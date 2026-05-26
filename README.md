@@ -1,6 +1,6 @@
-# DirectX11による2Dゲーム開発フレームワーク
+# DirectX11による3Dゲーム開発フレームワーク
 
-DirectX11 2Dゲームプロジェクト<br>
+DirectX11 3Dゲームプロジェクト<br>
 開発環境：Visual Studio 2022
 
 ---
