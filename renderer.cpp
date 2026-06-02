@@ -1,12 +1,11 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : renderer.cpp
+*	@brief	 : 描画
 *
-*	描画[renderer.cpp]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/21
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/21
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "main.h"
 #include "renderer.h"
 #include <io.h>
@@ -31,7 +30,7 @@ ID3D11DepthStencilState* Renderer::m_DepthStateDisable{};
 ID3D11BlendState*		Renderer::m_BlendState{};
 ID3D11BlendState*		Renderer::m_BlendStateATC{};
 
-void Renderer::Init()
+void Renderer::Initialize()
 {
 	HRESULT hr = S_OK;
 
@@ -211,7 +210,7 @@ void Renderer::Init()
 	SetMaterial(material);
 }
 
-void Renderer::Uninit()
+void Renderer::Finalize()
 {
 	m_WorldBuffer->Release();
 	m_ViewBuffer->Release();

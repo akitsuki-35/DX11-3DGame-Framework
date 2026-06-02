@@ -1,12 +1,11 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : shader.cpp
+*	@brief	 : 2D用シェーダー
 *
-*	2D用シェーダー[shader.cpp]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/01
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/01
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "shader2d.h"
 #include "direct3d.h"
 #include "debug_ostream.h"
@@ -14,6 +13,9 @@
 #include <DirectXMath.h>
 using namespace DirectX;
 
+/*------------------------------------------------------------
+	グローバル変数定義
+------------------------------------------------------------*/
 static ID3D11VertexShader* g_pVertexShader{ nullptr };
 static ID3D11InputLayout* g_pInputLayout{ nullptr };
 

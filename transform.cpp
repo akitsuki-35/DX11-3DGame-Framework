@@ -1,21 +1,20 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : transform.cpp
+*	@brief	 : トランスフォーム
 *
-*	トランスフォームコンポーネント[transform.cpp]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/05/19
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/05/19
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "main.h"
 #include "renderer.h"
 #include "transform.h"
 
-void Transform::Init()
+void Transform::Initialize()
 {
 }
 
-void Transform::Uninit()
+void Transform::Finalize()
 {
 }
 

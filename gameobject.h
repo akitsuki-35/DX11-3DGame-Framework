@@ -1,12 +1,11 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : gameobject.h
+*	@brief	 : 3Dゲームオブジェクト基底クラス
 *
-*	3Dゲームオブジェクト基底クラス[gameobject.h]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/05/12
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/05/12
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
@@ -15,6 +14,10 @@
 #include <sstream>
 #include <DirectXMath.h>
 
+/*============================================================
+*	@class	: GameObject
+*	@brief	: ゲームオブジェクト基底クラス
+*============================================================*/
 class GameObject
 {
 protected: // 継承先からアクセス可能なメンバ変数
@@ -49,7 +52,7 @@ public:
 	virtual void Initialize() = 0;
 	virtual void Finalize() {
 		for (Component* component : components) {
-			component->Uninit();
+			component->Finalize();
 			delete component;
 		}
 	}
@@ -67,7 +70,7 @@ public:
 	template <typename T> // テンプレート関数
 	T* AddComponent(GameObject* object) {
 		T* component = new T(object);
-		component->Init();
+		component->Initialize();
 		components.push_back(component);
 
 		return component;

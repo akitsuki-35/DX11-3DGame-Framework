@@ -7,7 +7,7 @@ BYTE Input::m_OldKeyState[256];
 BYTE Input::m_KeyState[256];
 
 
-void Input::Init()
+void Input::Initialize()
 {
 
 	memset( m_OldKeyState, 0, 256 );
@@ -15,7 +15,7 @@ void Input::Init()
 
 }
 
-void Input::Uninit()
+void Input::Finalize()
 {
 
 

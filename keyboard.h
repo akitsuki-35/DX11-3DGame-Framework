@@ -1,19 +1,20 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : keyboard.h
+*	@brief	 : キーボードモジュール
 *
-*	キーボードモジュール[keyboard.h]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/13
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/13
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
 #include <windows.h>
 #include <memory>
 
-// キー列挙
+/*------------------------------------------------------------
+	キー列挙
+------------------------------------------------------------*/
 typedef enum KeyTags : unsigned char
 {
     KK_NONE               = 0x0,
@@ -403,25 +404,5 @@ void KeyboardReset();
 
 // キーボード制御のためのウォンどうメッセージプロシージャフック関数
 void KeyboardProcessMessage(UINT message, WPARAM wParam, LPARAM lParam);
-
-//
-// For a Win32 desktop application, call this function from your Window Message Procedure
-//
-// LResult CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-// {
-//     switch (message)
-//     {
-//
-//     case WM_ACTIVATEAPP:
-//     case WM_KEYDOWN:
-//     case WM_SYSKEYDOWN:
-//     case WM_KEYUP:
-//     case WM_SYSKEYUP:
-//         Keyboard_ProcessMessage(message, wParam, lParam);
-//         break;
-//
-//     }
-// }
-//
 
 #endif // KEYBOARD_H

@@ -1,22 +1,34 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : keylogger.h
+*	@brief	 : キーボード入力
 *
-*	キーボード入力[keylogger.h]
-*
-* 　作成者 : @akitsuki-35（https://github.com/akitsuki-35）
-* 　作成日 : 2025/6/27
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2025/06/27
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef KEYLOGGER_H
 #define KEYLOGGER_H
 
 #include "keyboard.h"
 
-void KeyLoggerInitialize();
-void KeyLoggerUpdate();
+/*============================================================
+*	@class	: KeyLogger
+*	@brief	: キーボード入力状態取得
+*============================================================*/
+class KeyLogger
+{
+private:
+	static KeyboardState ptevState;
+	static KeyboardState triggerState;
+	static KeyboardState releaseState;
 
-bool KeyIsPressd(Keys key);
-bool KeyIsTrigger(Keys key);
-bool KeyIsRelease(Keys key);
+public:
+	static void Initialize();
+	static void Update();
+
+	static bool IsPressd(Keys key);
+	static bool IsTrigger(Keys key);
+	static bool IsRelease(Keys key);
+};
 
 #endif // KEYLOGGER_H

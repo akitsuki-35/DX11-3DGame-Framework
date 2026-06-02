@@ -1,18 +1,21 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : transform.h
+*	@brief	 : トランスフォーム
 *
-*	トランスフォームコンポーネント[transform.h]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/05/19
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/05/19
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
 #include "component.h"
 #include "vector3.h"
 
+/*============================================================
+*	@class	: Transform
+*	@brief	: トランスフォームコンポーネント
+*============================================================*/
 class Transform : public Component
 {
 private:
@@ -30,8 +33,8 @@ public:
 
 	using Component::Component;
 
-	void Init() override;
-	void Uninit() override;
+	void Initialize() override;
+	void Finalize() override;
 	void Update() override;
 	void Draw() override;
 };
