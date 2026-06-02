@@ -2,7 +2,7 @@
 *
 *	カメラ[camera.cpp]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/04/26
 * ----------------------------------------------------------------------------------------------------------
 *
@@ -32,15 +32,19 @@ void Camera::Update()
 	float dt = 1.0f / 60.0f;
 
 	if (Input::GetKeyPress(VK_LEFT)) {
-		rotation.y += 3.0f * dt;
+		rotation.y -= 3.0f * dt;
 	}
 	else if (Input::GetKeyPress(VK_RIGHT)) {
-		rotation.y -= 3.0f * dt;
+		rotation.y += 3.0f * dt;
 	}
 
 	float t = 0.1f;
 	target = target * (1.0f - t) + (playerPos + Vector3(0.0f, 2.0f, 0.0f)) * t;
 	position = target + Vector3(-sinf(rotation.y) * 10.0f, 5.0f, -cosf(rotation.y) * 10.0f);
+
+	XMFLOAT3 up = XMFLOAT3(0.0f, 1.0f, 0.0f);
+	viewMatrix = XMMatrixLookAtLH(XMLoadFloat3((XMFLOAT3*)&position),
+		XMLoadFloat3((XMFLOAT3*)&target), XMLoadFloat3(&up));
 }
 
 void Camera::Draw() const
@@ -51,10 +55,7 @@ void Camera::Draw() const
 	Renderer::SetProjectionMatrix(projection);
 
 	// ビュー行列設定
-	XMFLOAT3 up = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	XMMATRIX View = XMMatrixLookAtLH(XMLoadFloat3((XMFLOAT3*)&position),
-		XMLoadFloat3((XMFLOAT3*)&target), XMLoadFloat3(&up));
-	Renderer::SetViewMatrix(View);
+	Renderer::SetViewMatrix(viewMatrix);
 }
 
 void TopCamera::Initialize()

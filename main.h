@@ -2,7 +2,7 @@
 *
 *	メイン[main.h]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/04/21
 * ----------------------------------------------------------------------------------------------------------
 *
@@ -17,6 +17,7 @@
 #include <assert.h>
 #include <functional>
 #include <list>
+#include <vector>
 
 #include <d3d11.h>
 #pragma comment (lib, "d3d11.lib")

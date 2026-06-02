@@ -2,7 +2,7 @@
 *
 *	マネージャー[manager.cpp]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/04/21
 * ----------------------------------------------------------------------------------------------------------
 *
@@ -12,10 +12,13 @@
 #include "renderer.h"
 #include "input.h"
 #include "camera.h"
+
 #include "field.h"
 #include "polygon2d.h"
 #include "player.h"
 #include "enemy.h"
+#include "bullet.h"
+#include "tree.h"
 
 std::list<GameObject*> Manager::gameObjects;
 
@@ -30,18 +33,15 @@ void Manager::Init()
 	AddGameObject<Camera>();
 
 	AddGameObject<Field>();
-	//gameObjects.push_back(new Field(L"Resources\\Textures\\glass.jpg"));
-	//gameObjects.back()->Initialize();
 
 	AddGameObject<Player>();
-	//AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
-	//AddGameObject<Enemy>()->SetPosition({-5.0f, 0.0f, 5.0f });
-	//AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({-5.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
 
-	AddGameObject<Polygon2D>();
+	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, 5.0f });
 
-	//gameObjects.push_back(new Polygon2D(L"Resources\\Textures\\rock.jpg"));
-	//gameObjects.back()->Initialize();
+	//AddGameObject<Polygon2D>();
 }
 
 /*----------------------------------------------------------------------------------------------------------
@@ -68,6 +68,11 @@ void Manager::Update()
 	for (GameObject* obj : gameObjects) {
 		obj->Update();
 	}
+
+	// ゲームオブジェクト削除
+	gameObjects.remove_if([](GameObject* object) {
+		return object->Destroy();
+	});
 }
 
 /*----------------------------------------------------------------------------------------------------------

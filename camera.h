@@ -2,7 +2,7 @@
 *
 *	カメラ[camera.h]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/04/26
 * ----------------------------------------------------------------------------------------------------------
 *
@@ -16,6 +16,7 @@ class Camera : public GameObject
 {
 protected:
 	Vector3 target{}; // 注視点
+	XMMATRIX viewMatrix;
 
 public:
 	virtual ~Camera() = default;
@@ -23,6 +24,8 @@ public:
 	void Finalize() override;
 	void Update() override;
 	void Draw() const override;
+
+	XMMATRIX GetViewMatrix() const { return viewMatrix; }
 
 	virtual Vector3 GetForward() const override {
 		Vector3 forward = target - position;

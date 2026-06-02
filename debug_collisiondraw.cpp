@@ -2,7 +2,7 @@
 *
 *	コリジョン可視化[debug_collisiondraw.cpp]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/04/20
 * ----------------------------------------------------------------------------------------------------------
 *	デバッグビルドのみ動作

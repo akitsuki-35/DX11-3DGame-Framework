@@ -2,7 +2,7 @@
 *
 *	プレイヤー[player.cpp]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/05/19
 * ----------------------------------------------------------------------------------------------------------
 *
@@ -14,6 +14,7 @@
 #include "manager.h"
 #include "player.h"
 #include "camera.h"
+#include "bullet.h"
 
 void Player::Initialize()
 {
@@ -75,7 +76,7 @@ void Player::Update()
 	rotation.y = atan2f(velocity.x, velocity.z);
 
 	// ジャンプ
-	if (Input::GetKeyTrigger(VK_SPACE)) {
+	if (Input::GetKeyTrigger('K')) {
 		velocity.y += j; // 撃力
 	}
 
@@ -93,6 +94,14 @@ void Player::Update()
 	if (position.y < 0.0f) {
 		position.y = 0.0f;
 		velocity.y = 0.0f;
+	}
+
+	// 弾の発射
+	if (Input::GetKeyTrigger('J')) {
+
+		Bullet* bullet = Manager::AddGameObject<Bullet>();
+		bullet->SetPosition({ position.x, position.y, position.z });
+		bullet->SetVelocity(GetForward() * 50.0f);
 	}
 
 	GameObject::Update();

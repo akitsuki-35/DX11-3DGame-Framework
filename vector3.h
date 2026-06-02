@@ -2,7 +2,7 @@
 *
 *	3次元ベクトルクラス[vector3.h]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/04/23
 * ----------------------------------------------------------------------------------------------------------
 *
@@ -109,6 +109,12 @@ public:
 			y *= oneOverMag;
 			z *= oneOverMag;
 		}
+	}
+
+	// 長さ取得
+	float Length() const
+	{
+		return sqrt(x * x + y * y + z * z);
 	}
 
 	// 内積

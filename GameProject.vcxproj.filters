@@ -149,6 +149,12 @@
     <ClCompile Include="enemy.cpp">
       <Filter>3Dフレームワーク\Objecs</Filter>
     </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>3Dフレームワーク\Objecs</Filter>
+    </ClCompile>
+    <ClCompile Include="tree.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -255,6 +261,15 @@
     </ClInclude>
     <ClInclude Include="transform.h">
       <Filter>3Dフレームワーク\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>3Dフレームワーク\Objecs</Filter>
+    </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="tree.h">
+      <Filter>3Dフレームワーク\Objecs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

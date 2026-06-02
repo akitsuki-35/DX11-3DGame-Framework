@@ -2,7 +2,7 @@
 *
 *	3Dゲームオブジェクト基底クラス[gameobject.h]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/05/12
 * ----------------------------------------------------------------------------------------------------------
 *
@@ -25,21 +25,27 @@ protected: // 継承先からアクセス可能なメンバ変数
 	std::list<Component*> components; // コンポーネント
 
 	std::string tag{};
-	bool isActive{};
+	bool isDestroy{ false };
 
 public:
 	GameObject() = default;
-	GameObject(const Vector3& position, const Vector3& rotation, const Vector3& scale, const std::string& tag, bool isActive = true) 
-		: position(position), rotation(rotation), scale(scale), tag(tag), isActive(isActive) {}
+	GameObject(const Vector3& position, const Vector3& rotation, const Vector3& scale, const std::string& tag, bool isDestroy = true) 
+		: position(position), rotation(rotation), scale(scale), tag(tag), isDestroy(isDestroy) {}
 	virtual ~GameObject() = default;
 
 	void SetPosition(const Vector3& pos) { position = pos; }
+	void SetDestroy() { isDestroy = true; }
+	bool Destroy() {
+		if (isDestroy) {
+			Finalize();
+			delete this;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
-protected:
-	void Active() { isActive = true; }
-	void Destroy() { isActive = false; }
-
-public:
 	virtual void Initialize() = 0;
 	virtual void Finalize() {
 		for (Component* component : components) {
@@ -89,7 +95,6 @@ public:
 	}
 
 	const std::string& GetTag() const { return tag; }
-	const bool GetIsActive() const { return isActive; }
 };
 
 #endif // GAMEOBJECT_H

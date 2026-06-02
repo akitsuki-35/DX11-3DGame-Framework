@@ -1,33 +1,35 @@
 /*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 *
-*	エネミー[enemy.cpp]
+*	弾[bullet.cpp]
 *
 * 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/05/19
+* 　Date	: 2026/06/02
 * ----------------------------------------------------------------------------------------------------------
 *
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
 #include "main.h"
+#include "manager.h"
+#include "bullet.h"
 #include "input.h"
 #include "renderer.h"
 #include "modelRenderer.h"
 #include "enemy.h"
 
-void Enemy::Initialize()
+void Bullet::Initialize()
 {
 	position = { 0.0f, 0.0f, 0.0f };
 	velocity = { 0.0f, 0.0f, 0.0f };
 	accel = { 0.0f, 0.0f, 0.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelRenderer>(this)->Load("Resources\\Models\\player.obj");
+	AddComponent<ModelRenderer>(this)->Load("Resources\\Models\\bullet.obj");
 
 	// シェーダー読込
 	Renderer::CreateVertexShader(&pVertexShader, &pVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
 	Renderer::CreatePixelShader(&pPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 }
 
-void Enemy::Finalize()
+void Bullet::Finalize()
 {
 	pPixelShader->Release();
 	pVertexShader->Release();
@@ -36,12 +38,36 @@ void Enemy::Finalize()
 	GameObject::Finalize();
 }
 
-void Enemy::Update()
+void Bullet::Update()
 {
+	float dt = 1.0f / 60.0f;
+
+	position += velocity * dt;
+
+	// 敵との衝突判定
+	auto enemys = Manager::GetGameObjects<Enemy>();
+	for (auto enemy : enemys) {
+		Vector3 dir = enemy->GetPosition() - position;
+		float length = dir.Length();
+
+		if (length < 1.0f) {
+			enemy->SetDestroy();
+			SetDestroy();
+			break;
+		}
+	}
+
+
+	lifeTime -= dt;
+	if (lifeTime <= 0.0f) {
+		// 一定時間経過で弾を削除
+		SetDestroy();
+	}
+
 	GameObject::Update();
 }
 
-void Enemy::Draw() const
+void Bullet::Draw() const
 {
 	// 入力レイアウト設定
 	Renderer::GetDeviceContext()->IASetInputLayout(pVertexLayout);

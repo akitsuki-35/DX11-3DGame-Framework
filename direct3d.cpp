@@ -2,7 +2,7 @@
 *
 *	DirectX初期化[direct3d.cpp]
 *
-* 　Author  : Asuka Kuroda
+* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　Date	: 2026/04/12
 * ----------------------------------------------------------------------------------------------------------
 *
