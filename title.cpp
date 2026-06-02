@@ -1,14 +1,13 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : title.cpp
+*	@brief	 : タイトルシーン
 *
-*	タイトルシーン[title.cpp]
-*
-* 　作成者 : @akitsuki-35（https://github.com/akitsuki-35）
-* 　作成日 : 2026/03/29
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/03/29
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "title.h"
-#include "scene.h"
+#include "manager.h"
 #include "keylogger.h"
 #include "texture.h"
 #include "fade.h"
@@ -16,63 +15,49 @@
 #include "direct3d.h"
 #include <math.h>
 
-static double g_Accumulatedtime{ 0.0 };
-static double g_KeyInputTime{};
-
-enum TitleState
+void Title::Initialize()
 {
-	TITLE_FADE_IN,
-	TITLE_KEYINPUT_WAIT,
-	TITLE_KEYINPUT_ACTION,
-	TITLE_FADE_OUT
-};
-
-static TitleState g_State = TITLE_FADE_IN;
-
-void TitleInitialize()
-{
-	FadeStart(1.0f, true);
-
-	g_State = TITLE_FADE_IN;
+	Fade::GetInstance().Start(1.0f, true);
+	state = TITLE_FADE_IN;
 }
 
-void TitleFinalize()
+void Title::Finalize()
 {
 }
 
-void TitleUpdate(double elapsed_time)
+void Title::Update(double elapsed_time)
 {
-	g_Accumulatedtime += elapsed_time;
+	accumulatedTime += elapsed_time;
 
-	switch (g_State)
+	switch (state)
 	{
 	case TITLE_FADE_IN:
-		if (GetFadeState() == FADE_IN_END) {
-			g_State = TITLE_KEYINPUT_WAIT;
+		if (Fade::GetInstance().GetState() == Fade::FADE_IN_END) {
+			state = TITLE_KEYINPUT_WAIT;
 		}
 		break;
 
 	case TITLE_KEYINPUT_WAIT:
-		if (KeyIsTrigger(KK_ENTER))
+		if (KeyLogger::IsTrigger(KK_ENTER))
 		{
-			g_State = TITLE_KEYINPUT_ACTION;
-			g_KeyInputTime = g_Accumulatedtime;
+			state = TITLE_KEYINPUT_ACTION;
+			keyInputTime = accumulatedTime;
 			//サウンド再生
-			
+
 		}
 		break;
 
 	case TITLE_KEYINPUT_ACTION:
-		if (g_Accumulatedtime - g_KeyInputTime > 1.0){
-			g_State = TITLE_FADE_OUT;
-			FadeStart(1.0f, false);
+		if (accumulatedTime - keyInputTime > 1.0) {
+			state = TITLE_FADE_OUT;
+			Fade::GetInstance().Start(1.0f, false);
 		}
 		break;
 
 	case TITLE_FADE_OUT:
-		if (GetFadeState() == FADE_OUT_END) {
+		if (Fade::GetInstance().GetState() == Fade::FADE_OUT_END) {
 			// ゲームシーンに遷移
-			SetNextScene(SCENE_GAME);
+			//Manager::SetNextScene(new Game);
 		}
 		break;
 
@@ -81,10 +66,10 @@ void TitleUpdate(double elapsed_time)
 	}
 }
 
-void TitleDraw()
+void Title::Draw() const
 {
-	if (g_State != TITLE_FADE_IN) {
-		//float alpha = static_cast<float>((sin(g_Accumulatedtime)+ 1.0f)) * 0.5f;
+	if (state != TITLE_FADE_IN) {
+		float alpha = static_cast<float>((sin(accumulatedTime) + 1.0f)) * 0.5f;
 
 	}
 }

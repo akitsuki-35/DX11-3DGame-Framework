@@ -82,10 +82,10 @@ void Field::Finalize()
 
 void Field::Update()
 {
-	if (KeyIsPressd(KK_A)) {
+	if (KeyLogger::IsPressd(KK_A)) {
 		scale.x -= 10.0f;
 	}
-	if (KeyIsPressd(KK_D)) {
+	if (KeyLogger::IsPressd(KK_D)) {
 		scale.x += 10.0f;
 	}
 }

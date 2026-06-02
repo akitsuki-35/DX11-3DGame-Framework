@@ -1,12 +1,11 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : animation.cpp
+*	@brief	 : スプライトアニメーション
 *
-*	スプライトアニメーション[animation.cpp]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/01
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/01
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "animation.h"
 #include "sprite.h"
 #include "texture.h"
@@ -15,14 +14,22 @@ using namespace DirectX;
 
 void Animation::Update(double elapsedTime)
 {
+	// 停止中なら何もしない
 	if (isStoped) return;
 
 	accumulatedTime += elapsedTime;
 
-	if (accumulatedTime >= perSecond) {
-		patternNum = (patternNum + 1) % pSpriteSheet->GetPatternMax();
+	// 現在のパターンIDとパターン総数を取得
+	int currentPattern = pSpriteSheet->GetCurrentPattern();
+	int patternMax = pSpriteSheet->GetPatternMax();
 
-		if (patternNum == pSpriteSheet->GetPatternMax() - 1) {
+	if (accumulatedTime >= perSecond) {
+		// パターン更新
+		pSpriteSheet->SetPattern((currentPattern += 1) % patternMax);
+
+		// 最後のパターンに到達
+		if (currentPattern == patternMax - 1) {
+			// ループフラグがoffならアニメーション停止
 			if (!isLoop) isStoped = true;
 		}
 
@@ -30,12 +37,7 @@ void Animation::Update(double elapsedTime)
 	}
 }
 
-void Animation::Draw(const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, const DirectX::XMFLOAT4& color) const
+void Animation::Draw() const
 {
-	pSpriteSheet->Draw(position, patternNum, size, color);
-}
-
-void Animation::Draw(const DirectX::XMFLOAT2& position, const float& size, const DirectX::XMFLOAT4& color) const
-{
-	pSpriteSheet->Draw(position, patternNum, size, color);
+	pSpriteSheet->Draw();
 }

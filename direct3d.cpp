@@ -1,18 +1,20 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : direct3d.cpp
+*	@brief	 : DirectX初期化
 *
-*	DirectX初期化[direct3d.cpp]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/12
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/12
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "direct3d.h"
 #include "debug_ostream.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
 
+/*------------------------------------------------------------
+	グローバル変数定義
+------------------------------------------------------------*/
 //各種インターフェース
 static ID3D11Device* g_pDevice = nullptr;
 static ID3D11DeviceContext* g_pDeviceContext = nullptr;
@@ -30,6 +32,9 @@ static ID3D11DepthStencilView* g_pDepthStencilView = nullptr;
 static D3D11_TEXTURE2D_DESC g_BackBufferDesc{};
 static D3D11_VIEWPORT g_Viewport{};
 
+/*------------------------------------------------------------
+	ローカル関数 プロトタイプ宣言
+------------------------------------------------------------*/
 bool ConfigureBackBuffer();
 void ReleaseBackBuffer();
 
@@ -40,7 +45,7 @@ bool Direct3DInitialize(HWND hWnd)
 	swapChainDesc.Windowed = TRUE;
 	swapChainDesc.BufferCount = 2;
 
-		//ウィンドウサイズに合わせて自動的に設定される
+	//ウィンドウサイズに合わせて自動的に設定される
 		//swap_chain_desc.BufferDesc.Width = 0;
 		//swap_chain_desc.BufferDesc.Height = 0;
 

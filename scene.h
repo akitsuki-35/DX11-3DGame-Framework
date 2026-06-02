@@ -1,28 +1,27 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : scene.h
+*	@brief	 : シーン基底クラス
 *
-*	シーン管理[scene.h]
-*
-* 　作成者 : @akitsuki-35（https://github.com/akitsuki-35）
-* 　作成日 : 2025/9/17
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2025/09/17
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef SCENE_H
 #define SCENE_H
 
-void SceneInitialize();
-void SceneFinalize();
-void SceneUpdate(double elapsedTime);
-void SceneDraw();
-
-enum Scene
+/*============================================================
+*	@class	: Scene
+*	@brief	: シーン基底クラス
+*============================================================*/
+class Scene
 {
-	SCENE_TITLE,
-	SCENE_GAME,
-	SCENE_RESULT
-};
+public:
+	virtual ~Scene() = default;
 
-void SetNextScene(Scene next);
-void ChangeScene();
+	virtual void Initialize() = 0;
+	virtual void Finalize() = 0;
+	virtual void Update(double elapsed_time) = 0;
+	virtual void Draw() const = 0;
+};
 
 #endif // SCENE_H

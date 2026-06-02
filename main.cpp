@@ -1,21 +1,34 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : main.cpp
+*	@brief	 : メイン
 *
-*	メイン[main.cpp]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/21
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/21
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "main.h"
 #include "manager.h"
+#include "debugger.h"
 #include <thread>
 
+// ImGui
+#include <imgui_impl_win32.h>
+
+/*------------------------------------------------------------
+	ウィンドウ情報
+------------------------------------------------------------*/
 const char* CLASS_NAME = "AppClass";
 const char* WINDOW_NAME = "Game Window";
 
+/*------------------------------------------------------------
+	ローカル関数 プロトタイプ宣言
+------------------------------------------------------------*/
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+/*------------------------------------------------------------
+	グローバル変数定義
+------------------------------------------------------------*/
 HWND g_Window;
 
 HWND GetWindow()
@@ -23,9 +36,9 @@ HWND GetWindow()
 	return g_Window;
 }
 
-/*----------------------------------------------------------------------------------------------------------
+/*------------------------------------------------------------
 	メイン
-----------------------------------------------------------------------------------------------------------*/
+------------------------------------------------------------*/
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
 {
 	WNDCLASSEX wcex;
@@ -54,7 +67,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 
 	CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 
-	Manager::Init();
+	Manager::Initialize();
+
+#if defined(DEBUG) || defined(_DEBUG)
+	//Debugger::GetInstance().Initialize(g_Window);
+#endif // defined(DEBUG) || defined(_DEBUG)
 
 	ShowWindow(g_Window, nCmdShow);
 	UpdateWindow(g_Window);
@@ -65,9 +82,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 	dwExecLastTime = timeGetTime();
 	dwCurrentTime = 0;
 
-/*----------------------------------------------------------------------------------------------------------
+/*------------------------------------------------------------
 	ゲームループ
-----------------------------------------------------------------------------------------------------------*/
+------------------------------------------------------------*/
 	MSG msg;
 	while(1)
 	{
@@ -93,6 +110,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 
 				Manager::Update();
 				Manager::Draw();
+
+		#if defined(DEBUG) || defined(_DEBUG)
+				//Debugger::GetInstance().Update();
+				//Debugger::GetInstance().Draw();
+		#endif // defined(DEBUG) || defined(_DEBUG)
 			}
 		}
 	}
@@ -101,17 +123,26 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 
 	UnregisterClass(CLASS_NAME, wcex.hInstance);
 
-	Manager::Uninit();
+#if defined(DEBUG) || defined(_DEBUG)
+	//Debugger::GetInstance().Finalize();
+#endif // defined(DEBUG) || defined(_DEBUG)
+
+	Manager::Finalize();
 	CoUninitialize();
 
 	return (int)msg.wParam;
 }
 
-/*----------------------------------------------------------------------------------------------------------
+/*------------------------------------------------------------
 	ウィンドウプロシージャ
-----------------------------------------------------------------------------------------------------------*/
+------------------------------------------------------------*/
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+#if defined(DEBUG) || defined(_DEBUG)
+	// ImGuiメッセージ処理
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+		return true;
+#endif // defined(DEBUG) || defined(_DEBUG)
 
 	switch(uMsg)
 	{

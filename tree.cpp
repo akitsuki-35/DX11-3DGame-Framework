@@ -1,12 +1,10 @@
 /*============================================================
-*
-*	@file	 : tree.cpp
+*	@file	 : tree.h
 *	@brief	 : 木のビルボード
 *
 * 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@Date	 : 2026/06/02
 *	@Updated : 2026/06/02
-*
 *============================================================*/
 #include "main.h"
 #include "tree.h"
@@ -85,12 +83,6 @@ void Tree::Finalize()
 
 void Tree::Update()
 {
-	if (KeyIsPressd(KK_A)) {
-		scale.x -= 10.0f;
-	}
-	if (KeyIsPressd(KK_D)) {
-		scale.x += 10.0f;
-	}
 }
 
 void Tree::Draw() const

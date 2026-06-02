@@ -1,25 +1,30 @@
-﻿/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+﻿/*============================================================
+*	@file	 : animation.h
+*	@brief	 : スプライトアニメーション
 *
-*	スプライトアニメーション[animation.h]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/01
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/01
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
 #include <d3d11.h>
 #include <DirectXMath.h>
 
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
 class SpriteSheet;
 
+/*============================================================
+*	@class	: Animation
+*	@brief	: スプライトアニメーション再生
+*============================================================*/
 class Animation
 {
 private:
 	SpriteSheet* pSpriteSheet;
-	int patternNum{ 0 };
 	DirectX::XMUINT2 startPos{};
 	double perSecond{};
 	double accumulatedTime{ 0.0f };
@@ -31,12 +36,9 @@ public:
 		: pSpriteSheet(pSpriteSheet), startPos(startPos), perSecond(perSecond), isLoop(isLoop) {}
 
 	void Update(double elapsedTime);
-	void Draw(const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size,
-		const DirectX::XMFLOAT4& color = { 1.0f,1.0f,1.0f,1.0f }) const;
-	void Draw(const DirectX::XMFLOAT2& position, const float& size = 1.0f,
-		const DirectX::XMFLOAT4& color = { 1.0f,1.0f,1.0f,1.0f }) const;
+	void Draw() const;
 
-	bool IsLoop() { return isLoop; }
+	bool IsLoop() const { return isLoop; }
 	bool IsStoped() const { return isStoped; }
 };
 

@@ -57,6 +57,12 @@
     <Filter Include="3Dフレームワーク\System">
       <UniqueIdentifier>{4cfd07e0-80f1-4321-960c-e1c640a7d0be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{10a80eed-e6d1-4103-a442-1c89f7677c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{bca3d428-e11d-4e58-8c0e-d0d8ce746547}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -99,9 +105,6 @@
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
     <ClCompile Include="texture.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="scene.cpp">
       <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
     <ClCompile Include="title.cpp">
@@ -153,7 +156,37 @@
       <Filter>3Dフレームワーク\Objecs</Filter>
     </ClCompile>
     <ClCompile Include="tree.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>3Dフレームワーク\Objecs</Filter>
+    </ClCompile>
+    <ClCompile Include="debugger.cpp">
+      <Filter>ソース ファイル\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="cursor.cpp">
+      <Filter>ソース ファイル\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ImGui\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ImGui\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ImGui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ImGui\imgui_impl_dx11.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ImGui\imgui_impl_win32.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ImGui\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ImGui\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,11 +298,47 @@
     <ClInclude Include="bullet.h">
       <Filter>3Dフレームワーク\Objecs</Filter>
     </ClInclude>
-    <ClInclude Include="text.h">
-      <Filter>3Dフレームワーク\Common</Filter>
-    </ClInclude>
     <ClInclude Include="tree.h">
       <Filter>3Dフレームワーク\Objecs</Filter>
+    </ClInclude>
+    <ClInclude Include="debugger.h">
+      <Filter>ヘッダー ファイル\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="cursor.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="subject.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="observer.h">
+      <Filter>ヘッダー ファイル\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImGui\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImGui\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImGui\imgui_impl_dx11.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImGui\imgui_impl_win32.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImGui\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImGui\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImGui\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImGui\imstb_truetype.h">
+      <Filter>ImGui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -288,5 +357,10 @@
     <FxCompile Include="hlsl\common.hlsl">
       <Filter>シェーダー ファイル</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\ImGui\imgui.ini">
+      <Filter>ImGui</Filter>
+    </None>
   </ItemGroup>
 </Project>

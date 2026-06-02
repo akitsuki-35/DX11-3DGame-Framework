@@ -1,76 +1,53 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : sprite.h
+*	@brief	 : スプライト描画
 *
-*	スプライト描画[sprite.h]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/01
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/01
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include "direct3d.h"
 #include <DirectXMath.h>
 
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
 class Texture;
 class SpriteSheet;
 
-void SpriteInitialize();
-void SpriteFinalize();
+/*============================================================
+*	@class	: Sprite
+*	@brief	: スプライト描画クラス
+*============================================================*/
+class Sprite 
+{
+private:
+	static constexpr int NUM_VERTEX{ 4 }; // 頂点数
+	static ID3D11Buffer* pVertexBuffer; // 頂点バッファ
 
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-	スプライト描画関数
-	サイズ指定方式でオーバーロード関数化
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
-/*----------------------------------------------------------------------------------------------------------
-	通常スプライト描画
+	Sprite() {}
+	Sprite(const Sprite&);
+	Sprite& operator=(const Sprite&);
+	~Sprite() {};
 
-	引数：
-	テクスチャ, 左上座標, サイズ, カラー
-	テクスチャ, 左上座標, 拡大率, カラー
-----------------------------------------------------------------------------------------------------------*/
-// 数値で直接サイズ指定
-void SpriteDraw(Texture* pTexture, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, 
-	const DirectX::XMFLOAT4& color = { 1.0f,1.0f,1.0f,1.0f });
+public:
+	static Sprite& GetInstance() {
+		static Sprite instance;
+		return instance;
+	}
 
-// 拡大率でサイズ指定
-void SpriteDraw(Texture* pTexture, const DirectX::XMFLOAT2& position, const float& scale = 1.0f,
-	const DirectX::XMFLOAT4& color = { 1.0f,1.0f,1.0f,1.0f });
+	const void Initialize();
+	const void Finalize();
 
-/*----------------------------------------------------------------------------------------------------------
-	スプライトシート描画
-	0を始点としたx, y番号でパターン指定
+	const void Draw(Texture* pTexture, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size,
+		const float& rotate, const DirectX::XMFLOAT4& color);
 
-	引数：
-	テクスチャ, 左上座標, パターン番号(x, y), サイズ, カラー
-	テクスチャ, 左上座標, パターン番号(x, y), 拡大率, カラー
-----------------------------------------------------------------------------------------------------------*/
-// 数値で直接サイズ指定
-void SpriteDraw(SpriteSheet* pSpriteSheet, const DirectX::XMFLOAT2& position,
-	const DirectX::XMUINT2& patternNum, DirectX::XMFLOAT2 size,
-	const DirectX::XMFLOAT4& color = { 1.0f,1.0f,1.0f,1.0f });
-
-// 拡大率でサイズ指定
-void SpriteDraw(SpriteSheet* pSpriteSheet, const DirectX::XMFLOAT2& position,
-	const DirectX::XMUINT2& patternNum, const float& scale = 1.0f,
-	const DirectX::XMFLOAT4& color = { 1.0f,1.0f,1.0f,1.0f });
-
-/*----------------------------------------------------------------------------------------------------------
-	スプライトシート描画
-	0を始点としたパターン番号でパターン指定
-
-	引数：
-	テクスチャ, 左上座標, パターン番号, サイズ, カラー
-	テクスチャ, 左上座標, パターン番号, 拡大率, カラー
-----------------------------------------------------------------------------------------------------------*/
-// 数値で直接サイズ指定
-void SpriteDraw(SpriteSheet* pSpriteSheet, const DirectX::XMFLOAT2& position,
-	const int& patternNum, DirectX::XMFLOAT2 size,
-	const DirectX::XMFLOAT4& color = { 1.0f,1.0f,1.0f,1.0f });
-
-// 拡大率でサイズ指定
-void SpriteDraw(SpriteSheet* pSpriteSheet, const DirectX::XMFLOAT2& position,
-	const int& patternNum, const float& scale = 1.0f,
-	const DirectX::XMFLOAT4& color = { 1.0f,1.0f,1.0f,1.0f });
+	const void Draw(SpriteSheet* pSpriteSheet, const int& patternNum,
+		const DirectX::XMFLOAT2& position, DirectX::XMFLOAT2 size, const float& rotate,
+		const DirectX::XMFLOAT4& color);
+};
 
 #endif // SPRITE_H

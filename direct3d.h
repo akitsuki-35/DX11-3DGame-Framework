@@ -1,12 +1,11 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : direct3d.h
+*	@brief	 : DirectX初期化
 *
-*	DirectX初期化[direct3d.h]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/12
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/12
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef DIRECT3D_H
 #define DIRECT3D_H
 
@@ -28,6 +27,9 @@ ID3D11Device* Direct3DGetDevice();
 ID3D11DeviceContext* Direct3DGetDeviceContext();
 IDXGISwapChain* Direct3DGetSwapChain();
 
+/*------------------------------------------------------------
+	アルファブレンド設定
+------------------------------------------------------------*/
 enum AlphaBlendMode
 {
 	BLEND_MULTIPLY,

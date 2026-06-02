@@ -1,153 +1,129 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : systemtimer.cpp
+*	@brief	 : システムタイマー
 *
-*	システムタイマー[systemtimer.cpp]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/13
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/13
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "systemtimer.h"
-#include <Windows.h>
 
-/*------------------------------------------------------------------------------
-   グローバル変数宣言
-------------------------------------------------------------------------------*/
-static bool g_IsTimerStopped = true; // ストップフラグ
-static LONGLONG g_TicksPerSec = 0;  // １秒間の計測時間
-static LONGLONG g_StopTime;         // ストップした時間
-static LONGLONG g_LastElapsedTime;  // 最後に記録した更新時間
-static LONGLONG g_BaseTime;         // 基本時間
+/*------------------------------------------------------------
+	メンバ変数定義
+------------------------------------------------------------*/
+bool SystemTimer::isTimerStopped = true;
+LONGLONG SystemTimer::ticksPerSec = 0;
+LONGLONG SystemTimer::stopTime;
+LONGLONG SystemTimer::lastElapsedTime;
+LONGLONG SystemTimer::baseTime;
 
-/*------------------------------------------------------------------------------
-   プロトタイプ宣言
-------------------------------------------------------------------------------*/
-// 停止していれば停止時間、そうでなければ現在の時間の取得
-static LARGE_INTEGER GetAdjustedCurrentTime();
-
-/*------------------------------------------------------------------------------
-   関数定義
-------------------------------------------------------------------------------*/
-// システムタイマーの初期化
-void SystemTimerInitialize()
+void SystemTimer::Initialize()
 {
-    g_IsTimerStopped = true;
-    g_TicksPerSec = 0;
-    g_StopTime = 0;
-    g_LastElapsedTime = 0;
-    g_BaseTime = 0;
+    isTimerStopped = true;
+    ticksPerSec = 0;
+    stopTime = 0;
+    lastElapsedTime = 0;
+    baseTime = 0;
 
     // 高分解能パフォーマンスカウンタ周波数の取得
-    LARGE_INTEGER ticksPerSec = { 0 };
-    QueryPerformanceFrequency(&ticksPerSec);
-    g_TicksPerSec = ticksPerSec.QuadPart;
+    LARGE_INTEGER tps = { 0 };
+    QueryPerformanceFrequency(&tps);
+    ticksPerSec = tps.QuadPart;
 }
 
-// システムタイマーのリセット
-void SystemTimerReset()
+void SystemTimer::Reset()
 {
     LARGE_INTEGER time = GetAdjustedCurrentTime();
 
-    g_BaseTime = g_LastElapsedTime = time.QuadPart;
-    g_StopTime = 0;
-    g_IsTimerStopped = false;
+    baseTime = lastElapsedTime = time.QuadPart;
+    stopTime = 0;
+    isTimerStopped = false;
 }
 
-// システムタイマーのスタート
-void SystemTimerStart()
+void SystemTimer::Start()
 {
     // 現在の時間を取得
     LARGE_INTEGER time = { 0 };
     QueryPerformanceCounter(&time);
 
     // 今まで計測がストップしていたら
-    if( g_IsTimerStopped ) {
+    if (isTimerStopped) {
         // 止まっていた時間を差し引いて基本時間を更新
-        g_BaseTime += time.QuadPart - g_StopTime;
+        baseTime += time.QuadPart - stopTime;
     }
 
-    g_StopTime = 0;
-    g_LastElapsedTime = time.QuadPart;
-    g_IsTimerStopped = false;
+    stopTime = 0;
+    lastElapsedTime = time.QuadPart;
+    isTimerStopped = false;
 }
 
-// システムタイマーのストップ
-void SystemTimerStop()
+void SystemTimer::Stop()
 {
-    if( g_IsTimerStopped ) return;
+    if (isTimerStopped) return;
 
     LARGE_INTEGER time = { 0 };
     QueryPerformanceCounter(&time);
 
-    g_LastElapsedTime = g_StopTime = time.QuadPart; // 停止時間を記録
-    g_IsTimerStopped = true;
+    lastElapsedTime = stopTime = time.QuadPart; // 停止時間を記録
+    isTimerStopped = true;
 }
 
-// システムタイマーを0.1秒進める
-void SystemTimerAdvance()
+void SystemTimer::Advance()
 {
-    g_StopTime += g_TicksPerSec / 10;
+    stopTime += ticksPerSec / 10;
 }
 
-// 計測時間を取得
-double GetSystemTimer()
+double SystemTimer::GetTime()
 {
     LARGE_INTEGER time = GetAdjustedCurrentTime();
 
-    return (double)(time.QuadPart - g_BaseTime) / (double)g_TicksPerSec;
+    return (double)(time.QuadPart - baseTime) / (double)ticksPerSec;
 }
 
-// 現在の時間を取得
-double GetAbsoluteTime()
+double SystemTimer::GetAbsoluteTime()
 {
     LARGE_INTEGER time = { 0 };
     QueryPerformanceCounter(&time);
 
-    return time.QuadPart / (double)g_TicksPerSec;
+    return time.QuadPart / (double)ticksPerSec;
 }
 
-// 経過時間の取得
-float GetElapsedTime(void)
+float SystemTimer::GetElapsedTime()
 {
     LARGE_INTEGER time = GetAdjustedCurrentTime();
 
-    double elapsedTime = (float)((double)(time.QuadPart - g_LastElapsedTime) / (double)g_TicksPerSec);
-    g_LastElapsedTime = time.QuadPart;
+    double elapsedTime = (float)((double)(time.QuadPart - lastElapsedTime) / (double)ticksPerSec);
+    lastElapsedTime = time.QuadPart;
 
-    // タイマーが正確であることを保証するために、更新時間を０にクランプする。
+    // タイマーが正確であることを保証するために、更新時間を0にクランプする。
     // elapsed_timeは、プロセッサが節電モードに入るか、何らかの形で別のプロセッサにシャッフルされると、この範囲外になる可能性がある。
     // よって、メインスレッドはSetThreadAffinityMaskを呼び出して、別のプロセッサにシャッフルされないようにする必要がある。
     // 他のワーカースレッドはSetThreadAffinityMaskを呼び出すべきではなく、メインスレッドから収集されたタイマーデータの共有コピーを使用すること。
-    if( elapsedTime < 0.0f ) {
+    if (elapsedTime < 0.0f) {
         elapsedTime = 0.0f;
     }
 
     return (float)elapsedTime;
 }
 
-// システムタイマーが止まっているか？
-bool SystemTimerIsStoped(void)
+bool SystemTimer::IsStoped()
 {
-    return g_IsTimerStopped;
+    return isTimerStopped;
 }
 
-// 現在のスレッドを1つのプロセッサ（現在のスレッド）に制限
-void LimitThreadAffinityToCurrentProc(void)
+void SystemTimer::LimitThreadAffinityToCurrentProc()
 {
     HANDLE hCurrentProcess = GetCurrentProcess();
 
-    // Get the processor affinity mask for this process
     DWORD_PTR dwProcessAffinityMask = 0;
     DWORD_PTR dwSystemAffinityMask = 0;
 
-    if( GetProcessAffinityMask(hCurrentProcess, &dwProcessAffinityMask, &dwSystemAffinityMask) != 0 && dwProcessAffinityMask ) {
-        // Find the lowest processor that our process is allows to run against
+    if (GetProcessAffinityMask(hCurrentProcess, &dwProcessAffinityMask, &dwSystemAffinityMask) != 0 && dwProcessAffinityMask) {
+     
         DWORD_PTR dwAffinityMask = (dwProcessAffinityMask & ((~dwProcessAffinityMask) + 1));
 
-        // Set this as the processor that our thread must always run against
-        // This must be a subset of the process affinity mask
         HANDLE hCurrentThread = GetCurrentThread();
-        if( INVALID_HANDLE_VALUE != hCurrentThread ) {
+        if (INVALID_HANDLE_VALUE != hCurrentThread) {
             SetThreadAffinityMask(hCurrentThread, dwAffinityMask);
             CloseHandle(hCurrentThread);
         }
@@ -156,12 +132,11 @@ void LimitThreadAffinityToCurrentProc(void)
     CloseHandle(hCurrentProcess);
 }
 
-// 停止していれば停止時間、そうでなければ現在の時間の取得
-LARGE_INTEGER GetAdjustedCurrentTime(void)
+LARGE_INTEGER SystemTimer::GetAdjustedCurrentTime()
 {
     LARGE_INTEGER time;
-    if( g_StopTime != 0 ) {
-        time.QuadPart = g_StopTime;
+    if (stopTime != 0) {
+        time.QuadPart = stopTime;
     }
     else {
         QueryPerformanceCounter(&time);

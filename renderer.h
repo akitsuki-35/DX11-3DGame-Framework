@@ -1,18 +1,14 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : renderer.h
+*	@brief	 : 描画
 *
-*	描画[renderer.h]
-*
-* 　Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　Date	: 2026/04/21
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/04/21
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef RENDERER_H
 #define RENDERER_H
 
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-	DirectX関連の処理
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
 struct VERTEX_3D
 {
 	XMFLOAT3 Position;
@@ -41,6 +37,10 @@ struct LIGHT
 	XMFLOAT4	Ambient;
 };
 
+/*============================================================
+*	@class	: Renderer
+*	@brief	: 描画クラス
+*============================================================*/
 class Renderer
 {
 private:
@@ -66,8 +66,8 @@ private:
 	static ID3D11BlendState*		m_BlendStateATC;
 
 public:
-	static void Init();
-	static void Uninit();
+	static void Initialize();
+	static void Finalize();
 	static void Begin();
 	static void End();
 

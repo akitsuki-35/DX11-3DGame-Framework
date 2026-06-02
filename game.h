@@ -1,18 +1,29 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : game.h
+*	@brief	 : ゲームシーン
 *
-*	ゲームシーン[game.h]
-*
-* 　作成者 : @akitsuki-35（https://github.com/akitsuki-35）
-* 　作成日 : 2026/03/28
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/03/28
+*	@Updated : 2026/06/02
+*============================================================*/
 #ifndef GAME_H
 #define GAME_H
 
-void GameInitialize();
-void GameFinalize();
-void GameUpdate(double elapsedTime);
-void GameDraw();
+#include "scene.h"
+
+/*============================================================
+*	@class	: Game
+*	@brief	: ゲームシーン（Sceneを継承）
+*============================================================*/
+class Game : public Scene
+{
+private:
+
+public:
+	void Initialize() override;
+	void Finalize() override;
+	void Update(double elapsed_time) override;
+	void Draw() const override;
+};
 
 #endif // GAME_H

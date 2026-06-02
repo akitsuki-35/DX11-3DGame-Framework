@@ -1,12 +1,11 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+/*============================================================
+*	@file	 : fade.cpp
+*	@brief	 : フェード制御
 *
-*	フェード制御[fade.cpp]
-*
-* 　作成者 : @akitsuki-35（https://github.com/akitsuki-35）
-* 　作成日 : 2026/03/29
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
+* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@Date	 : 2026/03/29
+*	@Updated : 2026/06/02
+*============================================================*/
 #include "fade.h"
 #include "main.h"
 #include "sprite.h"
@@ -15,72 +14,66 @@
 
 #include "debug_memoryleak.h"
 
-static FadeState g_FadeState = FADE_IN;
-static double g_FadeTime;
-static double g_Accumulatedtime = 0.0;
-static double g_FadeStartTime = 0.0;
-static XMFLOAT4 g_FadeColor = { 0.0f, 0.0f, 0.0f, 1.0f };
-static int g_FadeTexID = -1;
+/*------------------------------------------------------------
+	メンバ変数定義
+------------------------------------------------------------*/
+Texture* Fade::texture{ nullptr };
+Fade::State Fade::fadeState{ Fade::State::FADE_IN };
+double Fade::time{};
+double Fade::accumulatedtime{ 0.0 };
+double Fade::startTime{ 0.0 };
+XMFLOAT4 Fade::color{ 0.0f, 0.0f, 0.0f, 1.0f };
 
-Texture* g_FadeTexture{ nullptr };
-
-void FadeInitialize()
+const void Fade::Initialize()
 {
-	g_FadeState = FADE_IN;
-	g_Accumulatedtime = 0.0;
-	g_FadeTexture = new Texture(L"Resources/Texture/Common/white.png");
+	// テクスチャと変数のセット
+	texture = new Texture(L"Resources/Textures/Common/white.png", { 0.0f, 0.0f },
+		{ 1920.0f, 1080.0f }, 0, color);
+	fadeState = Fade::State::FADE_IN;
+	accumulatedtime = 0.0;
 }
 
-void FadeFinalize()
+const void Fade::Finalize()
 {
-	delete g_FadeTexture;
+	delete texture;
 }
 
-void FadeUpdate(double elapsedTime)
+const void Fade::Update(double elapsedTime)
 {
 	// 時間計測とステートの管理
-	if (g_FadeState == NONE || g_FadeState == FADE_OUT_END || g_FadeState == FADE_IN_END) {
+	if (fadeState == NONE || fadeState == FADE_OUT_END || fadeState == FADE_IN_END) {
 		return;
 	}
 
-	g_Accumulatedtime += elapsedTime;
+	accumulatedtime += elapsedTime;
 
-	double lifeTime = g_Accumulatedtime - g_FadeStartTime;
+	double lifeTime = accumulatedtime - startTime;
 
-	float alpha = (float)(lifeTime / g_FadeTime);
+	float alpha = (float)(lifeTime / time);
 
-	g_FadeColor.w = g_FadeState == FADE_IN ? 1.0f - alpha : alpha;
+	color.w = fadeState == FADE_IN ? 1.0f - alpha : alpha;
+	texture->SetColor(color);
 
-	if (g_FadeTime <= lifeTime) {
-		g_FadeState = g_FadeState == FADE_IN ? FADE_IN_END : FADE_OUT_END;
+	if (time <= lifeTime) {
+		fadeState = fadeState == FADE_IN ? FADE_IN_END : FADE_OUT_END;
 	}
 }
 
-void FadeDraw()
+const void Fade::Draw()
 {
-	if (g_FadeState == NONE || g_FadeState == FADE_IN_END) {
+	if (fadeState == NONE || fadeState == FADE_IN_END) {
 		return;
 	}
 
-	//SpriteDraw(g_FadeTexID, { 0.0f, 0.0f },
-	//	{ static_cast<float>(Direct3DGetBackBufferWidth()),
-	//	static_cast<float>(Direct3DGetBackBufferHeight()) },
-	//	g_FadeColor);
-
-	g_FadeTexture->Draw({ 0.0f, 0.0f }, { SCREEN_WIDTH, SCREEN_HEIGHT }, g_FadeColor);
+	texture->Draw();
 }
 
-void FadeStart(double fadeTime, bool isFadeIn, XMFLOAT4 fadeColor)
+const void Fade::Start(const double& fadeTime, const bool& isFadeIn, const XMFLOAT4& fadeColor)
 {
-	g_FadeTime = fadeTime;
-	g_FadeState = isFadeIn ? FADE_IN : FADE_OUT;
+	time = fadeTime;
+	fadeState = isFadeIn ? FADE_IN : FADE_OUT;
 
-	g_FadeStartTime = g_Accumulatedtime;
+	startTime = accumulatedtime;
 
-	g_FadeColor = fadeColor;
-}
-
-const FadeState GetFadeState()
-{
-	return g_FadeState;
+	texture->SetColor(color = fadeColor);
 }
