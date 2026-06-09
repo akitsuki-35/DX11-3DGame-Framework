@@ -18,8 +18,8 @@
 class Camera : public GameObject
 {
 protected:
-	Vector3 target{}; // íçéãì_
-	XMMATRIX viewMatrix;
+	Vector3 mTarget{}; // íçéãì_
+	XMMATRIX mViewMatrix;
 
 public:
 	virtual ~Camera() = default;
@@ -28,17 +28,17 @@ public:
 	void Update() override;
 	void Draw() const override;
 
-	XMMATRIX GetViewMatrix() const { return viewMatrix; }
+	XMMATRIX GetViewMatrix() const { return mViewMatrix; }
 
 	virtual Vector3 GetForward() const override {
-		Vector3 forward = target - position;
+		Vector3 forward = mTarget - mPosition;
 		forward.Normalize();
 
 		return forward;
 	}
 
 	virtual Vector3 GetRight() const override {
-		Vector3 forward = target - position;
+		Vector3 forward = mTarget - mPosition;
 		Vector3 up = Vector3(0.0f, 1.0f, 0.0f);
 		Vector3 right = Vector3::cross(up, forward);
 		right.Normalize();

@@ -1,34 +1,33 @@
 /*============================================================
-*	@file	 : player.h
-*	@brief	 : プレイヤー
+*	@file	 : glass.h
+*	@brief	 : 草のビルボード
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/05/19
-*	@updated : 2026/06/02
+* 　@date	 : 2026/06/09
+*	@updated : 2026/06/09
 *============================================================*/
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef GLASS_H
+#define GLASS_H
 
 #include "gameobject.h"
 
 /*============================================================
-*	@class	: Player
-*	@brief	: プレイヤー
+*	@class	: Glass
+*	@brief	: 草のビルボード描画
 *============================================================*/
-class Player : public GameObject
+class Glass : public GameObject
 {
 private:
-	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
-	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
-	float mRotationVel{ 0.0f };
-
+	ID3D11Buffer* _mVertexBuffer{}; // 頂点バッファ
 	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
 	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー
 	ID3D11PixelShader* _mPixelShader{}; // ピクセルシェーダー
 
+	ID3D11ShaderResourceView* _mTexture{}; // テクスチャ
+
 public:
-	Player() = default;
-	//Player(const wchar_t* pFileName);
+	Glass() = default;
+	Glass(const wchar_t* pFileName);
 
 	void Initialize() override;
 	void Finalize() override;
@@ -36,4 +35,4 @@ public:
 	void Draw() const override;
 };
 
-#endif // PLAYER_H
+#endif // GLASS_H

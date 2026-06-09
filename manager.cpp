@@ -18,6 +18,7 @@
 #include "enemy.h"
 #include "bullet.h"
 #include "tree.h"
+#include "sky.h"
 
 std::list<GameObject*> Manager::gameObjects;
 
@@ -31,6 +32,8 @@ void Manager::Initialize()
 
 	AddGameObject<Camera>();
 
+	AddGameObject<Sky>();
+
 	AddGameObject<Field>();
 
 	AddGameObject<Player>();
@@ -39,8 +42,9 @@ void Manager::Initialize()
 	AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
 
 	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, 5.0f });
+	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, -5.0f });
 
-	//AddGameObject<Polygon2D>();
+	AddGameObject<Polygon2D>();
 }
 
 /*------------------------------------------------------------
@@ -81,8 +85,13 @@ void Manager::Draw()
 {
 	Renderer::Begin();
 
-	for (GameObject* obj : gameObjects) {
-		obj->Draw();
+	for (int layer = 0; layer < 4; layer++)
+	{
+		for (GameObject* obj : gameObjects) {
+			if (obj->GetLayer() == layer) {
+				obj->Draw();
+			}
+		}
 	}
 
 	Renderer::End();

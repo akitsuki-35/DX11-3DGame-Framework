@@ -1,16 +1,18 @@
 /*============================================================
-*	@file	 : polygon2d.cpp
-*	@brief	 : 2Dポリゴン表示
+*	@file	 : glass.h
+*	@brief	 : 木のビルボード
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/04/28
+* 　@date	 : 2026/06/02
 *	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
-#include "polygon2d.h"
+#include "glass.h"
 #include "renderer.h"
+#include "manager.h"
+#include "camera.h"
 
-Polygon2D::Polygon2D(const wchar_t* pFileName)
+Glass::Glass(const wchar_t* pFileName)
 {
 	// テクスチャ読込
 	TexMetadata metaData;
@@ -20,29 +22,29 @@ Polygon2D::Polygon2D(const wchar_t* pFileName)
 	assert(_mTexture);
 }
 
-void Polygon2D::Initialize()
+void Glass::Initialize()
 {
-	mLayer = 3;
+	mLayer = 2;
 
 	VERTEX_3D vertex[4];
 
-	vertex[0].Position = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	vertex[0].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	vertex[0].Position = XMFLOAT3(-4.0f, 10.0f, 0.0f);
+	vertex[0].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 	vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
 
-	vertex[1].Position = XMFLOAT3(200.0f, 0.0f, 0.0f);
-	vertex[1].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	vertex[1].Position = XMFLOAT3(4.0f, 10.0f, 0.0f);
+	vertex[1].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
 
-	vertex[2].Position = XMFLOAT3(0.0f, 200.0f, 0.0f);
-	vertex[2].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	vertex[2].Position = XMFLOAT3(-4.0f, 0.0f, 0.0f);
+	vertex[2].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 	vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
 
-	vertex[3].Position = XMFLOAT3(200.0f, 200.0f, 0.0f);
-	vertex[3].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	vertex[3].Position = XMFLOAT3(4.0f, 0.0f, 0.0f);
+	vertex[3].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
 
@@ -61,7 +63,7 @@ void Polygon2D::Initialize()
 	// テクスチャ読込
 	TexMetadata metaData;
 	ScratchImage image;
-	LoadFromWICFile(L"Resources\\Textures\\rock.jpg", WIC_FLAGS_NONE, &metaData, image);
+	LoadFromWICFile(L"Resources\\Textures\\Background\\glass.png", WIC_FLAGS_NONE, &metaData, image);
 	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
 	assert(_mTexture);
 
@@ -70,9 +72,9 @@ void Polygon2D::Initialize()
 	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 }
 
-void Polygon2D::Finalize()
+void Glass::Finalize()
 {
-	if(_mTexture) _mTexture->Release();
+	if (_mTexture) _mTexture->Release();
 
 	_mPixelShader->Release();
 	_mVertexShader->Release();
@@ -80,11 +82,11 @@ void Polygon2D::Finalize()
 	_mVertexBuffer->Release();
 }
 
-void Polygon2D::Update()
+void Glass::Update()
 {
 }
 
-void Polygon2D::Draw() const
+void Glass::Draw() const
 {
 	// 入力レイアウト設定
 	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
@@ -93,20 +95,25 @@ void Polygon2D::Draw() const
 	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
 
-	// マトリクス設定
-	Renderer::SetWorldViewProjection2D();
+	// ビルボード用マトリクス
+	Camera* camera = Manager::GetGameObject<Camera>();
+	XMMATRIX view = camera->GetViewMatrix();
+	XMMATRIX invView = XMMatrixInverse(NULL, view);
+	invView.r[3].m128_f32[0] = 0.0f;
+	invView.r[3].m128_f32[1] = 0.0f;
+	invView.r[3].m128_f32[2] = 0.0f;
 
+	// マトリクス設定
 	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(1.0f, 1.0f, 1.0f); // 拡大縮小
-	r = XMMatrixRotationRollPitchYaw(0.0f, 0.0f, 0.0f); // 回転
-	t = XMMatrixTranslation(0.0f, 0.0f, 0.0f); // 平行移動
-	w = s * r * t;
+	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // 拡大縮小	
+	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // 平行移動
+	w = s * invView * t;
 	Renderer::SetWorldMatrix(w);
 
 	// マテリアル設定
 	MATERIAL material{};
 	material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	if(_mTexture)material.TextureEnable = true;
+	if (_mTexture)material.TextureEnable = true;
 	else material.TextureEnable = false;
 	Renderer::SetMaterial(material);
 

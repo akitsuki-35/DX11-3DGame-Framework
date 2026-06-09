@@ -6,8 +6,10 @@
 * 　@date	 : 2026/04/13
 *	@updated : 2026/06/02
 *============================================================*/
+#include "main.h"
 #include "texture.h"
 #include "sprite.h"
+#include "renderer.h"
 #include "direct3d.h"
 using namespace DirectX;
 #include <string>
@@ -42,7 +44,10 @@ Texture::Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position, co
 	}
 
 	//シェーダーリソースビューの生成
-	HRESULT hr = CreateShaderResourceView(Direct3DGetDevice(), image.GetImages(), image.GetImageCount(),
+	//HRESULT hr = CreateShaderResourceView(Direct3DGetDevice(), image.GetImages(), image.GetImageCount(),
+	//	metaData, &pShaderResourceView);
+
+	HRESULT hr = CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(),
 		metaData, &pShaderResourceView);
 
 	if (FAILED(hr))

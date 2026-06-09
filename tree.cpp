@@ -9,7 +9,6 @@
 #include "main.h"
 #include "tree.h"
 #include "renderer.h"
-#include "keylogger.h"
 #include "manager.h"
 #include "camera.h"
 
@@ -19,31 +18,33 @@ Tree::Tree(const wchar_t* pFileName)
 	TexMetadata metaData;
 	ScratchImage image;
 	LoadFromWICFile(pFileName, WIC_FLAGS_NONE, &metaData, image);
-	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &pTexture);
-	assert(pTexture);
+	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
+	assert(_mTexture);
 }
 
 void Tree::Initialize()
 {
+	mLayer = 2;
+
 	VERTEX_3D vertex[4];
 
 	vertex[0].Position = XMFLOAT3(-4.0f, 10.0f, 0.0f);
-	vertex[0].Normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
+	vertex[0].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 	vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
 
 	vertex[1].Position = XMFLOAT3(4.0f, 10.0f, 0.0f);
-	vertex[1].Normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
+	vertex[1].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
 
 	vertex[2].Position = XMFLOAT3(-4.0f, 0.0f, 0.0f);
-	vertex[2].Normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
+	vertex[2].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 	vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
 
 	vertex[3].Position = XMFLOAT3(4.0f, 0.0f, 0.0f);
-	vertex[3].Normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
+	vertex[3].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
 
@@ -57,28 +58,28 @@ void Tree::Initialize()
 	D3D11_SUBRESOURCE_DATA sd{};
 	sd.pSysMem = vertex;
 
-	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &pVertexBuffer);
+	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &_mVertexBuffer);
 
 	// テクスチャ読込
 	TexMetadata metaData;
 	ScratchImage image;
 	LoadFromWICFile(L"Resources\\Textures\\Background\\tree.png", WIC_FLAGS_NONE, &metaData, image);
-	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &pTexture);
-	assert(pTexture);
+	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
+	assert(_mTexture);
 
 	// シェーダー読込
-	Renderer::CreateVertexShader(&pVertexShader, &pVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	Renderer::CreatePixelShader(&pPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
+	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 }
 
 void Tree::Finalize()
 {
-	if (pTexture) pTexture->Release();
+	if (_mTexture) _mTexture->Release();
 
-	pPixelShader->Release();
-	pVertexShader->Release();
-	pVertexLayout->Release();
-	pVertexBuffer->Release();
+	_mPixelShader->Release();
+	_mVertexShader->Release();
+	_mVertexLayout->Release();
+	_mVertexBuffer->Release();
 }
 
 void Tree::Update()
@@ -88,11 +89,11 @@ void Tree::Update()
 void Tree::Draw() const
 {
 	// 入力レイアウト設定
-	Renderer::GetDeviceContext()->IASetInputLayout(pVertexLayout);
+	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
 
 	// シェーダー設定
-	Renderer::GetDeviceContext()->VSSetShader(pVertexShader, NULL, 0);
-	Renderer::GetDeviceContext()->PSSetShader(pPixelShader, NULL, 0);
+	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
+	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
 
 	// ビルボード用マトリクス
 	Camera* camera = Manager::GetGameObject<Camera>();
@@ -104,27 +105,27 @@ void Tree::Draw() const
 
 	// マトリクス設定
 	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(scale.x, scale.y, scale.z); // 拡大縮小	
-	t = XMMatrixTranslation(position.x, position.y, position.z); // 平行移動
+	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // 拡大縮小	
+	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // 平行移動
 	w = s * invView * t;
 	Renderer::SetWorldMatrix(w);
 
 	// マテリアル設定
 	MATERIAL material{};
 	material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	if (pTexture)material.TextureEnable = true;
+	if (_mTexture)material.TextureEnable = true;
 	else material.TextureEnable = false;
 	Renderer::SetMaterial(material);
 
 	// テクスチャ設定
-	if (pTexture) {
-		Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &pTexture);
+	if (_mTexture) {
+		Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &_mTexture);
 	}
 
 	// 頂点バッファ設定
 	UINT stride = sizeof(VERTEX_3D);
 	UINT offset = 0;
-	Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
+	Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &_mVertexBuffer, &stride, &offset);
 
 	// プリミティブトポロジ設定
 	Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);

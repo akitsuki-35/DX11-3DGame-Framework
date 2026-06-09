@@ -15,8 +15,10 @@
 
 void Camera::Initialize()
 {
-	position = Vector3(0.0f, 5.0f, -10.0f);
-	target = Vector3(0.0f, 0.0f, 0.0f);
+	mLayer = 0;
+
+	mPosition = Vector3(0.0f, 5.0f, -10.0f);
+	mTarget = Vector3(0.0f, 0.0f, 0.0f);
 }
 
 void Camera::Finalize()
@@ -31,19 +33,19 @@ void Camera::Update()
 	float dt = 1.0f / 60.0f;
 
 	if (Input::GetKeyPress(VK_LEFT)) {
-		rotation.y -= 3.0f * dt;
+		mRotation.y -= 3.0f * dt;
 	}
 	else if (Input::GetKeyPress(VK_RIGHT)) {
-		rotation.y += 3.0f * dt;
+		mRotation.y += 3.0f * dt;
 	}
 
 	float t = 0.1f;
-	target = target * (1.0f - t) + (playerPos + Vector3(0.0f, 2.0f, 0.0f)) * t;
-	position = target + Vector3(-sinf(rotation.y) * 10.0f, 5.0f, -cosf(rotation.y) * 10.0f);
+	mTarget = mTarget * (1.0f - t) + (playerPos + Vector3(0.0f, 2.0f, 0.0f)) * t;
+	mPosition = mTarget + Vector3(-sinf(mRotation.y) * 10.0f, 5.0f, -cosf(mRotation.y) * 10.0f);
 
 	XMFLOAT3 up = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	viewMatrix = XMMatrixLookAtLH(XMLoadFloat3((XMFLOAT3*)&position),
-		XMLoadFloat3((XMFLOAT3*)&target), XMLoadFloat3(&up));
+	mViewMatrix = XMMatrixLookAtLH(XMLoadFloat3((XMFLOAT3*)&mPosition),
+		XMLoadFloat3((XMFLOAT3*)&mTarget), XMLoadFloat3(&up));
 }
 
 void Camera::Draw() const
@@ -54,13 +56,13 @@ void Camera::Draw() const
 	Renderer::SetProjectionMatrix(projection);
 
 	// ƒrƒ…[s—ñÝ’è
-	Renderer::SetViewMatrix(viewMatrix);
+	Renderer::SetViewMatrix(mViewMatrix);
 }
 
 void TopCamera::Initialize()
 {
-	position = Vector3(0.0f, 10.0f, 0.0f);
-	target = Vector3(0.0f, 0.0f, 0.0f);
+	mPosition = Vector3(0.0f, 10.0f, 0.0f);
+	mTarget = Vector3(0.0f, 0.0f, 0.0f);
 }
 
 void TopCamera::Update()
@@ -69,6 +71,6 @@ void TopCamera::Update()
 	Vector3 playerPos = player->GetPosition();
 	Vector3 playerForward = player->GetForward();
 
-	target = { playerPos.x, playerPos.y, playerPos.z };
-	position = playerPos + Vector3(0.0f, 10.0f, 1.0f);
+	mTarget = { playerPos.x, playerPos.y, playerPos.z };
+	mPosition = playerPos + Vector3(0.0f, 10.0f, 1.0f);
 }

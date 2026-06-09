@@ -18,13 +18,13 @@
 class Bullet : public GameObject
 {
 private:
-	Vector3 velocity{ 0.0f, 0.0f, 0.0f };
-	Vector3 accel{ 0.0f, 0.0f, 0.0f };
-	float lifeTime{ 2.0f };
+	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
+	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
+	float mLifeTime{ 2.0f };
 
-	ID3D11InputLayout* pVertexLayout{}; // 頂点レイアウト
-	ID3D11VertexShader* pVertexShader{}; // 頂点シェーダー
-	ID3D11PixelShader* pPixelShader{}; // ピクセルシェーダー
+	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
+	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー
+	ID3D11PixelShader* _mPixelShader{}; // ピクセルシェーダー
 
 public:
 	Bullet() = default;
@@ -34,7 +34,7 @@ public:
 	void Update() override;
 	void Draw() const override;
 
-	void SetVelocity(const Vector3& newVelocity) { velocity = newVelocity; }
+	void SetVelocity(const Vector3& velocity) { mVelocity = velocity; }
 };
 
 #endif // BULLET_H
