@@ -2,9 +2,9 @@
 *	@file	 : debug_text.h
 *	@brief	 : デバッグテキスト表示
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/13
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/13
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef DEBUG_TEXT_H
 #define DEBUG_TEXT_H

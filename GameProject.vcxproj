@@ -24,9 +24,9 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="cursor.cpp" />
-    <ClCompile Include="debug ostream.cpp" />
     <ClCompile Include="debugger.cpp" />
     <ClCompile Include="debug_collisiondraw.cpp" />
+    <ClCompile Include="debug_ostream.cpp" />
     <ClCompile Include="debug_text.cpp" />
     <ClCompile Include="direct3d.cpp" />
     <ClCompile Include="enemy.cpp" />

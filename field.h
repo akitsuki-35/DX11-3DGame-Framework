@@ -2,9 +2,9 @@
 *	@file	 : field.h
 *	@brief	 : 3Dポリゴン表示
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/28
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/28
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef FIELD_H
 #define FIELD_H

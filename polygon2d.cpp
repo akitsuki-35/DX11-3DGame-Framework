@@ -2,9 +2,9 @@
 *	@file	 : polygon2d.cpp
 *	@brief	 : 2Dポリゴン表示
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/28
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/28
+*	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
 #include "polygon2d.h"

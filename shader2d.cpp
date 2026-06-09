@@ -2,9 +2,9 @@
 *	@file	 : shader.cpp
 *	@brief	 : 2D用シェーダー
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/01
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/01
+*	@updated : 2026/06/02
 *============================================================*/
 #include "shader2d.h"
 #include "direct3d.h"

@@ -110,9 +110,6 @@
     <ClCompile Include="title.cpp">
       <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
-    <ClCompile Include="debug ostream.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="debug_text.cpp">
       <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
@@ -187,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="include\ImGui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="debug_ostream.cpp">
+      <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

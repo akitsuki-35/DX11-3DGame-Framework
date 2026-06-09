@@ -2,9 +2,9 @@
 *	@file	 : title.cpp
 *	@brief	 : タイトルシーン
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/03/29
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/03/29
+*	@updated : 2026/06/02
 *============================================================*/
 #include "title.h"
 #include "manager.h"

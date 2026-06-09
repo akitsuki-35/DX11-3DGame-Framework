@@ -2,9 +2,9 @@
 *	@file	 : debug_collisiondraw.h
 *	@brief	 : コリジョン可視化
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/20
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/20
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef DEBUG_COLLISIONDRAW_H
 #define DEBUG_COLLISIONDRAW_H

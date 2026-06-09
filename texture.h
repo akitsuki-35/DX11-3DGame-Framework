@@ -2,9 +2,9 @@
 *	@file	 : texture.h
 *	@brief	 : テクスチャ管理
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/13
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/13
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef TEXTURE_H
 #define TEXTURE_H

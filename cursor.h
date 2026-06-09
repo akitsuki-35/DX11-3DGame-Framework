@@ -2,9 +2,9 @@
 *	@file	 : cursor.h
 *	@brief	 : マウスカーソル
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/05/20
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/05/20
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef CURSOR_H
 #define CURSOR_H

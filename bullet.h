@@ -2,9 +2,9 @@
 *	@file	 : bullet.h
 *	@brief	 : 弾
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/06/02
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/06/02
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef BULLET_H
 #define BULLET_H

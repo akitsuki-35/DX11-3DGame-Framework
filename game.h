@@ -2,9 +2,9 @@
 *	@file	 : game.h
 *	@brief	 : ゲームシーン
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/03/28
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/03/28
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef GAME_H
 #define GAME_H

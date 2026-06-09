@@ -2,9 +2,9 @@
 *	@file	 : vector3.h
 *	@brief	 : 3次元ベクトルクラス
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/23
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/23
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef VECTOR3_H
 #define VECTOR3_H

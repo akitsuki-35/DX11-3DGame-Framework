@@ -2,9 +2,9 @@
 *	@file	 : camera.h
 *	@brief	 : カメラ
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/26
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/26
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef CAMERA_H
 #define CAMERA_H

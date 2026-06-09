@@ -2,9 +2,9 @@
 *	@file	 : scene.h
 *	@brief	 : シーン基底クラス
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2025/09/17
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2025/09/17
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef SCENE_H
 #define SCENE_H
