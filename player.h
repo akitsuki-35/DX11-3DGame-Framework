@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/19
-*	@updated : 2026/06/02
+*	@updated : 2026/06/16
 *============================================================*/
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -21,6 +21,8 @@ private:
 	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
 	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
 	float mRotationVel{ 0.0f };
+	bool mGround{ true };
+	float mMoveAnimation{ 0.0f };
 
 	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
 	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー

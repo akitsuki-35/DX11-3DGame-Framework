@@ -197,6 +197,9 @@
     <ClCompile Include="glass.cpp">
       <Filter>3Dフレームワーク\Objecs</Filter>
     </ClCompile>
+    <ClCompile Include="box.cpp">
+      <Filter>3Dフレームワーク\Objecs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -356,6 +359,12 @@
       <Filter>3Dフレームワーク\Objecs</Filter>
     </ClInclude>
     <ClInclude Include="glass.h">
+      <Filter>3Dフレームワーク\Objecs</Filter>
+    </ClInclude>
+    <ClInclude Include="collision3D.h">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="box.h">
       <Filter>3Dフレームワーク\Objecs</Filter>
     </ClInclude>
   </ItemGroup>

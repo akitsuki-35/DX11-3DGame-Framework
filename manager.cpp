@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/06/02
+*	@updated : 2026/06/16
 *============================================================*/
 #include "main.h"
 #include "manager.h"
@@ -19,6 +19,7 @@
 #include "bullet.h"
 #include "tree.h"
 #include "sky.h"
+#include "box.h"
 
 std::list<GameObject*> Manager::gameObjects;
 
@@ -40,6 +41,9 @@ void Manager::Initialize()
 	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
 	AddGameObject<Enemy>()->SetPosition({-5.0f, 0.0f, 5.0f });
 	AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
+	Box* box = AddGameObject<Box>();
+	box->SetPosition({ 0.0f, 0.0f, -5.0f });
+	box->SetScale({ 1.0f, 1.0f, 1.0f });
 
 	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, 5.0f });
 	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, -5.0f });
@@ -84,6 +88,21 @@ void Manager::Update()
 void Manager::Draw()
 {
 	Renderer::Begin();
+
+	// Zソート
+	{
+		Camera* camera = GetGameObject<Camera>();
+		Vector3 forward = camera->GetForward();
+		Vector3 position = camera->GetPosition();
+
+		for (GameObject* obj : gameObjects) {
+			obj->CalcCameraZ(position, forward);
+		}
+
+		gameObjects.sort([](GameObject* a, GameObject* b) {
+			return a->GetCameraZ() > b->GetCameraZ();
+			});
+	}
 
 	for (int layer = 0; layer < 4; layer++)
 	{

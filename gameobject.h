@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/12
-*	@updated : 2026/06/02
+*	@updated : 2026/06/16
 *============================================================*/
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
@@ -23,6 +23,7 @@ class GameObject
 protected: // 継承先からアクセス可能なメンバ変数
 
 	int mLayer{ 1 }; // レイヤー番号
+	float mCameraZ; // カメラからの距離（Zソート用）
 
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
 	Vector3 mRotation{ 0.0f, 0.0f, 0.0f };
@@ -39,7 +40,9 @@ public:
 		: mPosition(position), mRotation(rotation), mScale(scale), mTag(tag), mIsDestroy(isDestroy) {}
 	virtual ~GameObject() = default;
 
-	void SetPosition(const Vector3& pos) { mPosition = pos; }
+	void SetPosition(const Vector3& position) { mPosition = position; }
+	void SetScale(const Vector3& scale) { mScale = scale; }
+
 	void SetDestroy() { mIsDestroy = true; }
 	bool Destroy() {
 		if (mIsDestroy) {
@@ -81,9 +84,17 @@ public:
 
 	// ゲッター
 	const int& GetLayer() const { return mLayer; }
+	const float& GetCameraZ() const { return mCameraZ; }
+
 	const Vector3& GetPosition() const { return mPosition; }
 	const Vector3& GetRotation() const { return mRotation; }
 	const Vector3& GetScale() const { return mScale; }
+
+	// Z値計算
+	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) {
+		Vector3 dir = mPosition - cameraPosition;
+		mCameraZ = Vector3::dot(dir, cameraForward);
+	}
 
 	virtual Vector3 GetForward() const {
 		DirectX::XMMATRIX r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z);
