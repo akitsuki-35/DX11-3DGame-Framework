@@ -200,6 +200,9 @@
     <ClCompile Include="box.cpp">
       <Filter>3Dフレームワーク\Objecs</Filter>
     </ClCompile>
+    <ClCompile Include="particle.cpp">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -366,6 +369,9 @@
     </ClInclude>
     <ClInclude Include="box.h">
       <Filter>3Dフレームワーク\Objecs</Filter>
+    </ClInclude>
+    <ClInclude Include="particle.h">
+      <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

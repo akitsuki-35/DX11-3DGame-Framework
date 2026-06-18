@@ -21,6 +21,8 @@
 #include "sky.h"
 #include "box.h"
 
+#include "particle.h"
+
 std::list<GameObject*> Manager::gameObjects;
 
 /*------------------------------------------------------------
@@ -47,6 +49,8 @@ void Manager::Initialize()
 
 	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, 5.0f });
 	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, -5.0f });
+
+	AddGameObject<Particle>()->SetPosition({ 0.0f, 10.0f, 0.0f });
 
 	AddGameObject<Polygon2D>();
 }

@@ -1,0 +1,184 @@
+﻿/*============================================================
+*	@file	 : particle.cpp
+*	@brief	 : パーティクル
+*
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/06/18
+*	@updated : 2026/06/18
+*============================================================*/
+#include "main.h"
+#include "particle.h"
+#include "renderer.h"
+#include "manager.h"
+#include "camera.h"
+
+Particle::Particle(const wchar_t* pFileName)
+{
+	// テクスチャ読込
+	TexMetadata metaData;
+	ScratchImage image;
+	LoadFromWICFile(pFileName, WIC_FLAGS_NONE, &metaData, image);
+	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
+	assert(_mTexture);
+}
+
+void Particle::Initialize()
+{
+	mLayer = 2;
+
+	VERTEX_3D vertex[4];
+
+	vertex[0].Position = XMFLOAT3(-0.5f, 0.5f, 0.0f);
+	vertex[0].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
+	vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
+
+	vertex[1].Position = XMFLOAT3(0.5f, 0.5f, 0.0f);
+	vertex[1].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
+	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
+
+	vertex[2].Position = XMFLOAT3(-0.5f, -0.5f, 0.0f);
+	vertex[2].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
+	vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
+
+	vertex[3].Position = XMFLOAT3(0.5f, -0.5f, 0.0f);
+	vertex[3].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
+	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
+
+	// 頂点バッファ生成
+	D3D11_BUFFER_DESC bd{};
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.ByteWidth = sizeof(VERTEX_3D) * 4;
+	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bd.CPUAccessFlags = 0;
+
+	D3D11_SUBRESOURCE_DATA sd{};
+	sd.pSysMem = vertex;
+
+	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &_mVertexBuffer);
+
+	// テクスチャ読込
+	TexMetadata metaData;
+	ScratchImage image;
+	LoadFromWICFile(L"Resources\\Textures\\Common\\particle.png", WIC_FLAGS_NONE, &metaData, image);
+	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
+	assert(_mTexture);
+
+	// シェーダー読込
+	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
+	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+
+	// 構造体初期化
+	for (int i = 0; i < PARTICLE_MAX; i++) {
+		mParticle[i].enable = false;
+	}
+}
+
+void Particle::Finalize()
+{
+	if (_mTexture) _mTexture->Release();
+
+	_mPixelShader->Release();
+	_mVertexShader->Release();
+	_mVertexLayout->Release();
+	_mVertexBuffer->Release();
+}
+
+void Particle::Update()
+{
+	float dt = 1.0f / 60.0f;
+	Vector3 gravity{ 0.0f, -9.8f, 0.0f };
+
+	// パーティクル発射
+	for (int i = 0; i < PARTICLE_MAX; i++) {
+		if (!mParticle[i].enable) {
+			mParticle[i].enable = true;
+			mParticle[i].life = 180;
+			mParticle[i].position = mPosition;
+			mParticle[i].velocity = { ((float)rand() / RAND_MAX - 0.5f) * 10.0f,
+				((float)rand() / RAND_MAX) * 10.0f,
+				((float)rand() / RAND_MAX - 0.5f) * 10.0f };
+
+			float scale = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
+
+			mParticle[i].scale = { scale, scale, scale };
+			break;
+		}
+	}
+
+	// パーティクル更新
+	for (int i = 0; i < PARTICLE_MAX; i++) {
+		if (mParticle[i].enable) {
+			mParticle[i].velocity += gravity * dt;
+			mParticle[i].position += mParticle[i].velocity * dt;
+			
+			mParticle[i].life--;
+
+			if (mParticle[i].life <= 0) {
+				mParticle[i].enable = false;
+			}
+		}
+	}
+}
+
+void Particle::Draw() const
+{
+	// 入力レイアウト設定
+	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
+
+	// シェーダー設定
+	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
+	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
+
+	// ビルボード用マトリクス
+	Camera* camera = Manager::GetGameObject<Camera>();
+	XMMATRIX view = camera->GetViewMatrix();
+	XMMATRIX invView = XMMatrixInverse(NULL, view);
+	invView.r[3].m128_f32[0] = 0.0f;
+	invView.r[3].m128_f32[1] = 0.0f;
+	invView.r[3].m128_f32[2] = 0.0f;
+
+	// マテリアル設定
+	MATERIAL material{};
+	material.Diffuse = XMFLOAT4(mColor);
+	if (_mTexture)material.TextureEnable = true;
+	else material.TextureEnable = false;
+	Renderer::SetMaterial(material);
+
+	// テクスチャ設定
+	if (_mTexture) {
+		Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &_mTexture);
+	}
+
+	// 頂点バッファ設定
+	UINT stride = sizeof(VERTEX_3D);
+	UINT offset = 0;
+	Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &_mVertexBuffer, &stride, &offset);
+
+	// プリミティブトポロジ設定
+	Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+	Renderer::SetDepthEnable(false);
+
+	for (int i = 0; i < PARTICLE_MAX; i++) {
+		if (mParticle[i].enable) {
+
+			// マトリクス設定
+			XMMATRIX w, s, r, t;
+			s = XMMatrixScaling(mParticle[i].scale.x, mParticle[i].scale.y,
+				mParticle[i].scale.z); // 拡大縮小	
+			t = XMMatrixTranslation(mParticle[i].position.x, 
+				mParticle[i].position.y, mParticle[i].position.z); // 平行移動
+			w = s * invView * t;
+			Renderer::SetWorldMatrix(w);
+
+			// 描画
+			Renderer::GetDeviceContext()->Draw(4, 0);
+		}
+	}
+	
+	Renderer::SetDepthEnable(true);
+}
