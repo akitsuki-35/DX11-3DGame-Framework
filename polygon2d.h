@@ -29,7 +29,8 @@ public:
 	Polygon2D() = default;
 	Polygon2D(const wchar_t* pFileName);
 
-	void Initialize() override;
+	void Initialize() override {};
+	void Initialize(const XMFLOAT2& position, const XMFLOAT2& size, const WCHAR* fileName);
 	void Finalize() override;
 	void Update() override;
 	void Draw() const override;

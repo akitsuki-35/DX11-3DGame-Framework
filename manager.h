@@ -10,11 +10,13 @@
 #define MANAGER_H
 
 #include "main.h"
+#include "gameobject.h"
+#include "scene.h"
 
 /*------------------------------------------------------------
 	前方宣言
 ------------------------------------------------------------*/
-class GameObject;
+class Scene;
 
 /*============================================================
 *	@class	: Manager
@@ -23,7 +25,9 @@ class GameObject;
 class Manager
 {
 private:
-	static std::list<GameObject*> gameObjects;
+	//static std::list<GameObject*> gameObjects;
+	static Scene* mCurrentScene;
+	static Scene* mNextScene;
 
 public:
 	static void Initialize();
@@ -31,36 +35,9 @@ public:
 	static void Update();
 	static void Draw();
 
-	template <typename T> // テンプレート関数
-	static T* AddGameObject() {
-		T* gameObject = new T();
-		gameObject->Initialize();
-		gameObjects.push_back(gameObject);
-
-		return gameObject;
-	}
-
-	template <typename T> // テンプレート関数
-	static T* GetGameObject() {
-		for (GameObject* gameObject : gameObjects) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(gameObject);
-			if (find) return find;
-		}
-		return nullptr;
-	}
-
-	template <typename T>
-	static std::vector<T*> GetGameObjects() {
-		std::vector<T*> objects;
-		for (GameObject* gameObject : gameObjects) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(gameObject);
-			if (find != nullptr) {
-				objects.push_back(find);
-			}
-		}
-		return objects;
+	template <class T>
+	static void SceneChange() {
+		mNextScene = new T();
 	}
 };
 

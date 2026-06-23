@@ -1,45 +1,33 @@
 /*============================================================
-*	@file	 : title.h
-*	@brief	 : ƒ^ƒCƒgƒ‹ƒV[ƒ“
+*	@file	 : result.h
+*	@brief	 : ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/03/29
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/03/29
 *	@updated : 2026/06/23
 *============================================================*/
-#ifndef TITLE_H
-#define TITLE_H
+#ifndef RESULT_H
+#define RESULT_H
 
 #include "scene.h"
 #include "gameobject.h"
 
 /*------------------------------------------------------------
-	‘O•ûéŒ¾
+	å‰æ–¹å®£è¨€
 ------------------------------------------------------------*/
 class Texture;
 
-/*------------------------------------------------------------
-	ƒ^ƒCƒgƒ‹ƒV[ƒ“‚Ìó‘Ô
-------------------------------------------------------------*/
-enum TitleState
-{
-	TITLE_FADE_IN,
-	TITLE_KEYINPUT_WAIT,
-	TITLE_KEYINPUT_ACTION,
-	TITLE_FADE_OUT
-};
-
 /*============================================================
-*	@class	: Title
-*	@brief	: ƒ^ƒCƒgƒ‹ƒV[ƒ“iScene‚ğŒp³j
+*	@class	: Result
+*	@brief	: ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³ï¼ˆSceneã‚’ç¶™æ‰¿ï¼‰
 *============================================================*/
-class Title : public Scene
+class Result : public Scene
 {
 private:
-	TitleState state{ TitleState::TITLE_FADE_IN };
 	double accumulatedTime{ 0.0 };
 	double keyInputTime{};
 	Texture* pTexture{ nullptr };
-	static std::list<GameObject*> titleObjects;
+	static std::list<GameObject*> resultObjects;
 
 public:
 	void Initialize() override;
@@ -48,4 +36,4 @@ public:
 	void Draw() const override;
 };
 
-#endif // TITLE_H
+#endif //  RESULT_H

@@ -54,6 +54,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="polygon2d.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="result.cpp" />
     <ClCompile Include="shader2d.cpp" />
     <ClCompile Include="sky.cpp" />
     <ClCompile Include="sprite.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="include\ImGui\imstb_truetype.h" />
     <ClInclude Include="observer.h" />
     <ClInclude Include="particle.h" />
+    <ClInclude Include="result.h" />
     <ClInclude Include="sky.h" />
     <ClInclude Include="subject.h" />
     <ClInclude Include="audio.h" />

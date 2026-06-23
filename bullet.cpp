@@ -7,7 +7,7 @@
 *	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
-#include "manager.h"
+#include "game.h"
 #include "bullet.h"
 #include "input.h"
 #include "renderer.h"
@@ -47,7 +47,7 @@ void Bullet::Update()
 	mPosition += mVelocity * dt;
 
 	// ìGÇ∆ÇÃè’ìÀîªíË
-	auto enemys = Manager::GetGameObjects<Enemy>();
+	auto enemys = Game::GetGameObjects<Enemy>();
 	for (auto enemy : enemys) {
 		Vector3 dir = enemy->GetPosition() - mPosition;
 		float length = dir.Length();
@@ -56,7 +56,7 @@ void Bullet::Update()
 			enemy->SetDestroy();
 			SetDestroy();
 
-			Manager::AddGameObject<Explosion>()->SetPosition({ enemy->GetPosition().x,
+			Game::AddGameObject<Explosion>()->SetPosition({ enemy->GetPosition().x,
 				enemy->GetPosition().y + 1.0f, enemy->GetPosition().z });
 
 			break;

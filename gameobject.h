@@ -9,6 +9,7 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include "main.h"
 #include "vector3.h"
 #include "component.h"
 #include <sstream>

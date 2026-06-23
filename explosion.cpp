@@ -9,7 +9,7 @@
 #include "main.h"
 #include "explosion.h"
 #include "renderer.h"
-#include "manager.h"
+#include "game.h"
 #include "camera.h"
 #include "texture.h"
 
@@ -142,7 +142,7 @@ void Explosion::Draw() const
 	}
 
 	// ビルボード用マトリクス
-	Camera* camera = Manager::GetGameObject<Camera>();
+	Camera* camera = Game::GetGameObject<Camera>();
 	XMMATRIX view = camera->GetViewMatrix();
 	XMMATRIX invView = XMMatrixInverse(NULL, view);
 	invView.r[3].m128_f32[0] = 0.0f;

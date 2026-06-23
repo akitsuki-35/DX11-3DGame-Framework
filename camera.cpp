@@ -7,7 +7,7 @@
 *	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
-#include "manager.h"
+#include "game.h"
 #include "camera.h"
 #include "renderer.h"
 #include "input.h"
@@ -27,7 +27,7 @@ void Camera::Finalize()
 
 void Camera::Update()
 {
-	Player* player = Manager::GetGameObject<Player>();
+	Player* player = Game::GetGameObject<Player>();
 	Vector3 playerPos = player->GetPosition();
 
 	float dt = 1.0f / 60.0f;
@@ -67,7 +67,7 @@ void TopCamera::Initialize()
 
 void TopCamera::Update()
 {
-	Player* player = Manager::GetGameObject<Player>();
+	Player* player = Game::GetGameObject<Player>();
 	Vector3 playerPos = player->GetPosition();
 	Vector3 playerForward = player->GetForward();
 

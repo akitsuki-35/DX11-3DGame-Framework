@@ -20,28 +20,28 @@ Polygon2D::Polygon2D(const wchar_t* pFileName)
 	assert(_mTexture);
 }
 
-void Polygon2D::Initialize()
+void Polygon2D::Initialize(const XMFLOAT2& position, const XMFLOAT2& size, const WCHAR* fileName)
 {
 	mLayer = 3;
 
 	VERTEX_3D vertex[4];
 
-	vertex[0].Position = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	vertex[0].Position = XMFLOAT3(position.x, position.y, 0.0f);
 	vertex[0].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
 
-	vertex[1].Position = XMFLOAT3(200.0f, 0.0f, 0.0f);
+	vertex[1].Position = XMFLOAT3(position.x + size.x, position.y, 0.0f);
 	vertex[1].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
 
-	vertex[2].Position = XMFLOAT3(0.0f, 200.0f, 0.0f);
+	vertex[2].Position = XMFLOAT3(position.x, position.y + size.y, 0.0f);
 	vertex[2].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
 
-	vertex[3].Position = XMFLOAT3(200.0f, 200.0f, 0.0f);
+	vertex[3].Position = XMFLOAT3(position.x + size.x, position.y + size.y, 0.0f);
 	vertex[3].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
@@ -61,7 +61,7 @@ void Polygon2D::Initialize()
 	// テクスチャ読込
 	TexMetadata metaData;
 	ScratchImage image;
-	LoadFromWICFile(L"Resources\\Textures\\rock.jpg", WIC_FLAGS_NONE, &metaData, image);
+	LoadFromWICFile(fileName, WIC_FLAGS_NONE, &metaData, image);
 	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
 	assert(_mTexture);
 

@@ -10,7 +10,7 @@
 #include "input.h"
 #include "renderer.h"
 #include "modelRenderer.h"
-#include "manager.h"
+#include "game.h"
 #include "player.h"
 #include "camera.h"
 #include "bullet.h"
@@ -52,7 +52,7 @@ void Player::Update()
 
 	Vector3 oldPosition = mPosition; // プレイヤー移動前座標
 
-	Camera* camera = Manager::GetGameObject<Camera>();
+	Camera* camera = Game::GetGameObject<Camera>();
 	Vector3 forward = camera->GetForward();
 	Vector3 right = camera->GetRight();
 
@@ -116,7 +116,7 @@ void Player::Update()
 	}
 
 	// 木との衝突判定
-	auto trees = Manager::GetGameObjects<Tree>();
+	auto trees = Game::GetGameObjects<Tree>();
 	for (auto tree : trees) {
 		Vector3 treePosition = tree->GetPosition();
 		Vector3 playerPosition = mPosition;
@@ -135,7 +135,7 @@ void Player::Update()
 	}
 
 	// 箱との衝突判定
-	auto boxes = Manager::GetGameObjects<Box>();
+	auto boxes = Game::GetGameObjects<Box>();
 	for (auto box : boxes) {
 		Vector3 boxPosition = box->GetPosition();
 		Vector3 boxScale = box->GetScale();
@@ -180,7 +180,7 @@ void Player::Update()
 	// 弾の発射
 	if (Input::GetKeyTrigger('J')) {
 
-		Bullet* bullet = Manager::AddGameObject<Bullet>();
+		Bullet* bullet = Game::AddGameObject<Bullet>();
 		bullet->SetPosition({ mPosition.x, mPosition.y, mPosition.z });
 		bullet->SetVelocity(GetForward() * 50.0f);
 	}

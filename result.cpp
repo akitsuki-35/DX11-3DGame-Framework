@@ -1,12 +1,12 @@
 /*============================================================
-*	@file	 : title.cpp
-*	@brief	 : ƒ^ƒCƒgƒ‹ƒV[ƒ“
+*	@file	 : result.cpp
+*	@brief	 : ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/03/29
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/03/29
 *	@updated : 2026/06/23
 *============================================================*/
-#include "title.h"
+#include "result.h"
 #include "manager.h"
 //#include "keylogger.h"
 #include "texture.h"
@@ -15,26 +15,25 @@
 #include "direct3d.h"
 
 #include "polygon2d.h"
-#include "game.h"
+#include "title.h"
 #include "input.h"
 
 #include <math.h>
 
-std::list<GameObject*> Title::titleObjects;
+std::list<GameObject*> Result::resultObjects;
 
-void Title::Initialize()
+void Result::Initialize()
 {
 	//Fade::GetInstance().Start(1.0f, true);
 	//state = TITLE_FADE_IN;
+	Result::resultObjects.clear();
 
-	Title::titleObjects.clear();
 }
 
-void Title::Finalize()
-{
-}
+void Result::Finalize()
+{}
 
-void Title::Update(double elapsedTime)
+void Result::Update(double elapsedTime)
 {
 	//accumulatedTime += elapsed_time;
 
@@ -51,7 +50,7 @@ void Title::Update(double elapsedTime)
 	//	{
 	//		state = TITLE_KEYINPUT_ACTION;
 	//		keyInputTime = accumulatedTime;
-	//		//ƒTƒEƒ“ƒhÄ¶
+	//		//ã‚µã‚¦ãƒ³ãƒ‰å†ç”Ÿ
 
 	//	}
 	//	break;
@@ -65,7 +64,7 @@ void Title::Update(double elapsedTime)
 
 	//case TITLE_FADE_OUT:
 	//	if (Fade::GetInstance().GetState() == Fade::FADE_OUT_END) {
-	//		// ƒQ[ƒ€ƒV[ƒ“‚É‘JˆÚ
+	//		// ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã«é·ç§»
 	//		//Manager::SetNextScene(new Game);
 	//	}
 	//	break;
@@ -77,11 +76,11 @@ void Title::Update(double elapsedTime)
 	//Manager::SceneChange<Game>();
 
 	if (Input::GetKeyTrigger(VK_RETURN)) {
-		Manager::SceneChange<Game>();
+		Manager::SceneChange<Title>();
 	}
 }
 
-void Title::Draw() const
+void Result::Draw() const
 {
 	//if (state != TITLE_FADE_IN) {
 	//	float alpha = static_cast<float>((sin(accumulatedTime) + 1.0f)) * 0.5f;

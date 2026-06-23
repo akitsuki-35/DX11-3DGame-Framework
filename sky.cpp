@@ -7,7 +7,7 @@
 *	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
-#include "manager.h"
+#include "game.h"
 #include "input.h"
 #include "renderer.h"
 #include "modelRenderer.h"
@@ -43,7 +43,7 @@ void Sky::Finalize()
 
 void Sky::Update()
 {
-	Camera* camera = Manager::GetGameObject<Camera>();
+	Camera* camera = Game::GetGameObject<Camera>();
 
 	mPosition = camera->GetPosition();
 

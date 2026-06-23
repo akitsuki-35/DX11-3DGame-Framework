@@ -9,7 +9,7 @@
 #include "main.h"
 #include "tree.h"
 #include "renderer.h"
-#include "manager.h"
+#include "game.h"
 #include "camera.h"
 
 Tree::Tree(const wchar_t* pFileName)
@@ -96,7 +96,7 @@ void Tree::Draw() const
 	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
 
 	// ビルボード用マトリクス
-	Camera* camera = Manager::GetGameObject<Camera>();
+	Camera* camera = Game::GetGameObject<Camera>();
 	XMMATRIX view = camera->GetViewMatrix();
 	XMMATRIX invView = XMMatrixInverse(NULL, view);
 	invView.r[3].m128_f32[0] = 0.0f;

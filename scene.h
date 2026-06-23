@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2025/09/17
-*	@updated : 2026/06/02
+*	@updated : 2026/06/23
 *============================================================*/
 #ifndef SCENE_H
 #define SCENE_H
@@ -20,7 +20,7 @@ public:
 
 	virtual void Initialize() = 0;
 	virtual void Finalize() = 0;
-	virtual void Update(double elapsed_time) = 0;
+	virtual void Update(double elapsedTime) = 0;
 	virtual void Draw() const = 0;
 };
 
