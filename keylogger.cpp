@@ -2,9 +2,9 @@
 *	@file	 : keylogger.cpp
 *	@brief	 : キーボード入力
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2025/06/27
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2025/06/27
+*	@updated : 2026/06/02
 *============================================================*/
 #include "keylogger.h"
 

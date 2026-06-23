@@ -2,9 +2,9 @@
 *	@file	 : enemy.cpp
 *	@brief	 : エネミー
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/05/19
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/05/19
+*	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
 #include "input.h"
@@ -14,23 +14,25 @@
 
 void Enemy::Initialize()
 {
-	position = { 0.0f, 0.0f, 0.0f };
-	velocity = { 0.0f, 0.0f, 0.0f };
-	accel = { 0.0f, 0.0f, 0.0f };
+	mLayer = 1;
+
+	mPosition = { 0.0f, 0.0f, 0.0f };
+	mVelocity = { 0.0f, 0.0f, 0.0f };
+	mAccel = { 0.0f, 0.0f, 0.0f };
 
 	// コンポーネント読込
 	AddComponent<ModelRenderer>(this)->Load("Resources\\Models\\player.obj");
 
 	// シェーダー読込
-	Renderer::CreateVertexShader(&pVertexShader, &pVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	Renderer::CreatePixelShader(&pPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
+	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 }
 
 void Enemy::Finalize()
 {
-	pPixelShader->Release();
-	pVertexShader->Release();
-	pVertexLayout->Release();
+	_mPixelShader->Release();
+	_mVertexShader->Release();
+	_mVertexLayout->Release();
 
 	GameObject::Finalize();
 }
@@ -43,17 +45,17 @@ void Enemy::Update()
 void Enemy::Draw() const
 {
 	// 入力レイアウト設定
-	Renderer::GetDeviceContext()->IASetInputLayout(pVertexLayout);
+	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
 
 	// シェーダー設定
-	Renderer::GetDeviceContext()->VSSetShader(pVertexShader, NULL, 0);
-	Renderer::GetDeviceContext()->PSSetShader(pPixelShader, NULL, 0);
+	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
+	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
 
 	// マトリクス設定
 	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(scale.x, scale.y, scale.z); // 拡大縮小
-	r = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z); // 回転
-	t = XMMatrixTranslation(position.x, position.y, position.z); // 平行移動
+	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // 拡大縮小
+	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z); // 回転
+	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // 平行移動
 	w = s * r * t;
 	Renderer::SetWorldMatrix(w);
 

@@ -2,9 +2,9 @@
 *	@file	 : observer.h
 *	@brief	 : オブザーバー
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/05/25
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/05/25
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef OBSERVER_H
 #define OBSERVER_H

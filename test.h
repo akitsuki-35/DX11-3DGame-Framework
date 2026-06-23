@@ -2,9 +2,9 @@
 *	@file	 : test.h
 *	@brief	 : テスト用シーン
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/29
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/29
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef TEST_H
 #define TEST_H

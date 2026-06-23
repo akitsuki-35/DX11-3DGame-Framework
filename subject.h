@@ -2,9 +2,9 @@
 *	@file	 : subject.h
 *	@brief	 : サブジェクト
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/05/25
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/05/25
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef SUBJECT_H
 #define SUBJECT_H

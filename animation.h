@@ -2,9 +2,9 @@
 *	@file	 : animation.h
 *	@brief	 : スプライトアニメーション
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/01
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/01
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef ANIMATION_H
 #define ANIMATION_H
@@ -25,15 +25,14 @@ class Animation
 {
 private:
 	SpriteSheet* pSpriteSheet;
-	DirectX::XMUINT2 startPos{};
 	double perSecond{};
 	double accumulatedTime{ 0.0f };
 	bool isLoop{ true };
 	bool isStoped{ false };
 
 public:
-	Animation(SpriteSheet* pSpriteSheet, DirectX::XMUINT2 startPos, double perSecond, bool isLoop = true)
-		: pSpriteSheet(pSpriteSheet), startPos(startPos), perSecond(perSecond), isLoop(isLoop) {}
+	Animation(SpriteSheet* pSpriteSheet, double perSecond, bool isLoop = true)
+		: pSpriteSheet(pSpriteSheet), perSecond(perSecond), isLoop(isLoop) {}
 
 	void Update(double elapsedTime);
 	void Draw() const;

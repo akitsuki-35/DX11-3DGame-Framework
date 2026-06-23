@@ -2,9 +2,9 @@
 *	@file	 : sprite.cpp
 *	@brief	 : スプライト描画
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/01
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/01
+*	@updated : 2026/06/02
 *============================================================*/
 #include "sprite.h"
 #include "shader2d.h"

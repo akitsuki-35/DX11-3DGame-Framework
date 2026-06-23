@@ -20,19 +20,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
+    <ClCompile Include="box.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="cursor.cpp" />
-    <ClCompile Include="debug ostream.cpp" />
     <ClCompile Include="debugger.cpp" />
     <ClCompile Include="debug_collisiondraw.cpp" />
+    <ClCompile Include="debug_ostream.cpp" />
     <ClCompile Include="debug_text.cpp" />
     <ClCompile Include="direct3d.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="explosion.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="field.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="glass.cpp" />
     <ClCompile Include="include\ImGui\imgui.cpp" />
     <ClCompile Include="include\ImGui\imgui_demo.cpp" />
     <ClCompile Include="include\ImGui\imgui_draw.cpp" />
@@ -47,10 +50,13 @@
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="modelRenderer.cpp" />
     <ClCompile Include="mouse.cpp" />
+    <ClCompile Include="particle.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="polygon2d.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="result.cpp" />
     <ClCompile Include="shader2d.cpp" />
+    <ClCompile Include="sky.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="systemtimer.cpp" />
@@ -62,8 +68,12 @@
     <ClCompile Include="WICTextureLoader11.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="box.h" />
+    <ClInclude Include="collision3D.h" />
     <ClInclude Include="cursor.h" />
     <ClInclude Include="debugger.h" />
+    <ClInclude Include="explosion.h" />
+    <ClInclude Include="glass.h" />
     <ClInclude Include="include\ImGui\imconfig.h" />
     <ClInclude Include="include\ImGui\imgui.h" />
     <ClInclude Include="include\ImGui\imgui_impl_dx11.h" />
@@ -73,6 +83,9 @@
     <ClInclude Include="include\ImGui\imstb_textedit.h" />
     <ClInclude Include="include\ImGui\imstb_truetype.h" />
     <ClInclude Include="observer.h" />
+    <ClInclude Include="particle.h" />
+    <ClInclude Include="result.h" />
+    <ClInclude Include="sky.h" />
     <ClInclude Include="subject.h" />
     <ClInclude Include="audio.h" />
     <ClInclude Include="bullet.h" />

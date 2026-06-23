@@ -15,12 +15,6 @@
     <Filter Include="ソース ファイル\Debug">
       <UniqueIdentifier>{b40c971e-101e-4ea4-bc5b-984f15af651b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Game">
-      <UniqueIdentifier>{32c47da7-6411-4eee-a684-547ca56c356b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Title">
-      <UniqueIdentifier>{5ab00863-fc64-4363-80c9-a271aecc8ef4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Common">
       <UniqueIdentifier>{172898ab-e8c4-41d7-853c-a23b63b5b72b}</UniqueIdentifier>
     </Filter>
@@ -33,20 +27,11 @@
     <Filter Include="ヘッダー ファイル\Common">
       <UniqueIdentifier>{18d3cd50-e814-4366-96f1-09d4cc8af130}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Title">
-      <UniqueIdentifier>{9cd76ba0-b2e7-4fdd-925e-8a25abc39951}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\Debug">
       <UniqueIdentifier>{51c5a1a5-7c62-47ea-b425-582cd0e8119a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Game">
-      <UniqueIdentifier>{377b112a-bd98-4875-b223-c62706727842}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3Dフレームワーク">
       <UniqueIdentifier>{1b269d7f-0295-4617-9c0e-1cf8ed5e52b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3Dフレームワーク\Objecs">
-      <UniqueIdentifier>{240e13a5-0f74-4882-9214-24a8cf71cc75}</UniqueIdentifier>
     </Filter>
     <Filter Include="3Dフレームワーク\Components">
       <UniqueIdentifier>{afed10f6-0809-43ff-ab2d-9666210c8cf3}</UniqueIdentifier>
@@ -63,11 +48,14 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{bca3d428-e11d-4e58-8c0e-d0d8ce746547}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3Dフレームワーク\Scenes">
+      <UniqueIdentifier>{6b73aeb5-90dd-443b-b717-d051455775fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3Dフレームワーク\Objects">
+      <UniqueIdentifier>{240e13a5-0f74-4882-9214-24a8cf71cc75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp">
-      <Filter>ソース ファイル\Game</Filter>
-    </ClCompile>
     <ClCompile Include="direct3d.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
@@ -107,12 +95,6 @@
     <ClCompile Include="texture.cpp">
       <Filter>ソース ファイル\Common</Filter>
     </ClCompile>
-    <ClCompile Include="title.cpp">
-      <Filter>ソース ファイル\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="debug ostream.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="debug_text.cpp">
       <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
@@ -120,16 +102,16 @@
       <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClCompile>
     <ClCompile Include="field.cpp">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClCompile>
     <ClCompile Include="polygon2d.cpp">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClCompile>
     <ClCompile Include="modelRenderer.cpp">
       <Filter>3Dフレームワーク\Components</Filter>
@@ -150,13 +132,13 @@
       <Filter>3Dフレームワーク\Components</Filter>
     </ClCompile>
     <ClCompile Include="enemy.cpp">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClCompile>
     <ClCompile Include="bullet.cpp">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClCompile>
     <ClCompile Include="tree.cpp">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClCompile>
     <ClCompile Include="debugger.cpp">
       <Filter>ソース ファイル\Debug</Filter>
@@ -188,14 +170,35 @@
     <ClCompile Include="include\ImGui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="debug_ostream.cpp">
+      <Filter>ソース ファイル\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="explosion.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sky.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="glass.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="box.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="particle.cpp">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>3Dフレームワーク\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>3Dフレームワーク\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>3Dフレームワーク\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h">
-      <Filter>ヘッダー ファイル\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="title.h">
-      <Filter>ヘッダー ファイル\Title</Filter>
-    </ClInclude>
     <ClInclude Include="debug_memoryleak.h">
       <Filter>ヘッダー ファイル\Debug</Filter>
     </ClInclude>
@@ -226,9 +229,6 @@
     <ClInclude Include="keylogger.h">
       <Filter>ヘッダー ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="scene.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
     <ClInclude Include="mouse.h">
       <Filter>ヘッダー ファイル\System</Filter>
     </ClInclude>
@@ -251,19 +251,19 @@
       <Filter>ヘッダー ファイル\Debug</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClInclude>
     <ClInclude Include="field.h">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClInclude>
     <ClInclude Include="gameobject.h">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClInclude>
     <ClInclude Include="polygon2d.h">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClInclude>
     <ClInclude Include="component.h">
       <Filter>3Dフレームワーク\Components</Filter>
@@ -290,16 +290,16 @@
       <Filter>3Dフレームワーク\System</Filter>
     </ClInclude>
     <ClInclude Include="enemy.h">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClInclude>
     <ClInclude Include="transform.h">
       <Filter>3Dフレームワーク\Components</Filter>
     </ClInclude>
     <ClInclude Include="bullet.h">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClInclude>
     <ClInclude Include="tree.h">
-      <Filter>3Dフレームワーク\Objecs</Filter>
+      <Filter>3Dフレームワーク\Objects</Filter>
     </ClInclude>
     <ClInclude Include="debugger.h">
       <Filter>ヘッダー ファイル\Debug</Filter>
@@ -339,6 +339,36 @@
     </ClInclude>
     <ClInclude Include="include\ImGui\imstb_truetype.h">
       <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="explosion.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sky.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="glass.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="collision3D.h">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="box.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="particle.h">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>3Dフレームワーク\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>3Dフレームワーク\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>3Dフレームワーク\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>3Dフレームワーク\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

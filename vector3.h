@@ -2,9 +2,9 @@
 *	@file	 : vector3.h
 *	@brief	 : 3次元ベクトルクラス
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/23
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/23
+*	@updated : 2026/06/16
 *============================================================*/
 #ifndef VECTOR3_H
 #define VECTOR3_H
@@ -143,6 +143,10 @@ public:
 ------------------------------------------------------------*/
 	float operator * (const Vector3& vector3) const {
 		return x * vector3.x + y * vector3.y + z * vector3.z;
+	}
+
+	static float dot(Vector3& a, Vector3& b) {
+		return a.x * b.x + a.y * b.y + a.z * b.z;
 	}
 
 /*------------------------------------------------------------

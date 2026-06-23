@@ -2,9 +2,9 @@
 *	@file	 : debugger.cpp
 *	@brief	 : ImGuiデバッガー
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/05/21
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/05/21
+*	@updated : 2026/06/02
 *============================================================*/
 #if defined(DEBUG) || defined(_DEBUG)
 #include "debugger.h"

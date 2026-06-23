@@ -2,9 +2,9 @@
 *	@file	 : collision.cpp
 *	@brief	 : 当たり判定
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/19
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/19
+*	@updated : 2026/06/02
 *============================================================*/
 #include "collision.h"
 #include "debug_collisiondraw.h"

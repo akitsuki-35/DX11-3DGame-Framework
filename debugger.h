@@ -2,9 +2,9 @@
 *	@file	 : debugger.h
 *	@brief	 : ImGuiデバッガー
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/05/21
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/05/21
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef DEBUGGER_H
 #define DEBUGGER_H

@@ -1,24 +1,16 @@
-/*＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-*
-*	タイトルシーン[title.h]
-*
-* 　作成者 : Asuka Kuroda
-* 　作成日 : 2026/03/29
-* ----------------------------------------------------------------------------------------------------------
-*
-＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/
 /*============================================================
 *	@file	 : title.h
 *	@brief	 : タイトルシーン
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/03/29
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/03/29
+*	@updated : 2026/06/23
 *============================================================*/
 #ifndef TITLE_H
 #define TITLE_H
 
 #include "scene.h"
+#include "gameobject.h"
 
 /*------------------------------------------------------------
 	前方宣言
@@ -47,6 +39,7 @@ private:
 	double accumulatedTime{ 0.0 };
 	double keyInputTime{};
 	Texture* pTexture{ nullptr };
+	static std::list<GameObject*> titleObjects;
 
 public:
 	void Initialize() override;

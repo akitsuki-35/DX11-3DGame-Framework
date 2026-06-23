@@ -2,9 +2,9 @@
 *	@file	 : sprite.h
 *	@brief	 : スプライト描画
 *
-* 　@Author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@Date	 : 2026/04/01
-*	@Updated : 2026/06/02
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/04/01
+*	@updated : 2026/06/02
 *============================================================*/
 #ifndef SPRITE_H
 #define SPRITE_H
