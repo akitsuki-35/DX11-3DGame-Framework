@@ -11,6 +11,7 @@
 #include "renderer.h"
 #include "game.h"
 #include "camera.h"
+#include "input.h"
 
 Particle::Particle(const wchar_t* pFileName)
 {
@@ -92,27 +93,36 @@ void Particle::Update()
 	float dt = 1.0f / 60.0f;
 	Vector3 gravity{ 0.0f, -9.8f, 0.0f };
 
-	// パーティクル発射
-	for (int i = 0; i < PARTICLE_MAX; i++) {
-		if (!mParticle[i].enable) {
-			mParticle[i].enable = true;
-			mParticle[i].life = 180;
-			mParticle[i].position = mPosition;
-			mParticle[i].velocity = { ((float)rand() / RAND_MAX - 0.5f) * 10.0f,
-				((float)rand() / RAND_MAX) * 10.0f,
-				((float)rand() / RAND_MAX - 0.5f) * 10.0f };
+	int count = 100;
 
-			float scale = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
+	if (Input::GetKeyTrigger(VK_SPACE)) {
+		// パーティクル発射
+		for (int i = 0; i < PARTICLE_MAX; i++) {
+			if (!mParticle[i].enable) {
+				mParticle[i].enable = true;
+				mParticle[i].life = 60;
+				mParticle[i].position = mPosition;
+				mParticle[i].velocity = { ((float)rand() / RAND_MAX - 0.5f) * 20.0f,
+					((float)rand() / RAND_MAX) * 20.0f,
+					((float)rand() / RAND_MAX - 0.5f) * 20.0f };
 
-			mParticle[i].scale = { scale, scale, scale };
-			break;
+				float scale = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
+
+				mParticle[i].scale = { scale, scale, scale };
+
+				count--;
+				if (count <= 0) {
+					break;
+				}
+			}
 		}
 	}
 
 	// パーティクル更新
 	for (int i = 0; i < PARTICLE_MAX; i++) {
 		if (mParticle[i].enable) {
-			mParticle[i].velocity += gravity * dt;
+			mParticle[i].velocity += gravity * dt; // 重力
+			mParticle[i].velocity += mParticle[i].velocity * -1.0f * dt; // 抵抗
 			mParticle[i].position += mParticle[i].velocity * dt;
 			
 			mParticle[i].life--;
@@ -161,7 +171,11 @@ void Particle::Draw() const
 	// プリミティブトポロジ設定
 	Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
+	// 深度バッファ無効化
 	Renderer::SetDepthEnable(false);
+
+	// 加算合成
+	Renderer::SetAddBrendEnable(true);
 
 	for (int i = 0; i < PARTICLE_MAX; i++) {
 		if (mParticle[i].enable) {
@@ -180,5 +194,30 @@ void Particle::Draw() const
 		}
 	}
 	
+	// マテリアル設定
+	material.Diffuse = XMFLOAT4(0.2f, 0.2f, 1.0f, 1.0f);
+	if (_mTexture)material.TextureEnable = true;
+	else material.TextureEnable = false;
+	Renderer::SetMaterial(material);
+
+	for (int i = 0; i < PARTICLE_MAX; i++) {
+		if (mParticle[i].enable) {
+
+			// マトリクス設定
+			XMMATRIX w, s, r, t;
+			s = XMMatrixScaling(mParticle[i].scale.x - 0.5f, mParticle[i].scale.y - 0.5f,
+				mParticle[i].scale.z - 0.5f); // 拡大縮小	
+			t = XMMatrixTranslation(mParticle[i].position.x,
+				mParticle[i].position.y, mParticle[i].position.z); // 平行移動
+			w = s * invView * t;
+			Renderer::SetWorldMatrix(w);
+
+			// 描画
+			Renderer::GetDeviceContext()->Draw(4, 0);
+		}
+	}
+
+	// 設定を元に戻す
 	Renderer::SetDepthEnable(true);
+	Renderer::SetAddBrendEnable(false);
 }

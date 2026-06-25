@@ -52,7 +52,7 @@ void Game::Initialize()
 	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, 5.0f });
 	AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, -5.0f });
 
-	AddGameObject<Particle>()->SetPosition({ 0.0f, 10.0f, 0.0f });
+	AddGameObject<Particle>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
 	AddGameObject<Polygon2D>()->Initialize({0.0f, 0.0f}, { 100.0f, 100.0f }, L"Resources\\Textures\\rock.jpg");
 }
