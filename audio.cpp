@@ -1,95 +1,69 @@
-/*============================================================
-*	@file	 : audio.cpp
-*	@brief	 : 音声ファイル管理
-*
-* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/04/01
-*	@updated : 2026/06/02
-*============================================================*/
-#include <xaudio2.h>
-#include <assert.h>
+
+#include "main.h"
 #include "audio.h"
 
-#pragma comment(lib, "winmm.lib")
 
-/*------------------------------------------------------------
-	グローバル変数定義
-------------------------------------------------------------*/
-static IXAudio2* g_Xaudio{};
-static IXAudio2MasteringVoice* g_MasteringVoice{};
 
-/*------------------------------------------------------------
-	オーディオ構造体
-------------------------------------------------------------*/
-struct Audio
+
+
+IXAudio2*				Audio::m_Xaudio = NULL;
+IXAudio2MasteringVoice*	Audio::m_MasteringVoice = NULL;
+
+
+void Audio::InitMaster()
 {
-public:
-	IXAudio2SourceVoice* sourceVoice{};
-	BYTE* soundData{};
+	// COM初期化
+	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
-	int	length{};
-	int	playLength{};
-};
-
-/*------------------------------------------------------------
-	マクロ定義
-------------------------------------------------------------*/
-#define AUDIO_MAX 100
-static Audio g_Audio[AUDIO_MAX]{};
-
-void AudioInitialize()
-{
 	// XAudio生成
-	XAudio2Create(&g_Xaudio, 0);
+	XAudio2Create(&m_Xaudio, 0);
 
 	// マスタリングボイス生成
-	g_Xaudio->CreateMasteringVoice(&g_MasteringVoice);
+	m_Xaudio->CreateMasteringVoice(&m_MasteringVoice);
 }
 
-void AudioFinalize()
+
+void Audio::UninitMaster()
 {
-	g_MasteringVoice->DestroyVoice();
-	g_Xaudio->Release();
+	m_MasteringVoice->DestroyVoice();
+	m_Xaudio->Release();
+	CoUninitialize();
 }
 
-int AudioLoad(const char *fileName)
+
+
+
+
+
+
+
+
+void Audio::Load(const char *FileName)
 {
-	int index = -1;
-
-	for (int i = 0; i < AUDIO_MAX; i++)
-	{
-		if (g_Audio[i].sourceVoice == nullptr)
-		{
-			index = i;
-			break;
-		}
-	}
-
-	if (index == -1)
-		return -1;
 
 	// サウンドデータ読込
 	WAVEFORMATEX wfx = { 0 };
 
 	{
 		HMMIO hmmio = NULL;
-		MMIOINFO mmioInfo = { 0 };
-		MMCKINFO riffChunkInfo = { 0 };
-		MMCKINFO dataChunkInfo = { 0 };
-		MMCKINFO mmckInfo = { 0 };
-		UINT32 bufLen;
-		LONG readLen;
+		MMIOINFO mmioinfo = { 0 };
+		MMCKINFO riffchunkinfo = { 0 };
+		MMCKINFO datachunkinfo = { 0 };
+		MMCKINFO mmckinfo = { 0 };
+		UINT32 buflen;
+		LONG readlen;
 
-		hmmio = mmioOpen((LPSTR)fileName, &mmioInfo, MMIO_READ);
+
+		hmmio = mmioOpen((LPSTR)FileName, &mmioinfo, MMIO_READ);
 		assert(hmmio);
 
-		riffChunkInfo.fccType = mmioFOURCC('W', 'A', 'V', 'E');
-		mmioDescend(hmmio, &riffChunkInfo, NULL, MMIO_FINDRIFF);
+		riffchunkinfo.fccType = mmioFOURCC('W', 'A', 'V', 'E');
+		mmioDescend(hmmio, &riffchunkinfo, NULL, MMIO_FINDRIFF);
 
-		mmckInfo.ckid = mmioFOURCC('f', 'm', 't', ' ');
-		mmioDescend(hmmio, &mmckInfo, &riffChunkInfo, MMIO_FINDCHUNK);
+		mmckinfo.ckid = mmioFOURCC('f', 'm', 't', ' ');
+		mmioDescend(hmmio, &mmckinfo, &riffchunkinfo, MMIO_FINDCHUNK);
 
-		if (mmckInfo.cksize >= sizeof(WAVEFORMATEX))
+		if (mmckinfo.cksize >= sizeof(WAVEFORMATEX))
 		{
 			mmioRead(hmmio, (HPSTR)&wfx, sizeof(wfx));
 		}
@@ -101,61 +75,80 @@ int AudioLoad(const char *fileName)
 			memcpy(&wfx, &pcmwf, sizeof(pcmwf));
 			wfx.cbSize = 0;
 		}
-		mmioAscend(hmmio, &mmckInfo, 0);
+		mmioAscend(hmmio, &mmckinfo, 0);
 
-		dataChunkInfo.ckid = mmioFOURCC('d', 'a', 't', 'a');
-		mmioDescend(hmmio, &dataChunkInfo, &riffChunkInfo, MMIO_FINDCHUNK);
+		datachunkinfo.ckid = mmioFOURCC('d', 'a', 't', 'a');
+		mmioDescend(hmmio, &datachunkinfo, &riffchunkinfo, MMIO_FINDCHUNK);
 
-		bufLen = dataChunkInfo.cksize;
-		g_Audio[index].soundData = new unsigned char[bufLen];
-		readLen = mmioRead(hmmio, (HPSTR)g_Audio[index].soundData, bufLen);
 
-		g_Audio[index].length = readLen;
-		g_Audio[index].playLength = readLen / wfx.nBlockAlign;
+
+		buflen = datachunkinfo.cksize;
+		m_SoundData = new unsigned char[buflen];
+		readlen = mmioRead(hmmio, (HPSTR)m_SoundData, buflen);
+
+
+		m_Length = readlen;
+		m_PlayLength = readlen / wfx.nBlockAlign;
+
 
 		mmioClose(hmmio, 0);
 	}
 
+
 	// サウンドソース生成
-	g_Xaudio->CreateSourceVoice(&g_Audio[index].sourceVoice, &wfx);
-	assert(g_Audio[index].sourceVoice);
-
-	return index;
+	m_Xaudio->CreateSourceVoice(&m_SourceVoice, &wfx);
+	assert(m_SourceVoice);
 }
 
-void AudioRelease(int index)
-{
-	g_Audio[index].sourceVoice->Stop();
-	g_Audio[index].sourceVoice->DestroyVoice();
 
-	delete[] g_Audio[index].soundData;
-	g_Audio[index].soundData = nullptr;
+void Audio::Finalize()
+{
+	m_SourceVoice->Stop();
+	m_SourceVoice->DestroyVoice();
+
+	delete[] m_SoundData;
 }
 
-void AudioPlay(int index, bool loop)
+
+
+
+
+void Audio::Play(bool Loop)
 {
-	g_Audio[index].sourceVoice->Stop();
-	g_Audio[index].sourceVoice->FlushSourceBuffers();
+	m_SourceVoice->Stop();
+	m_SourceVoice->FlushSourceBuffers();
+
 
 	// バッファ設定
-	XAUDIO2_BUFFER bufInfo;
+	XAUDIO2_BUFFER bufinfo;
 
-	memset(&bufInfo, 0x00, sizeof(bufInfo));
-	bufInfo.AudioBytes = g_Audio[index].length;
-	bufInfo.pAudioData = g_Audio[index].soundData;
-	bufInfo.PlayBegin = 0;
-	bufInfo.PlayLength = g_Audio[index].playLength;
+	memset(&bufinfo, 0x00, sizeof(bufinfo));
+	bufinfo.AudioBytes = m_Length;
+	bufinfo.pAudioData = m_SoundData;
+	bufinfo.PlayBegin = 0;
+	bufinfo.PlayLength = m_PlayLength;
 
 	// ループ設定
-	if (loop)
+	if (Loop)
 	{
-		bufInfo.LoopBegin = 0;
-		bufInfo.LoopLength = g_Audio[index].playLength;
-		bufInfo.LoopCount = XAUDIO2_LOOP_INFINITE;
+		bufinfo.LoopBegin = 0;
+		bufinfo.LoopLength = m_PlayLength;
+		bufinfo.LoopCount = XAUDIO2_LOOP_INFINITE;
 	}
 
-	g_Audio[index].sourceVoice->SubmitSourceBuffer(&bufInfo, NULL);
+	m_SourceVoice->SubmitSourceBuffer(&bufinfo, NULL);
+
+/*
+	float outputMatrix[4] = { 0.0f , 0.0f, 1.0f , 0.0f };
+	m_SourceVoice->SetOutputMatrix(m_MasteringVoice, 2, 2, outputMatrix);
+	//m_SourceVoice->SetVolume(0.1f);
+*/
+
 
 	// 再生
-	g_Audio[index].sourceVoice->Start();
+	m_SourceVoice->Start();
+
 }
+
+
+

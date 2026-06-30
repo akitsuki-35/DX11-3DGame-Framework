@@ -1,19 +1,33 @@
-/*============================================================
-*	@file	 : audio.h
-*	@brief	 : 音声ファイル管理
-*
-* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/04/01
-*	@updated : 2026/06/02
-*============================================================*/
-#ifndef AUDIO_H
-#define AUDIO_H
+#pragma once
 
-void AudioInitialize();
-void AudioFinalize();
+#include <xaudio2.h>
+#include "component.h"
 
-int AudioLoad(const char* fileName);
-void AudioRelease(int index);
-void AudioPlay(int index, bool loop = false);
 
-#endif // AUDIO_H
+class Audio : public Component
+{
+private:
+	static IXAudio2*				m_Xaudio;
+	static IXAudio2MasteringVoice*	m_MasteringVoice;
+
+	IXAudio2SourceVoice*	m_SourceVoice{};
+	BYTE*					m_SoundData{};
+
+	int						m_Length{};
+	int						m_PlayLength{};
+
+
+public:
+	static void InitMaster();
+	static void UninitMaster();
+
+	using Component::Component;
+
+	void Finalize() override;
+
+	void Load(const char *FileName);
+	void Play(bool Loop = false);
+
+
+};
+

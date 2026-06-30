@@ -11,6 +11,7 @@
 #include "renderer.h"
 #include "modelRenderer.h"
 #include "game.h"
+#include "audio.h"
 #include "player.h"
 #include "camera.h"
 #include "bullet.h"
@@ -32,6 +33,9 @@ void Player::Initialize()
 	// シェーダー読込
 	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
 	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+
+	mSE = AddComponent<Audio>(this);
+	mSE->Load("Resources\\Audios\\wan.wav");
 }
 
 void Player::Finalize()
@@ -87,6 +91,8 @@ void Player::Update()
 			mScale.y = 2.0f;
 			mScale.x = 0.75f;
 			mScale.z = 0.75f;
+
+			mSE->Play();
 		}
 	}
 

@@ -28,6 +28,8 @@
 
 #include "result.h"
 
+#include "score.h"
+
 std::list<GameObject*> Game::gameObjects;
 
 void Game::Initialize()
@@ -54,7 +56,9 @@ void Game::Initialize()
 
 	AddGameObject<Particle>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
-	AddGameObject<Polygon2D>()->Initialize({0.0f, 0.0f}, { 100.0f, 100.0f }, L"Resources\\Textures\\rock.jpg");
+	AddGameObject<Score>()->SetPosition({ 120.0f, 32.0f, 0.0f });
+
+	//AddGameObject<Polygon2D>()->Initialize({0.0f, 0.0f}, { 100.0f, 100.0f }, L"Resources\\Textures\\rock.jpg");
 }
 
 void Game::Finalize()

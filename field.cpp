@@ -10,6 +10,7 @@
 #include "field.h"
 #include "renderer.h"
 #include "keylogger.h"
+#include "audio.h"
 
 Field::Field(const wchar_t* pFileName)
 {
@@ -69,6 +70,10 @@ void Field::Initialize()
 	// シェーダー読込
 	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
 	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+
+	Audio* bgm = AddComponent<Audio>(this);
+	bgm->Load("Resources\\Audios\\bgm.wav");
+	bgm->Play(true);
 }
 
 void Field::Finalize()
@@ -79,6 +84,8 @@ void Field::Finalize()
 	_mVertexShader->Release();
 	_mVertexLayout->Release();
 	_mVertexBuffer->Release();
+
+	GameObject::Finalize();
 }
 
 void Field::Update()
@@ -89,6 +96,8 @@ void Field::Update()
 	if (KeyLogger::IsPressd(KK_D)) {
 		mScale.x += 10.0f;
 	}
+
+	GameObject::Update();
 }
 
 void Field::Draw() const
@@ -130,4 +139,6 @@ void Field::Draw() const
 
 	// 描画
 	Renderer::GetDeviceContext()->Draw(4, 0);
+
+	GameObject::Draw();
 }

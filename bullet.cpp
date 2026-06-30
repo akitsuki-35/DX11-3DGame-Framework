@@ -14,6 +14,7 @@
 #include "modelRenderer.h"
 #include "enemy.h"
 #include "explosion.h"
+#include "score.h"
 
 void Bullet::Initialize()
 {
@@ -58,6 +59,8 @@ void Bullet::Update()
 
 			Game::AddGameObject<Explosion>()->SetPosition({ enemy->GetPosition().x,
 				enemy->GetPosition().y + 1.0f, enemy->GetPosition().z });
+
+			Game::GetGameObject<Score>()->Add(1);
 
 			break;
 		}
