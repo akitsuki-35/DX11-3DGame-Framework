@@ -39,9 +39,14 @@ HWND GetWindow()
 /*------------------------------------------------------------
 	メイン
 ------------------------------------------------------------*/
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
+int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
-	WNDCLASSEX wcex;
+	// 未使用パラメータ明示（警告を消去）
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+
+	// ウィンドウクラス登録
+	WNDCLASSEX wcex{};
 	{
 		wcex.cbSize = sizeof(WNDCLASSEX);
 		wcex.style = 0;
@@ -49,12 +54,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 		wcex.cbClsExtra = 0;
 		wcex.cbWndExtra = 0;
 		wcex.hInstance = hInstance;
-		wcex.hIcon = nullptr;
+		wcex.hIcon = LoadIcon(hInstance, IDI_APPLICATION);
 		wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-		wcex.hbrBackground = nullptr;
+		wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 		wcex.lpszMenuName = nullptr;
 		wcex.lpszClassName = CLASS_NAME;
-		wcex.hIconSm = nullptr;
+		wcex.hIconSm = LoadIcon(wcex.hInstance, IDI_APPLICATION);
 
 		RegisterClassEx(&wcex);
 
@@ -65,7 +70,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 			rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
 	}
 
-	CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
+	(void)CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 
 	Manager::Initialize();
 

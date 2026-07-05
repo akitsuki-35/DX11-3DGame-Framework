@@ -1,14 +1,14 @@
 /*============================================================
-*	@file	 : cursor.cpp
+*	@file	 : Cursor.cpp
 *	@brief	 : マウスカーソル
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/20
 *	@updated : 2026/06/02
 *============================================================*/
-#include "cursor.h"
-#include "mouse.h"
-#include "texture.h"
+#include "Cursor.h"
+#include "Mouse.h"
+#include "Texture.h"
 using namespace DirectX;
 
 /*------------------------------------------------------------

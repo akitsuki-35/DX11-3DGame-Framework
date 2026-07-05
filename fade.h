@@ -1,5 +1,5 @@
 /*============================================================
-*	@file	 : fade.h
+*	@file	 : Rade.h
 *	@brief	 : フェード制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）

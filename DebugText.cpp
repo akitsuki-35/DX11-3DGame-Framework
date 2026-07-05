@@ -1,12 +1,12 @@
 /*============================================================
-*	@file	 : debug_text.cpp
+*	@file	 : DebugText.cpp
 *	@brief	 : デバッグテキスト表示
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
 *	@updated : 2026/06/02
 *============================================================*/
-#include "debug_text.h"
+#include "DebugText.h"
 #include "WICTextureLoader11.h"
 #include <D3Dcompiler.h>
 using namespace DirectX;

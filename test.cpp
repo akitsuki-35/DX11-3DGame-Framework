@@ -1,13 +1,13 @@
 /*============================================================
-*	@file	 : test.cpp
+*	@file	 : Test.cpp
 *	@brief	 : テスト用シーン
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/29
 *	@updated : 2026/06/02
 *============================================================*/
-#include "test.h"
-#include "debug_memoryleak.h"
+#include "Test.h"
+#include "DebugMemoryleak.h"
 #include <DirectXMath.h>
 
 void Test::Initialize()
