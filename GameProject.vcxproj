@@ -62,6 +62,7 @@
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Systemtimer.cpp" />
+    <ClCompile Include="SystemWindow.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Title.cpp" />
@@ -78,6 +79,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Collision3D.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DebugCollisiondraw.h" />
     <ClInclude Include="Debugger.h" />

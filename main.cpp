@@ -1,14 +1,14 @@
 /*============================================================
-*	@file	 : main.cpp
+*	@file	 : Main.cpp
 *	@brief	 : メイン
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
 *	@updated : 2026/06/02
 *============================================================*/
-#include "main.h"
-#include "manager.h"
-#include "debugger.h"
+#include "Main.h"
+#include "Manager.h"
+#include "Debugger.h"
 #include <thread>
 
 // ImGui
