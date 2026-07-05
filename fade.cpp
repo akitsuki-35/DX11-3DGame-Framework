@@ -1,18 +1,18 @@
 /*============================================================
-*	@file	 : fade.cpp
+*	@file	 : Fade.cpp
 *	@brief	 : フェード制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/29
 *	@updated : 2026/06/02
 *============================================================*/
-#include "fade.h"
-#include "main.h"
-#include "sprite.h"
-#include "texture.h"
-#include "direct3d.h"
+#include "Fade.h"
+#include "Main.h"
+#include "Sprite.h"
+#include "Texture.h"
+#include "Direct3D.h"
 
-#include "debug_memoryleak.h"
+#include "DebugMemoryleak.h"
 
 /*------------------------------------------------------------
 	メンバ変数定義

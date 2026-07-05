@@ -1,15 +1,15 @@
 /*============================================================
-*	@file	 : collision.cpp
+*	@file	 : Collision.cpp
 *	@brief	 : 当たり判定
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/19
 *	@updated : 2026/06/02
 *============================================================*/
-#include "collision.h"
-#include "debug_collisiondraw.h"
-#include "texture.h"
-#include "sprite.h"
+#include "Collision.h"
+#include "DebugCollisiondraw.h"
+#include "Texture.h"
+#include "Sprite.h"
 #include <cmath>
 using namespace DirectX;
 

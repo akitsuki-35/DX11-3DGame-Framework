@@ -6,7 +6,7 @@
 * Å@@date	 : 2026/04/20
 *	@updated : 2026/06/02
 *============================================================*/
-#include "debug_collisiondraw.h"
+#include "DebugCollisiondraw.h"
 #include "direct3d.h"
 #include "shader2d.h"
 #include "texture.h"

@@ -1,5 +1,5 @@
 /*============================================================
-*	@file	 : collision.h
+*	@file	 : Collision.h
 *	@brief	 : “–‚½‚è”»’è
 *
 * @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j

@@ -7,7 +7,7 @@
 *	@updated : 2026/06/02
 *============================================================*/
 #if defined(DEBUG) || defined(_DEBUG)
-#include "debugger.h"
+#include "Debugger.h"
 #include "direct3d.h"
 
 // ImGui

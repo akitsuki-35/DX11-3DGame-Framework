@@ -1,14 +1,14 @@
 /*============================================================
-*	@file	 : shader.cpp
+*	@file	 : Shader.cpp
 *	@brief	 : 2D用シェーダー
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/01
 *	@updated : 2026/06/02
 *============================================================*/
-#include "shader2d.h"
-#include "direct3d.h"
-#include "debug_ostream.h"
+#include "Shader2D.h"
+#include "Direct3D.h"
+#include "DebugOstream.h"
 #include <fstream>
 #include <DirectXMath.h>
 using namespace DirectX;
