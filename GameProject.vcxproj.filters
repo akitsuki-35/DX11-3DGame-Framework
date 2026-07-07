@@ -155,9 +155,6 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>3Dフレームワーク\System</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClCompile>
     <ClCompile Include="Manager.cpp">
       <Filter>3Dフレームワーク\System</Filter>
     </ClCompile>
@@ -205,6 +202,15 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemWindow.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemApp.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +396,12 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemApp.h">
+      <Filter>3Dフレームワーク\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
