@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/05
-*	@updated : 2026/07/05
+*	@updated : 2026/07/07
 *============================================================*/
 #ifndef SYSTEMWINDOW_H
 #define SYSTEMWINDOW_H
@@ -14,11 +14,16 @@
 #include <mutex>
 
 namespace System {
-
+/*============================================================
+*	@class	: Window
+*	@brief	: メインウィンドウ
+*============================================================*/
 	class Window
 	{
 	private:
 		HWND mHwnd{ nullptr };
+		static constexpr char CLASS_NAME[] = "AppClass";
+		static constexpr char WINDOW_NAME[] = "Game Window";
 		HINSTANCE mHInstance{ nullptr };
 		int mWidth{ Screen::WIDTH };
 		int mHeigth{ Screen::HEIGHT };
@@ -43,6 +48,7 @@ namespace System {
 		}
 
 		void Initialize(HINSTANCE hInstance, int width = Screen::WIDTH, int height = Screen::HEIGHT);
+		void Finalize();
 		void Show(int nCmdShow);
 		bool ProcessMessage();
 

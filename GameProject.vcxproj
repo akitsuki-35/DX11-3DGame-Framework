@@ -61,6 +61,7 @@
     <ClCompile Include="Shader2D.cpp" />
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SystemApp.cpp" />
     <ClCompile Include="Systemtimer.cpp" />
     <ClCompile Include="SystemWindow.cpp" />
     <ClCompile Include="Test.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Subject.h" />
+    <ClInclude Include="SystemApp.h" />
     <ClInclude Include="Systemtimer.h" />
     <ClInclude Include="SystemWindow.h" />
     <ClInclude Include="Test.h" />
