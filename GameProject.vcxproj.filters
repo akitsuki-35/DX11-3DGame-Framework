@@ -54,100 +54,13 @@
     <Filter Include="3Dフレームワーク\Objects">
       <UniqueIdentifier>{240e13a5-0f74-4882-9214-24a8cf71cc75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="未整理">
+      <UniqueIdentifier>{f168aaa5-13cf-40d5-b6ed-9eec2ebf1f05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="direct3d.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="shader2d.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="mouse.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="keyboard.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="keylogger.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="audio.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="animation.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="collision.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="fade.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="systemtimer.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="sprite.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
     <ClCompile Include="WICTextureLoader11.cpp">
       <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="debug_text.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="debug_collisiondraw.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="camera.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="field.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="polygon2d.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="modelRenderer.cpp">
-      <Filter>3Dフレームワーク\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>3Dフレームワーク\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClCompile>
-    <ClCompile Include="manager.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClCompile>
-    <ClCompile Include="renderer.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClCompile>
-    <ClCompile Include="transform.cpp">
-      <Filter>3Dフレームワーク\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="bullet.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="tree.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="debugger.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="cursor.cpp">
-      <Filter>ソース ファイル\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="include\ImGui\imgui.cpp">
       <Filter>ImGui</Filter>
@@ -170,151 +83,139 @@
     <ClCompile Include="include\ImGui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="debug_ostream.cpp">
+    <ClCompile Include="DebugCollisiondraw.cpp">
       <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="explosion.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+    <ClCompile Include="DebugOstream.cpp">
+      <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="sky.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+    <ClCompile Include="DebugText.cpp">
+      <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="glass.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+    <ClCompile Include="Debugger.cpp">
+      <Filter>ソース ファイル\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="box.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="particle.cpp">
+    <ClCompile Include="Input.cpp">
       <Filter>3Dフレームワーク\Common</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
+    <ClCompile Include="Particle.cpp">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>3Dフレームワーク\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelRenderer.cpp">
+      <Filter>3Dフレームワーク\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Glass.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Polygon2D.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Sky.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
       <Filter>3Dフレームワーク\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="title.cpp">
+    <ClCompile Include="Title.cpp">
       <Filter>3Dフレームワーク\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="result.cpp">
+    <ClCompile Include="Result.cpp">
       <Filter>3Dフレームワーク\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyLogger.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader2D.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Systemtimer.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>未整理</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemWindow.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemApp.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="debug_memoryleak.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="debug_ostream.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="debug_text.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="animation.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="collision.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="direct3d.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="fade.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="audio.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="keyboard.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="keylogger.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="mouse.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="shader2d.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="sprite.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="systemtimer.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="texture.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
     <ClInclude Include="WICTextureLoader11.h">
       <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="debug_collisiondraw.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="field.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="gameobject.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="polygon2d.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="component.h">
-      <Filter>3Dフレームワーク\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="modelRenderer.h">
-      <Filter>3Dフレームワーク\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="spriteRenderer.h">
-      <Filter>3Dフレームワーク\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>3Dフレームワーク\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="vector3.h">
-      <Filter>3Dフレームワーク\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClInclude>
-    <ClInclude Include="manager.h">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClInclude>
-    <ClInclude Include="renderer.h">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="transform.h">
-      <Filter>3Dフレームワーク\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="bullet.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="tree.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="debugger.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="cursor.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="subject.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="observer.h">
-      <Filter>ヘッダー ファイル\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="test.h">
-      <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="include\ImGui\imconfig.h">
       <Filter>ImGui</Filter>
@@ -340,35 +241,167 @@
     <ClInclude Include="include\ImGui\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="explosion.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+    <ClInclude Include="SystemWindow.h">
+      <Filter>3Dフレームワーク\System</Filter>
     </ClInclude>
-    <ClInclude Include="sky.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+    <ClInclude Include="DebugCollisiondraw.h">
+      <Filter>ヘッダー ファイル\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="glass.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+    <ClInclude Include="DebugMemoryleak.h">
+      <Filter>ヘッダー ファイル\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="collision3D.h">
+    <ClInclude Include="DebugOstream.h">
+      <Filter>ヘッダー ファイル\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugText.h">
+      <Filter>ヘッダー ファイル\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Debugger.h">
+      <Filter>ヘッダー ファイル\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision3D.h">
       <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
-    <ClInclude Include="box.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="particle.h">
+    <ClInclude Include="Input.h">
       <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
+    <ClInclude Include="Particle.h">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>3Dフレームワーク\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>3Dフレームワーク\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRenderer.h">
+      <Filter>3Dフレームワーク\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Glass.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon2D.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Sky.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>3Dフレームワーク\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>3Dフレームワーク\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="scene.h">
+    <ClInclude Include="Title.h">
       <Filter>3Dフレームワーク\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="title.h">
+    <ClInclude Include="Scene.h">
       <Filter>3Dフレームワーク\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="result.h">
+    <ClInclude Include="Result.h">
       <Filter>3Dフレームワーク\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyLogger.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader2D.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Systemtimer.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>未整理</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemApp.h">
+      <Filter>3Dフレームワーク\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,7 @@
 #include "game.h"
 #include "title.h"
 #include "scene.h"
+#include "audio.h"
 
 Scene* Manager::mCurrentScene{ nullptr };
 Scene* Manager::mNextScene{ nullptr };
@@ -24,6 +25,7 @@ void Manager::Initialize()
 {
 	Renderer::Initialize();
 	Input::Initialize();
+	Audio::InitMaster();
 
 	//mCurrentScene = mNextScene = new Title();
 	//mCurrentScene->Initialize();
@@ -48,6 +50,7 @@ void Manager::Finalize()
 		mNextScene = nullptr;
 	}
 
+	Audio::UninitMaster();
 	Input::Finalize();
 	Renderer::Finalize();
 }

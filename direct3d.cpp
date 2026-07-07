@@ -1,13 +1,13 @@
 /*============================================================
-*	@file	 : direct3d.cpp
+*	@file	 : Direct3D.cpp
 *	@brief	 : DirectX初期化
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/12
 *	@updated : 2026/06/02
 *============================================================*/
-#include "direct3d.h"
-#include "debug_ostream.h"
+#include "Direct3D.h"
+#include "DebugOstream.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")

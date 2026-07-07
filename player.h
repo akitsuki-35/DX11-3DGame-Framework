@@ -11,6 +11,8 @@
 
 #include "gameobject.h"
 
+class Audio;
+
 /*============================================================
 *	@class	: Player
 *	@brief	: プレイヤー
@@ -27,6 +29,8 @@ private:
 	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
 	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー
 	ID3D11PixelShader* _mPixelShader{}; // ピクセルシェーダー
+
+	Audio* mSE{};
 
 public:
 	Player() = default;

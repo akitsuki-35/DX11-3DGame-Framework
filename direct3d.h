@@ -1,5 +1,5 @@
 /*============================================================
-*	@file	 : direct3d.h
+*	@file	 : Direct3D.h
 *	@brief	 : DirectX‰Šú‰»
 *
 * @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j

@@ -1,15 +1,15 @@
 /*============================================================
-*	@file	 : sprite.cpp
+*	@file	 : Sprite.cpp
 *	@brief	 : スプライト描画
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/01
 *	@updated : 2026/06/02
 *============================================================*/
-#include "sprite.h"
-#include "shader2d.h"
-#include "texture.h"
-#include "debug_ostream.h"
+#include "Sprite.h"
+#include "Shader2D.h"
+#include "Texture.h"
+#include "DebugOstream.h"
 using namespace DirectX;
 
 /*------------------------------------------------------------

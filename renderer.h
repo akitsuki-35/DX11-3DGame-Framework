@@ -63,6 +63,7 @@ private:
 	static ID3D11DepthStencilState* m_DepthStateDisable;
 
 	static ID3D11BlendState*		m_BlendState;
+	static ID3D11BlendState*		m_BlendStateAdd;
 	static ID3D11BlendState*		m_BlendStateATC;
 
 public:
@@ -72,6 +73,7 @@ public:
 	static void End();
 
 	static void SetDepthEnable(bool Enable);
+	static void SetAddBrendEnable(bool Enable);
 	static void SetATCEnable(bool Enable);
 	static void SetWorldViewProjection2D();
 	static void SetWorldMatrix(XMMATRIX WorldMatrix);

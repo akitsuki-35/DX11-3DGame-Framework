@@ -1,5 +1,5 @@
 /*============================================================
-*	@file	 : shader.h
+*	@file	 : Shader.h
 *	@brief	 : 2D用シェーダー
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
