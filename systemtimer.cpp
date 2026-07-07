@@ -1,14 +1,12 @@
 /*============================================================
 *	@file	 : SystemTimer.cpp
-*	@brief	 : システムタイマー
+*	@brief	 : ゲーム内時間制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
 *	@updated : 2026/07/07
 *============================================================*/
 #include "SystemTimer.h"
-#include <Windows.h>
-#include <xmmintrin.h>
 
 void System::Timer::Initialize()
 {

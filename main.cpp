@@ -10,7 +10,9 @@
 
 // System
 #include "SystemWindow.h"
+#include "SystemTimer.h"
 #include "SystemApp.h"
+
 #include "Manager.h"
 #include "Debugger.h"
 #include <thread>
@@ -50,8 +52,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	// ウィンドウ表示
 	System::Window::getInstance().Show(nCmdShow);
 
-	// アプリケーション初期化
-	System::App::getInstance().Init();
+	// タイマー初期化
+	System::Timer::getInstance().Initialize();
 
 	// ゲームループ
 	int isQuit = System::App::getInstance().Run();

@@ -12,11 +12,6 @@
 #include "Manager.h"
 #include <Windows.h>
 
-void System::App::Init()
-{
-	System::Timer::getInstance().Initialize();
-}
-
 int System::App::Run()
 {
 	// アプリケーションループ

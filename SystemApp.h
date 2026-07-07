@@ -36,8 +36,6 @@ namespace System {
 			return instance;
 		}
 
-		void Init();
-
 		int Run();
 	};
 }
