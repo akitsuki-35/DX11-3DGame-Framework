@@ -8,15 +8,13 @@
 *============================================================*/
 #include "SystemApp.h"
 #include "SystemWindow.h"
+#include "SystemTimer.h"
 #include "Manager.h"
+#include <Windows.h>
 
 void System::App::Init()
 {
-	DWORD dwExecLastTime;
-	DWORD dwCurrentTime;
-	timeBeginPeriod(1);
-	dwExecLastTime = timeGetTime();
-	dwCurrentTime = 0;
+	System::Timer::getInstance().Initialize();
 }
 
 int System::App::Run()
@@ -28,12 +26,8 @@ int System::App::Run()
 			break;
 		}
 		else{
-			dwCurrentTime = timeGetTime();
-
-			if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
+			if (System::Timer::getInstance().Tick(1000 / 60))
 			{
-				dwExecLastTime = dwCurrentTime;
-
 				Manager::Update();
 				Manager::Draw();
 			}

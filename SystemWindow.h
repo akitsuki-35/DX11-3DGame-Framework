@@ -22,13 +22,11 @@ namespace System {
 	{
 	private:
 		HWND mHwnd{ nullptr };
-		static constexpr char CLASS_NAME[] = "AppClass";
-		static constexpr char WINDOW_NAME[] = "Game Window";
+		static constexpr char CLASS_NAME[] = "AppClass"; // ウィンドウクラス名
+		static constexpr char WINDOW_NAME[] = "Game Window"; // アプリケーション名
 		HINSTANCE mHInstance{ nullptr };
 		int mWidth{ Screen::WIDTH };
 		int mHeigth{ Screen::HEIGHT };
-
-		std::mutex mMutex;
 
 		static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -50,7 +48,7 @@ namespace System {
 		void Initialize(HINSTANCE hInstance, int width = Screen::WIDTH, int height = Screen::HEIGHT);
 		void Finalize();
 		void Show(int nCmdShow);
-		bool ProcessMessage();
+		int ProcessMessage();
 
 		HWND GetHandle() const { return mHwnd; }
 	};
