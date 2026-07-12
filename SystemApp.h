@@ -10,8 +10,6 @@
 #define SYSTEMAPP_H
 
 #include "Config.h"
-#include <Windows.h>
-#include <mutex>
 
 namespace System {
 /*============================================================
@@ -21,11 +19,7 @@ namespace System {
 	class App
 	{
 	private:
-		DWORD dwExecLastTime;
-		DWORD dwCurrentTime;
-		
 		bool mPaused{ false }; // ポーズフラグ
-		std::mutex mMutex;
 
 		App() = default;
 		App(const App&) = delete;
@@ -42,9 +36,7 @@ namespace System {
 			return instance;
 		}
 
-		void Init();
-
-		int Run();
+		int Run() const;
 	};
 }
 

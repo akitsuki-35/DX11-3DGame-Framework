@@ -194,9 +194,6 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
-    <ClCompile Include="Systemtimer.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
     <ClCompile Include="Test.cpp">
       <Filter>Test</Filter>
     </ClCompile>
@@ -210,6 +207,9 @@
       <Filter>3Dフレームワーク\System</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemTimer.cpp">
       <Filter>3Dフレームワーク\System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -258,9 +258,6 @@
     </ClInclude>
     <ClInclude Include="Debugger.h">
       <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Collision3D.h">
       <Filter>3Dフレームワーク\Common</Filter>
@@ -388,20 +385,23 @@
     <ClInclude Include="Subject.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="Systemtimer.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
     <ClInclude Include="Test.h">
       <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SystemApp.h">
       <Filter>3Dフレームワーク\System</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemTimer.h">
+      <Filter>3Dフレームワーク\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>ヘッダー ファイル\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

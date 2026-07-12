@@ -33,25 +33,7 @@ void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
 	RegisterClassEx(&wcex);
 
 	// ウィンドウ短形
-	RECT rc = { 0, 0, (LONG)mWidth, (LONG)mHeigth };
-
-	// ウィンドウのスタイル
-	DWORD windowStyle = WS_OVERLAPPEDWINDOW ^ (WS_THICKFRAME | WS_MAXIMIZEBOX);
-
-	// 短形座標を計算
-	AdjustWindowRect(&rc, windowStyle, FALSE);
-
-	// ウィンドウの幅と高さを算出
-	int windowWidth = rc.right - rc.left;
-	int windowHeight = rc.bottom - rc.top;
-
-	// プライマリモニターの画面解像度取得
-	int desktopWidth = GetSystemMetrics(SM_CXSCREEN);
-	int desktopHeight = GetSystemMetrics(SM_CYSCREEN);
-
-	// デスクトップ中央にウィンドウを表示
-	int windowX = std::max((desktopWidth - windowWidth) / 2, 0);
-	int windowY = std::max((desktopHeight - windowHeight) / 2, 0);
+	RECT rc = { 0, 0, mWidth, mHeigth };
 
 	// メインウィンドウ作成
 	mHwnd = CreateWindowEx(
@@ -72,22 +54,30 @@ void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
 	(void)CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 
 	// タイトルバーと枠を削除
-	SetWindowLongPtr(mHwnd, GWL_STYLE, windowStyle &= ~(WS_CAPTION | WS_THICKFRAME));
+	SetWindowLongPtr(mHwnd, GWL_STYLE, WS_POPUP);
+
+	// 疑似フルスクリーン化
+	SetWindowPos(
+		mHwnd, 
+		HWND_TOP, 
+		0, 0,
+		mWidth, mHeigth, 
+		SWP_FRAMECHANGED | SWP_NOZORDER);
 }
 
-void System::Window::Finalize()
+void System::Window::Finalize() const
 {
 	UnregisterClass(CLASS_NAME, mHInstance);
 	CoUninitialize();
 }
 
-void System::Window::Show(int nCmdShow)
+void System::Window::Show(int nCmdShow) const
 {
 	ShowWindow(mHwnd, nCmdShow);
 	UpdateWindow(mHwnd);
 }
 
-bool System::Window::ProcessMessage()
+int System::Window::ProcessMessage() const
 {
 	// メッセージループ
 	MSG msg{};
@@ -101,7 +91,7 @@ bool System::Window::ProcessMessage()
 		DispatchMessage(&msg);
 	}
 
-	return false;
+	return 0;
 }
 
 LRESULT System::Window::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
