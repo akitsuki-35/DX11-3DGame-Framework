@@ -12,7 +12,7 @@
 #include "Manager.h"
 #include <Windows.h>
 
-int System::App::Run()
+int System::App::Run() const
 {
 	// アプリケーションループ
 	while (1)

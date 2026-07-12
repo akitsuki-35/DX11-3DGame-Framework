@@ -35,12 +35,6 @@ void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
 	// ウィンドウ短形
 	RECT rc = { 0, 0, mWidth, mHeigth };
 
-	// ウィンドウのスタイル
-	DWORD windowStyle = WS_OVERLAPPEDWINDOW ^ (WS_THICKFRAME | WS_MAXIMIZEBOX);
-
-	// 短形座標を計算
-	AdjustWindowRect(&rc, windowStyle, FALSE);
-
 	// メインウィンドウ作成
 	mHwnd = CreateWindowEx(
 		0, 
@@ -60,22 +54,30 @@ void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
 	(void)CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 
 	// タイトルバーと枠を削除
-	SetWindowLongPtr(mHwnd, GWL_STYLE, windowStyle &= ~(WS_CAPTION | WS_THICKFRAME));
+	SetWindowLongPtr(mHwnd, GWL_STYLE, WS_POPUP);
+
+	// 疑似フルスクリーン化
+	SetWindowPos(
+		mHwnd, 
+		HWND_TOP, 
+		0, 0,
+		mWidth, mHeigth, 
+		SWP_FRAMECHANGED | SWP_NOZORDER);
 }
 
-void System::Window::Finalize()
+void System::Window::Finalize() const
 {
 	UnregisterClass(CLASS_NAME, mHInstance);
 	CoUninitialize();
 }
 
-void System::Window::Show(int nCmdShow)
+void System::Window::Show(int nCmdShow) const
 {
 	ShowWindow(mHwnd, nCmdShow);
 	UpdateWindow(mHwnd);
 }
 
-int System::Window::ProcessMessage()
+int System::Window::ProcessMessage() const
 {
 	// メッセージループ
 	MSG msg{};

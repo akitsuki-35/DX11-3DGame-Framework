@@ -36,7 +36,7 @@ namespace System {
 			return instance;
 		}
 
-		int Run();
+		int Run() const;
 	};
 }
 

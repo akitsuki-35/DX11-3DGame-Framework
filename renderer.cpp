@@ -9,6 +9,7 @@
 #include "main.h"
 #include "renderer.h"
 #include "SystemWindow.h"
+#include "Config.h"
 #include <io.h>
 
 D3D_FEATURE_LEVEL       Renderer::m_FeatureLevel = D3D_FEATURE_LEVEL_11_0;
@@ -39,8 +40,8 @@ void Renderer::Initialize()
 	// デバイス、スワップチェーン作成
 	DXGI_SWAP_CHAIN_DESC swapChainDesc{};
 	swapChainDesc.BufferCount = 1;
-	swapChainDesc.BufferDesc.Width = SCREEN_WIDTH;
-	swapChainDesc.BufferDesc.Height = SCREEN_HEIGHT;
+	swapChainDesc.BufferDesc.Width = Screen::WIDTH;
+	swapChainDesc.BufferDesc.Height = Screen::HEIGHT;
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
@@ -49,6 +50,8 @@ void Renderer::Initialize()
 	swapChainDesc.SampleDesc.Count = 1;
 	swapChainDesc.SampleDesc.Quality = 0;
 	swapChainDesc.Windowed = TRUE;
+	swapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
+	swapChainDesc.BufferDesc.RefreshRate.Denominator = 0;
 
 	hr = D3D11CreateDeviceAndSwapChain( 
 		NULL,
@@ -97,8 +100,8 @@ void Renderer::Initialize()
 
 	// ビューポート設定
 	D3D11_VIEWPORT viewport;
-	viewport.Width = (FLOAT)SCREEN_WIDTH;
-	viewport.Height = (FLOAT)SCREEN_HEIGHT;
+	viewport.Width = (FLOAT)Screen::WIDTH;
+	viewport.Height = (FLOAT)Screen::HEIGHT;
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
 	viewport.TopLeftX = 0;

@@ -46,9 +46,9 @@ namespace System {
 		}
 
 		void Initialize(HINSTANCE hInstance, int width = Screen::WIDTH, int height = Screen::HEIGHT);
-		void Finalize();
-		void Show(int nCmdShow);
-		int ProcessMessage();
+		void Finalize() const;
+		void Show(int nCmdShow) const;
+		int ProcessMessage() const;
 
 		HWND GetHandle() const { return mHwnd; }
 	};

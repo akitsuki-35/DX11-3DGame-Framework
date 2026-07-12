@@ -40,6 +40,9 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
+	// DPIスケーリング対策
+	SetProcessDPIAware();
+
 	// ウィンドウ初期化
 	System::Window::getInstance().Initialize(hInstance);
 
