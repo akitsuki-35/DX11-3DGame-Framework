@@ -99,7 +99,7 @@ void Renderer::Initialize()
 	m_DeviceContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
 
 	// ビューポート設定
-	D3D11_VIEWPORT viewport;
+	D3D11_VIEWPORT viewport{};
 	viewport.Width = (FLOAT)Screen::WIDTH;
 	viewport.Height = (FLOAT)Screen::HEIGHT;
 	viewport.MinDepth = 0.0f;

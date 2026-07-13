@@ -12,13 +12,15 @@
 #include "Config.h"
 #include "DirectX11Config.h"
 
-using Microsoft::WRL::ComPtr;
-
 bool D3D11::DeviceManager::Initialize(HWND hWnd, int width, int height)
 {
-    HRESULT hr = S_OK;
+	if (!GenerateDeviceAndSwapChain()) { return false; }
+	if (!GenerateDepthStencilView()) { return false; }
 
-    return false;
+	if (!GenerateDepthStencilView()) { return false; }
+
+	RenderStateRegister();
+    return true;
 }
 
 bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
@@ -54,10 +56,10 @@ bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
 		_countof(D3D11::FEATURE_LEVELS),
 		D3D11_SDK_VERSION,
 		&swapChainDesc,
-		&_mSwapChain,
-		&_mDevice,
+		_mSwapChain.put(),
+		_mDevice.put(),
 		&level,
-		&_mContext
+		_mContext.put()
 	);
 
 	if (FAILED(hr)) { return false; }
@@ -68,7 +70,7 @@ bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
 	hr = _mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&renderTarget);
 	if (FAILED(hr)) { return false; }
 
-	hr = _mDevice->CreateRenderTargetView(renderTarget.Get(), nullptr, &_mRenderTargetView);
+	hr = _mDevice->CreateRenderTargetView(renderTarget.get(), nullptr, _mRenderTargetView.put());
 	if (FAILED(hr)) { return false; }
 	
 	return true;
@@ -93,7 +95,7 @@ bool D3D11::DeviceManager::GenerateDepthStencilView()
 	depthDesc.MiscFlags = 0;
 
 	ComPtr<ID3D11Texture2D> depthBuffer;
-	hr = _mDevice->CreateTexture2D(&depthDesc, nullptr, &depthBuffer);
+	hr = _mDevice->CreateTexture2D(&depthDesc, nullptr, depthBuffer.put());
 	if (FAILED(hr)) { return false; }
 
 	// デプスステンシルビュー作成
@@ -102,10 +104,10 @@ bool D3D11::DeviceManager::GenerateDepthStencilView()
 	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	depthStencilViewDesc.Flags = 0;
 
-	hr = _mDevice->CreateDepthStencilView(depthBuffer.Get(), &depthStencilViewDesc, &_mDepthStencilView);
+	hr = _mDevice->CreateDepthStencilView(depthBuffer.get(), &depthStencilViewDesc, _mDepthStencilView.put());
 	if (FAILED(hr)) { return false; }
 
-	_mContext->OMSetRenderTargets(1, &_mRenderTargetView, _mDepthStencilView.Get());
+	_mContext->OMSetRenderTargets(1, _mRenderTargetView.put(), _mDepthStencilView.get());
 
 	return true;
 }
@@ -121,14 +123,14 @@ bool D3D11::DeviceManager::GenerateDepthStencilState()
 	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
 	depthStencilDesc.StencilEnable = FALSE;
 
-	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, &_mDepthEnable);//深度有効ステート
+	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, _mDepthEnable.put());//深度有効ステート
 	if (FAILED(hr)) { return false; }
 
 	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
-	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, &_mDepthDisable);//深度無効ステート
+	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, _mDepthDisable.put());//深度無効ステート
 	if (FAILED(hr)) { return false; }
 
-	_mContext->OMSetDepthStencilState(_mDepthEnable.Get(), NULL);
+	_mContext->OMSetDepthStencilState(_mDepthEnable.get(), NULL);
 
 	return true;
 }
@@ -150,22 +152,22 @@ bool D3D11::DeviceManager::GenerateBlendState()
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-	hr = _mDevice->CreateBlendState(&blendDesc, &_mBlendAlpha);
+	hr = _mDevice->CreateBlendState(&blendDesc, _mBlendAlpha.put());
 	if (FAILED(hr)) { return false; }
 
 	// 加算
 	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
-	hr = _mDevice->CreateBlendState(&blendDesc, &_mBlendAdd);
+	hr = _mDevice->CreateBlendState(&blendDesc, _mBlendAdd.put());
 	if (FAILED(hr)) { return false; }
 
 	// 乗算
 	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_SRC_ALPHA;
 	blendDesc.AlphaToCoverageEnable = TRUE;
-	hr = _mDevice->CreateBlendState(&blendDesc, &_mBlendATC);
+	hr = _mDevice->CreateBlendState(&blendDesc, _mBlendATC.put());
 	if (FAILED(hr)) { return false; }
 
 	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-	_mContext->OMSetBlendState(_mBlendAlpha.Get(), blendFactor, 0xffffffff);
+	_mContext->OMSetBlendState(_mBlendAlpha.get(), blendFactor, 0xffffffff);
 
 	return true;
 }
@@ -182,15 +184,15 @@ bool D3D11::DeviceManager::GenerateRasterizerState()
 	rasterizerDesc.MultisampleEnable = FALSE;
 
 	// ソリッド
-	hr = _mDevice->CreateRasterizerState(&rasterizerDesc, &_mRasterSolid);
+	hr = _mDevice->CreateRasterizerState(&rasterizerDesc, _mRasterSolid.put());
 	if (FAILED(hr)) { return false; }
 
 	// ワイヤーフレーム
 	rasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
-	hr = _mDevice->CreateRasterizerState(&rasterizerDesc, &_mRasterWireframe);
+	hr = _mDevice->CreateRasterizerState(&rasterizerDesc, _mRasterWireframe.put());
 	if (FAILED(hr)) { return false; }
 
-	_mContext->RSSetState(_mRasterSolid.Get());
+	_mContext->RSSetState(_mRasterSolid.get());
 
 	return true;
 }
@@ -209,20 +211,20 @@ bool D3D11::DeviceManager::GenerateSamplerState()
 	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
 	// Anisotropic
-	hr = _mDevice->CreateSamplerState(&samplerDesc, &_mSamplerAnisotropic);
+	hr = _mDevice->CreateSamplerState(&samplerDesc, _mSamplerAnisotropic.put());
 	if (FAILED(hr)) { return false; }
 
 	// Linear
 	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	hr = _mDevice->CreateSamplerState(&samplerDesc, &_mSamplerLinear);
+	hr = _mDevice->CreateSamplerState(&samplerDesc, _mSamplerLinear.put());
 	if (FAILED(hr)) { return false; }
 
 	// Point
 	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-	hr = _mDevice->CreateSamplerState(&samplerDesc, &_mSamplerPoint);
+	hr = _mDevice->CreateSamplerState(&samplerDesc, _mSamplerPoint.put());
 	if (FAILED(hr)) { return false; }
 
-	_mContext->PSSetSamplers(0, 1, &_mSamplerAnisotropic);
+	_mContext->PSSetSamplers(0, 1, _mSamplerAnisotropic.put());
 
 	return true;
 }
@@ -230,20 +232,20 @@ bool D3D11::DeviceManager::GenerateSamplerState()
 void D3D11::DeviceManager::RenderStateRegister()
 {
 	// 深度ステート登録
-	RenderState::Depth::Enable = _mDepthEnable.Get();
-	RenderState::Depth::Disable = _mDepthDisable.Get();
+	RenderState::Depth::Enable = _mDepthEnable.get();
+	RenderState::Depth::Disable = _mDepthDisable.get();
 
 	// ブレンドステート登録
-	RenderState::Blend::Alpha = _mBlendAlpha.Get();
-	RenderState::Blend::Add = _mBlendAdd.Get();
-	RenderState::Blend::ATC = _mBlendATC.Get();
+	RenderState::Blend::Alpha = _mBlendAlpha.get();
+	RenderState::Blend::Add = _mBlendAdd.get();
+	RenderState::Blend::ATC = _mBlendATC.get();
 
 	// ラスタライザステート登録
-	RenderState::Raster::Solid = _mRasterSolid.Get();
-	RenderState::Raster::Wireframe = _mRasterWireframe.Get();
+	RenderState::Raster::Solid = _mRasterSolid.get();
+	RenderState::Raster::Wireframe = _mRasterWireframe.get();
 
 	// サンプラーステート登録
-	RenderState::Sampler::Anisotropic = _mSamplerAnisotropic.Get();
-	RenderState::Sampler::Linear = _mSamplerLinear.Get();
-	RenderState::Sampler::Point = _mSamplerPoint.Get();
+	RenderState::Sampler::Anisotropic = _mSamplerAnisotropic.get();
+	RenderState::Sampler::Linear = _mSamplerLinear.get();
+	RenderState::Sampler::Point = _mSamplerPoint.get();
 }

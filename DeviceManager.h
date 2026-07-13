@@ -9,7 +9,7 @@
 #pragma once
 
 #include <d3d11.h>
-#include <wrl/client.h>
+#include <winrt/base.h>
 
 namespace D3D11 {
 /*============================================================
@@ -18,7 +18,9 @@ namespace D3D11 {
 *============================================================*/
 	class DeviceManager final
 	{
-	
+		template <typename T>
+		using ComPtr = winrt::com_ptr<T>;
+
 	/*--------------------------------------------------
 		Singleton用
 	----------------------------------------------------*/
@@ -45,33 +47,33 @@ namespace D3D11 {
 		D3D_FEATURE_LEVEL mFutureLevel{};
 
 		// DX11デバイス
-		Microsoft::WRL::ComPtr<ID3D11Device> _mDevice{};
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext> _mContext{};
-		Microsoft::WRL::ComPtr<IDXGISwapChain> _mSwapChain{};
+		winrt::com_ptr<ID3D11Device> _mDevice{};
+		winrt::com_ptr<ID3D11DeviceContext> _mContext{};
+		winrt::com_ptr<IDXGISwapChain> _mSwapChain{};
 
 		// レンダーターゲット
-		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> _mRenderTargetView{};
+		winrt::com_ptr<ID3D11RenderTargetView> _mRenderTargetView{};
 		
 		// 深度バッファ
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> _mDepthStencilView{};
+		winrt::com_ptr<ID3D11DepthStencilView> _mDepthStencilView{};
 
 		// 深度ステート
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>  _mDepthEnable{};
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>  _mDepthDisable{};
+		winrt::com_ptr<ID3D11DepthStencilState>  _mDepthEnable{};
+		winrt::com_ptr<ID3D11DepthStencilState>  _mDepthDisable{};
 
 		// ブレンドステート
-		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendAlpha{};
-		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendAdd{};
-		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendATC{};
+		winrt::com_ptr<ID3D11BlendState>  _mBlendAlpha{};
+		winrt::com_ptr<ID3D11BlendState>  _mBlendAdd{};
+		winrt::com_ptr<ID3D11BlendState>  _mBlendATC{};
 
 		// ラスタライザステート
-		Microsoft::WRL::ComPtr<ID3D11RasterizerState> _mRasterSolid{};
-		Microsoft::WRL::ComPtr<ID3D11RasterizerState> _mRasterWireframe{};
+		winrt::com_ptr<ID3D11RasterizerState> _mRasterSolid{};
+		winrt::com_ptr<ID3D11RasterizerState> _mRasterWireframe{};
 
 		// サンプラーステート
-		Microsoft::WRL::ComPtr<ID3D11SamplerState> _mSamplerAnisotropic{};
-		Microsoft::WRL::ComPtr<ID3D11SamplerState> _mSamplerLinear{};
-		Microsoft::WRL::ComPtr<ID3D11SamplerState> _mSamplerPoint{};
+		winrt::com_ptr<ID3D11SamplerState> _mSamplerAnisotropic{};
+		winrt::com_ptr<ID3D11SamplerState> _mSamplerLinear{};
+		winrt::com_ptr<ID3D11SamplerState> _mSamplerPoint{};
 
 	public:
 		bool Initialize(HWND hWnd, int width, int height);
