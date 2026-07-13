@@ -1,4 +1,4 @@
-#include <cmath>
+﻿#include <cmath>
 #include <map>
 
 #include "easing.h"

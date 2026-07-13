@@ -1,9 +1,9 @@
-/*============================================================
+Ôªø/*============================================================
 *	@file	 : sky.h
-*	@brief	 : ÉXÉJÉCÉhÅ[ÉÄ
+*	@brief	 : „Çπ„Ç´„Ç§„Éâ„Éº„É†
 *
-* Å@@author  : @akitsuki-35Åihttps://github.com/akitsuki-35Åj
-* Å@@date	 : 2026/06/09
+* „ÄÄ@author  : @akitsuki-35Ôºàhttps://github.com/akitsuki-35Ôºâ
+* „ÄÄ@date	 : 2026/06/09
 *	@updated : 2026/06/09
 *============================================================*/
 #ifndef SKY_H
@@ -13,7 +13,7 @@
 
 /*============================================================
 *	@class	: Sky
-*	@brief	: ÉXÉJÉCÉhÅ[ÉÄ
+*	@brief	: „Çπ„Ç´„Ç§„Éâ„Éº„É†
 *============================================================*/
 class Sky : public GameObject
 {
@@ -21,9 +21,9 @@ private:
 	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
 	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
 
-	ID3D11InputLayout* _mVertexLayout{}; // í∏ì_ÉåÉCÉAÉEÉg
-	ID3D11VertexShader* _mVertexShader{}; // í∏ì_ÉVÉFÅ[É_Å[
-	ID3D11PixelShader* _mPixelShader{}; // ÉsÉNÉZÉãÉVÉFÅ[É_Å[
+	ID3D11InputLayout* _mVertexLayout{}; // È†ÇÁÇπ„É¨„Ç§„Ç¢„Ç¶„Éà
+	ID3D11VertexShader* _mVertexShader{}; // È†ÇÁÇπ„Ç∑„Çß„Éº„ÉÄ„Éº
+	ID3D11PixelShader* _mPixelShader{}; // „Éî„ÇØ„Çª„É´„Ç∑„Çß„Éº„ÉÄ„Éº
 
 public:
 	Sky() = default;

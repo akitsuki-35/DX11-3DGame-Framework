@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : texture.cpp
-*	@brief	 : ƒeƒNƒXƒ`ƒƒŠÇ—
+*	@brief	 : ãƒ†ã‚¯ã‚¹ãƒãƒ£ç®¡ç†
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/13
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/13
 *	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
@@ -18,14 +18,14 @@ using namespace DirectX;
 Texture::Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, const float& rotate, const DirectX::XMFLOAT4& color, bool isMipMap)
 	: position(position), drawSize(size), rotate(rotate), color(color)
 {
-	//ƒeƒNƒXƒ`ƒƒ‚©‚ç‚Ìƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‹ã‚‰ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 	TexMetadata metaData;
 	ScratchImage image;
 
-	//‰æ‘œƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+	//ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 	LoadFromWICFile(pFileName, WIC_FLAGS_NONE, &metaData, image);
 
-	//‰æ‘œƒtƒ@ƒCƒ‹‚ÌƒTƒCƒY‚ğæ“¾
+	//ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚µã‚¤ã‚ºã‚’å–å¾—
 	originalSize.x = static_cast<unsigned int>(metaData.width);
 	originalSize.y = static_cast<unsigned int>(metaData.height);
 
@@ -36,14 +36,14 @@ Texture::Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position, co
 
 	if (isMipMap)
 	{
-		//ƒ~ƒbƒvƒ}ƒbƒv‚ğì¬‚·‚é
+		//ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ã‚’ä½œæˆã™ã‚‹
 		ScratchImage mipChain;
 		GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
 		image = std::move(mipChain);
 		metaData = image.GetMetadata();
 	}
 
-	//ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[‚Ì¶¬
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	//HRESULT hr = CreateShaderResourceView(Direct3DGetDevice(), image.GetImages(), image.GetImageCount(),
 	//	metaData, &pShaderResourceView);
 
@@ -52,7 +52,7 @@ Texture::Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position, co
 
 	if (FAILED(hr))
 	{
-		MessageBox(nullptr, "ƒeƒNƒXƒ`ƒƒ‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½", "ƒGƒ‰[", MB_OK);
+		MessageBox(nullptr, "ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 		return;
 	}
 }
@@ -69,14 +69,14 @@ void Texture::Draw()
 
 void Texture::SetTexture()
 {
-	// ƒeƒNƒXƒ`ƒƒİ’è
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
 	Direct3DGetDeviceContext()->PSSetShaderResources(0, 1, &pShaderResourceView);
 }
 
 SpriteSheet::SpriteSheet(const wchar_t* pFileName, const DirectX::XMUINT2& patternMatrix, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, const float& rotate, const DirectX::XMFLOAT4& color, bool isMipMap)
 	:Texture(pFileName, position, size, rotate, color, isMipMap), patternMatrix(patternMatrix)
 {
-	// ‘ƒpƒ^[ƒ“”‚Æƒpƒ^[ƒ“ƒTƒCƒY‚ğƒZƒbƒg
+	// ç·ãƒ‘ã‚¿ãƒ¼ãƒ³æ•°ã¨ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚µã‚¤ã‚ºã‚’ã‚»ãƒƒãƒˆ
 	patternMax = patternMatrix.x * patternMatrix.y;
 	patternSize.x = originalSize.x / patternMatrix.x;
 	patternSize.y = originalSize.y / patternMatrix.y;

@@ -1,13 +1,12 @@
-/*============================================================
+Ôªø/*============================================================
 *	@file	 : main.h
-*	@brief	 : ÉÅÉCÉì
+*	@brief	 : „É°„Ç§„É≥
 *
-* Å@@author  : @akitsuki-35Åihttps://github.com/akitsuki-35Åj
-* Å@@date	 : 2026/04/21
+* „ÄÄ@author  : @akitsuki-35Ôºàhttps://github.com/akitsuki-35Ôºâ
+* „ÄÄ@date	 : 2026/04/21
 *	@updated : 2026/06/02
 *============================================================*/
-#ifndef MAIN_H
-#define MAIN_H
+#pragma once
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -34,5 +33,3 @@ using namespace DirectX;
 HWND GetWindow();
 
 void Invoke(std::function<void()> Function, int Time);
-
-#endif // FILENAME_H

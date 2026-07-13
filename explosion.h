@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : explosion.h
-*	@brief	 : ”š”­ƒGƒtƒFƒNƒg
+*	@brief	 : çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/06/09
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/06/09
 *	@updated : 2026/06/09
 *============================================================*/
 #ifndef EXPLOSION_H
@@ -14,7 +14,7 @@
 
 /*============================================================
 *	@class	: Explosion
-*	@brief	: ”š”­ƒGƒtƒFƒNƒg•`‰æ
+*	@brief	: çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆæç”»
 *============================================================*/
 class Explosion : public GameObject
 {
@@ -25,12 +25,12 @@ private:
 	//int patternMax{ PATTERN_X * PATTERN_Y };
 	int frame{};
 
-	ID3D11Buffer* pVertexBuffer{}; // ’¸“_ƒoƒbƒtƒ@
-	ID3D11InputLayout* pVertexLayout{}; // ’¸“_ƒŒƒCƒAƒEƒg
-	ID3D11VertexShader* pVertexShader{}; // ’¸“_ƒVƒF[ƒ_[
-	ID3D11PixelShader* pPixelShader{}; // ƒsƒNƒZƒ‹ƒVƒF[ƒ_[
+	ID3D11Buffer* pVertexBuffer{}; // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+	ID3D11InputLayout* pVertexLayout{}; // é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
+	ID3D11VertexShader* pVertexShader{}; // é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
+	ID3D11PixelShader* pPixelShader{}; // ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 
-	ID3D11ShaderResourceView* pTexture{}; // ƒeƒNƒXƒ`ƒƒ
+	ID3D11ShaderResourceView* pTexture{}; // ãƒ†ã‚¯ã‚¹ãƒãƒ£
 
 public:
 	Explosion() = default;

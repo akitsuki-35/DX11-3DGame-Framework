@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Fade.cpp
-*	@brief	 : ƒtƒF[ƒh§Œä
+*	@brief	 : ãƒ•ã‚§ãƒ¼ãƒ‰åˆ¶å¾¡
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/03/29
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/03/29
 *	@updated : 2026/06/02
 *============================================================*/
 #include "Fade.h"
@@ -15,7 +15,7 @@
 #include "DebugMemoryleak.h"
 
 /*------------------------------------------------------------
-	ƒƒ“ƒo•Ï”’è‹`
+	ãƒ¡ãƒ³ãƒå¤‰æ•°å®šç¾©
 ------------------------------------------------------------*/
 Texture* Fade::texture{ nullptr };
 Fade::State Fade::fadeState{ Fade::State::FADE_IN };
@@ -26,7 +26,7 @@ XMFLOAT4 Fade::color{ 0.0f, 0.0f, 0.0f, 1.0f };
 
 const void Fade::Initialize()
 {
-	// ƒeƒNƒXƒ`ƒƒ‚Æ•Ï”‚ÌƒZƒbƒg
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¨å¤‰æ•°ã®ã‚»ãƒƒãƒˆ
 	texture = new Texture(L"Resources/Textures/Common/white.png", { 0.0f, 0.0f },
 		{ 1920.0f, 1080.0f }, 0, color);
 	fadeState = Fade::State::FADE_IN;
@@ -40,7 +40,7 @@ const void Fade::Finalize()
 
 const void Fade::Update(double elapsedTime)
 {
-	// ŠÔŒv‘ª‚ÆƒXƒe[ƒg‚ÌŠÇ—
+	// æ™‚é–“è¨ˆæ¸¬ã¨ã‚¹ãƒ†ãƒ¼ãƒˆã®ç®¡ç†
 	if (fadeState == NONE || fadeState == FADE_OUT_END || fadeState == FADE_IN_END) {
 		return;
 	}

@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : bullet.cpp
-*	@brief	 : ’e
+*	@brief	 : å¼¾
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/06/02
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/06/02
 *	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
@@ -24,10 +24,10 @@ void Bullet::Initialize()
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 0.0f, 0.0f, 0.0f };
 
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg“Ç
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆèª­è¾¼
 	AddComponent<ModelRenderer>(this)->Load("Resources\\Models\\bullet.obj");
 
-	// ƒVƒF[ƒ_[“Ç
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼èª­è¾¼
 	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
 	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 }
@@ -47,7 +47,7 @@ void Bullet::Update()
 
 	mPosition += mVelocity * dt;
 
-	// “G‚Æ‚ÌÕ“Ë”»’è
+	// æ•µã¨ã®è¡çªåˆ¤å®š
 	auto enemys = Game::GetGameObjects<Enemy>();
 	for (auto enemy : enemys) {
 		Vector3 dir = enemy->GetPosition() - mPosition;
@@ -69,7 +69,7 @@ void Bullet::Update()
 
 	mLifeTime -= dt;
 	if (mLifeTime <= 0.0f) {
-		// ˆê’èŠÔŒo‰ß‚Å’e‚ğíœ
+		// ä¸€å®šæ™‚é–“çµŒéã§å¼¾ã‚’å‰Šé™¤
 		SetDestroy();
 	}
 
@@ -78,20 +78,20 @@ void Bullet::Update()
 
 void Bullet::Draw() const
 {
-	// “ü—ÍƒŒƒCƒAƒEƒgİ’è
+	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
 	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
 
-	// ƒVƒF[ƒ_[İ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼è¨­å®š
 	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
 
-	// ƒ}ƒgƒŠƒNƒXİ’è
+	// ãƒãƒˆãƒªã‚¯ã‚¹è¨­å®š
 	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // Šg‘åk¬
-	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z); // ‰ñ“]
-	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // •½sˆÚ“®
+	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // æ‹¡å¤§ç¸®å°
+	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z); // å›è»¢
+	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // å¹³è¡Œç§»å‹•
 	w = s * r * t;
 	Renderer::SetWorldMatrix(w);
 
-	GameObject::Draw(); // Œp³Œ³‚ÌDraw‚ğŒÄ‚Ño‚·
+	GameObject::Draw(); // ç¶™æ‰¿å…ƒã®Drawã‚’å‘¼ã³å‡ºã™
 }

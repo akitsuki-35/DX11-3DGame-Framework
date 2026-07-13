@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : keyboard.h
-*	@brief	 : ƒL[ƒ{[ƒhƒ‚ƒWƒ…[ƒ‹
+*	@brief	 : ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/13
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/13
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef KEYBOARD_H
@@ -13,7 +13,7 @@
 #include <memory>
 
 /*------------------------------------------------------------
-	ƒL[—ñ‹“
+	ã‚­ãƒ¼åˆ—æŒ™
 ------------------------------------------------------------*/
 typedef enum KeyTags : unsigned char
 {
@@ -196,7 +196,7 @@ typedef enum KeyTags : unsigned char
 } Keys;
 
 
-// ƒL[ƒ{[ƒhó‘Ô\‘¢‘Ì
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰çŠ¶æ…‹æ§‹é€ ä½“
 typedef struct KeyboardStateTag
 {
     bool Reserved0 : 8;
@@ -385,24 +385,24 @@ typedef struct KeyboardStateTag
     bool Reserved26 : 1;
 } KeyboardState;
 
-// ƒL[ƒ{[ƒhƒ‚ƒWƒ…[ƒ‹‚Ì‰Šú‰»
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®åˆæœŸåŒ–
 void KeyboardInitialize();
 
-// ƒL[ƒ{[ƒh‚ÌŒ»İ‚Ìó‘Ô‚ğæ“¾‚·‚é
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®ç¾åœ¨ã®çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
 const KeyboardState* GetKeyboardState();
 
-// ƒL[ƒ{[ƒh‚Ìó‘Ô‚©‚çƒL[–ˆ‚Ìó‘Ô‚ğæ“¾‚·‚é
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®çŠ¶æ…‹ã‹ã‚‰ã‚­ãƒ¼æ¯ã®çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
 bool IsKeyDown(Keys key, const KeyboardState* pState);
 bool IsKeyUp(Keys key, const KeyboardState* pState);
 
-// ƒL[ƒ{[ƒh‚ÌŒ»İ‚ÌƒL[–ˆ‚Ìó‘Ô‚ğæ“¾‚·‚é
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®ç¾åœ¨ã®ã‚­ãƒ¼æ¯ã®çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
 bool IsKeyDown(Keys key);
 bool IsKeyUp(Keys key);
 
-// ƒL[ƒ{[ƒh‚Ìó‘Ô‚ğƒŠƒZƒbƒg‚·‚é
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®çŠ¶æ…‹ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
 void KeyboardReset();
 
-// ƒL[ƒ{[ƒh§Œä‚Ì‚½‚ß‚ÌƒEƒHƒ“‚Ç‚¤ƒƒbƒZ[ƒWƒvƒƒV[ƒWƒƒƒtƒbƒNŠÖ”
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰åˆ¶å¾¡ã®ãŸã‚ã®ã‚¦ã‚©ãƒ³ã©ã†ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ãƒ•ãƒƒã‚¯é–¢æ•°
 void KeyboardProcessMessage(UINT message, WPARAM wParam, LPARAM lParam);
 
 #endif // KEYBOARD_H

@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Shader.cpp
-*	@brief	 : 2D—pƒVƒF[ƒ_[
+*	@brief	 : 2Dç”¨ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/01
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/01
 *	@updated : 2026/06/02
 *============================================================*/
 #include "Shader2D.h"
@@ -14,7 +14,7 @@
 using namespace DirectX;
 
 /*------------------------------------------------------------
-	ƒOƒ[ƒoƒ‹•Ï”’è‹`
+	ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°å®šç¾©
 ------------------------------------------------------------*/
 static ID3D11VertexShader* g_pVertexShader{ nullptr };
 static ID3D11InputLayout* g_pInputLayout{ nullptr };
@@ -31,71 +31,71 @@ static ID3D11Buffer* g_pPSConstantBuffer{ nullptr };
 
 bool Shader2DInitialize()
 {
-	HRESULT hr; // –ß‚è’lŠi”[—p
+	HRESULT hr; // æˆ»ã‚Šå€¤æ ¼ç´ç”¨
 
-	// –‘OƒRƒ“ƒpƒCƒ‹Ï‚İ’¸“_ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
+	// äº‹å‰ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®èª­ã¿è¾¼ã¿
 	std::ifstream ifsVs("Resources/Shaders/VertexShader2d.cso", std::ios::binary);
 
 	if (!ifsVs) {
-		MessageBox(nullptr, "’¸“_ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½\n\nVertexShader2d.cso", "ƒGƒ‰[", MB_OK);
+		MessageBox(nullptr, "é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ\n\nVertexShader2d.cso", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 		return false;
 	}
 
-	// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğæ“¾
-	ifsVs.seekg(0, std::ios::end); // ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ğ––”ö‚ÉˆÚ“®
-	std::streamsize fileSize = ifsVs.tellg(); // ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ÌˆÊ’u‚ğæ“¾i‚Â‚Ü‚èƒtƒ@ƒCƒ‹ƒTƒCƒYj
-	ifsVs.seekg(0, std::ios::beg); // ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ğæ“ª‚É–ß‚·
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’å–å¾—
+	ifsVs.seekg(0, std::ios::end); // ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã‚’æœ«å°¾ã«ç§»å‹•
+	std::streamsize fileSize = ifsVs.tellg(); // ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã®ä½ç½®ã‚’å–å¾—ï¼ˆã¤ã¾ã‚Šãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºï¼‰
+	ifsVs.seekg(0, std::ios::beg); // ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã‚’å…ˆé ­ã«æˆ»ã™
 
-	// ƒoƒCƒiƒŠƒf[ƒ^‚ğŠi”[‚·‚é‚½‚ß‚Ìƒoƒbƒtƒ@‚ğŠm•Û
+	// ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®ãƒãƒƒãƒ•ã‚¡ã‚’ç¢ºä¿
 	unsigned char* vsBinaryPointer = new unsigned char[fileSize];
 	
-	ifsVs.read((char*)vsBinaryPointer, fileSize); // ƒoƒCƒiƒŠƒf[ƒ^‚ğ“Ç‚İ‚Ş
-	ifsVs.close(); // ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+	ifsVs.read((char*)vsBinaryPointer, fileSize); // ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
+	ifsVs.close(); // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 
-	// ’¸“_ƒVƒF[ƒ_[‚Ìì¬
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ä½œæˆ
 	hr = Direct3DGetDevice()->CreateVertexShader(vsBinaryPointer, fileSize, nullptr, &g_pVertexShader);
 
 	if (FAILED(hr)) {
-		dOst::dout << "Shader2d_Initialize() : ’¸“_ƒVƒF[ƒ_[‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½" << std::endl;
-		delete[] vsBinaryPointer; // ƒƒ‚ƒŠƒŠ[ƒN‚µ‚È‚¢‚æ‚¤‚ÉƒoƒCƒiƒŠƒf[ƒ^‚Ìƒoƒbƒtƒ@‚ğ‰ğ•ú
+		dOst::dout << "Shader2d_Initialize() : é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ" << std::endl;
+		delete[] vsBinaryPointer; // ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯ã—ãªã„ã‚ˆã†ã«ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã®ãƒãƒƒãƒ•ã‚¡ã‚’è§£æ”¾
 		return false;
 	}
 
-	// ’¸“_ƒŒƒCƒAƒEƒg‚Ì’è‹`
+	// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®å®šç¾©
 	D3D11_INPUT_ELEMENT_DESC layout[] = {
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 
-	UINT num_elements = ARRAYSIZE(layout); // ”z—ñ‚Ì—v‘f”‚ğæ“¾
+	UINT num_elements = ARRAYSIZE(layout); // é…åˆ—ã®è¦ç´ æ•°ã‚’å–å¾—
 
-	// ’¸“_ƒŒƒCƒAƒEƒg‚Ìì¬
+	// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®ä½œæˆ
 	hr = Direct3DGetDevice()->CreateInputLayout(layout, num_elements, vsBinaryPointer, fileSize, &g_pInputLayout);
 
-	delete[] vsBinaryPointer; // ƒoƒCƒiƒŠƒf[ƒ^‚Ìƒoƒbƒtƒ@‚ğ‰ğ•ú
+	delete[] vsBinaryPointer; // ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã®ãƒãƒƒãƒ•ã‚¡ã‚’è§£æ”¾
 
 	if (FAILED(hr)) {
-		dOst::dout << "Shader2d_Initialize() : ’¸“_ƒŒƒCƒAƒEƒg‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½" << std::endl;
+		dOst::dout << "Shader2d_Initialize() : é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ" << std::endl;
 		return false;
 	}
 
 
-	// ’¸“_ƒVƒF[ƒ_[—p’è”ƒoƒbƒtƒ@‚Ìì¬
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	D3D11_BUFFER_DESC bufferDesc{};
-	bufferDesc.ByteWidth = sizeof(XMFLOAT4X4); // ƒoƒbƒtƒ@‚ÌƒTƒCƒY
-	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; // ƒoƒCƒ“ƒhƒtƒ‰ƒO
+	bufferDesc.ByteWidth = sizeof(XMFLOAT4X4); // ãƒãƒƒãƒ•ã‚¡ã®ã‚µã‚¤ã‚º
+	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; // ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°
 	Direct3DGetDevice()->CreateBuffer(&bufferDesc, nullptr, &g_pVSConstantBufferproj);
 
-	bufferDesc.ByteWidth = sizeof(XMFLOAT4X4); // ƒoƒbƒtƒ@‚ÌƒTƒCƒY
-	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; // ƒoƒCƒ“ƒhƒtƒ‰ƒO
+	bufferDesc.ByteWidth = sizeof(XMFLOAT4X4); // ãƒãƒƒãƒ•ã‚¡ã®ã‚µã‚¤ã‚º
+	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; // ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°
 	Direct3DGetDevice()->CreateBuffer(&bufferDesc, nullptr, &g_pVSConstantBufferworld);
 
 
-	// –‘OƒRƒ“ƒpƒCƒ‹Ï‚İƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
+	// äº‹å‰ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®èª­ã¿è¾¼ã¿
 	std::ifstream ifsPs("Resources/Shaders/PixelShader2d.cso", std::ios::binary);
 	if (!ifsPs) {
-		MessageBox(nullptr, "ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½\n\nPixelShader2d.cso", "ƒGƒ‰[", MB_OK);
+		MessageBox(nullptr, "ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸ\n\nPixelShader2d.cso", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 		return false;
 	}
 
@@ -107,23 +107,23 @@ bool Shader2DInitialize()
 	ifsPs.read((char*)psBinaryPointer, fileSize);
 	ifsPs.close();
 
-	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ìì¬
+	// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ä½œæˆ
 	hr = Direct3DGetDevice()->CreatePixelShader(psBinaryPointer, fileSize, nullptr, &g_pPixelShader);
 
-	delete[] psBinaryPointer; // ƒoƒCƒiƒŠƒf[ƒ^‚Ìƒoƒbƒtƒ@‚ğ‰ğ•ú
+	delete[] psBinaryPointer; // ãƒã‚¤ãƒŠãƒªãƒ‡ãƒ¼ã‚¿ã®ãƒãƒƒãƒ•ã‚¡ã‚’è§£æ”¾
 
 	if (FAILED(hr)) {
-		dOst::dout << "Shader2d_Initialize() : ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½" << std::endl;
+		dOst::dout << "Shader2d_Initialize() : ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ" << std::endl;
 		return false;
 	}
 
-	//// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[—p’è”ƒoƒbƒtƒ@‚Ìì¬
-	bufferDesc.ByteWidth = sizeof(XMFLOAT4); // ƒoƒbƒtƒ@‚ÌƒTƒCƒY
-	//buffer_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; // ƒoƒCƒ“ƒhƒtƒ‰ƒO
+	//// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç”¨å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
+	bufferDesc.ByteWidth = sizeof(XMFLOAT4); // ãƒãƒƒãƒ•ã‚¡ã®ã‚µã‚¤ã‚º
+	//buffer_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER; // ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°
 
 	Direct3DGetDevice()->CreateBuffer(&bufferDesc, nullptr, &g_pPSConstantBuffer);
 
-	// ’ÊíƒXƒvƒ‰ƒCƒg—pƒTƒ“ƒvƒ‰[ƒXƒe[ƒgİ’è
+	// é€šå¸¸ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç”¨ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
 	D3D11_SAMPLER_DESC samplerDesc{};
 	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -137,7 +137,7 @@ bool Shader2DInitialize()
 
 	Direct3DGetDevice()->CreateSamplerState(&samplerDesc, &g_pSamplerStateLinear);
 
-	// UVƒXƒvƒ‰ƒCƒg—pƒTƒ“ƒvƒ‰[ƒXƒe[ƒgİ’è
+	// UVã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç”¨ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
 	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -167,66 +167,66 @@ void Shader2DFinalize()
 
 void Shader2DSetProjectionMatrix(const DirectX::XMMATRIX& matrix)
 {
-	// ’è”ƒoƒbƒtƒ@Ši”[—ps—ñ‚Ì\‘¢‘Ì‚ğ’è‹`
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡æ ¼ç´ç”¨è¡Œåˆ—ã®æ§‹é€ ä½“ã‚’å®šç¾©
 	XMFLOAT4X4 transpose;
 
-	// s—ñ‚ğ“]’u‚µ‚Ä’è”ƒoƒbƒtƒ@Ši”[—ps—ñ‚É•ÏŠ·
+	// è¡Œåˆ—ã‚’è»¢ç½®ã—ã¦å®šæ•°ãƒãƒƒãƒ•ã‚¡æ ¼ç´ç”¨è¡Œåˆ—ã«å¤‰æ›
 	XMStoreFloat4x4(&transpose, XMMatrixTranspose(matrix));
 
-	// ’è”ƒoƒbƒtƒ@‚És—ñ‚ğƒZƒbƒg
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«è¡Œåˆ—ã‚’ã‚»ãƒƒãƒˆ
 	Direct3DGetDeviceContext()->UpdateSubresource(g_pVSConstantBufferproj, 0, nullptr, &transpose, 0, 0);
 }
 
 void Shader2DSetWorldMatrix(const DirectX::XMMATRIX& matrix)
 {
-	// ’è”ƒoƒbƒtƒ@Ši”[—ps—ñ‚Ì\‘¢‘Ì‚ğ’è‹`
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡æ ¼ç´ç”¨è¡Œåˆ—ã®æ§‹é€ ä½“ã‚’å®šç¾©
 	XMFLOAT4X4 transpose;
 
-	// s—ñ‚ğ“]’u‚µ‚Ä’è”ƒoƒbƒtƒ@Ši”[—ps—ñ‚É•ÏŠ·
+	// è¡Œåˆ—ã‚’è»¢ç½®ã—ã¦å®šæ•°ãƒãƒƒãƒ•ã‚¡æ ¼ç´ç”¨è¡Œåˆ—ã«å¤‰æ›
 	XMStoreFloat4x4(&transpose, XMMatrixTranspose(matrix));
 
-	// ’è”ƒoƒbƒtƒ@‚És—ñ‚ğƒZƒbƒg
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«è¡Œåˆ—ã‚’ã‚»ãƒƒãƒˆ
 	Direct3DGetDeviceContext()->UpdateSubresource(g_pVSConstantBufferworld, 0, nullptr, &transpose, 0, 0);
 }
 
 void Shader2DSetColor(const DirectX::XMFLOAT4& color)
 {
-	// ’è”ƒoƒbƒtƒ@‚ÉF‚ğƒZƒbƒg
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã«è‰²ã‚’ã‚»ãƒƒãƒˆ
 	Direct3DGetDeviceContext()->UpdateSubresource(g_pPSConstantBuffer, 0, nullptr, &color, 0, 0);
 }
 
 void Shader2DBeginLinear()
 {
-	// ’¸“_ƒVƒF[ƒ_[‚ÆƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¨ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Direct3DGetDeviceContext()->VSSetShader(g_pVertexShader, nullptr, 0);
 	Direct3DGetDeviceContext()->PSSetShader(g_pPixelShader, nullptr, 0);
 
-	// ’¸“_ƒŒƒCƒAƒEƒg‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Direct3DGetDeviceContext()->IASetInputLayout(g_pInputLayout);
 
-	// ’è”ƒoƒbƒtƒ@‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Direct3DGetDeviceContext()->VSSetConstantBuffers(0, 1, &g_pVSConstantBufferproj);
 	Direct3DGetDeviceContext()->VSSetConstantBuffers(1, 1, &g_pVSConstantBufferworld);
 	Direct3DGetDeviceContext()->PSSetConstantBuffers(0, 1, &g_pPSConstantBuffer);
 
-	// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Direct3DGetDeviceContext()->PSSetSamplers(0, 1, &g_pSamplerStateLinear);
 }
 
 void Shader2DBeginPoint()
 {
-	// ’¸“_ƒVƒF[ƒ_[‚ÆƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¨ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Direct3DGetDeviceContext()->VSSetShader(g_pVertexShader, nullptr, 0);
 	Direct3DGetDeviceContext()->PSSetShader(g_pPixelShader, nullptr, 0);
 
-	// ’¸“_ƒŒƒCƒAƒEƒg‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Direct3DGetDeviceContext()->IASetInputLayout(g_pInputLayout);
 
-	// ’è”ƒoƒbƒtƒ@‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Direct3DGetDeviceContext()->VSSetConstantBuffers(0, 1, &g_pVSConstantBufferproj);
 	Direct3DGetDeviceContext()->VSSetConstantBuffers(1, 1, &g_pVSConstantBufferworld);
 	Direct3DGetDeviceContext()->PSSetConstantBuffers(0, 1, &g_pPSConstantBuffer);
 
-	// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Direct3DGetDeviceContext()->PSSetSamplers(0, 1, &g_pSamplerStatePoint);
 }

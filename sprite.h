@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : sprite.h
-*	@brief	 : ƒXƒvƒ‰ƒCƒg•`‰æ
+*	@brief	 : ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/01
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/01
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef SPRITE_H
@@ -13,20 +13,20 @@
 #include <DirectXMath.h>
 
 /*------------------------------------------------------------
-	‘O•ûéŒ¾
+	å‰æ–¹å®£è¨€
 ------------------------------------------------------------*/
 class Texture;
 class SpriteSheet;
 
 /*============================================================
 *	@class	: Sprite
-*	@brief	: ƒXƒvƒ‰ƒCƒg•`‰æƒNƒ‰ƒX
+*	@brief	: ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»ã‚¯ãƒ©ã‚¹
 *============================================================*/
 class Sprite 
 {
 private:
-	static constexpr int NUM_VERTEX{ 4 }; // ’¸“_”
-	static ID3D11Buffer* pVertexBuffer; // ’¸“_ƒoƒbƒtƒ@
+	static constexpr int NUM_VERTEX{ 4 }; // é ‚ç‚¹æ•°
+	static ID3D11Buffer* pVertexBuffer; // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 
 	Sprite() {}
 	Sprite(const Sprite&);

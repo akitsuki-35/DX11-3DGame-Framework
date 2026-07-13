@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : title.h
-*	@brief	 : ƒ^ƒCƒgƒ‹ƒV[ƒ“
+*	@brief	 : ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/03/29
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/03/29
 *	@updated : 2026/06/23
 *============================================================*/
 #ifndef TITLE_H
@@ -13,12 +13,12 @@
 #include "gameobject.h"
 
 /*------------------------------------------------------------
-	‘O•ûéŒ¾
+	å‰æ–¹å®£è¨€
 ------------------------------------------------------------*/
 class Texture;
 
 /*------------------------------------------------------------
-	ƒ^ƒCƒgƒ‹ƒV[ƒ“‚Ìó‘Ô
+	ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã®çŠ¶æ…‹
 ------------------------------------------------------------*/
 enum TitleState
 {
@@ -30,7 +30,7 @@ enum TitleState
 
 /*============================================================
 *	@class	: Title
-*	@brief	: ƒ^ƒCƒgƒ‹ƒV[ƒ“iScene‚ğŒp³j
+*	@brief	: ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ï¼ˆSceneã‚’ç¶™æ‰¿ï¼‰
 *============================================================*/
 class Title : public Scene
 {
@@ -47,7 +47,7 @@ public:
 	void Update(double elapsedTime) override;
 	void Draw() const override;
 
-	template <typename T> // ƒeƒ“ƒvƒŒ[ƒgŠÖ”
+	template <typename T> // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
 	static T* AddTitleObject() {
 		T* TitleObject = new T();
 		TitleObject->Initialize();
@@ -56,10 +56,10 @@ public:
 		return TitleObject;
 	}
 
-	template <typename T> // ƒeƒ“ƒvƒŒ[ƒgŠÖ”
+	template <typename T> // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
 	static T* GetTitleObject() {
 		for (GameObject* TitleObject : titleObjects) {
-			// RTTIiÀsŒ^î•ñj
+			// RTTIï¼ˆå®Ÿè¡Œæ™‚å‹æƒ…å ±ï¼‰
 			T* find = dynamic_cast<T*>(TitleObject);
 			if (find) return find;
 		}
@@ -70,7 +70,7 @@ public:
 	static std::vector<T*> GetTitleObjects() {
 		std::vector<T*> objects;
 		for (GameObject* TitleObject : titleObjects) {
-			// RTTIiÀsŒ^î•ñj
+			// RTTIï¼ˆå®Ÿè¡Œæ™‚å‹æƒ…å ±ï¼‰
 			T* find = dynamic_cast<T*>(TitleObject);
 			if (find != nullptr) {
 				objects.push_back(find);

@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : field.cpp
-*	@brief	 : 3Dƒ|ƒŠƒSƒ“•\Ž¦
+*	@brief	 : 3Dãƒãƒªã‚´ãƒ³è¡¨ç¤º
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/28
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/28
 *	@updated : 2026/06/09
 *============================================================*/
 #include "main.h"
@@ -14,7 +14,7 @@
 
 Field::Field(const wchar_t* pFileName)
 {
-	// ƒeƒNƒXƒ`ƒƒ“Çž
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­è¾¼
 	TexMetadata metaData;
 	ScratchImage image;
 	LoadFromWICFile(pFileName, WIC_FLAGS_NONE, &metaData, image);
@@ -48,7 +48,7 @@ void Field::Initialize()
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
 
-	// ’¸“_ƒoƒbƒtƒ@¶¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	D3D11_BUFFER_DESC bd{};
 	bd.Usage = D3D11_USAGE_DEFAULT;
 	bd.ByteWidth = sizeof(VERTEX_3D) * 4;
@@ -60,14 +60,14 @@ void Field::Initialize()
 
 	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &_mVertexBuffer);
 
-	// ƒeƒNƒXƒ`ƒƒ“Çž
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­è¾¼
 	TexMetadata metaData;
 	ScratchImage image;
 	LoadFromWICFile(L"Resources\\Textures\\glass.jpg", WIC_FLAGS_NONE, &metaData, image);
 	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
 	assert(_mTexture);
 
-	// ƒVƒF[ƒ_[“Çž
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼èª­è¾¼
 	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
 	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 
@@ -102,42 +102,42 @@ void Field::Update()
 
 void Field::Draw() const
 {
-	// “ü—ÍƒŒƒCƒAƒEƒgÝ’è
+	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
 	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
 
-	// ƒVƒF[ƒ_[Ý’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼è¨­å®š
 	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
 
-	// ƒ}ƒgƒŠƒNƒXÝ’è
+	// ãƒžãƒˆãƒªã‚¯ã‚¹è¨­å®š
 	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // Šg‘åk¬
-	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z); // ‰ñ“]
-	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // •½sˆÚ“®
+	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // æ‹¡å¤§ç¸®å°
+	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z); // å›žè»¢
+	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // å¹³è¡Œç§»å‹•
 	w = s * r * t;
 	Renderer::SetWorldMatrix(w);
 
-	// ƒ}ƒeƒŠƒAƒ‹Ý’è
+	// ãƒžãƒ†ãƒªã‚¢ãƒ«è¨­å®š
 	MATERIAL material{};
 	material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	if (_mTexture)material.TextureEnable = true;
 	else material.TextureEnable = false;
 	Renderer::SetMaterial(material);
 
-	// ƒeƒNƒXƒ`ƒƒÝ’è
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
 	if (_mTexture) {
 		Renderer::GetDeviceContext()->PSSetShaderResources(0, 1, &_mTexture);
 	}
 
-	// ’¸“_ƒoƒbƒtƒ@Ý’è
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®š
 	UINT stride = sizeof(VERTEX_3D);
 	UINT offset = 0;
 	Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &_mVertexBuffer, &stride, &offset);
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWÝ’è
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
 	Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	// •`‰æ
+	// æç”»
 	Renderer::GetDeviceContext()->Draw(4, 0);
 
 	GameObject::Draw();

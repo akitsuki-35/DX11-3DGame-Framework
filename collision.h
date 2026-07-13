@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Collision.h
-*	@brief	 : “–‚½‚è”»’è
+*	@brief	 : å½“ãŸã‚Šåˆ¤å®š
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/29
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/29
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef COLLISION_H
@@ -13,9 +13,9 @@
 
 /*============================================================
 *	@namespace	: Collision
-*	@brief		: Õ“Ë–h~—pƒl[ƒ€ƒXƒy[ƒX
+*	@brief		: è¡çªé˜²æ­¢ç”¨ãƒãƒ¼ãƒ ã‚¹ãƒšãƒ¼ã‚¹
 * 
-* @¦using namespace‚µ‚È‚¢‚±‚Æ
+* ã€€â€»using namespaceã—ãªã„ã“ã¨
 *============================================================*/
 namespace Collision {
 	class Circle;
@@ -24,14 +24,14 @@ namespace Collision {
 
 /*============================================================
 *	@class	: CollisionBase
-*	@brief	: ƒRƒŠƒWƒ‡ƒ“Šî’êƒNƒ‰ƒX
+*	@brief	: ã‚³ãƒªã‚¸ãƒ§ãƒ³åŸºåº•ã‚¯ãƒ©ã‚¹
 *============================================================*/
 class CollisionBase
 {
 protected:
-	DirectX::XMFLOAT2 position{}; // ƒRƒŠƒWƒ‡ƒ“¶ãÀ•W;
-	DirectX::XMFLOAT2 center{}; // ƒRƒŠƒWƒ‡ƒ“’†SÀ•W
-	DirectX::XMFLOAT2 collisionSize{}; // ƒRƒŠƒWƒ‡ƒ“ƒTƒCƒY
+	DirectX::XMFLOAT2 position{}; // ã‚³ãƒªã‚¸ãƒ§ãƒ³å·¦ä¸Šåº§æ¨™;
+	DirectX::XMFLOAT2 center{}; // ã‚³ãƒªã‚¸ãƒ§ãƒ³ä¸­å¿ƒåº§æ¨™
+	DirectX::XMFLOAT2 collisionSize{}; // ã‚³ãƒªã‚¸ãƒ§ãƒ³ã‚µã‚¤ã‚º
 
 public:
 	CollisionBase(const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& collisionSize)
@@ -40,38 +40,38 @@ public:
 	}
 	virtual ~CollisionBase() = default;
 
-	// ’†SÀ•WXV
+	// ä¸­å¿ƒåº§æ¨™æ›´æ–°
 	void SetCenter(const DirectX::XMFLOAT2& offset) {
 		center = { offset.x + collisionSize.x / 2, offset.y + collisionSize.y / 2 };
 	}
 
-	// ƒTƒCƒYXV
+	// ã‚µã‚¤ã‚ºæ›´æ–°
 	void SetSize(const DirectX::XMFLOAT2& size) {
 		collisionSize = size;
 		SetCenter(position);
 	}
 
-	// ƒRƒŠƒWƒ‡ƒ“ˆÚ“®
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ç§»å‹•
 	virtual void Move(const DirectX::XMFLOAT2& currentPos) {
 		DirectX::XMFLOAT2 newPos = currentPos;
 		SetCenter(newPos);
 	}
 
-	// ’†SÀ•Wæ“¾
+	// ä¸­å¿ƒåº§æ¨™å–å¾—
 	virtual const DirectX::XMFLOAT2& GetCenter() const { return center; }
 
-	// ŠeíƒRƒŠƒWƒ‡ƒ“‚Æ‚Ì“–‚½‚è”»’èiŒp³æ‚Åˆ—j
+	// å„ç¨®ã‚³ãƒªã‚¸ãƒ§ãƒ³ã¨ã®å½“ãŸã‚Šåˆ¤å®šï¼ˆç¶™æ‰¿å…ˆã§å‡¦ç†ï¼‰
 	virtual bool IsOverlap(const Collision::Circle*) const { return false; }
 	virtual bool IsOverlap(const Collision::Box*) const { return false; }
 	virtual bool IsOverlap(const DirectX::XMFLOAT2&) const { return false; }
 
-	// •`‰æiƒfƒoƒbƒO—pj
+	// æç”»ï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ï¼‰
 	virtual void Draw() const {}
 };
 
 /*============================================================
 *	@class	: Circle
-*	@brief	: ƒT[ƒNƒ‹ƒRƒŠƒWƒ‡ƒ“
+*	@brief	: ã‚µãƒ¼ã‚¯ãƒ«ã‚³ãƒªã‚¸ãƒ§ãƒ³
 *============================================================*/
 class Collision::Circle : public CollisionBase
 {
@@ -91,23 +91,23 @@ public:
 		}
 	}
 
-	// ŠeíƒRƒŠƒWƒ‡ƒ“‚Æ‚Ì“–‚½‚è”»’è
+	// å„ç¨®ã‚³ãƒªã‚¸ãƒ§ãƒ³ã¨ã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsOverlap(const Circle* target) const override;
 	bool IsOverlap(const Box* target) const override;
 	virtual bool IsOverlap(const DirectX::XMFLOAT2& target) const override;
 
-	// ƒRƒŠƒWƒ‡ƒ“ˆÚ“®
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ç§»å‹•
 	virtual void Move(const DirectX::XMFLOAT2& currentPos) override {
 		SetCenter(currentPos);
 	}
 
-	// •`‰æiƒfƒoƒbƒO—pj
+	// æç”»ï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ï¼‰
 	void Draw() const override;
 };
 
 /*============================================================
 *	@class	: Box
-*	@brief	: ƒ{ƒbƒNƒXƒRƒŠƒWƒ‡ƒ“
+*	@brief	: ãƒœãƒƒã‚¯ã‚¹ã‚³ãƒªã‚¸ãƒ§ãƒ³
 *============================================================*/
 class Collision::Box : public CollisionBase
 {
@@ -124,12 +124,12 @@ public:
 		max = { center.x + (collisionSize.x / 2), center.y + (collisionSize.y / 2) };
 	}
 
-	// ŠeíƒRƒŠƒWƒ‡ƒ“‚Æ‚Ì“–‚½‚è”»’è
+	// å„ç¨®ã‚³ãƒªã‚¸ãƒ§ãƒ³ã¨ã®å½“ãŸã‚Šåˆ¤å®š
 	bool IsOverlap(const Circle* target) const override;
 	bool IsOverlap(const Box* target) const override;
 	virtual bool IsOverlap(const DirectX::XMFLOAT2& target) const override;
 
-	// ƒRƒŠƒWƒ‡ƒ“ˆÚ“®
+	// ã‚³ãƒªã‚¸ãƒ§ãƒ³ç§»å‹•
 	void Move(const DirectX::XMFLOAT2& currentPos) override {
 		float x = position.x - currentPos.x;
 		float y = position.y - currentPos.y;
@@ -145,7 +145,7 @@ public:
 		max = { center.x + (collisionSize.x / 2), center.y + (collisionSize.y / 2) };
 	}
 
-	// •`‰æiƒfƒoƒbƒO—pj
+	// æç”»ï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ï¼‰
 	void Draw() const override;
 };
 

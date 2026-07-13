@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Direct3D.cpp
-*	@brief	 : DirectX‰Šú‰»
+*	@brief	 : DirectXåˆæœŸåŒ–
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/12
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/12
 *	@updated : 2026/06/02
 *============================================================*/
 #include "Direct3D.h"
@@ -13,9 +13,9 @@
 #pragma comment(lib, "dxgi.lib")
 
 /*------------------------------------------------------------
-	ƒOƒ[ƒoƒ‹•Ï”’è‹`
+	ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°å®šç¾©
 ------------------------------------------------------------*/
-//ŠeŽíƒCƒ“ƒ^[ƒtƒF[ƒX
+//å„ç¨®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 static ID3D11Device* g_pDevice = nullptr;
 static ID3D11DeviceContext* g_pDeviceContext = nullptr;
 static IDXGISwapChain* g_pSwapChain = nullptr;
@@ -25,7 +25,7 @@ static ID3D11BlendState* g_BlendStateAdd = nullptr;
 
 static ID3D11DepthStencilState* g_DepthStencilStateDepthDisable = nullptr;
 
-//ƒoƒbƒNƒoƒbƒtƒ@ŠÖ˜A
+//ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡é–¢é€£
 static ID3D11RenderTargetView* g_pRenderTargetView = nullptr;
 static ID3D11Texture2D* g_pDepthStencilBuffer = nullptr;
 static ID3D11DepthStencilView* g_pDepthStencilView = nullptr;
@@ -33,19 +33,19 @@ static D3D11_TEXTURE2D_DESC g_BackBufferDesc{};
 static D3D11_VIEWPORT g_Viewport{};
 
 /*------------------------------------------------------------
-	ƒ[ƒJƒ‹ŠÖ” ƒvƒƒgƒ^ƒCƒvéŒ¾
+	ãƒ­ãƒ¼ã‚«ãƒ«é–¢æ•° ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 ------------------------------------------------------------*/
 bool ConfigureBackBuffer();
 void ReleaseBackBuffer();
 
 bool Direct3DInitialize(HWND hWnd)
 {
-	//ƒfƒoƒCƒXAƒXƒƒbƒvƒ`ƒF[ƒ“AƒRƒ“ƒeƒLƒXƒg¶¬
+	//ãƒ‡ãƒã‚¤ã‚¹ã€ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã€ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆç”Ÿæˆ
 	DXGI_SWAP_CHAIN_DESC swapChainDesc{};
 	swapChainDesc.Windowed = TRUE;
 	swapChainDesc.BufferCount = 2;
 
-	//ƒEƒBƒ“ƒhƒEƒTƒCƒY‚É‡‚í‚¹‚ÄŽ©“®“I‚ÉÝ’è‚³‚ê‚é
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã«åˆã‚ã›ã¦è‡ªå‹•çš„ã«è¨­å®šã•ã‚Œã‚‹
 		//swap_chain_desc.BufferDesc.Width = 0;
 		//swap_chain_desc.BufferDesc.Height = 0;
 
@@ -87,21 +87,21 @@ bool Direct3DInitialize(HWND hWnd)
 
 	if (FAILED(hr))
 	{
-		MessageBox(hWnd, "Direct3D‚Ì‰Šú‰»‚ÉŽ¸”s‚µ‚Ü‚µ‚½", "ƒGƒ‰[", MB_OK);
+		MessageBox(hWnd, "Direct3Dã®åˆæœŸåŒ–ã«å¤±æ•—ã—ã¾ã—ãŸ", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 		return false;
 	}
 
 	if (!ConfigureBackBuffer())
 	{
-		MessageBox(hWnd, "ƒoƒbƒNƒoƒbƒtƒ@‚ÌÝ’è‚ÉŽ¸”s‚µ‚Ü‚µ‚½", "ƒGƒ‰[", MB_OK);
+		MessageBox(hWnd, "ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®è¨­å®šã«å¤±æ•—ã—ã¾ã—ãŸ", "ã‚¨ãƒ©ãƒ¼", MB_OK);
 		return false;
 	}
 
-	//[“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgÝ’è
+	//æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
 	D3D11_DEPTH_STENCIL_DESC dsd = {};
 	dsd.DepthFunc = D3D11_COMPARISON_LESS;
 	dsd.StencilEnable = FALSE;
-	dsd.DepthEnable = FALSE; //–³Œø‰»
+	dsd.DepthEnable = FALSE; //ç„¡åŠ¹åŒ–
 	dsd.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
 
 	g_pDevice->CreateDepthStencilState(&dsd, &g_DepthStencilStateDepthDisable);
@@ -127,13 +127,13 @@ void Direct3DClear()
 	g_pDeviceContext->ClearRenderTargetView(g_pRenderTargetView, clearColor);
 	g_pDeviceContext->ClearDepthStencilView(g_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-	//ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚ÆƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒrƒ…[‚ÌÝ’è
+	//ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã¨ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã®è¨­å®š
 	g_pDeviceContext->OMSetRenderTargets(1, &g_pRenderTargetView, g_pDepthStencilView);
 }
 
 void Direct3DPresent()
 {
-	//ƒXƒƒbƒvƒ`ƒF[ƒ“‚Ì•\Ž¦
+	//ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã®è¡¨ç¤º
 	g_pSwapChain->Present(1, 0);
 }
 
@@ -187,29 +187,29 @@ bool ConfigureBackBuffer()
 
 	ID3D11Texture2D* backBufferPointer = nullptr;
 
-	// ƒoƒbƒNƒoƒbƒtƒ@‚ÌŽæ“¾
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
 	hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBufferPointer);
 
 	if (FAILED(hr)) {
-		dOst::dout << "ƒoƒbƒNƒoƒbƒtƒ@‚ÌŽæ“¾‚ÉŽ¸”s‚µ‚Ü‚µ‚½" << std::endl;
+		dOst::dout << "ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸ" << std::endl;
 		return false;
 	}
 
-	// ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚Ì¶¬
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	hr = g_pDevice->CreateRenderTargetView(backBufferPointer, nullptr, &g_pRenderTargetView);
 
 	if (FAILED(hr)) {
 		backBufferPointer->Release();
-		dOst::dout << "ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚Ì¶¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½" << std::endl;
+		dOst::dout << "ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆã«å¤±æ•—ã—ã¾ã—ãŸ" << std::endl;
 		return false;
 	}
 
-	// ƒoƒbƒNƒoƒbƒtƒ@‚Ìó‘Ôiî•ñj‚ðŽæ“¾
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®çŠ¶æ…‹ï¼ˆæƒ…å ±ï¼‰ã‚’å–å¾—
 	backBufferPointer->GetDesc(&g_BackBufferDesc);
 
-	backBufferPointer->Release(); // ƒoƒbƒNƒoƒbƒtƒ@‚Ìƒ|ƒCƒ“ƒ^‚Í•s—v‚È‚Ì‚Å‰ð•ú
+	backBufferPointer->Release(); // ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒã‚¤ãƒ³ã‚¿ã¯ä¸è¦ãªã®ã§è§£æ”¾
 
-	// ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚Ì¶¬
+	// ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	D3D11_TEXTURE2D_DESC depthStencilDesc{};
 	depthStencilDesc.Width = g_BackBufferDesc.Width;
 	depthStencilDesc.Height = g_BackBufferDesc.Height;
@@ -225,11 +225,11 @@ bool ConfigureBackBuffer()
 	hr = g_pDevice->CreateTexture2D(&depthStencilDesc, nullptr, &g_pDepthStencilBuffer);
 
 	if (FAILED(hr)) {
-		dOst::dout << "ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚Ì¶¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½" << std::endl;
+		dOst::dout << "ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆã«å¤±æ•—ã—ã¾ã—ãŸ" << std::endl;
 		return false;
 	}
 
-	// ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒrƒ…[‚Ì¶¬
+	// ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	D3D11_DEPTH_STENCIL_VIEW_DESC depth_stencil_view_desc{};
 	depth_stencil_view_desc.Format = depthStencilDesc.Format;
 	depth_stencil_view_desc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
@@ -238,11 +238,11 @@ bool ConfigureBackBuffer()
 	hr = g_pDevice->CreateDepthStencilView(g_pDepthStencilBuffer, &depth_stencil_view_desc, &g_pDepthStencilView);
 
 	if (FAILED(hr)) {
-		dOst::dout << "ƒfƒvƒXƒXƒeƒ“ƒVƒ‹ƒrƒ…[‚Ì¶¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½" << std::endl;
+		dOst::dout << "ãƒ‡ãƒ—ã‚¹ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆã«å¤±æ•—ã—ã¾ã—ãŸ" << std::endl;
 		return false;
 	}
 
-	//ƒrƒ…[ƒ|[ƒg‚ÌÝ’è
+	//ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
 	g_Viewport.TopLeftX = 0.0f;
 	g_Viewport.TopLeftY = 0.0f;
 	g_Viewport.Width = (FLOAT)g_BackBufferDesc.Width;
@@ -252,7 +252,7 @@ bool ConfigureBackBuffer()
 
 	g_pDeviceContext->RSSetViewports(1, &g_Viewport);
 
-	// ƒuƒŒƒ“ƒhƒXƒe[ƒgÝ’è
+	// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
 	D3D11_BLEND_DESC bd = {};
 	bd.AlphaToCoverageEnable = FALSE;
 	bd.IndependentBlendEnable = FALSE;
@@ -267,7 +267,7 @@ bool ConfigureBackBuffer()
 
 	g_pDevice->CreateBlendState(&bd, &g_BlendStateMultiply);
 
-	// ‰ÁŽZ‡¬
+	// åŠ ç®—åˆæˆ
 	bd.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
 	g_pDevice->CreateBlendState(&bd, &g_BlendStateAdd);
 

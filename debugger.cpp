@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : debugger.cpp
-*	@brief	 : ImGuiƒfƒoƒbƒK[
+*	@brief	 : ImGuiãƒ‡ãƒãƒƒã‚¬ãƒ¼
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/05/21
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/05/21
 *	@updated : 2026/06/02
 *============================================================*/
 #if defined(DEBUG) || defined(_DEBUG)
@@ -15,42 +15,42 @@
 #include <imgui_impl_win32.h>
 #include <imgui_impl_dx11.h>
 
-// ƒfƒoƒbƒO‘ÎÛ‚ÌƒCƒ“ƒNƒ‹[ƒh
+// ãƒ‡ãƒãƒƒã‚°å¯¾è±¡ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 #include "cursor.h"
 
 /*============================================================
-	g‚¢•û
+	ä½¿ã„æ–¹
 
-	ƒwƒbƒ_‘¤‚ÉƒfƒoƒbƒOƒEƒBƒ“ƒhƒEŠÖ”‚ÌéŒ¾‚ğ‹Lq‚µAcpp‘¤‚Å’è‹`
-	Initialize, Finalize, Draw‚Ì“à•”‚ÆUpdate‚ÌImGui::NewFrame();‚æ‚èã‚Ìs‚Ì•ÏXŒµ‹Ö
+	ãƒ˜ãƒƒãƒ€å´ã«ãƒ‡ãƒãƒƒã‚°ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é–¢æ•°ã®å®£è¨€ã‚’è¨˜è¿°ã—ã€cppå´ã§å®šç¾©
+	Initialize, Finalize, Drawã®å†…éƒ¨ã¨Updateã®ImGui::NewFrame();ã‚ˆã‚Šä¸Šã®è¡Œã®å¤‰æ›´å³ç¦
 
-	ƒfƒoƒbƒOŠÖ”‚ÍˆÈ‰º‚Ì‘®‚Å‹Lq‚·‚é
-	•K‚¸Begin‚ÆEnd‚Å‹²‚Ş‚±‚Æi”ò‚Ñ‚Ü‚·j
+	ãƒ‡ãƒãƒƒã‚°é–¢æ•°ã¯ä»¥ä¸‹ã®æ›¸å¼ã§è¨˜è¿°ã™ã‚‹
+	å¿…ãšBeginã¨Endã§æŒŸã‚€ã“ã¨ï¼ˆé£›ã³ã¾ã™ï¼‰
 
-	const void Debugger::[ŠÖ”–¼]()
+	const void Debugger::[é–¢æ•°å]()
 	{
 		ImGui::Begin("Cursor");
 
-		// ˆ—“à—e
+		// å‡¦ç†å†…å®¹
 
 		ImGui::End();
 	}
 ============================================================*/
 const void Debugger::Initialize(HWND hwnd) const
 {
-	// ƒo[ƒWƒ‡ƒ“ƒ`ƒFƒbƒN
+	// ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãƒã‚§ãƒƒã‚¯
 	IMGUI_CHECKVERSION();
 
-	// ƒRƒ“ƒeƒLƒXƒgì¬
+	// ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆä½œæˆ
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 
-	// win32—p‚Ì‰Šú‰»
+	// win32ç”¨ã®åˆæœŸåŒ–
 	ImGui_ImplWin32_Initialize(hwnd);
 
-	// DirectX11—p‚Ì‰Šú‰»
+	// DirectX11ç”¨ã®åˆæœŸåŒ–
 	ImGui_ImplDX11_Initialize(Direct3DGetDevice(), Direct3DGetDeviceContext());
 }
 
@@ -67,7 +67,7 @@ const void Debugger::Update() const
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	// ===== ƒfƒoƒbƒOƒEƒBƒ“ƒhƒE‚Ì’Ç‰Áˆ— =====
+	// ===== ãƒ‡ãƒãƒƒã‚°ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¿½åŠ å‡¦ç† =====
 
 	GetInstance().CursorDebug();
 	GetInstance().CursorColorDebug();

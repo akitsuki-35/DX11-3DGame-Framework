@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : camera.cpp
-*	@brief	 : ƒJƒƒ‰
+*	@brief	 : ã‚«ãƒ¡ãƒ©
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/26
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/26
 *	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
@@ -50,12 +50,12 @@ void Camera::Update()
 
 void Camera::Draw() const
 {
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñİ’è
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—è¨­å®š
 	XMMATRIX projection = XMMatrixPerspectiveFovLH(1.0f,
 		static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 1.0f, 1000.0f);
 	Renderer::SetProjectionMatrix(projection);
 
-	// ƒrƒ…[s—ñİ’è
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—è¨­å®š
 	Renderer::SetViewMatrix(mViewMatrix);
 }
 

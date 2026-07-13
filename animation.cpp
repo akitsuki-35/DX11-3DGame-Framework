@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : animation.cpp
-*	@brief	 : ƒXƒvƒ‰ƒCƒgƒAƒjƒ[ƒVƒ‡ƒ“
+*	@brief	 : ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/01
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/01
 *	@updated : 2026/06/02
 *============================================================*/
 #include "animation.h"
@@ -14,22 +14,22 @@ using namespace DirectX;
 
 void Animation::Update(double elapsedTime)
 {
-	// ’â~’†‚È‚ç‰½‚à‚µ‚È‚¢
+	// åœæ­¢ä¸­ãªã‚‰ä½•ã‚‚ã—ãªã„
 	if (isStoped) return;
 
 	accumulatedTime += elapsedTime;
 
-	// Œ»İ‚Ìƒpƒ^[ƒ“ID‚Æƒpƒ^[ƒ“‘”‚ğæ“¾
+	// ç¾åœ¨ã®ãƒ‘ã‚¿ãƒ¼ãƒ³IDã¨ãƒ‘ã‚¿ãƒ¼ãƒ³ç·æ•°ã‚’å–å¾—
 	int currentPattern = pSpriteSheet->GetCurrentPattern();
 	int patternMax = pSpriteSheet->GetPatternMax();
 
 	if (accumulatedTime >= perSecond) {
-		// ƒpƒ^[ƒ“XV
+		// ãƒ‘ã‚¿ãƒ¼ãƒ³æ›´æ–°
 		pSpriteSheet->SetPattern((currentPattern += 1) % patternMax);
 
-		// ÅŒã‚Ìƒpƒ^[ƒ“‚É“’B
+		// æœ€å¾Œã®ãƒ‘ã‚¿ãƒ¼ãƒ³ã«åˆ°é”
 		if (currentPattern == patternMax - 1) {
-			// ƒ‹[ƒvƒtƒ‰ƒO‚ªoff‚È‚çƒAƒjƒ[ƒVƒ‡ƒ“’â~
+			// ãƒ«ãƒ¼ãƒ—ãƒ•ãƒ©ã‚°ãŒoffãªã‚‰ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åœæ­¢
 			if (!isLoop) isStoped = true;
 		}
 

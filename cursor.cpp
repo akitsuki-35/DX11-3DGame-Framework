@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Cursor.cpp
-*	@brief	 : ƒ}ƒEƒXƒJ[ƒ\ƒ‹
+*	@brief	 : ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/05/20
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/05/20
 *	@updated : 2026/06/02
 *============================================================*/
 #include "Cursor.h"
@@ -12,7 +12,7 @@
 using namespace DirectX;
 
 /*------------------------------------------------------------
-	ƒƒ“ƒo•Ï”’è‹`
+	ãƒ¡ãƒ³ãƒå¤‰æ•°å®šç¾©
 ------------------------------------------------------------*/
 XMFLOAT2 Cursor::position{};
 std::list<std::unique_ptr<Texture>> textures;
@@ -20,7 +20,7 @@ CursorState Cursor::cursorState{ NONE, { 0.0f, 0.0f, 0.0f, 0.0f } };
 
 const void Cursor::Update(double elapsedTime)
 {
-    // ƒ}ƒEƒXÀ•W‚Ìæ“¾
+    // ãƒã‚¦ã‚¹åº§æ¨™ã®å–å¾—
     MouseState state{};
     GetMouseState(&state);
     position.x = static_cast<float>(state.x);
@@ -33,17 +33,17 @@ void Cursor::SetColor(const DirectX::XMFLOAT4& color)
 }
 
 /*------------------------------------------------------------
-	¶ƒ{ƒ^ƒ“‚Ì”»’è
+	å·¦ãƒœã‚¿ãƒ³ã®åˆ¤å®š
 ------------------------------------------------------------*/
 bool Cursor::IsLeftButtonPressed()
 {
-    // ‘OƒtƒŒ[ƒ€‚Åƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚©”»’è
+    // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã§ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãŸã‹åˆ¤å®š
     if (cursorState.current.leftButton) {
-        // last‚Étrue‚ğŠi”[
+        // lastã«trueã‚’æ ¼ç´
         cursorState.last.leftButton = true;
     }
 
-    // ƒ}ƒEƒXó‘Ô‚Ìæ“¾
+    // ãƒã‚¦ã‚¹çŠ¶æ…‹ã®å–å¾—
     MouseState state{};
     GetMouseState(&state);
     cursorState.current.leftButton = state.leftButton;
@@ -53,13 +53,13 @@ bool Cursor::IsLeftButtonPressed()
 
 bool Cursor::IsLeftButtonTrigger()
 {
-    // ‘OƒtƒŒ[ƒ€‚Åƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚©”»’è
+    // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã§ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãŸã‹åˆ¤å®š
     if (cursorState.current.leftButton) {
         cursorState.last.leftButton = true;
         return false;
     }
 
-    // ƒ}ƒEƒXó‘Ô‚Ìæ“¾
+    // ãƒã‚¦ã‚¹çŠ¶æ…‹ã®å–å¾—
     MouseState state{};
     GetMouseState(&state);
     cursorState.current.leftButton = state.leftButton;
@@ -69,12 +69,12 @@ bool Cursor::IsLeftButtonTrigger()
 
 bool Cursor::IsLeftButtonUp()
 {
-    // ƒ}ƒEƒXó‘Ô‚Ìæ“¾
+    // ãƒã‚¦ã‚¹çŠ¶æ…‹ã®å–å¾—
     MouseState state{};
     GetMouseState(&state);
     cursorState.current.leftButton = state.leftButton;
 
-    // ‘OƒtƒŒ[ƒ€‚Åƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚©”»’è
+    // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã§ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãŸã‹åˆ¤å®š
     if (!cursorState.current.leftButton) {
         if (cursorState.last.leftButton) {
             return true;
@@ -88,16 +88,16 @@ bool Cursor::IsLeftButtonUp()
 }
 
 /*------------------------------------------------------------
-	‰Eƒ{ƒ^ƒ“‚Ì”»’è
+	å³ãƒœã‚¿ãƒ³ã®åˆ¤å®š
 ------------------------------------------------------------*/
 bool Cursor::IsRightButtonPressed()
 {
-    // ‘OƒtƒŒ[ƒ€‚Åƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚©”»’è
+    // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã§ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãŸã‹åˆ¤å®š
     if (cursorState.current.rightButton) {
         cursorState.last.rightButton = true;
     }
 
-    // ƒ}ƒEƒXó‘Ô‚Ìæ“¾
+    // ãƒã‚¦ã‚¹çŠ¶æ…‹ã®å–å¾—
     MouseState state{};
     GetMouseState(&state);
     cursorState.current.rightButton = state.rightButton;
@@ -107,13 +107,13 @@ bool Cursor::IsRightButtonPressed()
 
 bool Cursor::IsRightButtonTrigger()
 {
-    // ‘OƒtƒŒ[ƒ€‚Åƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚©”»’è
+    // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã§ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãŸã‹åˆ¤å®š
     if (cursorState.current.rightButton) {
         cursorState.last.rightButton = true;
         return false;
     }
 
-    // ƒ}ƒEƒXó‘Ô‚Ìæ“¾
+    // ãƒã‚¦ã‚¹çŠ¶æ…‹ã®å–å¾—
     MouseState state{};
     GetMouseState(&state);
     cursorState.current.rightButton = state.rightButton;
@@ -123,12 +123,12 @@ bool Cursor::IsRightButtonTrigger()
 
 bool Cursor::IsRightButtonUp()
 {
-    // ƒ}ƒEƒXó‘Ô‚Ìæ“¾
+    // ãƒã‚¦ã‚¹çŠ¶æ…‹ã®å–å¾—
     MouseState state{};
     GetMouseState(&state);
     cursorState.current.rightButton = state.rightButton;
 
-    // ‘OƒtƒŒ[ƒ€‚Åƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚©”»’è
+    // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã§ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãŸã‹åˆ¤å®š
     if (!cursorState.current.rightButton) {
         if (cursorState.last.rightButton) {
             return true;

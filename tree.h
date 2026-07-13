@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : tree.h
-*	@brief	 : –Ø‚Ìƒrƒ‹ƒ{[ƒh
+*	@brief	 : æœ¨ã®ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/06/02
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/06/02
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef TREE_H
@@ -13,17 +13,17 @@
 
 /*============================================================
 *	@class	: Tree
-*	@brief	: –Ø‚Ìƒrƒ‹ƒ{[ƒh•`‰æ
+*	@brief	: æœ¨ã®ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰æç”»
 *============================================================*/
 class Tree : public GameObject
 {
 private:
-	ID3D11Buffer* _mVertexBuffer{}; // ’¸“_ƒoƒbƒtƒ@
-	ID3D11InputLayout* _mVertexLayout{}; // ’¸“_ƒŒƒCƒAƒEƒg
-	ID3D11VertexShader* _mVertexShader{}; // ’¸“_ƒVƒF[ƒ_[
-	ID3D11PixelShader* _mPixelShader{}; // ƒsƒNƒZƒ‹ƒVƒF[ƒ_[
+	ID3D11Buffer* _mVertexBuffer{}; // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+	ID3D11InputLayout* _mVertexLayout{}; // é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
+	ID3D11VertexShader* _mVertexShader{}; // é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
+	ID3D11PixelShader* _mPixelShader{}; // ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 
-	ID3D11ShaderResourceView* _mTexture{}; // ƒeƒNƒXƒ`ƒƒ
+	ID3D11ShaderResourceView* _mTexture{}; // ãƒ†ã‚¯ã‚¹ãƒãƒ£
 
 public:
 	Tree() = default;

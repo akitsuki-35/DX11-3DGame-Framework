@@ -1,27 +1,32 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : SystemTimer.h
-*	@brief	 : ƒQ[ƒ€“àŠÔ§Œä
+*	@brief	 : ã‚²ãƒ¼ãƒ å†…æ™‚é–“åˆ¶å¾¡
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/13
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/13
 *	@updated : 2026/07/07
 *============================================================*/
-#ifndef SYSTEMTIMER_H
-#define SYSTEMTIMER_H
+#pragma once
 
 #include <Windows.h>
 
 namespace System {
 /*============================================================
 *	@class	: Timer
-*	@brief	: ƒVƒXƒeƒ€ƒ^ƒCƒ}[
+*	@brief	: ã‚·ã‚¹ãƒ†ãƒ ã‚¿ã‚¤ãƒãƒ¼
 *============================================================*/
-	class Timer
+	class Timer final
 	{
-	private:
-		DWORD mExecLastTime{};
-		DWORD mCurrentTime{};
+	/*--------------------------------------------------
+		Singletonç”¨
+	----------------------------------------------------*/
+	public:
+		static Timer& getInstance() {
+			static Timer instance;
+			return instance;
+		}
 
+	private:
 		Timer() = default;
 		Timer(const Timer&) = delete;
 
@@ -31,15 +36,15 @@ namespace System {
 		Timer& operator=(Timer&&) = delete;
 		~Timer() {};
 
-	public:
-		static Timer& getInstance() {
-			static Timer instance;
-			return instance;
-		}
+	/*--------------------------------------------------
+		ãƒ¡ãƒ³ãƒå¤‰æ•°ãƒ»ãƒ¡ãƒ³ãƒé–¢æ•°
+	----------------------------------------------------*/
+	private:
+		DWORD mExecLastTime{};
+		DWORD mCurrentTime{};
 
+	public:
 		void Initialize();
 		bool Tick(double frameRate);
 	};
 }
-
-#endif // SYSTEMTIMER_H

@@ -4,21 +4,27 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/07
-*	@updated : 2026/07/07
+*	@updated : 2026/07/13
 *============================================================*/
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#pragma once
 
 #include "Config.h"
 /*============================================================
 *	@class	: Application
 *	@brief	: アプリケーション
 *============================================================*/
-	class Application
+	class Application final
 	{
-	private:
-		bool mPaused{ false }; // ポーズフラグ
+	/*--------------------------------------------------
+		Singleton用
+	----------------------------------------------------*/
+	public:
+		static Application& getInstance() {
+			static Application instance;
+			return instance;
+		}
 
+	private:
 		Application() = default;
 		Application(const Application&) = delete;
 
@@ -28,13 +34,12 @@
 		Application& operator=(Application&&) = delete;
 		~Application() {};
 
-	public:
-		static Application& getInstance() {
-			static Application instance;
-			return instance;
-		}
+	/*--------------------------------------------------
+		メンバ変数・メンバ関数
+	----------------------------------------------------*/
+	private:
+		bool mPaused{ false }; // ポーズフラグ
 
+	public:
 		int Run() const;
 	};
-
-#endif // APPLICATION_H

@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : game.h
-*	@brief	 : ƒQ[ƒ€ƒV[ƒ“
+*	@brief	 : ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/03/28
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/03/28
 *	@updated : 2026/06/23
 *============================================================*/
 #ifndef GAME_H
@@ -13,13 +13,13 @@
 #include "gameobject.h"
 
 /*------------------------------------------------------------
-	‘O•ûéŒ¾
+	å‰æ–¹å®£è¨€
 ------------------------------------------------------------*/
 class GameObject;
 
 /*============================================================
 *	@class	: Game
-*	@brief	: ƒQ[ƒ€ƒV[ƒ“iScene‚ğŒp³j
+*	@brief	: ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ï¼ˆSceneã‚’ç¶™æ‰¿ï¼‰
 *============================================================*/
 class Game : public Scene
 {
@@ -32,7 +32,7 @@ public:
 	void Update(double elapsedTime) override;
 	void Draw() const override;
 
-	template <typename T> // ƒeƒ“ƒvƒŒ[ƒgŠÖ”
+	template <typename T> // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
 	static T* AddGameObject() {
 		T* gameObject = new T();
 		gameObject->Initialize();
@@ -41,10 +41,10 @@ public:
 		return gameObject;
 	}
 
-	template <typename T> // ƒeƒ“ƒvƒŒ[ƒgŠÖ”
+	template <typename T> // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
 	static T* GetGameObject() {
 		for (GameObject* gameObject : gameObjects) {
-			// RTTIiÀsŒ^î•ñj
+			// RTTIï¼ˆå®Ÿè¡Œæ™‚å‹æƒ…å ±ï¼‰
 			T* find = dynamic_cast<T*>(gameObject);
 			if (find) return find;
 		}
@@ -55,7 +55,7 @@ public:
 	static std::vector<T*> GetGameObjects() {
 		std::vector<T*> objects;
 		for (GameObject* gameObject : gameObjects) {
-			// RTTIiÀsŒ^î•ñj
+			// RTTIï¼ˆå®Ÿè¡Œæ™‚å‹æƒ…å ±ï¼‰
 			T* find = dynamic_cast<T*>(gameObject);
 			if (find != nullptr) {
 				objects.push_back(find);

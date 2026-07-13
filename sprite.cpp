@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Sprite.cpp
-*	@brief	 : ƒXƒvƒ‰ƒCƒg•`‰æ
+*	@brief	 : ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/01
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/01
 *	@updated : 2026/06/02
 *============================================================*/
 #include "Sprite.h"
@@ -13,23 +13,23 @@
 using namespace DirectX;
 
 /*------------------------------------------------------------
-	ƒƒ“ƒo•Ï”’è‹`
+	ãƒ¡ãƒ³ãƒå¤‰æ•°å®šç¾©
 ------------------------------------------------------------*/
 ID3D11Buffer* Sprite::pVertexBuffer{ nullptr };
 
 /*------------------------------------------------------------
-	’¸“_\‘¢‘Ì
+	é ‚ç‚¹æ§‹é€ ä½“
 ------------------------------------------------------------*/
 struct Vertex
 {
-	XMFLOAT3 position; // ’¸“_À•W
-	XMFLOAT4 color;	   // F
-	XMFLOAT2 texCoord; // UVÀ•W
+	XMFLOAT3 position; // é ‚ç‚¹åº§æ¨™
+	XMFLOAT4 color;	   // è‰²
+	XMFLOAT2 texCoord; // UVåº§æ¨™
 };
 
 const void Sprite::Initialize()
 {
-	// ’¸“_ƒoƒbƒtƒ@¶¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	D3D11_BUFFER_DESC bd = {};
 	bd.Usage = D3D11_USAGE_DYNAMIC;
 	bd.ByteWidth = sizeof(Vertex) * NUM_VERTEX;
@@ -45,27 +45,27 @@ const void Sprite::Finalize()
 }
 
 /*------------------------------------------------------------
-	ƒeƒNƒXƒ`ƒƒ•`‰æ
+	ãƒ†ã‚¯ã‚¹ãƒãƒ£æç”»
 ------------------------------------------------------------*/
 const void Sprite::Draw(Texture* pTexture, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, const float& rotate, const DirectX::XMFLOAT4& color)
 {
 	pTexture->SetTexture();
 
-	// ƒVƒF[ƒ_[‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Shader2DBeginLinear();
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚·‚é
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã™ã‚‹
 	D3D11_MAPPED_SUBRESOURCE msr;
 	Direct3DGetDeviceContext()->Map(pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 
-	// ’¸“_ƒoƒbƒtƒ@‚Ö‚Ì‰¼‘zƒ|ƒCƒ“ƒ^‚ğæ“¾
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ä»®æƒ³ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
 	Vertex* v = (Vertex*)msr.pData;
 
-	// ’¸“_î•ñ‚ğ‘‚«‚İ
+	// é ‚ç‚¹æƒ…å ±ã‚’æ›¸ãè¾¼ã¿
 	const float SCREEN_WIDTH = static_cast<float>(Direct3DGetBackBufferWidth());
 	const float SCREEN_HEIGHT = static_cast<float>(Direct3DGetBackBufferHeight());
 
-	//lŠpŒ`‚Ì•`‰æ
+	//å››è§’å½¢ã®æç”»
 	v[0].position = { position.x, position.y, 0.0f };
 	v[1].position = { position.x + size.x, position.y, 0.0f };
 	v[2].position = { position.x, position.y + size.y, 0.0f };
@@ -76,69 +76,69 @@ const void Sprite::Draw(Texture* pTexture, const DirectX::XMFLOAT2& position, co
 		v[i].color = color;
 	}
 
-	// ƒeƒNƒXƒ`ƒƒÀ•Wİ’è
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™è¨­å®š
 	v[0].texCoord = { 0.0f, 0.0f };
 	v[1].texCoord = { 1.0f, 0.0f };
 	v[2].texCoord = { 0.0f, 1.0f };
 	v[3].texCoord = { 1.0f, 1.0f };
 
-	// ’¸“_ƒoƒbƒtƒ@‚ÌƒƒbƒN‚ğ‰ğœ
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ãƒ­ãƒƒã‚¯ã‚’è§£é™¤
 	Direct3DGetDeviceContext()->Unmap(pVertexBuffer, 0);
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 	Direct3DGetDeviceContext()->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
 
-	// ’†SÀ•W‚ğZo
+	// ä¸­å¿ƒåº§æ¨™ã‚’ç®—å‡º
 	float centerX = position.x + size.x / 2;
 	float centerY = position.y + size.y / 2;
 
-	// ’†SÀ•W‚É•½sˆÚ“®¨‰ñ“]¨Œ³‚ÌÀ•W‚É•½sˆÚ“®
+	// ä¸­å¿ƒåº§æ¨™ã«å¹³è¡Œç§»å‹•â†’å›è»¢â†’å…ƒã®åº§æ¨™ã«å¹³è¡Œç§»å‹•
 	XMMATRIX transToCenter = XMMatrixTranslation(-centerX, -centerY, 0.0f);
 	XMMATRIX rot = XMMatrixRotationZ(-rotate);
 	XMMATRIX transBack = XMMatrixTranslation(centerX, centerY, 0.0f);
 
-	// ’¸“_ƒVƒF[ƒ_[‚Éƒ[ƒ‹ƒh•ÏŠ·s—ñ‚ğİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—ã‚’è¨­å®š
 	Shader2DSetWorldMatrix(transToCenter * rot * transBack);
 
-	// ’¸“_ƒVƒF[ƒ_[‚ÉƒvƒƒWƒFƒNƒVƒ‡ƒ“•ÏŠ·s—ñ‚ğİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³å¤‰æ›è¡Œåˆ—ã‚’è¨­å®š
 	Shader2DSetProjectionMatrix(XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
 	Shader2DSetColor({ 1.0f,1.0f,1.0f,1.0f });
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWİ’è
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
 	Direct3DGetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	// ƒ|ƒŠƒSƒ“•`‰æ–½—ß”­s
+	// ãƒãƒªã‚´ãƒ³æç”»å‘½ä»¤ç™ºè¡Œ
 	Direct3DGetDeviceContext()->Draw(NUM_VERTEX, 0);
 }
 
 /*------------------------------------------------------------
-	ƒXƒvƒ‰ƒCƒg•`‰æ
+	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
 ------------------------------------------------------------*/
 const void Sprite::Draw(SpriteSheet* pSpriteSheet, const int& patternNum, const DirectX::XMFLOAT2& position, DirectX::XMFLOAT2 size, const float& rotate, const DirectX::XMFLOAT4& color)
 {
 	pSpriteSheet->SetTexture();
 
-	// ƒVƒF[ƒ_[‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Shader2DBeginPoint();
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚·‚é
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã™ã‚‹
 	D3D11_MAPPED_SUBRESOURCE msr;
 	Direct3DGetDeviceContext()->Map(pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 
-	// ’¸“_ƒoƒbƒtƒ@‚Ö‚Ì‰¼‘zƒ|ƒCƒ“ƒ^‚ğæ“¾
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ä»®æƒ³ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
 	Vertex* v = (Vertex*)msr.pData;
 
-	// ’¸“_î•ñ‚ğ‘‚«‚İ
+	// é ‚ç‚¹æƒ…å ±ã‚’æ›¸ãè¾¼ã¿
 	const float SCREEN_WIDTH = static_cast<float>(Direct3DGetBackBufferWidth());
 	const float SCREEN_HEIGHT = static_cast<float>(Direct3DGetBackBufferHeight());
 
-	// UVƒpƒ^[ƒ“‚ÌƒTƒCƒYæ“¾
+	// UVãƒ‘ã‚¿ãƒ¼ãƒ³ã®ã‚µã‚¤ã‚ºå–å¾—
 	float patternWidth = static_cast<float>(pSpriteSheet->GetPatternSize().x);
 	float patternHeight = static_cast<float>(pSpriteSheet->GetPatternSize().y);
 
-	//lŠpŒ`‚Ì•`‰æ
+	//å››è§’å½¢ã®æç”»
 	v[0].position = { position.x, position.y, 0.0f };
 	v[1].position = { position.x + size.x, position.y, 0.0f };
 	v[2].position = { position.x, position.y + size.y, 0.0f };
@@ -149,7 +149,7 @@ const void Sprite::Draw(SpriteSheet* pSpriteSheet, const int& patternNum, const 
 		v[i].color = color;
 	}
 
-	// ƒeƒNƒXƒ`ƒƒ‚ÌƒTƒCƒYæ“¾
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚µã‚¤ã‚ºå–å¾—
 	float texWidth = static_cast<float>(pSpriteSheet->GetSize().x);
 	float texHeight = static_cast<float>(pSpriteSheet->GetSize().y);
 
@@ -161,39 +161,39 @@ const void Sprite::Draw(SpriteSheet* pSpriteSheet, const int& patternNum, const 
 	float u1 = (offsetX + patternWidth) / texWidth;
 	float v1 = (offsetY + patternHeight) / texHeight;
 
-	// ƒeƒNƒXƒ`ƒƒÀ•Wİ’è
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™è¨­å®š
 	v[0].texCoord = { u0, v0 };
 	v[1].texCoord = { u1, v0 };
 	v[2].texCoord = { u0, v1 };
 	v[3].texCoord = { u1, v1 };
 
-	// ’¸“_ƒoƒbƒtƒ@‚ÌƒƒbƒN‚ğ‰ğœ
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ãƒ­ãƒƒã‚¯ã‚’è§£é™¤
 	Direct3DGetDeviceContext()->Unmap(pVertexBuffer, 0);
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 	Direct3DGetDeviceContext()->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
 
-	// ’†SÀ•W‚ğZo
+	// ä¸­å¿ƒåº§æ¨™ã‚’ç®—å‡º
 	float centerX = position.x + size.x / 2;
 	float centerY = position.y + size.y / 2;
 
-	// ’†SÀ•W‚É•½sˆÚ“®¨‰ñ“]¨Œ³‚ÌÀ•W‚É•½sˆÚ“®
+	// ä¸­å¿ƒåº§æ¨™ã«å¹³è¡Œç§»å‹•â†’å›è»¢â†’å…ƒã®åº§æ¨™ã«å¹³è¡Œç§»å‹•
 	XMMATRIX transToCenter = XMMatrixTranslation(-centerX, -centerY, 0.0f);
 	XMMATRIX rot = XMMatrixRotationZ(-rotate);
 	XMMATRIX transBack = XMMatrixTranslation(centerX, centerY, 0.0f);
 
-	// ’¸“_ƒVƒF[ƒ_[‚Éƒ[ƒ‹ƒh•ÏŠ·s—ñ‚ğİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—ã‚’è¨­å®š
 	Shader2DSetWorldMatrix(transToCenter * rot * transBack);
 
-	// ’¸“_ƒVƒF[ƒ_[‚ÉƒvƒƒWƒFƒNƒVƒ‡ƒ“•ÏŠ·s—ñ‚ğİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³å¤‰æ›è¡Œåˆ—ã‚’è¨­å®š
 	Shader2DSetProjectionMatrix(XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
 	Shader2DSetColor({ 1.0f,1.0f,1.0f,1.0f });
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWİ’è
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
 	Direct3DGetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	// ƒ|ƒŠƒSƒ“•`‰æ–½—ß”­s
+	// ãƒãƒªã‚´ãƒ³æç”»å‘½ä»¤ç™ºè¡Œ
 	Direct3DGetDeviceContext()->Draw(NUM_VERTEX, 0);
 }

@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Rade.h
-*	@brief	 : ƒtƒF[ƒh§Œä
+*	@brief	 : ãƒ•ã‚§ãƒ¼ãƒ‰åˆ¶å¾¡
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/03/29
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/03/29
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef FADE_H
@@ -14,12 +14,12 @@ using namespace::DirectX;
 
 /*============================================================
 *	@class	: Fade
-*	@brief	: ƒtƒF[ƒh§Œä
+*	@brief	: ãƒ•ã‚§ãƒ¼ãƒ‰åˆ¶å¾¡
 *============================================================*/
 class Fade
 {
 public:
-	// ƒtƒF[ƒh‚Ì„ˆÚó‘Ô
+	// ãƒ•ã‚§ãƒ¼ãƒ‰ã®æ¨ç§»çŠ¶æ…‹
 	enum State
 	{
 		NONE,
@@ -32,9 +32,9 @@ public:
 private:
 	static class Texture* texture;
 	static State fadeState;
-	static double time; // ƒtƒF[ƒh‘ŠÔ
-	static double accumulatedtime; // ‘Œo‰ßŠÔ
-	static double startTime; // ƒtƒF[ƒhŠJnŠÔ
+	static double time; // ãƒ•ã‚§ãƒ¼ãƒ‰ç·æ™‚é–“
+	static double accumulatedtime; // ç·çµŒéæ™‚é–“
+	static double startTime; // ãƒ•ã‚§ãƒ¼ãƒ‰é–‹å§‹æ™‚é–“
 	static XMFLOAT4 color;
 
 	Fade() {}
@@ -53,7 +53,7 @@ public:
 	const void Update(double elapsedTime);
 	const void Draw();
 
-	// ƒtƒF[ƒhŠJn
+	// ãƒ•ã‚§ãƒ¼ãƒ‰é–‹å§‹
 	const void Start(const double& fadeTime, const bool& isFadeIn,
 		const XMFLOAT4& fadeColor = { 0.0f,0.0f,0.0f,1.0f });
 	const Fade::State GetState() { return fadeState; }

@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : transform.cpp
-*	@brief	 : ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+*	@brief	 : ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/05/19
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/05/19
 *	@updated : 2026/06/02
 *============================================================*/
 #include "main.h"
@@ -24,18 +24,18 @@ void Transform::Update()
 
 void Transform::Draw()
 {
-	// “ü—ÍƒŒƒCƒAƒEƒgİ’è
+	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
 	Renderer::GetDeviceContext()->IASetInputLayout(pVertexLayout);
 
-	// ƒVƒF[ƒ_[İ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼è¨­å®š
 	Renderer::GetDeviceContext()->VSSetShader(pVertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(pPixelShader, NULL, 0);
 
-	// ƒ}ƒgƒŠƒNƒXİ’è
+	// ãƒãƒˆãƒªã‚¯ã‚¹è¨­å®š
 	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(scale.x, scale.y, scale.z); // Šg‘åk¬
-	r = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z); // ‰ñ“]
-	t = XMMatrixTranslation(position.x, position.y, position.z); // •½sˆÚ“®
+	s = XMMatrixScaling(scale.x, scale.y, scale.z); // æ‹¡å¤§ç¸®å°
+	r = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z); // å›è»¢
+	t = XMMatrixTranslation(position.x, position.y, position.z); // å¹³è¡Œç§»å‹•
 	w = s * r * t;
 	Renderer::SetWorldMatrix(w);
 }

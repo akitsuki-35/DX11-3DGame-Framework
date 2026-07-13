@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : gameobject.h
-*	@brief	 : 3DƒQ[ƒ€ƒIƒuƒWƒFƒNƒgŠî’êƒNƒ‰ƒX
+*	@brief	 : 3Dã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºåº•ã‚¯ãƒ©ã‚¹
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/05/12
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/05/12
 *	@updated : 2026/06/16
 *============================================================*/
 #ifndef GAMEOBJECT_H
@@ -17,20 +17,20 @@
 
 /*============================================================
 *	@class	: GameObject
-*	@brief	: ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgŠî’êƒNƒ‰ƒX
+*	@brief	: ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºåº•ã‚¯ãƒ©ã‚¹
 *============================================================*/
 class GameObject
 {
-protected: // Œp³æ‚©‚çƒAƒNƒZƒX‰Â”\‚Èƒƒ“ƒo•Ï”
+protected: // ç¶™æ‰¿å…ˆã‹ã‚‰ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ãªãƒ¡ãƒ³ãƒå¤‰æ•°
 
-	int mLayer{ 1 }; // ƒŒƒCƒ„[”Ô†
-	float mCameraZ; // ƒJƒƒ‰‚©‚ç‚Ì‹——£iZƒ\[ƒg—pj
+	int mLayer{ 1 }; // ãƒ¬ã‚¤ãƒ¤ãƒ¼ç•ªå·
+	float mCameraZ; // ã‚«ãƒ¡ãƒ©ã‹ã‚‰ã®è·é›¢ï¼ˆZã‚½ãƒ¼ãƒˆç”¨ï¼‰
 
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
 	Vector3 mRotation{ 0.0f, 0.0f, 0.0f };
 	Vector3 mScale{ 1.0f, 1.0f, 1.0f };
 
-	std::list<Component*> mComponents; // ƒRƒ“ƒ|[ƒlƒ“ƒg
+	std::list<Component*> mComponents; // ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 
 	std::string mTag{};
 	bool mIsDestroy{ false };
@@ -74,7 +74,7 @@ public:
 		}
 	}
 
-	template <typename T> // ƒeƒ“ƒvƒŒ[ƒgŠÖ”
+	template <typename T> // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
 	T* AddComponent(GameObject* object) {
 		T* component = new T(object);
 		component->Initialize();
@@ -83,7 +83,7 @@ public:
 		return component;
 	}
 
-	// ƒQƒbƒ^[
+	// ã‚²ãƒƒã‚¿ãƒ¼
 	const int& GetLayer() const { return mLayer; }
 	const float& GetCameraZ() const { return mCameraZ; }
 
@@ -91,7 +91,7 @@ public:
 	const Vector3& GetRotation() const { return mRotation; }
 	const Vector3& GetScale() const { return mScale; }
 
-	// Z’lŒvZ
+	// Zå€¤è¨ˆç®—
 	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) {
 		Vector3 dir = mPosition - cameraPosition;
 		mCameraZ = Vector3::dot(dir, cameraForward);

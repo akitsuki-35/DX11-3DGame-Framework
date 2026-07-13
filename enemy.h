@@ -1,9 +1,9 @@
-/*============================================================
+Ôªø/*============================================================
 *	@file	 : enemy.h
-*	@brief	 : ÉGÉlÉ~Å[
+*	@brief	 : „Ç®„Éç„Éü„Éº
 *
-* Å@@author  : @akitsuki-35Åihttps://github.com/akitsuki-35Åj
-* Å@@date	 : 2026/05/19
+* „ÄÄ@author  : @akitsuki-35Ôºàhttps://github.com/akitsuki-35Ôºâ
+* „ÄÄ@date	 : 2026/05/19
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef ENEMY_H
@@ -13,7 +13,7 @@
 
 /*============================================================
 *	@class	: Enemy
-*	@brief	: ÉGÉlÉ~Å[
+*	@brief	: „Ç®„Éç„Éü„Éº
 *============================================================*/
 class Enemy : public GameObject
 {
@@ -21,9 +21,9 @@ private:
 	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
 	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
 
-	ID3D11InputLayout* _mVertexLayout{}; // í∏ì_ÉåÉCÉAÉEÉg
-	ID3D11VertexShader* _mVertexShader{}; // í∏ì_ÉVÉFÅ[É_Å[
-	ID3D11PixelShader* _mPixelShader{}; // ÉsÉNÉZÉãÉVÉFÅ[É_Å[
+	ID3D11InputLayout* _mVertexLayout{}; // È†ÇÁÇπ„É¨„Ç§„Ç¢„Ç¶„Éà
+	ID3D11VertexShader* _mVertexShader{}; // È†ÇÁÇπ„Ç∑„Çß„Éº„ÉÄ„Éº
+	ID3D11PixelShader* _mPixelShader{}; // „Éî„ÇØ„Çª„É´„Ç∑„Çß„Éº„ÉÄ„Éº
 
 public:
 	Enemy() = default;

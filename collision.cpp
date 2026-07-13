@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Collision.cpp
-*	@brief	 : “–‚½‚è”»’è
+*	@brief	 : å½“ãŸã‚Šåˆ¤å®š
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/19
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/19
 *	@updated : 2026/06/02
 *============================================================*/
 #include "Collision.h"
@@ -14,20 +14,20 @@
 using namespace DirectX;
 
 /*------------------------------------------------------------
-	ƒ[ƒJƒ‹ŠÖ” ƒvƒƒgƒ^ƒCƒvéŒ¾
+	ãƒ­ãƒ¼ã‚«ãƒ«é–¢æ•° ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 ------------------------------------------------------------*/
 float GetDistance(const XMFLOAT2& targetA, const XMFLOAT2& targetB);
 
 /*------------------------------------------------------------
-	ƒT[ƒNƒ‹ƒRƒŠƒWƒ‡ƒ“
+	ã‚µãƒ¼ã‚¯ãƒ«ã‚³ãƒªã‚¸ãƒ§ãƒ³
 ------------------------------------------------------------*/
 bool Collision::Circle::IsOverlap(const Circle* target) const
 {
-    // ‰~ * ‰~
-    // ’†SÀ•W“¯m‚Ì‹——£‚ğæ“¾
+    // å†† * å††
+    // ä¸­å¿ƒåº§æ¨™åŒå£«ã®è·é›¢ã‚’å–å¾—
     float centerDistance = GetDistance(target->center, center);
 
-    // ”¼Œa‚ªd‚È‚Á‚Ä‚¢‚é‚©‚ğ”»’è
+    // åŠå¾„ãŒé‡ãªã£ã¦ã„ã‚‹ã‹ã‚’åˆ¤å®š
     if (centerDistance <= radius + target->radius) {
         return true;
     }
@@ -37,14 +37,14 @@ bool Collision::Circle::IsOverlap(const Circle* target) const
 
 bool Collision::Circle::IsOverlap(const Box* target) const
 {
-    // ‰~ * lŠp
-    // ’†SÀ•W“¯m‚Ì‹——£‚ğæ“¾
+    // å†† * å››è§’
+    // ä¸­å¿ƒåº§æ¨™åŒå£«ã®è·é›¢ã‚’å–å¾—
     float distance[4] = {
     GetDistance(target->min, center), GetDistance({target->max.x, target->min.y}, center),
     GetDistance({target->min.x, target->max.y}, center), GetDistance(target->max, center),
     };
 
-    // ‰~‚ÆlŠp‚ªd‚È‚Á‚Ä‚¢‚é‚©‚ğ”»’è
+    // å††ã¨å››è§’ãŒé‡ãªã£ã¦ã„ã‚‹ã‹ã‚’åˆ¤å®š
     return (center.x <= target->max.x + radius) && (center.x >= target->min.x - radius)
         && (center.y <= target->max.y) && (center.y >= target->min.y)
 
@@ -57,7 +57,7 @@ bool Collision::Circle::IsOverlap(const Box* target) const
 
 bool Collision::Circle::IsOverlap(const DirectX::XMFLOAT2& target) const
 {
-    // ‚Â‚­‚è‚©‚¯
+    // ã¤ãã‚Šã‹ã‘
     //float centerDistance = GetDistance(target, center);
 
     //if (centerDistance <= radius + target.x) {
@@ -68,7 +68,7 @@ bool Collision::Circle::IsOverlap(const DirectX::XMFLOAT2& target) const
 }
 
 /*------------------------------------------------------------
-	ƒfƒoƒbƒO—p•`‰æŠÖ”
+	ãƒ‡ãƒãƒƒã‚°ç”¨æç”»é–¢æ•°
 ------------------------------------------------------------*/
 void Collision::Circle::Draw() const
 {
@@ -78,19 +78,19 @@ void Collision::Circle::Draw() const
 }
 
 /*------------------------------------------------------------
-	ƒ{ƒbƒNƒXƒRƒŠƒWƒ‡ƒ“
+	ãƒœãƒƒã‚¯ã‚¹ã‚³ãƒªã‚¸ãƒ§ãƒ³
 ------------------------------------------------------------*/
 bool Collision::Box::IsOverlap(const Circle* target) const
 {
-    // lŠp * ‰~
-    // ‰~ƒRƒŠƒWƒ‡ƒ“‘¤‚Ì”»’è‚ğ—˜—p
+    // å››è§’ * å††
+    // å††ã‚³ãƒªã‚¸ãƒ§ãƒ³å´ã®åˆ¤å®šã‚’åˆ©ç”¨
     return target->IsOverlap(this);
 }
 
 bool Collision::Box::IsOverlap(const Box* target) const
 {
-    // lŠp * lŠp
-    // min‚Æmax‚ªd‚È‚Á‚Ä‚¢‚é‚©‚ğ”»’è
+    // å››è§’ * å››è§’
+    // minã¨maxãŒé‡ãªã£ã¦ã„ã‚‹ã‹ã‚’åˆ¤å®š
     return min.x < target->max.x
         && max.x > target->min.x
         && min.y < target->max.y
@@ -99,8 +99,8 @@ bool Collision::Box::IsOverlap(const Box* target) const
 
 bool Collision::Box::IsOverlap(const DirectX::XMFLOAT2& target) const
 {
-    // lŠp * “_iƒ}ƒEƒXƒJ[ƒ\ƒ‹—pj
-    // “_À•W‚ªlŠp‚Ì”ÍˆÍ“à‚É‚ ‚é‚©‚ğ”»’è
+    // å››è§’ * ç‚¹ï¼ˆãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ç”¨ï¼‰
+    // ç‚¹åº§æ¨™ãŒå››è§’ã®ç¯„å›²å†…ã«ã‚ã‚‹ã‹ã‚’åˆ¤å®š
     return min.x < target.x
         && max.x > target.x
         && min.y < target.y
@@ -108,7 +108,7 @@ bool Collision::Box::IsOverlap(const DirectX::XMFLOAT2& target) const
 }
 
 /*------------------------------------------------------------
-    ƒfƒoƒbƒO—p•`‰æŠÖ”
+    ãƒ‡ãƒãƒƒã‚°ç”¨æç”»é–¢æ•°
 ------------------------------------------------------------*/
 void Collision::Box::Draw() const
 {
@@ -118,7 +118,7 @@ void Collision::Box::Draw() const
 }
 
 /*------------------------------------------------------------
-	‹——£‚Ìæ“¾
+	è·é›¢ã®å–å¾—
 ------------------------------------------------------------*/
 float GetDistance(const XMFLOAT2& targetA, const XMFLOAT2& targetB)
 {

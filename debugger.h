@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : debugger.h
-*	@brief	 : ImGuiƒfƒoƒbƒK[
+*	@brief	 : ImGuiãƒ‡ãƒãƒƒã‚¬ãƒ¼
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/05/21
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/05/21
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef DEBUGGER_H
@@ -15,9 +15,9 @@
 
 /*============================================================
 *	@class	: Debugger
-*	@brief	: ƒfƒoƒbƒK[ƒNƒ‰ƒX
+*	@brief	: ãƒ‡ãƒãƒƒã‚¬ãƒ¼ã‚¯ãƒ©ã‚¹
 *
-* @¦Initialize, Fainalize, Draw•ÏXŒµ‹ÖII
+* ã€€â€»Initialize, Fainalize, Drawå¤‰æ›´å³ç¦ï¼ï¼
 *============================================================*/
 class Debugger
 {
@@ -33,13 +33,13 @@ public:
 		return instance;
 	}
 
-	// ===== ‰Šú‰»`•`‰æ =====
+	// ===== åˆæœŸåŒ–ï½æç”» =====
 	const void Initialize(HWND hwnd) const;
 	const void Finalize() const;
 	const void Update() const;
 	const void Draw() const;
 
-	// ===== ƒfƒoƒbƒOƒEƒBƒ“ƒhƒEŠÖ”‚ğ‚±‚±‚É’Ç‰Á =====
+	// ===== ãƒ‡ãƒãƒƒã‚°ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é–¢æ•°ã‚’ã“ã“ã«è¿½åŠ  =====
 	const void CursorDebug();
 	const void CursorColorDebug();
 };

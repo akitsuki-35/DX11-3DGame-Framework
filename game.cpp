@@ -1,9 +1,9 @@
-/*============================================================
+Ôªø/*============================================================
 *	@file	 : game.cpp
-*	@brief	 : ÉQÅ[ÉÄÉVÅ[Éì
+*	@brief	 : „Ç≤„Éº„É†„Ç∑„Éº„É≥
 *
-* Å@@author  : @akitsuki-35Åihttps://github.com/akitsuki-35Åj
-* Å@@date	 : 2026/03/28
+* „ÄÄ@author  : @akitsuki-35Ôºàhttps://github.com/akitsuki-35Ôºâ
+* „ÄÄ@date	 : 2026/03/28
 *	@updated : 2026/06/23
 *============================================================*/
 #include "main.h"
@@ -75,7 +75,7 @@ void Game::Update(double elapsedTime)
 		obj->Update();
 	}
 
-	// ÉQÅ[ÉÄÉIÉuÉWÉFÉNÉgçÌèú
+	// „Ç≤„Éº„É†„Ç™„Éñ„Ç∏„Çß„ÇØ„ÉàÂâäÈô§
 	gameObjects.remove_if([](GameObject* object) {
 		return object->Destroy();
 		});
@@ -89,7 +89,7 @@ void Game::Draw() const
 {
 	Renderer::Begin();
 
-	// ZÉ\Å[Ég
+	// Z„ÇΩ„Éº„Éà
 	{
 		Camera* camera = GetGameObject<Camera>();
 

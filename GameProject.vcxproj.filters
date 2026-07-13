@@ -66,6 +66,9 @@
     <Filter Include="3Dフレームワーク\Engine\未整理">
       <UniqueIdentifier>{6a25f9d9-aeea-442f-808e-fd79f897d355}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3Dフレームワーク\Engine\Graphics">
+      <UniqueIdentifier>{a23fa5f7-7fd6-4cfe-8d53-c8b9f0d17b53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WICTextureLoader11.cpp">
@@ -197,9 +200,6 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
@@ -220,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,20 +388,11 @@
     <ClInclude Include="Subject.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>未整理</Filter>
     </ClInclude>
     <ClInclude Include="SystemTimer.h">
       <Filter>3Dフレームワーク\Engine\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>ヘッダー ファイル\System</Filter>
     </ClInclude>
     <ClInclude Include="Main.h">
       <Filter>3Dフレームワーク\Engine\Core</Filter>
@@ -411,6 +405,18 @@
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX11Config.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

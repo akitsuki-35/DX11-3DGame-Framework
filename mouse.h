@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : mouse.h
-*	@brief	 : ƒ}ƒEƒXƒ‚ƒWƒ…[ƒ‹
+*	@brief	 : ãƒã‚¦ã‚¹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/13
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/13
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef MOUSE_H
@@ -12,14 +12,14 @@
 #include <windows.h>
 #include <memory>
 
-// ƒ}ƒEƒXƒ‚[ƒh
+// ãƒã‚¦ã‚¹ãƒ¢ãƒ¼ãƒ‰
 typedef enum MousePositionModeTag
 {
-    MODE_ABSOLUTE, // â‘ÎÀ•Wƒ‚[ƒh
-    MODE_RELATIVE, // ‘Š‘ÎÀ•Wƒ‚[ƒh
+    MODE_ABSOLUTE, // çµ¶å¯¾åº§æ¨™ãƒ¢ãƒ¼ãƒ‰
+    MODE_RELATIVE, // ç›¸å¯¾åº§æ¨™ãƒ¢ãƒ¼ãƒ‰
 } MousePositionMode;
 
-// ƒ}ƒEƒXó‘Ô\‘¢‘Ì
+// ãƒã‚¦ã‚¹çŠ¶æ…‹æ§‹é€ ä½“
 typedef struct MouseStateTag
 {
     bool leftButton;
@@ -33,31 +33,31 @@ typedef struct MouseStateTag
     MousePositionMode positionMode;
 } MouseState;
 
-// ƒ}ƒEƒXƒ‚ƒWƒ…[ƒ‹‚Ì‰Šú‰»
+// ãƒã‚¦ã‚¹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®åˆæœŸåŒ–
 void MouseInitialize(HWND window);
 
-// ƒ}ƒEƒXƒ‚ƒWƒ…[ƒ‹‚ÌI—¹ˆ—
+// ãƒã‚¦ã‚¹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®çµ‚äº†å‡¦ç†
 void MouseFinalize();
 
-// ƒ}ƒEƒX‚Ìó‘Ô‚ğæ“¾‚·‚é
+// ãƒã‚¦ã‚¹ã®çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
 void GetMouseState(MouseState* pState);
 
-// —İÏ‚µ‚½ƒ}ƒEƒXƒXƒNƒ[ƒ‹ƒzƒC[ƒ‹’l‚ğƒŠƒZƒbƒg‚·‚é
+// ç´¯ç©ã—ãŸãƒã‚¦ã‚¹ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ›ã‚¤ãƒ¼ãƒ«å€¤ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
 void MouseResetScrollWheelValue();
 
-// ƒ}ƒEƒX‚Ìƒ|ƒWƒVƒ‡ƒ“ƒ‚[ƒh‚ğİ’è‚·‚éiƒfƒtƒHƒ‹ƒg‚Íâ‘ÎÀ•Wƒ‚[ƒhj
+// ãƒã‚¦ã‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ãƒ¢ãƒ¼ãƒ‰ã‚’è¨­å®šã™ã‚‹ï¼ˆãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯çµ¶å¯¾åº§æ¨™ãƒ¢ãƒ¼ãƒ‰ï¼‰
 void SetMouseMode(MousePositionMode mode);
 
-// ƒ}ƒEƒX‚ÌÚ‘±‚ğŒŸo‚·‚é
+// ãƒã‚¦ã‚¹ã®æ¥ç¶šã‚’æ¤œå‡ºã™ã‚‹
 bool MouseIsConnected();
 
-// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ª•\¦‚³‚ê‚Ä‚¢‚é‚©Šm”F‚·‚é
+// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ãŒè¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã™ã‚‹
 bool MouseIsVisible();
 
-// ƒ}ƒEƒXƒJ[ƒ\ƒ‹•\¦‚ğİ’è‚·‚é
+// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«è¡¨ç¤ºã‚’è¨­å®šã™ã‚‹
 void MouseSetVisible(bool visible);
 
-// ƒ}ƒEƒX§Œä‚Ì‚½‚ß‚ÌƒEƒBƒ“ƒhƒEƒƒbƒZ[ƒWƒvƒƒV[ƒWƒƒƒtƒbƒNŠÖ”
+// ãƒã‚¦ã‚¹åˆ¶å¾¡ã®ãŸã‚ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ãƒ•ãƒƒã‚¯é–¢æ•°
 void MouseProcessMessage(UINT message, WPARAM wParam, LPARAM lParam);
 
 #endif // MOUSE_H

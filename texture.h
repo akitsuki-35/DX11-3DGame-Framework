@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : texture.h
-*	@brief	 : ƒeƒNƒXƒ`ƒƒŠÇ—
+*	@brief	 : ãƒ†ã‚¯ã‚¹ãƒãƒ£ç®¡ç†
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/13
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/13
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef TEXTURE_H
@@ -15,18 +15,18 @@
 
 /*============================================================
 *	@class	: Texture
-*	@brief	: ƒeƒNƒXƒ`ƒƒƒNƒ‰ƒX
+*	@brief	: ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¯ãƒ©ã‚¹
 *============================================================*/
 class Texture
 {
 protected:
-	DirectX::XMUINT2 originalSize{}; // ƒeƒNƒXƒ`ƒƒ‚ÌƒIƒŠƒWƒiƒ‹ƒTƒCƒY
-	ID3D11ShaderResourceView* pShaderResourceView{ nullptr }; // ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[
+	DirectX::XMUINT2 originalSize{}; // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚µã‚¤ã‚º
+	ID3D11ShaderResourceView* pShaderResourceView{ nullptr }; // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼
 
-	DirectX::XMFLOAT2 position{}; // •`‰æÀ•W
-	DirectX::XMFLOAT2 drawSize{}; // •`‰æƒTƒCƒY
-	float rotate{}; // ‰ñ“]Šp
-	DirectX::XMFLOAT4 color{ 1.0f, 1.0f, 1.0f, 1.0f }; // ƒJƒ‰[
+	DirectX::XMFLOAT2 position{}; // æç”»åº§æ¨™
+	DirectX::XMFLOAT2 drawSize{}; // æç”»ã‚µã‚¤ã‚º
+	float rotate{}; // å›è»¢è§’
+	DirectX::XMFLOAT4 color{ 1.0f, 1.0f, 1.0f, 1.0f }; // ã‚«ãƒ©ãƒ¼
 
 public:
 	Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position = { 0.0f, 0.0f },
@@ -35,14 +35,14 @@ public:
 
 	virtual ~Texture();
 
-	// •`‰æ
+	// æç”»
 	virtual void Draw();
 	virtual void SetTexture();
 
 	const DirectX::XMUINT2& GetSize() { return originalSize; }
 
 /*------------------------------------------------------------
-	ƒZƒbƒ^[
+	ã‚»ãƒƒã‚¿ãƒ¼
 ------------------------------------------------------------*/
 	void SetPosition(const DirectX::XMFLOAT2& newPosition) { position = newPosition; }
 	void SetSize(const DirectX::XMFLOAT2& newSize) { drawSize = newSize; }
@@ -57,15 +57,15 @@ public:
 
 /*============================================================
 *	@class	: SpriteSheet
-*	@brief	: ƒXƒvƒ‰ƒCƒgƒV[ƒgƒNƒ‰ƒXiƒeƒNƒXƒ`ƒƒ‚ğŒp³j
+*	@brief	: ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚·ãƒ¼ãƒˆã‚¯ãƒ©ã‚¹ï¼ˆãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ç¶™æ‰¿ï¼‰
 *============================================================*/
 class SpriteSheet : public Texture
 {
 private:
-	int patternMax{}; // ƒpƒ^[ƒ“”
-	int CurrentPattern{}; // Œ»İ‚Ìƒpƒ^[ƒ“”Ô†
-	DirectX::XMUINT2 patternMatrix{}; // cE‰¡‚Ìƒpƒ^[ƒ“”
-	DirectX::XMUINT2 patternSize{}; // ƒpƒ^[ƒ“‚²‚Æ‚ÌƒTƒCƒY
+	int patternMax{}; // ãƒ‘ã‚¿ãƒ¼ãƒ³æ•°
+	int CurrentPattern{}; // ç¾åœ¨ã®ãƒ‘ã‚¿ãƒ¼ãƒ³ç•ªå·
+	DirectX::XMUINT2 patternMatrix{}; // ç¸¦ãƒ»æ¨ªã®ãƒ‘ã‚¿ãƒ¼ãƒ³æ•°
+	DirectX::XMUINT2 patternSize{}; // ãƒ‘ã‚¿ãƒ¼ãƒ³ã”ã¨ã®ã‚µã‚¤ã‚º
 
 public:
 	SpriteSheet(const wchar_t* pFileName, const DirectX::XMUINT2& patternMatrix,
@@ -73,11 +73,11 @@ public:
 		const DirectX::XMFLOAT2& size = { 0.0f, 0.0f }, const float& rotate = 0.0f,
 		const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f }, bool isMipMap = true);
 
-	// •`‰æ
+	// æç”»
 	void Draw() override;
 
 /*------------------------------------------------------------
-	ƒXƒvƒ‰ƒCƒgŠÖŒWƒQƒbƒ^[EƒZƒbƒ^[
+	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆé–¢ä¿‚ã‚²ãƒƒã‚¿ãƒ¼ãƒ»ã‚»ãƒƒã‚¿ãƒ¼
 ------------------------------------------------------------*/
 	const int& GetCurrentPattern() { return CurrentPattern; }
 	const int& GetPatternMax() { return patternMax; }

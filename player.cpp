@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : player.cpp
-*	@brief	 : ƒvƒŒƒCƒ„[
+*	@brief	 : ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/05/19
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/05/19
 *	@updated : 2026/06/16
 *============================================================*/
 #include "main.h"
@@ -27,10 +27,10 @@ void Player::Initialize()
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg“Ç
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆèª­è¾¼
 	AddComponent<ModelRenderer>(this)->Load("Resources\\Models\\player.obj");
 
-	// ƒVƒF[ƒ_[“Ç
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼èª­è¾¼
 	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
 	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 
@@ -49,12 +49,12 @@ void Player::Finalize()
 
 void Player::Update()
 {
-	float dt = 1.0f / 60.0f; // Œo‰ßŠÔ
-	float j = 15.0f; // ƒWƒƒƒ“ƒv—Í
-	float g = 30.0f; // d—Í‰Á‘¬“x
-	float r = 5.0f; // ’ïR—Í
+	float dt = 1.0f / 60.0f; // çµŒéæ™‚é–“
+	float j = 15.0f; // ã‚¸ãƒ£ãƒ³ãƒ—åŠ›
+	float g = 30.0f; // é‡åŠ›åŠ é€Ÿåº¦
+	float r = 5.0f; // æŠµæŠ—åŠ›
 
-	Vector3 oldPosition = mPosition; // ƒvƒŒƒCƒ„[ˆÚ“®‘OÀ•W
+	Vector3 oldPosition = mPosition; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç§»å‹•å‰åº§æ¨™
 
 	Camera* camera = Game::GetGameObject<Camera>();
 	Vector3 forward = camera->GetForward();
@@ -66,7 +66,7 @@ void Player::Update()
 	right.y = 0.0f;
 	right.Normalize();
 
-	// ƒL[“ü—ÍˆÚ“®ˆ—
+	// ã‚­ãƒ¼å…¥åŠ›ç§»å‹•å‡¦ç†
 	if (Input::GetKeyPress('D')) {
 		mVelocity += right * 50.0f * dt;
 	}
@@ -82,12 +82,12 @@ void Player::Update()
 
 	mRotation.y = atan2f(mVelocity.x, mVelocity.z);
 
-	// ƒWƒƒƒ“ƒv
+	// ã‚¸ãƒ£ãƒ³ãƒ—
 	if (mGround) {
 		if (Input::GetKeyTrigger('K')) {
-			mVelocity.y += j; // Œ‚—Í
+			mVelocity.y += j; // æ’ƒåŠ›
 
-			// ƒXƒP[ƒ‹ƒAƒjƒ[ƒVƒ‡ƒ“
+			// ã‚¹ã‚±ãƒ¼ãƒ«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 			mScale.y = 2.0f;
 			mScale.x = 0.75f;
 			mScale.z = 0.75f;
@@ -96,32 +96,32 @@ void Player::Update()
 		}
 	}
 
-	// ƒXƒP[ƒ‹‚ğŒ³‚É–ß‚·
+	// ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å…ƒã«æˆ»ã™
 	mScale.x += (1.0f - mScale.x) * 0.1f;
 	mScale.y += (1.0f - mScale.y) * 0.1f;
 	mScale.z += (1.0f - mScale.z) * 0.1f;
 
-	// d—Í‰Á‘¬“x
+	// é‡åŠ›åŠ é€Ÿåº¦
 	mVelocity.y += -g * dt;
 
-	// –€C’ïR
+	// æ‘©æ“¦æŠµæŠ—
 	mVelocity.x += -mVelocity.x * r * dt;
 	mVelocity.z += -mVelocity.z * r * dt;
 
-	// ˆÚ“®ˆ—
+	// ç§»å‹•å‡¦ç†
 	mPosition += mVelocity * dt;
 
 	bool oldGround = mGround;
 	mGround = false;
 
-	// ’n–Ê‚Æ‚ÌÕ“Ë”»’è
+	// åœ°é¢ã¨ã®è¡çªåˆ¤å®š
 	if (mPosition.y < 0.0f) {
 		mPosition.y = 0.0f;
 		mVelocity.y = 0.0f;
 		mGround = true;
 	}
 
-	// –Ø‚Æ‚ÌÕ“Ë”»’è
+	// æœ¨ã¨ã®è¡çªåˆ¤å®š
 	auto trees = Game::GetGameObjects<Tree>();
 	for (auto tree : trees) {
 		Vector3 treePosition = tree->GetPosition();
@@ -129,18 +129,18 @@ void Player::Update()
 
 		treePosition.y = 0.0f;
 		playerPosition.y = 0.0f;
-		Vector3 dir = playerPosition - treePosition; // •ûŒüƒxƒNƒgƒ‹Zo
-		float length = dir.Length(); // ‹——£ŒvZ
+		Vector3 dir = playerPosition - treePosition; // æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ç®—å‡º
+		float length = dir.Length(); // è·é›¢è¨ˆç®—
 
 		if (length < 1.5f) {
-			dir /= length; // ³‹K‰»
+			dir /= length; // æ­£è¦åŒ–
 			dir *= 1.5f - length;
 
 			mPosition += dir;
 		}
 	}
 
-	// ” ‚Æ‚ÌÕ“Ë”»’è
+	// ç®±ã¨ã®è¡çªåˆ¤å®š
 	auto boxes = Game::GetGameObjects<Box>();
 	for (auto box : boxes) {
 		Vector3 boxPosition = box->GetPosition();
@@ -172,18 +172,18 @@ void Player::Update()
 	}
 
 	if (!oldGround && mGround) {
-		// ƒXƒP[ƒ‹ƒAƒjƒ[ƒVƒ‡ƒ“
+		// ã‚¹ã‚±ãƒ¼ãƒ«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 		mScale.y = 0.5f;
 		mScale.x = 1.5f;
 		mScale.z = 1.5f;
 	}
 
-	// ƒXƒP[ƒ‹‚ğŒ³‚É–ß‚·
+	// ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å…ƒã«æˆ»ã™
 	mScale.x += (1.0f - mScale.x) * 0.1f;
 	mScale.y += (1.0f - mScale.y) * 0.1f;
 	mScale.z += (1.0f - mScale.z) * 0.1f;
 
-	// ’e‚Ì”­Ë
+	// å¼¾ã®ç™ºå°„
 	if (Input::GetKeyTrigger('J')) {
 
 		Bullet* bullet = Game::AddGameObject<Bullet>();
@@ -191,7 +191,7 @@ void Player::Update()
 		bullet->SetVelocity(GetForward() * 50.0f);
 	}
 	
-	// ˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“
+	// ç§»å‹•ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	if (mGround) {
 		mMoveAnimation += mVelocity.Length() * dt;
 		mScale.y += sinf(mMoveAnimation * 3.0f) * 0.03f;
@@ -202,20 +202,20 @@ void Player::Update()
 
 void Player::Draw() const
 {
-	// “ü—ÍƒŒƒCƒAƒEƒgİ’è
+	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
 	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
 
-	// ƒVƒF[ƒ_[İ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼è¨­å®š
 	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
 	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
 
-	// ƒ}ƒgƒŠƒNƒXİ’è
+	// ãƒãƒˆãƒªã‚¯ã‚¹è¨­å®š
 	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // Šg‘åk¬
-	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y + XM_PI, mRotation.z); // ‰ñ“]
-	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // •½sˆÚ“®
+	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // æ‹¡å¤§ç¸®å°
+	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y + XM_PI, mRotation.z); // å›è»¢
+	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // å¹³è¡Œç§»å‹•
 	w = s * r * t;
 	Renderer::SetWorldMatrix(w);
 
-	GameObject::Draw(); // Œp³Œ³‚ÌDraw‚ğŒÄ‚Ño‚·
+	GameObject::Draw(); // ç¶™æ‰¿å…ƒã®Drawã‚’å‘¼ã³å‡ºã™
 }

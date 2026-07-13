@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : camera.h
-*	@brief	 : ƒJƒƒ‰
+*	@brief	 : ã‚«ãƒ¡ãƒ©
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/26
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/26
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef CAMERA_H
@@ -13,12 +13,12 @@
 
 /*============================================================
 *	@class	: Camera
-*	@brief	: ƒJƒƒ‰
+*	@brief	: ã‚«ãƒ¡ãƒ©
 *============================================================*/
 class Camera : public GameObject
 {
 protected:
-	Vector3 mTarget{}; // ’‹“_
+	Vector3 mTarget{}; // æ³¨è¦–ç‚¹
 	XMMATRIX mViewMatrix;
 
 public:

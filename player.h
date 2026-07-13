@@ -1,9 +1,9 @@
-/*============================================================
+Ôªø/*============================================================
 *	@file	 : player.h
-*	@brief	 : ÉvÉåÉCÉÑÅ[
+*	@brief	 : „Éó„É¨„Ç§„É§„Éº
 *
-* Å@@author  : @akitsuki-35Åihttps://github.com/akitsuki-35Åj
-* Å@@date	 : 2026/05/19
+* „ÄÄ@author  : @akitsuki-35Ôºàhttps://github.com/akitsuki-35Ôºâ
+* „ÄÄ@date	 : 2026/05/19
 *	@updated : 2026/06/16
 *============================================================*/
 #ifndef PLAYER_H
@@ -15,7 +15,7 @@ class Audio;
 
 /*============================================================
 *	@class	: Player
-*	@brief	: ÉvÉåÉCÉÑÅ[
+*	@brief	: „Éó„É¨„Ç§„É§„Éº
 *============================================================*/
 class Player : public GameObject
 {
@@ -26,9 +26,9 @@ private:
 	bool mGround{ true };
 	float mMoveAnimation{ 0.0f };
 
-	ID3D11InputLayout* _mVertexLayout{}; // í∏ì_ÉåÉCÉAÉEÉg
-	ID3D11VertexShader* _mVertexShader{}; // í∏ì_ÉVÉFÅ[É_Å[
-	ID3D11PixelShader* _mPixelShader{}; // ÉsÉNÉZÉãÉVÉFÅ[É_Å[
+	ID3D11InputLayout* _mVertexLayout{}; // È†ÇÁÇπ„É¨„Ç§„Ç¢„Ç¶„Éà
+	ID3D11VertexShader* _mVertexShader{}; // È†ÇÁÇπ„Ç∑„Çß„Éº„ÉÄ„Éº
+	ID3D11PixelShader* _mPixelShader{}; // „Éî„ÇØ„Çª„É´„Ç∑„Çß„Éº„ÉÄ„Éº
 
 	Audio* mSE{};
 

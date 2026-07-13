@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : transform.h
-*	@brief	 : ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+*	@brief	 : ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/05/19
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/05/19
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef TRANSFORM_H
@@ -14,7 +14,7 @@
 
 /*============================================================
 *	@class	: Transform
-*	@brief	: ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€ƒRƒ“ƒ|[ƒlƒ“ƒg
+*	@brief	: ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 *============================================================*/
 class Transform : public Component
 {
@@ -23,9 +23,9 @@ private:
 	Vector3 rotation{ 0.0f, 0.0f, 0.0f };
 	Vector3 scale{ 1.0f, 1.0f, 1.0f };
 
-	ID3D11InputLayout* pVertexLayout{}; // ’¸“_ƒŒƒCƒAƒEƒg
-	ID3D11VertexShader* pVertexShader{}; // ’¸“_ƒVƒF[ƒ_[
-	ID3D11PixelShader* pPixelShader{}; // ƒsƒNƒZƒ‹ƒVƒF[ƒ_[
+	ID3D11InputLayout* pVertexLayout{}; // é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
+	ID3D11VertexShader* pVertexShader{}; // é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
+	ID3D11PixelShader* pPixelShader{}; // ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 
 public:
 	Transform(Vector3 position, Vector3 rotation = { 0.0f, 0.0f, 0.0f }, Vector3 scale = { 1.0f, 1.0f, 1.0f })

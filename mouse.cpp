@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : mouse.cpp
-*	@brief	 : ƒ}ƒEƒXƒ‚ƒWƒ…[ƒ‹
+*	@brief	 : ãƒã‚¦ã‚¹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/13
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/13
 *	@updated : 2026/06/02
 *============================================================*/
 #include "mouse.h"
@@ -12,12 +12,12 @@
 #include <assert.h>
 
 /*------------------------------------------------------------
-	ƒ}ƒNƒ’è‹`
+	ãƒã‚¯ãƒ­å®šç¾©
 ------------------------------------------------------------*/
 #define SAFE_CLOSEHANDLE(h) if(h){CloseHandle(h); h = NULL;}
 
 /*------------------------------------------------------------
-	ƒOƒ[ƒoƒ‹•Ï”’è‹`
+	ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°å®šç¾©
 ------------------------------------------------------------*/
 static MouseState g_State = {};
 static HWND g_Window = NULL;
@@ -33,7 +33,7 @@ static int g_RelativeY = INT32_MAX;
 static bool g_InFocus = true;
 
 /*------------------------------------------------------------
-	ƒ[ƒJƒ‹ŠÖ” ƒvƒƒgƒ^ƒCƒvéŒ¾
+	ãƒ­ãƒ¼ã‚«ãƒ«é–¢æ•° ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 ------------------------------------------------------------*/
 static void ClipToWindow();
 
@@ -181,7 +181,7 @@ void MouseProcessMessage(UINT message, WPARAM wParam, LPARAM lParam)
         point.x = g_LastX;
         point.y = g_LastY;
 
-        // ƒŠƒ‚[ƒgƒfƒBƒXƒNƒgƒbƒv‚É‘Î‰‚·‚é‚½‚ß‚ÉˆÚ“®‘O‚ÉƒJ[ƒ\ƒ‹‚ğ•\¦‚·‚é
+        // ãƒªãƒ¢ãƒ¼ãƒˆãƒ‡ã‚£ã‚¹ã‚¯ãƒˆãƒƒãƒ—ã«å¯¾å¿œã™ã‚‹ãŸã‚ã«ç§»å‹•å‰ã«ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¡¨ç¤ºã™ã‚‹
         ShowCursor(TRUE);
 
         if (MapWindowPoints(g_Window, nullptr, &point, 1)) {
@@ -253,7 +253,7 @@ void MouseProcessMessage(UINT message, WPARAM wParam, LPARAM lParam)
                 }
                 else if (raw.data.mouse.usFlags & MOUSE_VIRTUAL_DESKTOP) {
 
-                    // ƒŠƒ‚[ƒgƒfƒBƒXƒNƒgƒbƒv‚È‚Ç‚É‘Î‰
+                    // ãƒªãƒ¢ãƒ¼ãƒˆãƒ‡ã‚£ã‚¹ã‚¯ãƒˆãƒƒãƒ—ãªã©ã«å¯¾å¿œ
                     const int width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
                     const int height = GetSystemMetrics(SM_CYVIRTUALSCREEN);
 
@@ -339,13 +339,13 @@ void MouseProcessMessage(UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
     default:
-        // ƒƒbƒZ[ƒW‚È‚µ
+        // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãªã—
         return;
     }
 
     if (g_Mode == MODE_ABSOLUTE) {
 
-        // ‚·‚×‚Ä‚Ìƒ}ƒEƒXƒƒbƒZ[ƒW‚É‘Î‚µ‚ÄV‚µ‚¢À•W‚ğæ“¾‚·‚é
+        // ã™ã¹ã¦ã®ãƒã‚¦ã‚¹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«å¯¾ã—ã¦æ–°ã—ã„åº§æ¨™ã‚’å–å¾—ã™ã‚‹
         int xPos = GET_X_LPARAM(lParam);
         int yPos = GET_Y_LPARAM(lParam);
 
