@@ -1,43 +1,40 @@
 /*============================================================
-*	@file	 : SystemApp.h
+*	@file	 : Application.h
 *	@brief	 : アプリケーションループ制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/07
 *	@updated : 2026/07/07
 *============================================================*/
-#ifndef SYSTEMAPP_H
-#define SYSTEMAPP_H
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
 #include "Config.h"
-
-namespace System {
 /*============================================================
-*	@class	: App
+*	@class	: Application
 *	@brief	: アプリケーション
 *============================================================*/
-	class App
+	class Application
 	{
 	private:
 		bool mPaused{ false }; // ポーズフラグ
 
-		App() = default;
-		App(const App&) = delete;
+		Application() = default;
+		Application(const Application&) = delete;
 
-		App& operator=(const App&) = delete;
-		App(App&&) = delete;
+		Application& operator=(const Application&) = delete;
+		Application(Application&&) = delete;
 
-		App& operator=(App&&) = delete;
-		~App() {};
+		Application& operator=(Application&&) = delete;
+		~Application() {};
 
 	public:
-		static App& getInstance() {
-			static App instance;
+		static Application& getInstance() {
+			static Application instance;
 			return instance;
 		}
 
 		int Run() const;
 	};
-}
 
-#endif // SYSTEMAPP_H
+#endif // APPLICATION_H

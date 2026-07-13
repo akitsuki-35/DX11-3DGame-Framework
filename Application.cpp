@@ -1,18 +1,18 @@
 /*============================================================
-*	@file	 : SystemApp.cpp
+*	@file	 : Application.cpp
 *	@brief	 : アプリケーションループ制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/07
 *	@updated : 2026/07/07
 *============================================================*/
-#include "SystemApp.h"
+#include "Application.h"
 #include "SystemWindow.h"
 #include "SystemTimer.h"
 #include "Manager.h"
 #include <Windows.h>
 
-int System::App::Run() const
+int Application::Run() const
 {
 	// アプリケーションループ
 	while (1)

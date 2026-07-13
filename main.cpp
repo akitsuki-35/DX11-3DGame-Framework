@@ -7,11 +7,11 @@
 *	@updated : 2026/07/07
 *============================================================*/
 #include "Main.h"
+#include "Application.h"
 
 // System
 #include "SystemWindow.h"
 #include "SystemTimer.h"
-#include "SystemApp.h"
 
 #include "Manager.h"
 #include "Debugger.h"
@@ -59,7 +59,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	System::Timer::getInstance().Initialize();
 
 	// ÉQÅ[ÉÄÉãÅ[Év
-	int isQuit = System::App::getInstance().Run();
+	int isQuit = Application::getInstance().Run();
 
 	//	#if defined(DEBUG) || defined(_DEBUG)
 	//			//Debugger::GetInstance().Update();
