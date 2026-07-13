@@ -1,5 +1,5 @@
 ﻿/*============================================================
-*	@file	 : collision3D.h
+*	@file	 : Collision3D.h
 *	@brief	 : 3Dコリジョンクラス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）

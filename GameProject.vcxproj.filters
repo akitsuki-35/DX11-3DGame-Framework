@@ -271,9 +271,6 @@
     <ClInclude Include="Debugger.h">
       <Filter>ヘッダー ファイル\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="Collision3D.h">
-      <Filter>3Dフレームワーク\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
@@ -417,6 +414,9 @@
     </ClInclude>
     <ClInclude Include="DirectX11Config.h">
       <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision3D.h">
+      <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
