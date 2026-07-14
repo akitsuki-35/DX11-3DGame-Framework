@@ -12,16 +12,15 @@
 #include "Config.h"
 #include "DirectX11Config.h"
 
-bool D3D11::DeviceManager::Initialize(HWND hWnd, int width, int height)
+bool D3D11::DeviceManager::Initialize()
 {
 	// デバイス・スワップチェーン生成
 	if (!GenerateDeviceAndSwapChain()) { return false; }
 
-	// デプスステンシルビュ＾生成
+	// デプスステンシルビュー生成
 	if (!GenerateDepthStencilView()) { return false; }
 
 	// レンダーステート生成
-	if (!GenerateDepthStencilView()) { return false; }
 	if (!GenerateDepthStencilState()) { return false; }
 	if (!GenerateBlendState()) { return false; }
 	if (!GenerateRasterizerState()) { return false; }
@@ -83,7 +82,7 @@ bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
 		レンダーターゲットビュー作成
 	----------------------------------------------------*/
 	ComPtr<ID3D11Texture2D> renderTarget{};
-	hr = _mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&renderTarget);
+	hr = _mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), renderTarget.put_void());
 	if (FAILED(hr)) { return false; }
 
 	hr = _mDevice->CreateRenderTargetView(renderTarget.get(), nullptr, _mRenderTargetView.put());
@@ -104,7 +103,7 @@ bool D3D11::DeviceManager::GenerateDepthStencilView()
 	depthDesc.Height = Screen::HEIGHT;
 	depthDesc.MipLevels = 1;
 	depthDesc.ArraySize = 1;
-	depthDesc.Format = D3D11::BACKBUFFER_FORMAT;
+	depthDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	depthDesc.SampleDesc.Count = 1;
 	depthDesc.SampleDesc.Quality = 0;
 	depthDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -120,14 +119,18 @@ bool D3D11::DeviceManager::GenerateDepthStencilView()
 		デプスステンシルビュー作成
 	----------------------------------------------------*/
 	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc{};
-	depthStencilViewDesc.Format = D3D11::BACKBUFFER_FORMAT;
+	depthStencilViewDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	depthStencilViewDesc.Flags = 0;
 
 	hr = _mDevice->CreateDepthStencilView(depthBuffer.get(), &depthStencilViewDesc, _mDepthStencilView.put());
 	if (FAILED(hr)) { return false; }
 
-	_mContext->OMSetRenderTargets(1, _mRenderTargetView.put(), _mDepthStencilView.get());
+	ID3D11RenderTargetView* const rtvs[] = { _mRenderTargetView.get() };
+	_mContext->OMSetRenderTargets(1, rtvs, _mDepthStencilView.get());
+
+	assert(_mRenderTargetView != nullptr);
+	assert(_mDepthStencilView != nullptr);
 
 	return true;
 }

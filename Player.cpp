@@ -19,6 +19,9 @@
 #include "tree.h"
 #include "box.h"
 
+#include "DeviceManager.h"
+#include "BufferManager.h"
+
 void Player::Initialize()
 {
 	mLayer = 1;
@@ -31,8 +34,8 @@ void Player::Initialize()
 	AddComponent<ModelRenderer>(this)->Load("Resources\\Models\\player.obj");
 
 	// シェーダー読込
-	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+	Renderer::getInstance().CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
+	Renderer::getInstance().CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 
 	mSE = AddComponent<Audio>(this);
 	mSE->Load("Resources\\Audios\\wan.wav");
@@ -121,55 +124,55 @@ void Player::Update()
 		mGround = true;
 	}
 
-	// 木との衝突判定
-	auto trees = Game::GetGameObjects<Tree>();
-	for (auto tree : trees) {
-		Vector3 treePosition = tree->GetPosition();
-		Vector3 playerPosition = mPosition;
+	//// 木との衝突判定
+	//auto trees = Game::GetGameObjects<Tree>();
+	//for (auto tree : trees) {
+	//	Vector3 treePosition = tree->GetPosition();
+	//	Vector3 playerPosition = mPosition;
 
-		treePosition.y = 0.0f;
-		playerPosition.y = 0.0f;
-		Vector3 dir = playerPosition - treePosition; // 方向ベクトル算出
-		float length = dir.Length(); // 距離計算
+	//	treePosition.y = 0.0f;
+	//	playerPosition.y = 0.0f;
+	//	Vector3 dir = playerPosition - treePosition; // 方向ベクトル算出
+	//	float length = dir.Length(); // 距離計算
 
-		if (length < 1.5f) {
-			dir /= length; // 正規化
-			dir *= 1.5f - length;
+	//	if (length < 1.5f) {
+	//		dir /= length; // 正規化
+	//		dir *= 1.5f - length;
 
-			mPosition += dir;
-		}
-	}
+	//		mPosition += dir;
+	//	}
+	//}
 
-	// 箱との衝突判定
-	auto boxes = Game::GetGameObjects<Box>();
-	for (auto box : boxes) {
-		Vector3 boxPosition = box->GetPosition();
-		Vector3 boxScale = box->GetScale();
+	//// 箱との衝突判定
+	//auto boxes = Game::GetGameObjects<Box>();
+	//for (auto box : boxes) {
+	//	Vector3 boxPosition = box->GetPosition();
+	//	Vector3 boxScale = box->GetScale();
 
-		if (boxPosition.x - boxScale.x < mPosition.x &&
-			mPosition.x < boxPosition.x + boxScale.x &&
-			boxPosition.z - boxScale.z < mPosition.z &&
-			mPosition.z < boxPosition.z + boxScale.z) 
-		{
-			if (boxPosition.y + boxScale.y < mPosition.y &&
-				mPosition.y < boxPosition.y + boxScale.y * 2.0f &&
-				mVelocity.y < 0.0f)
-			{
-				mPosition.y = boxPosition.y + boxScale.y * 2.0f;
-				mVelocity.y = 0.0f;
-				mGround = true;
-			}
-			else if (boxPosition.y - boxScale.y < mPosition.y &&
-				mPosition.y < boxPosition.y + boxScale.y)
-			{
-				mPosition.x = oldPosition.x + mScale.x;
-				mPosition.z = oldPosition.z + mScale.z;
+	//	if (boxPosition.x - boxScale.x < mPosition.x &&
+	//		mPosition.x < boxPosition.x + boxScale.x &&
+	//		boxPosition.z - boxScale.z < mPosition.z &&
+	//		mPosition.z < boxPosition.z + boxScale.z) 
+	//	{
+	//		if (boxPosition.y + boxScale.y < mPosition.y &&
+	//			mPosition.y < boxPosition.y + boxScale.y * 2.0f &&
+	//			mVelocity.y < 0.0f)
+	//		{
+	//			mPosition.y = boxPosition.y + boxScale.y * 2.0f;
+	//			mVelocity.y = 0.0f;
+	//			mGround = true;
+	//		}
+	//		else if (boxPosition.y - boxScale.y < mPosition.y &&
+	//			mPosition.y < boxPosition.y + boxScale.y)
+	//		{
+	//			mPosition.x = oldPosition.x + mScale.x;
+	//			mPosition.z = oldPosition.z + mScale.z;
 
-				mVelocity.x = 0.0f;
-				mVelocity.z = 0.0f;
-			}
-		}
-	}
+	//			mVelocity.x = 0.0f;
+	//			mVelocity.z = 0.0f;
+	//		}
+	//	}
+	//}
 
 	if (!oldGround && mGround) {
 		// スケールアニメーション
@@ -183,13 +186,13 @@ void Player::Update()
 	mScale.y += (1.0f - mScale.y) * 0.1f;
 	mScale.z += (1.0f - mScale.z) * 0.1f;
 
-	// 弾の発射
-	if (Input::GetKeyTrigger('J')) {
+	//// 弾の発射
+	//if (Input::GetKeyTrigger('J')) {
 
-		Bullet* bullet = Game::AddGameObject<Bullet>();
-		bullet->SetPosition({ mPosition.x, mPosition.y, mPosition.z });
-		bullet->SetVelocity(GetForward() * 50.0f);
-	}
+	//	Bullet* bullet = Game::AddGameObject<Bullet>();
+	//	bullet->SetPosition({ mPosition.x, mPosition.y, mPosition.z });
+	//	bullet->SetVelocity(GetForward() * 50.0f);
+	//}
 	
 	// 移動アニメーション
 	if (mGround) {
@@ -203,11 +206,11 @@ void Player::Update()
 void Player::Draw() const
 {
 	// 入力レイアウト設定
-	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(_mVertexLayout);
 
 	// シェーダー設定
-	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
-	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(_mVertexShader, NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(_mPixelShader, NULL, 0);
 
 	// マトリクス設定
 	XMMATRIX w, s, r, t;
@@ -215,7 +218,7 @@ void Player::Draw() const
 	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y + XM_PI, mRotation.z); // 回転
 	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // 平行移動
 	w = s * r * t;
-	Renderer::SetWorldMatrix(w);
+	D3D11::BufferManager::getInstance().SetWorldMatrix(w);
 
 	GameObject::Draw(); // 継承元のDrawを呼び出す
 }

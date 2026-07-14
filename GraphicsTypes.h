@@ -37,7 +37,7 @@ namespace Element {
 		DirectX::XMFLOAT4 Specular;
 		DirectX::XMFLOAT4 Emission;
 		float Shininess;
-		bool TextureEnable;
+		int TextureEnable;
 		float Dummy[2];
 	};
 
@@ -46,8 +46,8 @@ namespace Element {
 	----------------------------------------------------*/
 	struct LIGHT
 	{
-		bool Enable;
-		bool Dummy[3];
+		int Enable;
+		float Dummy[3];
 		DirectX::XMFLOAT4 Direction;
 		DirectX::XMFLOAT4 Diffuse;
 		DirectX::XMFLOAT4 Ambient;

@@ -77,7 +77,7 @@ namespace D3D11 {
 		winrt::com_ptr<ID3D11SamplerState> _mSamplerPoint{};
 
 	public:
-		bool Initialize(HWND hWnd, int width, int height);
+		bool Initialize();
 
 	private:
 		// デバイス・ステート生成
@@ -93,5 +93,8 @@ namespace D3D11 {
 		// ゲッター
 		winrt::com_ptr<ID3D11Device> GetDevice() const { return _mDevice; }
 		winrt::com_ptr<ID3D11DeviceContext> GetContext() const { return _mContext; }
+		winrt::com_ptr<IDXGISwapChain> GetSwapChain() const { return _mSwapChain; }
+		winrt::com_ptr<ID3D11RenderTargetView> GetRenderTargetView() const { return _mRenderTargetView; }
+		winrt::com_ptr<ID3D11DepthStencilView> GetDepthStencilView() const { return _mDepthStencilView; }
 	};
 }

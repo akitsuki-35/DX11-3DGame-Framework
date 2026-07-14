@@ -7,8 +7,8 @@
 *	@updated : 2026/06/16
 *============================================================*/
 #include "main.h"
-#include "manager.h"
-#include "renderer.h"
+#include "Manager.h"
+#include "Renderer.h"
 #include "input.h"
 #include "game.h"
 #include "title.h"
@@ -23,11 +23,11 @@ Scene* Manager::mNextScene{ nullptr };
 ------------------------------------------------------------*/
 void Manager::Initialize()
 {
-	Renderer::Initialize();
+	Renderer::getInstance().Initialize();
 	Input::Initialize();
 	Audio::InitMaster();
 
-	SceneChange<Title>();
+	SceneChange<Game>();
 	mCurrentScene = mNextScene;
     mNextScene = nullptr;
     mCurrentScene->Initialize();
@@ -49,7 +49,6 @@ void Manager::Finalize()
 
 	Audio::UninitMaster();
 	Input::Finalize();
-	Renderer::Finalize();
 }
 
 /*------------------------------------------------------------

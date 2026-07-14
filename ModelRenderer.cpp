@@ -8,7 +8,8 @@
 #include "renderer.h"
 #include "modelRenderer.h"
 
-
+#include "DeviceManager.h"
+#include "BufferManager.h"
 
 std::unordered_map<std::string, MODEL*> ModelRenderer::m_ModelPool;
 
@@ -17,28 +18,28 @@ void ModelRenderer::Draw()
 {
 
 	// 頂点バッファ設定
-	UINT stride = sizeof(VERTEX_3D);
+	UINT stride = sizeof(Element::VERTEX3D);
 	UINT offset = 0;
-	Renderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &m_Model->VertexBuffer, &stride, &offset);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetVertexBuffers(0, 1, &m_Model->VertexBuffer, &stride, &offset);
 
 	// インデックスバッファ設定
-	Renderer::GetDeviceContext()->IASetIndexBuffer(m_Model->IndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetIndexBuffer(m_Model->IndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	// プリミティブトポロジ設定
-	Renderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 
 	for( unsigned int i = 0; i < m_Model->SubsetNum; i++ )
 	{
 		// マテリアル設定
-		Renderer::SetMaterial(m_Model->SubsetArray[i].Material.Material );
+		D3D11::BufferManager::getInstance().SetMaterial(m_Model->SubsetArray[i].Material.Material );
 
 		// テクスチャ設定
 		if(m_Model->SubsetArray[i].Material.Texture)
-			Renderer::GetDeviceContext()->PSSetShaderResources( 0, 1, &m_Model->SubsetArray[i].Material.Texture );
+			D3D11::DeviceManager::getInstance().GetContext()->PSSetShaderResources( 0, 1, &m_Model->SubsetArray[i].Material.Texture );
 
 		// ポリゴン描画
-		Renderer::GetDeviceContext()->DrawIndexed(m_Model->SubsetArray[i].IndexNum, m_Model->SubsetArray[i].StartIndex, 0 );
+		D3D11::DeviceManager::getInstance().GetContext()->DrawIndexed(m_Model->SubsetArray[i].IndexNum, m_Model->SubsetArray[i].StartIndex, 0 );
 	}
 
 }
@@ -108,7 +109,7 @@ void ModelRenderer::LoadModel( const char *FileName, MODEL *Model)
 		D3D11_BUFFER_DESC bd;
 		ZeroMemory( &bd, sizeof(bd) );
 		bd.Usage = D3D11_USAGE_DEFAULT;
-		bd.ByteWidth = sizeof( VERTEX_3D ) * modelObj.VertexNum;
+		bd.ByteWidth = sizeof(Element::VERTEX3D) * modelObj.VertexNum;
 		bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		bd.CPUAccessFlags = 0;
 
@@ -116,7 +117,7 @@ void ModelRenderer::LoadModel( const char *FileName, MODEL *Model)
 		ZeroMemory( &sd, sizeof(sd) );
 		sd.pSysMem = modelObj.VertexArray;
 
-		Renderer::GetDevice()->CreateBuffer( &bd, &sd, &Model->VertexBuffer );
+		D3D11::DeviceManager::getInstance().GetDevice()->CreateBuffer( &bd, &sd, &Model->VertexBuffer );
 	}
 
 
@@ -133,7 +134,7 @@ void ModelRenderer::LoadModel( const char *FileName, MODEL *Model)
 		ZeroMemory( &sd, sizeof(sd) );
 		sd.pSysMem = modelObj.IndexArray;
 
-		Renderer::GetDevice()->CreateBuffer( &bd, &sd, &Model->IndexBuffer );
+		D3D11::DeviceManager::getInstance().GetDevice()->CreateBuffer( &bd, &sd, &Model->IndexBuffer );
 	}
 
 	// サブセット設定
@@ -156,7 +157,7 @@ void ModelRenderer::LoadModel( const char *FileName, MODEL *Model)
 			wchar_t wc[256];
 			mbstowcs(wc, modelObj.SubsetArray[i].Material.TextureName, sizeof(wc));
 			LoadFromWICFile(wc, WIC_FLAGS_NONE, &metadata, image);
-			CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metadata, &Model->SubsetArray[i].Material.Texture);
+			CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().get(), image.GetImages(), image.GetImageCount(), metadata, &Model->SubsetArray[i].Material.Texture);
 
 			if (Model->SubsetArray[i].Material.Texture)
 				Model->SubsetArray[i].Material.Material.TextureEnable = true;
@@ -267,7 +268,7 @@ void ModelRenderer::LoadObj( const char *FileName, MODEL_OBJ *ModelObj )
 	texcoordArray = new XMFLOAT2[ texcoordNum ];
 
 
-	ModelObj->VertexArray = new VERTEX_3D[ vertexNum ];
+	ModelObj->VertexArray = new Element::VERTEX3D[ vertexNum ];
 	ModelObj->VertexNum = vertexNum;
 
 	ModelObj->IndexArray = new unsigned int[ indexNum ];

@@ -27,7 +27,6 @@ private:
 
 public:
 	Field() = default;
-	Field(const wchar_t* pFileName);
 	
 	void Initialize() override;
 	void Finalize() override;
