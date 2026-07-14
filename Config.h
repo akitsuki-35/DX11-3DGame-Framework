@@ -1,4 +1,4 @@
-/*============================================================
+﻿/*============================================================
 *	@file	 : Config.h
 *	@brief	 : システム設定・定数定義
 *
@@ -6,8 +6,7 @@
 * 　@date	 : 2026/07/05
 *	@updated : 2026/07/05
 *============================================================*/
-#ifndef CONFIG_H
-#define CONFIG_H
+#pragma once
 
 #include <DirectXMath.h>
 
@@ -30,5 +29,3 @@ namespace Screen {
 	static constexpr int LEFT{ 0 };
 	static constexpr int RIGHT{ WIDTH };
 }
-
-#endif // CONFIG_H

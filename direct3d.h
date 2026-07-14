@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : Direct3D.h
-*	@brief	 : DirectX‰Šú‰»
+*	@brief	 : DirectXåˆæœŸåŒ–
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/12
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/12
 *	@updated : 2026/06/02
 *============================================================*/
 #ifndef DIRECT3D_H
@@ -17,8 +17,8 @@
 bool Direct3DInitialize(HWND hwnd);
 void Direct3DFinalize();
 
-void Direct3DClear(); //ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒNƒŠƒA
-void Direct3DPresent(); //ƒoƒbƒNƒoƒbƒtƒ@‚Ì•\¦
+void Direct3DClear(); //ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢
+void Direct3DPresent(); //ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®è¡¨ç¤º
 
 unsigned int Direct3DGetBackBufferWidth();
 unsigned int Direct3DGetBackBufferHeight();
@@ -28,7 +28,7 @@ ID3D11DeviceContext* Direct3DGetDeviceContext();
 IDXGISwapChain* Direct3DGetSwapChain();
 
 /*------------------------------------------------------------
-	ƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒhİ’è
+	ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‰è¨­å®š
 ------------------------------------------------------------*/
 enum AlphaBlendMode
 {

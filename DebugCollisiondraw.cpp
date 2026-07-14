@@ -1,9 +1,9 @@
-/*============================================================
+ï»¿/*============================================================
 *	@file	 : debug_collisiondraw.cpp
-*	@brief	 : ƒRƒŠƒWƒ‡ƒ“‰Â‹‰»
+*	@brief	 : ã‚³ãƒªã‚¸ãƒ§ãƒ³å¯è¦–åŒ–
 *
-* @@author  : @akitsuki-35ihttps://github.com/akitsuki-35j
-* @@date	 : 2026/04/20
+* ã€€@author  : @akitsuki-35ï¼ˆhttps://github.com/akitsuki-35ï¼‰
+* ã€€@date	 : 2026/04/20
 *	@updated : 2026/06/02
 *============================================================*/
 #include "DebugCollisiondraw.h"
@@ -15,21 +15,21 @@
 using namespace DirectX;
 
 /*------------------------------------------------------------
-	ƒOƒ[ƒoƒ‹•Ï”’è‹`
+	ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°å®šç¾©
 ------------------------------------------------------------*/
-static constexpr int CIRCLE_NUM_VERTEX{ 9 }; // ’¸“_”
-static ID3D11Buffer* g_pCircleVertexBuffer{ nullptr }; // ’¸“_ƒoƒbƒtƒ@
-static constexpr int BOX_NUM_VERTEX{ 5 }; // ’¸“_”
-static ID3D11Buffer* g_pBoxVertexBuffer{ nullptr }; // ’¸“_ƒoƒbƒtƒ@
+static constexpr int CIRCLE_NUM_VERTEX{ 9 }; // é ‚ç‚¹æ•°
+static ID3D11Buffer* g_pCircleVertexBuffer{ nullptr }; // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+static constexpr int BOX_NUM_VERTEX{ 5 }; // é ‚ç‚¹æ•°
+static ID3D11Buffer* g_pBoxVertexBuffer{ nullptr }; // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 static Texture* g_pTexture{ nullptr };
 
 /*------------------------------------------------------------
-	’¸“_\‘¢‘Ì
+	é ‚ç‚¹æ§‹é€ ä½“
 ------------------------------------------------------------*/
 struct Vertex
 {
-	XMFLOAT3 position; // ’¸“_À•W
-	XMFLOAT4 color; //F
+	XMFLOAT3 position; // é ‚ç‚¹åº§æ¨™
+	XMFLOAT4 color; //è‰²
 	XMFLOAT2 texCoord;
 };
 
@@ -38,7 +38,7 @@ void CollisionDrawInitialize()
 #if defined(DEBUG) || defined(_DEBUG)
 	g_pTexture = new Texture(L"Resources/Textures/Common/white.png");
 
-	// ƒT[ƒNƒ‹ƒRƒŠƒWƒ‡ƒ“’¸“_ƒoƒbƒtƒ@¶¬
+	// ã‚µãƒ¼ã‚¯ãƒ«ã‚³ãƒªã‚¸ãƒ§ãƒ³é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	D3D11_BUFFER_DESC bd = {};
 	bd.Usage = D3D11_USAGE_DYNAMIC;
 	bd.ByteWidth = sizeof(Vertex) * CIRCLE_NUM_VERTEX;
@@ -47,7 +47,7 @@ void CollisionDrawInitialize()
 
 	Direct3DGetDevice()->CreateBuffer(&bd, NULL, &g_pCircleVertexBuffer);
 
-	// ƒ{ƒbƒNƒXƒRƒŠƒWƒ‡ƒ“’¸“_ƒoƒbƒtƒ@¶¬
+	// ãƒœãƒƒã‚¯ã‚¹ã‚³ãƒªã‚¸ãƒ§ãƒ³é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	bd = {};
 	bd.Usage = D3D11_USAGE_DYNAMIC;
 	bd.ByteWidth = sizeof(Vertex) * BOX_NUM_VERTEX;
@@ -68,29 +68,29 @@ void CollisionDrawFinalize()
 }
 
 /*------------------------------------------------------------
-	ƒT[ƒNƒ‹ƒRƒŠƒWƒ‡ƒ“•`‰æ
+	ã‚µãƒ¼ã‚¯ãƒ«ã‚³ãƒªã‚¸ãƒ§ãƒ³æç”»
 ------------------------------------------------------------*/
 void CircleCollisionDraw(const DirectX::XMFLOAT2& center, const float& radius, const DirectX::XMFLOAT4& color)
 {
-	// ‰¼‚Åƒ{ƒbƒNƒX—p‚Ì•`‰æ‚ğ—¬—p‚µ‚Ä‚¢‚é‚½‚ßAƒfƒoƒbƒO‚Í—¯ˆÓ
+	// ä»®ã§ãƒœãƒƒã‚¯ã‚¹ç”¨ã®æç”»ã‚’æµç”¨ã—ã¦ã„ã‚‹ãŸã‚ã€ãƒ‡ãƒãƒƒã‚°æ™‚ã¯ç•™æ„
 #if defined(DEBUG) || defined(_DEBUG)
 	g_pTexture->SetTexture();
 
-	// ƒVƒF[ƒ_[‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Shader2DBeginLinear();
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚·‚é
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã™ã‚‹
 	D3D11_MAPPED_SUBRESOURCE msr;
 	Direct3DGetDeviceContext()->Map(g_pCircleVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 
-	// ’¸“_ƒoƒbƒtƒ@‚Ö‚Ì‰¼‘zƒ|ƒCƒ“ƒ^‚ğæ“¾
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ä»®æƒ³ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
 	Vertex* v = (Vertex*)msr.pData;
 
-	// ’¸“_î•ñ‚ğ‘‚«‚İ
+	// é ‚ç‚¹æƒ…å ±ã‚’æ›¸ãè¾¼ã¿
 	const float SCREEN_WIDTH = static_cast<float>(Direct3DGetBackBufferWidth());
 	const float SCREEN_HEIGHT = static_cast<float>(Direct3DGetBackBufferHeight());
 
-	// ‰~‚Ì•`‰æ
+	// å††ã®æç”»
 	v[0].position = { center.x - (radius), center.y, 0.0f };
 	v[1].position = { center.x - (radius * 0.75f), center.y - (radius * 0.75f), 0.0f };
 	v[2].position = { center.x, center.y - (radius), 0.0f };
@@ -116,52 +116,52 @@ void CircleCollisionDraw(const DirectX::XMFLOAT2& center, const float& radius, c
 	v[7].texCoord = { 0.25f, 0.75f };
 	v[8].texCoord = v[0].texCoord;
 
-	// ’¸“_ƒoƒbƒtƒ@‚ÌƒƒbƒN‚ğ‰ğœ
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ãƒ­ãƒƒã‚¯ã‚’è§£é™¤
 	Direct3DGetDeviceContext()->Unmap(g_pCircleVertexBuffer, 0);
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 	Direct3DGetDeviceContext()->IASetVertexBuffers(0, 1, &g_pCircleVertexBuffer, &stride, &offset);
 
-	// ’¸“_ƒVƒF[ƒ_[‚Éƒ[ƒ‹ƒh•ÏŠ·s—ñ‚ğİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—ã‚’è¨­å®š
 	Shader2DSetWorldMatrix(XMMatrixIdentity());
 
-	// ’¸“_ƒVƒF[ƒ_[‚ÉƒvƒƒWƒFƒNƒVƒ‡ƒ“•ÏŠ·s—ñ‚ğİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³å¤‰æ›è¡Œåˆ—ã‚’è¨­å®š
 	Shader2DSetProjectionMatrix(XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
 	Shader2DSetColor({ 1.0f,1.0f,1.0f,1.0f });
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWİ’è
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
 	Direct3DGetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
-	// ƒ|ƒŠƒSƒ“•`‰æ–½—ß”­s
+	// ãƒãƒªã‚´ãƒ³æç”»å‘½ä»¤ç™ºè¡Œ
 	Direct3DGetDeviceContext()->Draw(CIRCLE_NUM_VERTEX, 0);
 #endif
 }
 
 /*------------------------------------------------------------
-	ƒ{ƒbƒNƒXƒRƒŠƒWƒ‡ƒ“•`‰æ
+	ãƒœãƒƒã‚¯ã‚¹ã‚³ãƒªã‚¸ãƒ§ãƒ³æç”»
 ------------------------------------------------------------*/
 void BoxCollisionDraw(const DirectX::XMFLOAT2& center, const DirectX::XMFLOAT2& size, const DirectX::XMFLOAT4& color)
 {
 #if defined(DEBUG) || defined(_DEBUG)
 	g_pTexture->SetTexture();
 
-	// ƒVƒF[ƒ_[‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	Shader2DBeginLinear();
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğƒƒbƒN‚·‚é
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ­ãƒƒã‚¯ã™ã‚‹
 	D3D11_MAPPED_SUBRESOURCE msr;
 	Direct3DGetDeviceContext()->Map(g_pBoxVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 
-	// ’¸“_ƒoƒbƒtƒ@‚Ö‚Ì‰¼‘zƒ|ƒCƒ“ƒ^‚ğæ“¾
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¸ã®ä»®æƒ³ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾—
 	Vertex* v = (Vertex*)msr.pData;
 
-	// ’¸“_î•ñ‚ğ‘‚«‚İ
+	// é ‚ç‚¹æƒ…å ±ã‚’æ›¸ãè¾¼ã¿
 	const float SCREEN_WIDTH = static_cast<float>(Direct3DGetBackBufferWidth());
 	const float SCREEN_HEIGHT = static_cast<float>(Direct3DGetBackBufferHeight());
 
-	//lŠpŒ`‚Ì•`‰æ
+	//å››è§’å½¢ã®æç”»
 	v[0].position = { center.x - (size.x / 2), center.y - (size.y / 2), 0.0f };
 	v[1].position = { center.x + (size.x / 2), center.y - (size.y / 2), 0.0f };
 	v[2].position = { center.x + (size.x / 2), center.y + (size.y / 2), 0.0f };
@@ -179,25 +179,25 @@ void BoxCollisionDraw(const DirectX::XMFLOAT2& center, const DirectX::XMFLOAT2& 
 	v[3].texCoord = { 0.0f, 1.0f };
 	v[4].texCoord = v[0].texCoord;
 
-	// ’¸“_ƒoƒbƒtƒ@‚ÌƒƒbƒN‚ğ‰ğœ
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ãƒ­ãƒƒã‚¯ã‚’è§£é™¤
 	Direct3DGetDeviceContext()->Unmap(g_pBoxVertexBuffer, 0);
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğ•`‰æƒpƒCƒvƒ‰ƒCƒ“‚Éİ’è
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã«è¨­å®š
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 	Direct3DGetDeviceContext()->IASetVertexBuffers(0, 1, &g_pBoxVertexBuffer, &stride, &offset);
 
-	// ’¸“_ƒVƒF[ƒ_[‚Éƒ[ƒ‹ƒh•ÏŠ·s—ñ‚ğİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—ã‚’è¨­å®š
 	Shader2DSetWorldMatrix(XMMatrixIdentity());
 
-	// ’¸“_ƒVƒF[ƒ_[‚ÉƒvƒƒWƒFƒNƒVƒ‡ƒ“•ÏŠ·s—ñ‚ğİ’è
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³å¤‰æ›è¡Œåˆ—ã‚’è¨­å®š
 	Shader2DSetProjectionMatrix(XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
 	Shader2DSetColor({ 1.0f,1.0f,1.0f,1.0f });
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWİ’è
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
 	Direct3DGetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
-	// ƒ|ƒŠƒSƒ“•`‰æ–½—ß”­s
+	// ãƒãƒªã‚´ãƒ³æç”»å‘½ä»¤ç™ºè¡Œ
 	Direct3DGetDeviceContext()->Draw(BOX_NUM_VERTEX, 0);
 #endif
 }

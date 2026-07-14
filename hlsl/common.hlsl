@@ -29,7 +29,7 @@ struct MATERIAL
 	float4 Specular;
 	float4 Emission;
 	float Shininess;
-	bool TextureEnable;
+	int TextureEnable;
 	float2 Dummy;
 };
 
@@ -43,8 +43,8 @@ cbuffer MaterialBuffer : register(b3)
 
 struct LIGHT
 {
-	bool Enable;
-	bool3 Dummy;
+	int Enable;
+	float Dummy;
 	float4 Direction;
 	float4 Diffuse;
 	float4 Ambient;
@@ -54,10 +54,6 @@ cbuffer LightBuffer : register(b4)
 {
 	LIGHT Light;
 }
-
-
-
-
 
 struct VS_IN
 {
