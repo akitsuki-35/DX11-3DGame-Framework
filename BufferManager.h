@@ -8,8 +8,10 @@
 *============================================================*/
 #pragma once
 
-#include <winrt/base.h>
 #include "DeviceManager.h"
+#include "GraphicsTypes.h"
+
+#include <winrt/base.h>
 
 namespace D3D11 {
 	/*============================================================
@@ -53,9 +55,25 @@ namespace D3D11 {
 
 	public:
 		void Initialize();
-		void Finalize();
 
 	private:
+		// 定数バッファ生成
 		winrt::com_ptr<ID3D11Buffer> GenerateBuffer(UINT size);
+
+	public:
+		// セッター
+		void Set2DMatrix();
+		void SetWorldMatrix(DirectX::XMMATRIX worldMatrix);
+		void SetViewMatrix(DirectX::XMMATRIX viewMatrix);
+		void SetProjectionMatrix(DirectX::XMMATRIX projectionMatrix);
+		void SetMaterial(Element::MATERIAL material);
+		void SetLight(Element::LIGHT light);
+
+		// ゲッター
+		winrt::com_ptr<ID3D11Buffer> GetWorldBuffer() const { return _mWorld; }
+		winrt::com_ptr<ID3D11Buffer> GetViewBuffer() const { return _mView; }
+		winrt::com_ptr<ID3D11Buffer> GetProjectionBuffer() const { return _mProjection; }
+		winrt::com_ptr<ID3D11Buffer> GetMaterialBuffer() const { return _mMaterial; }
+		winrt::com_ptr<ID3D11Buffer> GetLightBuffer() const { return _mLight; }
 	};
 }

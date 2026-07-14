@@ -8,8 +8,86 @@
 *============================================================*/
 #include "BufferManager.h"
 #include "DeviceManager.h"
+#include "Config.h"
+
+using namespace DirectX;
 
 void D3D11::BufferManager::Initialize()
 {
+	// 定数バッファ初期化
+	_mWorld = GenerateBuffer(sizeof(DirectX::XMMATRIX));
+	_mView = GenerateBuffer(sizeof(DirectX::XMMATRIX));
+	_mProjection = GenerateBuffer(sizeof(DirectX::XMMATRIX));
+	_mMaterial = GenerateBuffer(sizeof(Element::MATERIAL));
+	_mLight = GenerateBuffer(sizeof(Element::LIGHT));
+}
 
+winrt::com_ptr<ID3D11Buffer> D3D11::BufferManager::GenerateBuffer(UINT size)
+{
+	// 定数バッファ生成
+	D3D11_BUFFER_DESC bufferDesc{};
+	bufferDesc.ByteWidth = size;
+	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	bufferDesc.CPUAccessFlags = 0;
+	bufferDesc.MiscFlags = 0;
+	bufferDesc.StructureByteStride = sizeof(float);
+
+	ComPtr<ID3D11Buffer> buffer;
+	D3D11::DeviceManager::getInstance().
+		GetDevice()->CreateBuffer(&bufferDesc, nullptr, buffer.put());
+
+	return buffer;
+}
+
+void D3D11::BufferManager::Set2DMatrix()
+{
+	// 2D用マトリクス設定
+	SetWorldMatrix(XMMatrixIdentity());
+	SetViewMatrix(XMMatrixIdentity());
+
+	XMMATRIX projection;
+	projection = XMMatrixOrthographicOffCenterLH(0.0f, Screen::WIDTH, Screen::HEIGHT, 0.0f, 0.0f, 1.0f);
+	SetProjectionMatrix(projection);
+}
+
+void D3D11::BufferManager::SetWorldMatrix(DirectX::XMMATRIX worldMatrix)
+{
+	// ワールド行列設定
+	XMFLOAT4X4 worldf;
+	XMStoreFloat4x4(&worldf, XMMatrixTranspose(worldMatrix));
+	DeviceManager::getInstance().
+		GetContext()->UpdateSubresource(_mWorld.get(), 0, nullptr, &worldf, 0, 0);
+}
+
+void D3D11::BufferManager::SetViewMatrix(DirectX::XMMATRIX viewMatrix)
+{
+	// ビュー行列設定
+	XMFLOAT4X4 viewf;
+	XMStoreFloat4x4(&viewf, XMMatrixTranspose(viewMatrix));
+	DeviceManager::getInstance().
+		GetContext()->UpdateSubresource(_mView.get(), 0, nullptr, &viewf, 0, 0);
+}
+
+void D3D11::BufferManager::SetProjectionMatrix(DirectX::XMMATRIX projectionMatrix)
+{
+	// プロジェクション行列設定
+	XMFLOAT4X4 projectionf;
+	XMStoreFloat4x4(&projectionf, XMMatrixTranspose(projectionMatrix));
+	DeviceManager::getInstance().
+		GetContext()->UpdateSubresource(_mProjection.get(), 0, nullptr, &projectionf, 0, 0);
+}
+
+void D3D11::BufferManager::SetMaterial(Element::MATERIAL material)
+{
+	// マテリアル設定
+	DeviceManager::getInstance().
+		GetContext()->UpdateSubresource(_mMaterial.get(), 0, nullptr, &material, 0, 0);
+}
+
+void D3D11::BufferManager::SetLight(Element::LIGHT light)
+{
+	// ライト設定
+	DeviceManager::getInstance().
+		GetContext()->UpdateSubresource(_mLight.get(), 0, nullptr, &light, 0, 0);
 }

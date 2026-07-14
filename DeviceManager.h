@@ -89,6 +89,7 @@ namespace D3D11 {
 		bool GenerateSamplerState();
 		void RenderStateRegister();
 
+	public:
 		// ゲッター
 		winrt::com_ptr<ID3D11Device> GetDevice() const { return _mDevice; }
 		winrt::com_ptr<ID3D11DeviceContext> GetContext() const { return _mContext; }
