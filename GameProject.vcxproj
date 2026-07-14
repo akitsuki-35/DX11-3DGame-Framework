@@ -61,6 +61,7 @@
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Shader2D.cpp" />
+    <ClCompile Include="Shadow.cpp" />
     <ClCompile Include="Sky.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Application.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Shader2D.h" />
+    <ClInclude Include="Shadow.h" />
     <ClInclude Include="Sky.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRenderer.h" />

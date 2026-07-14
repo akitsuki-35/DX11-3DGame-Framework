@@ -225,7 +225,10 @@
       <Filter>3Dフレームワーク\Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="BufferManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Shadow.cpp">
+      <Filter>3Dフレームワーク\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -426,6 +429,9 @@
     </ClInclude>
     <ClInclude Include="GraphicsTypes.h">
       <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Shadow.h">
+      <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

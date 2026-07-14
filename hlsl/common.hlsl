@@ -1,4 +1,4 @@
-﻿
+
 
 
 cbuffer WorldBuffer : register(b0)
