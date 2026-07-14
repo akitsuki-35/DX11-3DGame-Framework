@@ -33,9 +33,6 @@
     <Filter Include="3Dフレームワーク">
       <UniqueIdentifier>{1b269d7f-0295-4617-9c0e-1cf8ed5e52b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\Components">
-      <UniqueIdentifier>{afed10f6-0809-43ff-ab2d-9666210c8cf3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3Dフレームワーク\Common">
       <UniqueIdentifier>{6d238e21-a4ea-4c2c-b06a-40168897765a}</UniqueIdentifier>
     </Filter>
@@ -68,6 +65,9 @@
     </Filter>
     <Filter Include="3Dフレームワーク\Engine\旧">
       <UniqueIdentifier>{6a25f9d9-aeea-442f-808e-fd79f897d355}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3Dフレームワーク\Components">
+      <UniqueIdentifier>{afed10f6-0809-43ff-ab2d-9666210c8cf3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
