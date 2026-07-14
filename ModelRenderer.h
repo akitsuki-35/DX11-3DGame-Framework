@@ -1,12 +1,12 @@
 ﻿#pragma once
 
-
+#include "GraphicsTypes.h"
 
 // マテリアル構造体
 struct MODEL_MATERIAL
 {
 	char						Name[256];
-	MATERIAL					Material;
+	Element::MATERIAL			Material;
 	char						TextureName[256];
 	ID3D11ShaderResourceView*	Texture;
 
@@ -25,7 +25,7 @@ struct SUBSET
 // モデル構造体
 struct MODEL_OBJ
 {
-	VERTEX_3D		*VertexArray;
+	Element::VERTEX3D *VertexArray;
 	unsigned int	VertexNum;
 
 	unsigned int	*IndexArray;

@@ -13,6 +13,10 @@
 #include "input.h"
 #include "player.h"
 
+#include "Config.h"
+
+#include "BufferManager.h"
+
 void Camera::Initialize()
 {
 	mLayer = 0;
@@ -52,11 +56,11 @@ void Camera::Draw() const
 {
 	// プロジェクション行列設定
 	XMMATRIX projection = XMMatrixPerspectiveFovLH(1.0f,
-		static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 1.0f, 1000.0f);
-	Renderer::SetProjectionMatrix(projection);
+		static_cast<float>(Screen::WIDTH) / static_cast<float>(Screen::HEIGHT), 1.0f, 1000.0f);
+	D3D11::BufferManager::getInstance().SetProjectionMatrix(projection);
 
 	// ビュー行列設定
-	Renderer::SetViewMatrix(mViewMatrix);
+	D3D11::BufferManager::getInstance().SetViewMatrix(mViewMatrix);
 }
 
 void TopCamera::Initialize()
