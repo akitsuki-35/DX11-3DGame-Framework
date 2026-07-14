@@ -1,4 +1,4 @@
-
+﻿
 
 
 cbuffer WorldBuffer : register(b0)
@@ -54,10 +54,6 @@ cbuffer LightBuffer : register(b4)
 {
 	LIGHT Light;
 }
-
-
-
-
 
 struct VS_IN
 {

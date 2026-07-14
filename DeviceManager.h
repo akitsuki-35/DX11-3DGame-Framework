@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/13
-*	@updated : 2026/07/13
+*	@updated : 2026/07/14
 *============================================================*/
 #pragma once
 
@@ -43,6 +43,7 @@ namespace D3D11 {
 	/*--------------------------------------------------
 		メンバ変数・メンバ関数
 	----------------------------------------------------*/
+	private:
 		// 実行フューチャーレベル
 		D3D_FEATURE_LEVEL mFutureLevel{};
 
@@ -79,13 +80,17 @@ namespace D3D11 {
 		bool Initialize(HWND hWnd, int width, int height);
 
 	private:
+		// デバイス・ステート生成
 		bool GenerateDeviceAndSwapChain();
 		bool GenerateDepthStencilView();
 		bool GenerateDepthStencilState();
 		bool GenerateBlendState();
 		bool GenerateRasterizerState();
 		bool GenerateSamplerState();
-
 		void RenderStateRegister();
+
+		// ゲッター
+		winrt::com_ptr<ID3D11Device> GetDevice() const { return _mDevice; }
+		winrt::com_ptr<ID3D11DeviceContext> GetContext() const { return _mContext; }
 	};
 }

@@ -63,11 +63,11 @@
     <Filter Include="3Dフレームワーク\Engine\Platform">
       <UniqueIdentifier>{4cfd07e0-80f1-4321-960c-e1c640a7d0be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\Engine\未整理">
-      <UniqueIdentifier>{6a25f9d9-aeea-442f-808e-fd79f897d355}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3Dフレームワーク\Engine\Graphics">
       <UniqueIdentifier>{a23fa5f7-7fd6-4cfe-8d53-c8b9f0d17b53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3Dフレームワーク\Engine\旧">
+      <UniqueIdentifier>{6a25f9d9-aeea-442f-808e-fd79f897d355}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -213,16 +213,19 @@
       <Filter>3Dフレームワーク\Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="Manager.cpp">
-      <Filter>3Dフレームワーク\Engine\未整理</Filter>
+      <Filter>3Dフレームワーク\Engine\旧</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>3Dフレームワーク\Engine\未整理</Filter>
+      <Filter>3Dフレームワーク\Engine\旧</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>3Dフレームワーク\Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="DeviceManager.cpp">
       <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferManager.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -395,10 +398,10 @@
       <Filter>3Dフレームワーク\Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
-      <Filter>3Dフレームワーク\Engine\未整理</Filter>
+      <Filter>3Dフレームワーク\Engine\旧</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>3Dフレームワーク\Engine\未整理</Filter>
+      <Filter>3Dフレームワーク\Engine\旧</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>3Dフレームワーク\Engine\Core</Filter>
@@ -417,6 +420,12 @@
     </ClInclude>
     <ClInclude Include="Collision3D.h">
       <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferManager.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsTypes.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

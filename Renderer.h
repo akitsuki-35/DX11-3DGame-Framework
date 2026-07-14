@@ -23,9 +23,9 @@ struct MATERIAL
 	XMFLOAT4	Diffuse;
 	XMFLOAT4	Specular;
 	XMFLOAT4	Emission;
-	float		Shininess;
+	FLOAT		Shininess;
 	BOOL		TextureEnable;
-	float		Dummy[2];
+	FLOAT		Dummy[2];
 };
 
 struct LIGHT

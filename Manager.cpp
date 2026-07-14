@@ -27,9 +27,6 @@ void Manager::Initialize()
 	Input::Initialize();
 	Audio::InitMaster();
 
-	//mCurrentScene = mNextScene = new Title();
-	//mCurrentScene->Initialize();
-
 	SceneChange<Title>();
 	mCurrentScene = mNextScene;
     mNextScene = nullptr;

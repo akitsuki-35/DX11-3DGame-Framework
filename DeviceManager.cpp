@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/13
-*	@updated : 2026/07/13
+*	@updated : 2026/07/14
 *============================================================*/
 #include "DeviceManager.h"
 #include "SystemWindow.h"
@@ -14,20 +14,32 @@
 
 bool D3D11::DeviceManager::Initialize(HWND hWnd, int width, int height)
 {
+	// デバイス・スワップチェーン生成
 	if (!GenerateDeviceAndSwapChain()) { return false; }
+
+	// デプスステンシルビュ＾生成
 	if (!GenerateDepthStencilView()) { return false; }
 
+	// レンダーステート生成
 	if (!GenerateDepthStencilView()) { return false; }
+	if (!GenerateDepthStencilState()) { return false; }
+	if (!GenerateBlendState()) { return false; }
+	if (!GenerateRasterizerState()) { return false; }
+	if (!GenerateSamplerState()) { return false; }
 
+	// レンダーステート登録
 	RenderStateRegister();
-    return true;
+    
+	return true;
 }
 
 bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
 {
 	HRESULT hr = S_OK;
 
-	// スワップチェーン設定
+	/*--------------------------------------------------
+		スワップチェーン設定
+	----------------------------------------------------*/
 	DXGI_SWAP_CHAIN_DESC swapChainDesc{};
 	swapChainDesc.BufferCount = 1;
 	swapChainDesc.BufferDesc.Width = Screen::WIDTH;
@@ -46,7 +58,9 @@ bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
 	// 実行フューチャーレベルを一時保存
 	D3D_FEATURE_LEVEL level{};
 
-	// スワップチェーン生成
+	/*--------------------------------------------------
+		スワップチェーン生成
+	----------------------------------------------------*/
 	hr = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
@@ -65,7 +79,9 @@ bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
 	if (FAILED(hr)) { return false; }
 	else { mFutureLevel = level; }
 
-	// レンダーターゲットビュー作成
+	/*--------------------------------------------------
+		レンダーターゲットビュー作成
+	----------------------------------------------------*/
 	ComPtr<ID3D11Texture2D> renderTarget{};
 	hr = _mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&renderTarget);
 	if (FAILED(hr)) { return false; }
@@ -80,7 +96,9 @@ bool D3D11::DeviceManager::GenerateDepthStencilView()
 {
 	HRESULT hr = S_OK;
 
-	// デプスステンシルバッファ作成
+	/*--------------------------------------------------
+		デプスステンシルバッファ作成
+	----------------------------------------------------*/
 	D3D11_TEXTURE2D_DESC depthDesc{};
 	depthDesc.Width = Screen::WIDTH;
 	depthDesc.Height = Screen::HEIGHT;
@@ -98,7 +116,9 @@ bool D3D11::DeviceManager::GenerateDepthStencilView()
 	hr = _mDevice->CreateTexture2D(&depthDesc, nullptr, depthBuffer.put());
 	if (FAILED(hr)) { return false; }
 
-	// デプスステンシルビュー作成
+	/*--------------------------------------------------
+		デプスステンシルビュー作成
+	----------------------------------------------------*/
 	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc{};
 	depthStencilViewDesc.Format = D3D11::BACKBUFFER_FORMAT;
 	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
@@ -116,18 +136,22 @@ bool D3D11::DeviceManager::GenerateDepthStencilState()
 {
 	HRESULT hr = S_OK;
 
-	// デプスステンシルステート設定
+	/*--------------------------------------------------
+		デプスステンシルステート設定
+	----------------------------------------------------*/
 	D3D11_DEPTH_STENCIL_DESC depthStencilDesc{};
 	depthStencilDesc.DepthEnable = TRUE;
 	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
 	depthStencilDesc.StencilEnable = FALSE;
 
-	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, _mDepthEnable.put());//深度有効ステート
+	// 深度有効
+	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, _mDepthEnable.put());
 	if (FAILED(hr)) { return false; }
 
+	// 深度無効ステート
 	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
-	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, _mDepthDisable.put());//深度無効ステート
+	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, _mDepthDisable.put());
 	if (FAILED(hr)) { return false; }
 
 	_mContext->OMSetDepthStencilState(_mDepthEnable.get(), NULL);
@@ -139,7 +163,9 @@ bool D3D11::DeviceManager::GenerateBlendState()
 {
 	HRESULT hr = S_OK;
 
-	// ブレンドステート設定
+	/*--------------------------------------------------
+		ブレンドステート設定
+	----------------------------------------------------*/
 	D3D11_BLEND_DESC blendDesc{};
 	blendDesc.AlphaToCoverageEnable = FALSE;
 	blendDesc.IndependentBlendEnable = FALSE;
@@ -152,6 +178,7 @@ bool D3D11::DeviceManager::GenerateBlendState()
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
+	// アルファブレンド
 	hr = _mDevice->CreateBlendState(&blendDesc, _mBlendAlpha.put());
 	if (FAILED(hr)) { return false; }
 
@@ -176,7 +203,9 @@ bool D3D11::DeviceManager::GenerateRasterizerState()
 {
 	HRESULT hr = S_OK;
 
-	// ラスタライザステート設定
+	/*--------------------------------------------------
+		ラスタライザステート設定
+	----------------------------------------------------*/
 	D3D11_RASTERIZER_DESC rasterizerDesc{};
 	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_BACK;
@@ -201,7 +230,9 @@ bool D3D11::DeviceManager::GenerateSamplerState()
 {
 	HRESULT hr = S_OK;
 
-	// サンプラーステート設定
+	/*--------------------------------------------------
+		サンプラーステート設定
+	----------------------------------------------------*/
 	D3D11_SAMPLER_DESC samplerDesc{};
 	samplerDesc.Filter = D3D11_FILTER_ANISOTROPIC;
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
