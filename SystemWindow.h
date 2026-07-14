@@ -1,4 +1,4 @@
-/*============================================================
+﻿/*============================================================
 *	@file	 : SystemWindow.h
 *	@brief	 : システムウィンドウ制御
 *
@@ -6,30 +6,28 @@
 * 　@date	 : 2026/07/05
 *	@updated : 2026/07/07
 *============================================================*/
-#ifndef SYSTEMWINDOW_H
-#define SYSTEMWINDOW_H
+#pragma once
 
 #include "Config.h"
 #include <Windows.h>
-#include <mutex>
 
 namespace System {
 /*============================================================
 *	@class	: Window
 *	@brief	: メインウィンドウ
 *============================================================*/
-	class Window
+	class Window final
 	{
+	/*--------------------------------------------------
+		Singleton用
+	----------------------------------------------------*/
+	public:
+		static Window& getInstance() {
+			static Window instance;
+			return instance;
+		}
+
 	private:
-		HWND mHwnd{ nullptr };
-		static constexpr char CLASS_NAME[] = "AppClass"; // ウィンドウクラス名
-		static constexpr char WINDOW_NAME[] = "Game Window"; // アプリケーション名
-		HINSTANCE mHInstance{ nullptr };
-		int mWidth{ Screen::WIDTH };
-		int mHeigth{ Screen::HEIGHT };
-
-		static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
 		Window() = default;
 		Window(const Window&) = delete;
 
@@ -39,12 +37,21 @@ namespace System {
 		Window& operator=(Window&&) = delete;
 		~Window() {};
 
-	public:
-		static Window& getInstance() {
-			static Window instance;
-			return instance;
-		}
+	/*--------------------------------------------------
+		メンバ変数・メンバ関数
+	----------------------------------------------------*/
+	private:
+		HWND mHwnd{ nullptr };
+		static constexpr char CLASS_NAME[] = "AppClass"; // ウィンドウクラス名
+		static constexpr char WINDOW_NAME[] = "Game Window"; // アプリケーション名
+		HINSTANCE mHInstance{ nullptr };
+		int mWidth{ Screen::WIDTH };
+		int mHeigth{ Screen::HEIGHT };
 
+		// ウィンドウプロシージャ
+		static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+	public:
 		void Initialize(HINSTANCE hInstance, int width = Screen::WIDTH, int height = Screen::HEIGHT);
 		void Finalize() const;
 		void Show(int nCmdShow) const;
@@ -53,5 +60,3 @@ namespace System {
 		HWND GetHandle() const { return mHwnd; }
 	};
 }
-
-#endif // SYSTEMWINDOW_H

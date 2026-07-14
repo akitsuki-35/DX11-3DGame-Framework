@@ -39,9 +39,6 @@
     <Filter Include="3Dフレームワーク\Common">
       <UniqueIdentifier>{6d238e21-a4ea-4c2c-b06a-40168897765a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\System">
-      <UniqueIdentifier>{4cfd07e0-80f1-4321-960c-e1c640a7d0be}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Test">
       <UniqueIdentifier>{10a80eed-e6d1-4103-a442-1c89f7677c38}</UniqueIdentifier>
     </Filter>
@@ -56,6 +53,21 @@
     </Filter>
     <Filter Include="未整理">
       <UniqueIdentifier>{f168aaa5-13cf-40d5-b6ed-9eec2ebf1f05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3Dフレームワーク\Engine">
+      <UniqueIdentifier>{5f9a23a6-f09f-47c5-88c7-f09540b6dbe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3Dフレームワーク\Engine\Core">
+      <UniqueIdentifier>{0237132d-6efd-4190-be7a-1556ff42d036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3Dフレームワーク\Engine\Platform">
+      <UniqueIdentifier>{4cfd07e0-80f1-4321-960c-e1c640a7d0be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3Dフレームワーク\Engine\Graphics">
+      <UniqueIdentifier>{a23fa5f7-7fd6-4cfe-8d53-c8b9f0d17b53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3Dフレームワーク\Engine\旧">
+      <UniqueIdentifier>{6a25f9d9-aeea-442f-808e-fd79f897d355}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -152,12 +164,6 @@
     <ClCompile Include="Result.cpp">
       <Filter>3Dフレームワーク\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
@@ -194,23 +200,35 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
     <ClCompile Include="SystemWindow.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemApp.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
+      <Filter>3Dフレームワーク\Engine\Platform</Filter>
     </ClCompile>
     <ClCompile Include="SystemTimer.cpp">
-      <Filter>3Dフレームワーク\System</Filter>
+      <Filter>3Dフレームワーク\Engine\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>3Dフレームワーク\Engine\旧</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>3Dフレームワーク\Engine\旧</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferManager.cpp">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Shadow.cpp">
+      <Filter>3Dフレームワーク\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,7 +260,7 @@
       <Filter>ImGui</Filter>
     </ClInclude>
     <ClInclude Include="SystemWindow.h">
-      <Filter>3Dフレームワーク\System</Filter>
+      <Filter>3Dフレームワーク\Engine\Platform</Filter>
     </ClInclude>
     <ClInclude Include="DebugCollisiondraw.h">
       <Filter>ヘッダー ファイル\Debug</Filter>
@@ -258,9 +276,6 @@
     </ClInclude>
     <ClInclude Include="Debugger.h">
       <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision3D.h">
-      <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>3Dフレームワーク\Common</Filter>
@@ -331,15 +346,6 @@
     <ClInclude Include="Result.h">
       <Filter>3Dフレームワーク\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Main.h">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager.h">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>未整理</Filter>
     </ClInclude>
@@ -385,23 +391,47 @@
     <ClInclude Include="Subject.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="SystemApp.h">
-      <Filter>3Dフレームワーク\System</Filter>
-    </ClInclude>
     <ClInclude Include="SystemTimer.h">
-      <Filter>3Dフレームワーク\System</Filter>
+      <Filter>3Dフレームワーク\Engine\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>3Dフレームワーク\Engine\旧</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>3Dフレームワーク\Engine\旧</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Config.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+      <Filter>3Dフレームワーク\Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="Utility.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+      <Filter>3Dフレームワーク\Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX11Config.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision3D.h">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferManager.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsTypes.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Shadow.h">
+      <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
