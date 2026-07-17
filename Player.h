@@ -27,7 +27,7 @@ private:
 	bool mGround{ true };
 	float mMoveAnimation{ 0.0f };
 
-	SHADER* mShader{};
+	Shader* mShader{};
 
 	//ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
 	//ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー

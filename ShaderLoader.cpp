@@ -14,7 +14,7 @@
 
 using namespace Microsoft::WRL;
 
-SHADER* ShaderLoader::Get(const std::string& keyName)
+Shader* ShaderLoader::Get(const std::string& keyName)
 {
 	if (mShaders.contains(keyName))
 		return mShaders[keyName].get();
@@ -22,7 +22,7 @@ SHADER* ShaderLoader::Get(const std::string& keyName)
 	return nullptr;
 }
 
-SHADER* ShaderLoader::Register(const std::string& keyName, const char* vsPath, const char* psPath)
+Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, const char* psPath)
 {
 	// 登録済みならreturn
 	if (mShaders.contains(keyName)) {
@@ -33,7 +33,7 @@ SHADER* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 	std::string vsKey = normalizePath(vsPath);
 	std::string psKey = normalizePath(psPath);
 
-	auto shader = std::make_unique<SHADER>();
+	auto shader = std::make_unique<Shader>();
 	shader->KeyName = keyName;
 	
 	// 頂点シェーダー作成

@@ -33,7 +33,7 @@ void Renderer::Initialize()
 	D3D11::BufferManager::getInstance().Initialize();
 
 	// シェーダー読み込み
-	Shader::initialize();
+	ShaderSet::initialize();
 }
 
 void Renderer::Begin()

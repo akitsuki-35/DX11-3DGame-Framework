@@ -10,7 +10,7 @@
 
 #include "ShaderLoader.h"
 
-namespace Shader {
+namespace ShaderSet {
 	inline void initialize() {
 			ShaderLoader::getInstance().Register("Unlit", 
 				"Resources\\Shaders\\unlitTextureVS.cso", "Resources\\Shaders\\unlitTexturePS.cso");
