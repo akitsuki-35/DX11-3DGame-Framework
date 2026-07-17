@@ -227,6 +227,9 @@
     <ClCompile Include="Shadow.cpp">
       <Filter>3Dフレームワーク\Common</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WICTextureLoader11.h">
@@ -429,6 +432,12 @@
     </ClInclude>
     <ClInclude Include="Shadow.h">
       <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderContainer.h">
+      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

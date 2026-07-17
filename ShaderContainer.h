@@ -8,11 +8,11 @@
 *============================================================*/
 #pragma once
 
-#include "ShaderManager.h"
+#include "ShaderLoader.h"
 
 namespace Shader {
-
-	inline SHADER Unlit{
-
-	};
+	inline void initialize() {
+			ShaderLoader::getInstance().Register("Unlit", 
+				"Resources\\Shaders\\unlitTextureVS.cso", "Resources\\Shaders\\unlitTexturePS.cso");
+	}
 }

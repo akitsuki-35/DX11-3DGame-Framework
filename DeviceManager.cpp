@@ -15,24 +15,24 @@
 bool D3D11::DeviceManager::Initialize()
 {
 	// デバイス・スワップチェーン生成
-	if (!GenerateDeviceAndSwapChain()) { return false; }
+	if (!generateDeviceAndSwapChain()) { return false; }
 
 	// デプスステンシルビュー生成
-	if (!GenerateDepthStencilView()) { return false; }
+	if (!generateDepthStencilView()) { return false; }
 
 	// レンダーステート生成
-	if (!GenerateDepthStencilState()) { return false; }
-	if (!GenerateBlendState()) { return false; }
-	if (!GenerateRasterizerState()) { return false; }
-	if (!GenerateSamplerState()) { return false; }
+	if (!generateDepthStencilState()) { return false; }
+	if (!generateBlendState()) { return false; }
+	if (!generateRasterizerState()) { return false; }
+	if (!generateSamplerState()) { return false; }
 
 	// レンダーステート登録
-	RenderStateRegister();
+	renderStateRegister();
     
 	return true;
 }
 
-bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
+bool D3D11::DeviceManager::generateDeviceAndSwapChain()
 {
 	HRESULT hr = S_OK;
 
@@ -91,7 +91,7 @@ bool D3D11::DeviceManager::GenerateDeviceAndSwapChain()
 	return true;
 }
 
-bool D3D11::DeviceManager::GenerateDepthStencilView()
+bool D3D11::DeviceManager::generateDepthStencilView()
 {
 	HRESULT hr = S_OK;
 
@@ -135,7 +135,7 @@ bool D3D11::DeviceManager::GenerateDepthStencilView()
 	return true;
 }
 
-bool D3D11::DeviceManager::GenerateDepthStencilState()
+bool D3D11::DeviceManager::generateDepthStencilState()
 {
 	HRESULT hr = S_OK;
 
@@ -162,7 +162,7 @@ bool D3D11::DeviceManager::GenerateDepthStencilState()
 	return true;
 }
 
-bool D3D11::DeviceManager::GenerateBlendState()
+bool D3D11::DeviceManager::generateBlendState()
 {
 	HRESULT hr = S_OK;
 
@@ -202,7 +202,7 @@ bool D3D11::DeviceManager::GenerateBlendState()
 	return true;
 }
 
-bool D3D11::DeviceManager::GenerateRasterizerState()
+bool D3D11::DeviceManager::generateRasterizerState()
 {
 	HRESULT hr = S_OK;
 
@@ -229,7 +229,7 @@ bool D3D11::DeviceManager::GenerateRasterizerState()
 	return true;
 }
 
-bool D3D11::DeviceManager::GenerateSamplerState()
+bool D3D11::DeviceManager::generateSamplerState()
 {
 	HRESULT hr = S_OK;
 
@@ -263,7 +263,7 @@ bool D3D11::DeviceManager::GenerateSamplerState()
 	return true;
 }
 
-void D3D11::DeviceManager::RenderStateRegister()
+void D3D11::DeviceManager::renderStateRegister()
 {
 	// 深度ステート登録
 	RenderState::Depth::Enable = _mDepthEnable.get();

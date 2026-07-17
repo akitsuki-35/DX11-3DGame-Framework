@@ -81,13 +81,13 @@ namespace D3D11 {
 
 	private:
 		// デバイス・ステート生成
-		bool GenerateDeviceAndSwapChain();
-		bool GenerateDepthStencilView();
-		bool GenerateDepthStencilState();
-		bool GenerateBlendState();
-		bool GenerateRasterizerState();
-		bool GenerateSamplerState();
-		void RenderStateRegister();
+		bool generateDeviceAndSwapChain();
+		bool generateDepthStencilView();
+		bool generateDepthStencilState();
+		bool generateBlendState();
+		bool generateRasterizerState();
+		bool generateSamplerState();
+		void renderStateRegister();
 
 	public:
 		// ゲッター
