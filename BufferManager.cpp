@@ -15,11 +15,11 @@ using namespace DirectX;
 void D3D11::BufferManager::Initialize()
 {
 	// 定数バッファ初期化
-	_mWorld = GenerateBuffer(sizeof(DirectX::XMMATRIX));
-	_mView = GenerateBuffer(sizeof(DirectX::XMMATRIX));
-	_mProjection = GenerateBuffer(sizeof(DirectX::XMMATRIX));
-	_mMaterial = GenerateBuffer(sizeof(Element::MATERIAL));
-	_mLight = GenerateBuffer(sizeof(Element::LIGHT));
+	_mWorld = generateBuffer(sizeof(DirectX::XMMATRIX));
+	_mView = generateBuffer(sizeof(DirectX::XMMATRIX));
+	_mProjection = generateBuffer(sizeof(DirectX::XMMATRIX));
+	_mMaterial = generateBuffer(sizeof(Element::MATERIAL));
+	_mLight = generateBuffer(sizeof(Element::LIGHT));
 
 	// ライト初期化
 	Element::LIGHT light{};
@@ -36,7 +36,7 @@ void D3D11::BufferManager::Initialize()
 	D3D11::BufferManager::getInstance().SetMaterial(material);
 }
 
-winrt::com_ptr<ID3D11Buffer> D3D11::BufferManager::GenerateBuffer(UINT size)
+winrt::com_ptr<ID3D11Buffer> D3D11::BufferManager::generateBuffer(UINT size)
 {
 	// 定数バッファ生成
 	D3D11_BUFFER_DESC bufferDesc{};

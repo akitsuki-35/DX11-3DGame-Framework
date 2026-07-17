@@ -58,7 +58,7 @@ namespace D3D11 {
 
 	private:
 		// 定数バッファ生成
-		winrt::com_ptr<ID3D11Buffer> GenerateBuffer(UINT size);
+		winrt::com_ptr<ID3D11Buffer> generateBuffer(UINT size);
 
 	public:
 		// セッター

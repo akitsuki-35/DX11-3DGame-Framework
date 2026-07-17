@@ -34,8 +34,10 @@ void Player::Initialize()
 	AddComponent<ModelRenderer>(this)->Load("Resources\\Models\\player.obj");
 
 	// シェーダー読込
-	Renderer::getInstance().CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	Renderer::getInstance().CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+	mShader = ShaderLoader::getInstance().Get("Unlit");
+
+	//Renderer::getInstance().CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
+	//Renderer::getInstance().CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 
 	mSE = AddComponent<Audio>(this);
 	mSE->Load("Resources\\Audios\\wan.wav");
@@ -43,10 +45,6 @@ void Player::Initialize()
 
 void Player::Finalize()
 {
-	_mPixelShader->Release();
-	_mVertexShader->Release();
-	_mVertexLayout->Release();
-
 	GameObject::Finalize();
 }
 
@@ -206,11 +204,11 @@ void Player::Update()
 void Player::Draw() const
 {
 	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(_mVertexLayout);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->Layout.Get());
 
 	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(_mVertexShader, NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(_mPixelShader, NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->VertexShader.Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->PixelShader.Get(), NULL, 0);
 
 	// マトリクス設定
 	XMMATRIX w, s, r, t;
