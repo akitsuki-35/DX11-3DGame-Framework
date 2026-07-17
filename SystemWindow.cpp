@@ -19,7 +19,7 @@ void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
 
 	wcex.cbSize = sizeof(WNDCLASSEX);
 	wcex.style = 0;
-	wcex.lpfnWndProc = WndProc;
+	wcex.lpfnWndProc = wndProc;
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = hInstance;
@@ -94,7 +94,7 @@ int System::Window::ProcessMessage() const
 	return 0;
 }
 
-LRESULT System::Window::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT System::Window::wndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	// ウィンドウプロシージャ
 	switch (uMsg)

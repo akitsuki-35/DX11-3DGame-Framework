@@ -10,7 +10,8 @@
 #include "Renderer.h"
 #include "DeviceManager.h"
 #include "BufferManager.h"
-
+#include "ShaderContainer.h"
+#include "ShaderLoader.h"
 #include "SystemWindow.h"
 #include <io.h>
 
@@ -25,35 +26,19 @@ void Renderer::Initialize()
 	if (FAILED(hr)) { return; }
 
 	// ビューポート設定
-	D3D11_VIEWPORT viewport{};
-	viewport.Width = (FLOAT)Screen::WIDTH;
-	viewport.Height = (FLOAT)Screen::HEIGHT;
-	viewport.MinDepth = 0.0f;
-	viewport.MaxDepth = 1.0f;
-	viewport.TopLeftX = 0;
-	viewport.TopLeftY = 0;
-	device.GetContext()->RSSetViewports(1, &viewport);
+	// デフォルトではウィンドウ幅全体を使用
+	SetViewport();
 
-
+	// 定数バッファ初期化
 	D3D11::BufferManager::getInstance().Initialize();
 
-	//// ライト初期化
-	//Element::LIGHT light{};
-	//light.Enable = true;
-	//light.Direction = XMFLOAT4(0.0f, -1.0f, 0.0f, 0.0f);
-	//light.Ambient = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);
-	//light.Diffuse = XMFLOAT4(1.5f, 1.5f, 1.5f, 1.0f);
-	//D3D11::BufferManager::getInstance().SetLight(light);
-
-	//// マテリアル初期化
-	//Element::MATERIAL material{};
-	//material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	//material.Ambient = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	//D3D11::BufferManager::getInstance().SetMaterial(material);
+	// シェーダー読み込み
+	Shader::initialize();
 }
 
 void Renderer::Begin()
 {
+	// ※ループ先頭で呼出
 	auto& device = D3D11::DeviceManager::getInstance();
 
 	// 画面クリア
@@ -61,6 +46,7 @@ void Renderer::Begin()
 	device.GetContext()->ClearRenderTargetView( device.GetRenderTargetView().get(), clearColor);
 	device.GetContext()->ClearDepthStencilView( device.GetDepthStencilView().get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
+
 void Renderer::SetViewport(float width, float height)
 {
 	// ビューポート設定
@@ -76,6 +62,7 @@ void Renderer::SetViewport(float width, float height)
 
 void Renderer::End()
 {
+	// ※ループ末尾で呼出
 	D3D11::DeviceManager::getInstance().GetSwapChain()->Present(1, 0);
 }
 
