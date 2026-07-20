@@ -6,8 +6,7 @@
 * 　@date	 : 2026/05/19
 *	@updated : 2026/06/02
 *============================================================*/
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#pragma once
 
 /*============================================================
 *	@class	: Component
@@ -16,12 +15,11 @@
 class Component
 {
 protected:
-
-	class GameObject* m_GameObject = nullptr;
+	class GameObject* mGameObject = nullptr;
 
 public:
 	Component() {}
-	Component(GameObject* Object) { m_GameObject = Object; }
+	Component(GameObject* Object) { mGameObject = Object; }
 	virtual ~Component() {}
 
 	virtual void Initialize() {};
@@ -29,5 +27,3 @@ public:
 	virtual void Update() {};
 	virtual void Draw() {};
 };
-
-#endif // COMPONENT_H

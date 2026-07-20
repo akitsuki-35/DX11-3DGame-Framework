@@ -164,9 +164,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
@@ -229,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="ShaderLoader.cpp">
       <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>3Dフレームワーク\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -349,9 +349,6 @@
     <ClInclude Include="Animation.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>未整理</Filter>
     </ClInclude>
@@ -438,6 +435,9 @@
     </ClInclude>
     <ClInclude Include="ShaderContainer.h">
       <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>3Dフレームワーク\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

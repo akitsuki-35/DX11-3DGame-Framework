@@ -6,12 +6,11 @@
 * 　@date	 : 2026/05/12
 *	@updated : 2026/06/16
 *============================================================*/
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#pragma once
 
-#include "main.h"
 #include "vector3.h"
 #include "component.h"
+#include "Transform.h"
 #include <sstream>
 #include <DirectXMath.h>
 
@@ -24,7 +23,7 @@ class GameObject
 protected: // 継承先からアクセス可能なメンバ変数
 
 	int mLayer{ 1 }; // レイヤー番号
-	float mCameraZ; // カメラからの距離（Zソート用）
+	float mCameraZ{}; // カメラからの距離（Zソート用）
 
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
 	Vector3 mRotation{ 0.0f, 0.0f, 0.0f };
@@ -39,6 +38,7 @@ public:
 	GameObject() = default;
 	GameObject(const Vector3& position, const Vector3& rotation, const Vector3& scale, const std::string& tag, bool isDestroy = true) 
 		: mPosition(position), mRotation(rotation), mScale(scale), mTag(tag), mIsDestroy(isDestroy) {}
+
 	virtual ~GameObject() = default;
 
 	void SetPosition(const Vector3& position) { mPosition = position; }
@@ -115,5 +115,3 @@ public:
 
 	const std::string& GetTag() const { return mTag; }
 };
-
-#endif // GAMEOBJECT_H
