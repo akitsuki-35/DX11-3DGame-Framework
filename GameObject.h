@@ -1,15 +1,15 @@
 ﻿/*============================================================
-*	@file	 : gameobject.h
+*	@file	 : GameObject.h
 *	@brief	 : 3Dゲームオブジェクト基底クラス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/12
-*	@updated : 2026/06/16
+*	@updated : 2026/07/21
 *============================================================*/
 #pragma once
 
 #include "vector3.h"
-#include "component.h"
+#include "Component.h"
 #include "Transform.h"
 #include <sstream>
 #include <DirectXMath.h>
@@ -25,24 +25,24 @@ protected: // 継承先からアクセス可能なメンバ変数
 	int mLayer{ 1 }; // レイヤー番号
 	float mCameraZ{}; // カメラからの距離（Zソート用）
 
-	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
-	Vector3 mRotation{ 0.0f, 0.0f, 0.0f };
-	Vector3 mScale{ 1.0f, 1.0f, 1.0f };
+	// トランスフォーム
+	Transform mTransform{};
 
-	std::list<Component*> mComponents; // コンポーネント
+	// コンポーネント
+	std::list<Component*> mComponents;
 
 	std::string mTag{};
 	bool mIsDestroy{ false };
 
 public:
 	GameObject() = default;
-	GameObject(const Vector3& position, const Vector3& rotation, const Vector3& scale, const std::string& tag, bool isDestroy = true) 
-		: mPosition(position), mRotation(rotation), mScale(scale), mTag(tag), mIsDestroy(isDestroy) {}
+	//GameObject(const Vector3& position, const Vector3& rotation, const Vector3& scale, const std::string& tag, bool isDestroy = true) 
+	//	: mPosition(position), mRotation(rotation), mScale(scale), mTag(tag), mIsDestroy(isDestroy) {}
+
+	//GameObject(const Vector3& position, const Vector3& rotation, const Vector3& scale, const std::string& tag, bool isDestroy = true)
+	//	: mPosition(position), mRotation(rotation), mScale(scale), mTag(tag), mIsDestroy(isDestroy) {}
 
 	virtual ~GameObject() = default;
-
-	void SetPosition(const Vector3& position) { mPosition = position; }
-	void SetScale(const Vector3& scale) { mScale = scale; }
 
 	void SetDestroy() { mIsDestroy = true; }
 	bool Destroy() {
@@ -86,19 +86,17 @@ public:
 	// ゲッター
 	const int& GetLayer() const { return mLayer; }
 	const float& GetCameraZ() const { return mCameraZ; }
-
-	const Vector3& GetPosition() const { return mPosition; }
-	const Vector3& GetRotation() const { return mRotation; }
-	const Vector3& GetScale() const { return mScale; }
+	const Transform& GetTransform() const { return mTransform; }
 
 	// Z値計算
 	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) {
-		Vector3 dir = mPosition - cameraPosition;
+		Vector3 dir = mTransform.GetPosition() - cameraPosition;
 		mCameraZ = Vector3::dot(dir, cameraForward);
 	}
 
 	virtual Vector3 GetForward() const {
-		DirectX::XMMATRIX r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z);
+		Vector3 rotation = mTransform.GetRotation();
+		DirectX::XMMATRIX r = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
 
 		Vector3 forward;
 		XMStoreFloat3((XMFLOAT3*)&forward, r.r[2]);
@@ -106,7 +104,8 @@ public:
 	}
 
 	virtual Vector3 GetRight() const {
-		DirectX::XMMATRIX r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z);
+		Vector3 rotation = mTransform.GetRotation();
+		DirectX::XMMATRIX r = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
 
 		Vector3 forward;
 		XMStoreFloat3((XMFLOAT3*)&forward, r.r[0]);

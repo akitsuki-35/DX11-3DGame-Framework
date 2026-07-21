@@ -48,6 +48,7 @@ private:
 	// 更新フラグをオン
 	void markDirty() { mDirty = true; }
 	
+public:
 	// セッター
 	// メンバ更新後、更新フラグ有効化
 	void SetPosition(const Vector3& position) {
@@ -67,7 +68,7 @@ private:
 	const Vector3& GetPosition() const { return mPosition; }
 	const Vector3& GetRotation() const { return mRotation; }
 	const Vector3& GetScale() const { return mScale; }
-	const DirectX::XMMATRIX& GetWorldMatrix() {
+	const DirectX::XMMATRIX& GetWorldMatrix() const {
 		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
 		if (mDirty) { rebuildWorldMatrix(); }
 		return mWorldMatrix;
