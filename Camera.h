@@ -29,15 +29,15 @@ public:
 
 	XMMATRIX GetViewMatrix() const { return mViewMatrix; }
 
-	virtual Vector3 GetForward() const override {
+	Vector3 GetForward() const {
 		Vector3 forward = mTarget - mTransform.GetPosition();
 		forward.Normalize();
 
 		return forward;
 	}
 
-	virtual Vector3 GetRight() const override {
-		Vector3 forward = mTarget - mTransform.GetPosition();
+	Vector3 GetRight() const {
+		Vector3 forward = GetForward();
 		Vector3 up = Vector3(0.0f, 1.0f, 0.0f);
 		Vector3 right = Vector3::cross(up, forward);
 		right.Normalize();

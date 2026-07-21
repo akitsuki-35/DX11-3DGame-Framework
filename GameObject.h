@@ -94,23 +94,5 @@ public:
 		mCameraZ = Vector3::dot(dir, cameraForward);
 	}
 
-	virtual Vector3 GetForward() const {
-		Vector3 rotation = mTransform.GetRotation();
-		DirectX::XMMATRIX r = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-
-		Vector3 forward;
-		XMStoreFloat3((XMFLOAT3*)&forward, r.r[2]);
-		return forward;
-	}
-
-	virtual Vector3 GetRight() const {
-		Vector3 rotation = mTransform.GetRotation();
-		DirectX::XMMATRIX r = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-
-		Vector3 forward;
-		XMStoreFloat3((XMFLOAT3*)&forward, r.r[0]);
-		return forward;
-	}
-
 	const std::string& GetTag() const { return mTag; }
 };

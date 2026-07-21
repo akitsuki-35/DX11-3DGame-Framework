@@ -44,10 +44,10 @@ private:
 
 	// ワールド行列を更新
 	void rebuildWorldMatrix() const;
-	
+
 	// 更新フラグをオン
 	void markDirty() { mDirty = true; }
-	
+
 public:
 	// セッター
 	// メンバ更新後、更新フラグ有効化
@@ -55,11 +55,11 @@ public:
 		mPosition = position;
 		markDirty();
 	}
-	void SetRotation(const Vector3& rotation) { 
+	void SetRotation(const Vector3& rotation) {
 		mRotation = rotation;
 		markDirty();
 	}
-	void SetScale(const Vector3& scale) { 
+	void SetScale(const Vector3& scale) {
 		mScale = scale;
 		markDirty();
 	}
@@ -72,5 +72,41 @@ public:
 		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
 		if (mDirty) { rebuildWorldMatrix(); }
 		return mWorldMatrix;
+	}
+
+	// 前方向取得
+	Vector3 GetForward() const {
+		const DirectX::XMMATRIX& world = GetWorldMatrix();
+
+		Vector3 forward{};
+		XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&forward), world.r[2]);
+
+		forward.Normalize();
+
+		return forward;
+	}
+
+	// 右方向取得
+	Vector3 GetRight() const {
+		const DirectX::XMMATRIX& world = GetWorldMatrix();
+
+		Vector3 right{};
+		XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&right), world.r[0]);
+
+		right.Normalize();
+
+		return right;
+	}
+
+	// 上方向取得
+	Vector3 GetUp() const {
+		const DirectX::XMMATRIX& world = GetWorldMatrix();
+
+		Vector3 up{};
+		XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&up), world.r[1]);
+
+		up.Normalize();
+
+		return up;
 	}
 };
