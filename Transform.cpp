@@ -6,36 +6,53 @@
 * 　@date	 : 2026/05/19
 *	@updated : 2026/06/02
 *============================================================*/
-#include "main.h"
-#include "renderer.h"
-#include "transform.h"
+#include "Transform.h"
 
-void Transform::Initialize()
+using namespace DirectX;
+
+DirectX::XMMATRIX Transform::createScaleMatrix() const
 {
+    // スケール行列作成
+    XMMATRIX scale =
+        XMMatrixScaling(
+            mScale.x,
+            mScale.y,
+            mScale.z);
+
+    return scale;
 }
 
-void Transform::Finalize()
+DirectX::XMMATRIX Transform::createRotationMatrix() const
 {
+    // 回転行列作成
+    XMMATRIX rotation =
+        XMMatrixRotationRollPitchYaw(
+            mRotation.x,
+            mRotation.y,
+            mRotation.z);
+
+    return rotation;
 }
 
-void Transform::Update()
+DirectX::XMMATRIX Transform::createTranslationMatrix() const
 {
+    // 移動行列作成
+    XMMATRIX translation =
+        XMMatrixTranslation(
+            mPosition.x,
+            mPosition.y,
+            mPosition.z);
+
+    return translation;
 }
 
-void Transform::Draw()
+void Transform::rebuildWorldMatrix() const
 {
-	// 入力レイアウト設定
-	Renderer::GetDeviceContext()->IASetInputLayout(pVertexLayout);
+    XMMATRIX scale = createScaleMatrix();
+    XMMATRIX rotation = createRotationMatrix();
+    XMMATRIX translation = createTranslationMatrix();
 
-	// シェーダー設定
-	Renderer::GetDeviceContext()->VSSetShader(pVertexShader, NULL, 0);
-	Renderer::GetDeviceContext()->PSSetShader(pPixelShader, NULL, 0);
+    mWorldMatrix = scale * rotation * translation;
 
-	// マトリクス設定
-	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(scale.x, scale.y, scale.z); // 拡大縮小
-	r = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z); // 回転
-	t = XMMatrixTranslation(position.x, position.y, position.z); // 平行移動
-	w = s * r * t;
-	Renderer::SetWorldMatrix(w);
+    mDirty = false;
 }

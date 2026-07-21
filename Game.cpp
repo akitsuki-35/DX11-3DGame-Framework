@@ -96,7 +96,7 @@ void Game::Draw() const
 		if (camera) {
 
 			Vector3 forward = camera->GetForward();
-			Vector3 position = camera->GetPosition();
+			Vector3 position = camera->GetTransform().GetPosition();
 
 			for (GameObject* obj : gameObjects) {
 				obj->CalcCameraZ(position, forward);

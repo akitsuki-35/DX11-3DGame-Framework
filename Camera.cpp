@@ -21,7 +21,9 @@ void Camera::Initialize()
 {
 	mLayer = 0;
 
-	mPosition = Vector3(0.0f, 5.0f, -10.0f);
+	mTransform.SetPosition({ 0.0f, 5.0f, -10.0f });
+
+	//mPosition = Vector3(0.0f, 5.0f, -10.0f);
 	mTarget = Vector3(0.0f, 0.0f, 0.0f);
 }
 
@@ -32,23 +34,28 @@ void Camera::Finalize()
 void Camera::Update()
 {
 	Player* player = Game::GetGameObject<Player>();
-	Vector3 playerPos = player->GetPosition();
+	Vector3 playerPos = player->GetTransform().GetPosition();
 
 	float dt = 1.0f / 60.0f;
 
+	Vector3 rotation = mTransform.GetRotation();
+
 	if (Input::GetKeyPress(VK_LEFT)) {
-		mRotation.y -= 3.0f * dt;
+		mTransform.SetRotation({ rotation.x, rotation.y -= 3.0f * dt, rotation.z });
 	}
 	else if (Input::GetKeyPress(VK_RIGHT)) {
-		mRotation.y += 3.0f * dt;
+		mTransform.SetRotation({ rotation.x, rotation.y += 3.0f * dt, rotation.z });
 	}
+
+	rotation = mTransform.GetRotation();
 
 	float t = 0.1f;
 	mTarget = mTarget * (1.0f - t) + (playerPos + Vector3(0.0f, 2.0f, 0.0f)) * t;
-	mPosition = mTarget + Vector3(-sinf(mRotation.y) * 10.0f, 5.0f, -cosf(mRotation.y) * 10.0f);
+	//mPosition = mTarget + Vector3(-sinf(rotation.y) * 10.0f, 5.0f, -cosf(rotation.y) * 10.0f);
+	mTransform.SetPosition(mTarget + Vector3(-sinf(rotation.y) * 10.0f, 5.0f, -cosf(rotation.y) * 10.0f));
 
 	XMFLOAT3 up = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	mViewMatrix = XMMatrixLookAtLH(XMLoadFloat3((XMFLOAT3*)&mPosition),
+	mViewMatrix = XMMatrixLookAtLH(XMLoadFloat3((XMFLOAT3*)&mTransform.GetPosition()),
 		XMLoadFloat3((XMFLOAT3*)&mTarget), XMLoadFloat3(&up));
 }
 
@@ -61,20 +68,4 @@ void Camera::Draw() const
 
 	// ビュー行列設定
 	D3D11::BufferManager::getInstance().SetViewMatrix(mViewMatrix);
-}
-
-void TopCamera::Initialize()
-{
-	mPosition = Vector3(0.0f, 10.0f, 0.0f);
-	mTarget = Vector3(0.0f, 0.0f, 0.0f);
-}
-
-void TopCamera::Update()
-{
-	Player* player = Game::GetGameObject<Player>();
-	Vector3 playerPos = player->GetPosition();
-	Vector3 playerForward = player->GetForward();
-
-	mTarget = { playerPos.x, playerPos.y, playerPos.z };
-	mPosition = playerPos + Vector3(0.0f, 10.0f, 1.0f);
 }
