@@ -8,10 +8,11 @@
 *============================================================*/
 #pragma once
 
-#include "vector3.h"
+#include "Vector3.h"
 #include "Component.h"
 #include "Transform.h"
 #include <sstream>
+#include <memory>
 #include <DirectXMath.h>
 
 /*============================================================
@@ -29,19 +30,13 @@ protected: // 継承先からアクセス可能なメンバ変数
 	Transform mTransform{};
 
 	// コンポーネント
-	std::list<Component*> mComponents;
+	std::vector<Component*> mComponents;
 
 	std::string mTag{};
 	bool mIsDestroy{ false };
 
 public:
 	GameObject() = default;
-	//GameObject(const Vector3& position, const Vector3& rotation, const Vector3& scale, const std::string& tag, bool isDestroy = true) 
-	//	: mPosition(position), mRotation(rotation), mScale(scale), mTag(tag), mIsDestroy(isDestroy) {}
-
-	//GameObject(const Vector3& position, const Vector3& rotation, const Vector3& scale, const std::string& tag, bool isDestroy = true)
-	//	: mPosition(position), mRotation(rotation), mScale(scale), mTag(tag), mIsDestroy(isDestroy) {}
-
 	virtual ~GameObject() = default;
 
 	void SetDestroy() { mIsDestroy = true; }
@@ -91,7 +86,7 @@ public:
 	// Z値計算
 	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) {
 		Vector3 dir = mTransform.GetPosition() - cameraPosition;
-		mCameraZ = Vector3::dot(dir, cameraForward);
+		mCameraZ = Vector3::Dot(dir, cameraForward);
 	}
 
 	const std::string& GetTag() const { return mTag; }

@@ -43,8 +43,8 @@ void Renderer::Begin()
 
 	// 画面クリア
 	float clearColor[4] = { 0.2f, 0.5f, 0.1f, 1.0f };
-	device.GetContext()->ClearRenderTargetView( device.GetRenderTargetView().get(), clearColor);
-	device.GetContext()->ClearDepthStencilView( device.GetDepthStencilView().get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+	device.GetContext()->ClearRenderTargetView( device.GetRenderTargetView().Get(), clearColor);
+	device.GetContext()->ClearDepthStencilView( device.GetDepthStencilView().Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 void Renderer::SetViewport(float width, float height)

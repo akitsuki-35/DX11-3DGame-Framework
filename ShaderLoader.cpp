@@ -9,6 +9,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "ShaderLoader.h"
 #include "DeviceManager.h"
+#include <cassert>
 #include <shlwapi.h>
 #include <io.h>
 

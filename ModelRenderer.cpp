@@ -157,7 +157,7 @@ void ModelRenderer::LoadModel( const char *FileName, MODEL *Model)
 			wchar_t wc[256];
 			mbstowcs(wc, modelObj.SubsetArray[i].Material.TextureName, sizeof(wc));
 			LoadFromWICFile(wc, WIC_FLAGS_NONE, &metadata, image);
-			CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().get(), image.GetImages(), image.GetImageCount(), metadata, &Model->SubsetArray[i].Material.Texture);
+			CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(), image.GetImages(), image.GetImageCount(), metadata, &Model->SubsetArray[i].Material.Texture);
 
 			if (Model->SubsetArray[i].Material.Texture)
 				Model->SubsetArray[i].Material.Material.TextureEnable = true;

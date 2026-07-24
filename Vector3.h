@@ -1,15 +1,14 @@
 ﻿/*============================================================
-*	@file	 : vector3.h
+*	@file	 : Vector3.h
 *	@brief	 : 3次元ベクトルクラス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/23
-*	@updated : 2026/06/16
+*	@updated : 2026/07/24
 *============================================================*/
-#ifndef VECTOR3_H
-#define VECTOR3_H
+#pragma once
 
-#include <math.h>
+#include <cmath>
 
 /*============================================================
 *	@class	: Vector3
@@ -31,7 +30,7 @@ public:
 /*------------------------------------------------------------
 	代入
 ------------------------------------------------------------*/
-	Vector3& operator = (const Vector3& vector3) {
+	Vector3& operator=(const Vector3& vector3) {
 		x = vector3.x;
 		y = vector3.y;
 		z = vector3.z;
@@ -41,11 +40,11 @@ public:
 /*------------------------------------------------------------
 	比較
 ------------------------------------------------------------*/
-	bool operator == (const Vector3 & vector3) const{
+	bool operator==(const Vector3& vector3) const {
 		return x == vector3.x && y == vector3.y && z == vector3.z;
 	}
 
-	bool operator != (const Vector3& vector3) const {
+	bool operator!=(const Vector3& vector3) const {
 		return x != vector3.x || y != vector3.y || z != vector3.z;
 	}
 
@@ -59,29 +58,29 @@ public:
 /*------------------------------------------------------------
 	ベクトルの反転
 ------------------------------------------------------------*/
-	Vector3 operator - () const {
+	Vector3 operator-() const {
 		return Vector3(-x, -y, -z);
 	}
 
 /*------------------------------------------------------------
 	加減算
 ------------------------------------------------------------*/
-	Vector3 operator + (const Vector3& vector3) const {
+	Vector3 operator+(const Vector3& vector3) const {
 		return Vector3(x + vector3.x, y + vector3.y, z + vector3.z);
 	}
 
-	Vector3 operator - (const Vector3& vector3) const {
+	Vector3 operator-(const Vector3& vector3) const {
 		return Vector3(x - vector3.x, y - vector3.y, z - vector3.z);
 	}
 
 /*------------------------------------------------------------
-	乗余算
+	乗除算
 ------------------------------------------------------------*/
-	Vector3 operator * (float scalar) const {
+	Vector3 operator*(float scalar) const {
 		return Vector3(x * scalar, y * scalar, z * scalar);
 	}
 
-	Vector3 operator / (float scalar) const {
+	Vector3 operator/(float scalar) const {
 		float oneOverA = 1.0f / scalar;
 		return Vector3(x * oneOverA, y * oneOverA, z * oneOverA);
 	}
@@ -89,28 +88,28 @@ public:
 /*------------------------------------------------------------
 	代入演算
 ------------------------------------------------------------*/
-	Vector3& operator += (const Vector3& vector3) {
+	Vector3& operator+=(const Vector3& vector3) {
 		x += vector3.x;
 		y += vector3.y;
 		z += vector3.z;
 		return *this;
 	}
 
-	Vector3& operator -= (const Vector3& vector3) {
+	Vector3& operator-=(const Vector3& vector3) {
 		x -= vector3.x;
 		y -= vector3.y;
 		z -= vector3.z;
 		return *this;
 	}
 
-	Vector3& operator *= (float scalar) {
+	Vector3& operator*=(float scalar) {
 		x *= scalar;
 		y *= scalar;
 		z *= scalar;
 		return *this;
 	}
 
-	Vector3& operator /= (float scalar) {
+	Vector3& operator/=(float scalar) {
 		x /= scalar;
 		y /= scalar;
 		z /= scalar;
@@ -123,7 +122,7 @@ public:
 	void Normalize() {
 		float magSq = x * x + y * y + z * z;
 		if (magSq > 0.0f) {
-			float oneOverMag = 1.0f / sqrt(magSq);
+			float oneOverMag = 1.0f / std::sqrt(magSq);
 			x *= oneOverMag;
 			y *= oneOverMag;
 			z *= oneOverMag;
@@ -135,28 +134,22 @@ public:
 ------------------------------------------------------------*/
 	float Length() const
 	{
-		return sqrt(x * x + y * y + z * z);
+		return std::sqrt(x * x + y * y + z * z);
 	}
 
 /*------------------------------------------------------------
 	内積
 ------------------------------------------------------------*/
-	float operator * (const Vector3& vector3) const {
-		return x * vector3.x + y * vector3.y + z * vector3.z;
-	}
-
-	static float dot(Vector3& a, Vector3& b) {
+	static float Dot(const Vector3& a, const Vector3& b) {
 		return a.x * b.x + a.y * b.y + a.z * b.z;
 	}
 
 /*------------------------------------------------------------
 	外積
 ------------------------------------------------------------*/
-	static Vector3 cross(const Vector3& a, const Vector3& b) {
+	static Vector3 Cross(const Vector3& a, const Vector3& b) {
 		return Vector3(a.y * b.z - a.z * b.y,
 			a.z * b.x - a.x * b.z,
 			a.x * b.y - a.y * b.x);
 	}
 };
-
-#endif // VECTOR3_H

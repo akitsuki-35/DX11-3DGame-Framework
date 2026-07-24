@@ -20,7 +20,7 @@ void Field::Initialize()
 {
 	mLayer = 1;
 
-	Element::VERTEX3D vertex[4];
+	Element::VERTEX3D vertex[4]{};
 
 	vertex[0].Position = XMFLOAT3(-30.0f, 0.0f, 30.0f);
 	vertex[0].Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
@@ -58,7 +58,7 @@ void Field::Initialize()
 	TexMetadata metaData;
 	ScratchImage image;
 	LoadFromWICFile(L"Resources\\Textures\\glass.jpg", WIC_FLAGS_NONE, &metaData, image);
-	CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().get(),
+	CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(),
 		image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
 	assert(_mTexture);
 

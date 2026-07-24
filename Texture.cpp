@@ -1,19 +1,18 @@
 ﻿/*============================================================
-*	@file	 : texture.cpp
+*	@file	 : Texture.cpp
 *	@brief	 : テクスチャ管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
-*	@updated : 2026/06/02
+*	@updated : 2026/07/24
 *============================================================*/
-#include "main.h"
-#include "texture.h"
-#include "sprite.h"
-#include "renderer.h"
-#include "direct3d.h"
-using namespace DirectX;
+#include "Texture.h"
+#include "Sprite.h"
+#include "DeviceManager.h"
 #include <string>
 #include <DirectXTex.h>
+
+using namespace DirectX;
 
 Texture::Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, const float& rotate, const DirectX::XMFLOAT4& color, bool isMipMap)
 	: position(position), drawSize(size), rotate(rotate), color(color)
@@ -44,10 +43,8 @@ Texture::Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position, co
 	}
 
 	//シェーダーリソースビューの生成
-	//HRESULT hr = CreateShaderResourceView(Direct3DGetDevice(), image.GetImages(), image.GetImageCount(),
-	//	metaData, &pShaderResourceView);
-
-	HRESULT hr = CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(),
+	HRESULT hr = CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(),
+		image.GetImages(), image.GetImageCount(),
 		metaData, &pShaderResourceView);
 
 	if (FAILED(hr))
@@ -59,7 +56,7 @@ Texture::Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position, co
 
 Texture::~Texture()
 {
-	SAFE_RELEASE(pShaderResourceView);
+	pShaderResourceView->Release();
 }
 
 void Texture::Draw()
@@ -70,7 +67,7 @@ void Texture::Draw()
 void Texture::SetTexture()
 {
 	// テクスチャ設定
-	Direct3DGetDeviceContext()->PSSetShaderResources(0, 1, &pShaderResourceView);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShaderResources(0, 1, &pShaderResourceView);
 }
 
 SpriteSheet::SpriteSheet(const wchar_t* pFileName, const DirectX::XMUINT2& patternMatrix, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, const float& rotate, const DirectX::XMFLOAT4& color, bool isMipMap)
