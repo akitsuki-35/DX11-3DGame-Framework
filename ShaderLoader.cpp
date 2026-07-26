@@ -9,12 +9,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "ShaderLoader.h"
 #include "DeviceManager.h"
+#include <cassert>
 #include <shlwapi.h>
 #include <io.h>
 
 using namespace Microsoft::WRL;
 
-SHADER* ShaderLoader::Get(const std::string& keyName)
+Shader* ShaderLoader::Get(const std::string& keyName)
 {
 	if (mShaders.contains(keyName))
 		return mShaders[keyName].get();
@@ -22,7 +23,7 @@ SHADER* ShaderLoader::Get(const std::string& keyName)
 	return nullptr;
 }
 
-SHADER* ShaderLoader::Register(const std::string& keyName, const char* vsPath, const char* psPath)
+Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, const char* psPath)
 {
 	// 登録済みならreturn
 	if (mShaders.contains(keyName)) {
@@ -33,19 +34,19 @@ SHADER* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 	std::string vsKey = normalizePath(vsPath);
 	std::string psKey = normalizePath(psPath);
 
-	auto shader = std::make_unique<SHADER>();
-	shader->KeyName = keyName;
+	auto shader = std::make_unique<Shader>();
+	shader->_mKeyName = keyName;
 	
 	// 頂点シェーダー作成
 	if (mVSCache.contains(vsKey)) {
-		shader->VertexShader = mVSCache[vsKey];
-		shader->Layout = mLayoutCache[vsKey];
+		shader->_mVertexShader = mVSCache[vsKey];
+		shader->_mLayout = mLayoutCache[vsKey];
 	}
 	else {
 		auto vsBuffer = road(vsPath);
 
 		D3D11::DeviceManager::getInstance().
-			GetDevice()->CreateVertexShader(vsBuffer.data(), vsBuffer.size(), nullptr, &shader->VertexShader);
+			GetDevice()->CreateVertexShader(vsBuffer.data(), vsBuffer.size(), nullptr, &shader->_mVertexShader);
 
 		// 頂点レイアウト作成
 		D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -60,32 +61,32 @@ SHADER* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 
 		D3D11::DeviceManager::getInstance().
 			GetDevice()->CreateInputLayout(layout, numElements,
-				vsBuffer.data(), vsBuffer.size(), &shader->Layout);
+				vsBuffer.data(), vsBuffer.size(), &shader->_mLayout);
 
 		// キャッシュ登録
-		mVSCache[vsKey] = shader->VertexShader;
-		mLayoutCache[vsKey] = shader->Layout;
+		mVSCache[vsKey] = shader->_mVertexShader;
+		mLayoutCache[vsKey] = shader->_mLayout;
 
 		// キャッシュからコンテナに登録
-		shader->VertexShader = mVSCache[vsKey];
-		shader->Layout = mLayoutCache[vsKey];
+		shader->_mVertexShader = mVSCache[vsKey];
+		shader->_mLayout = mLayoutCache[vsKey];
 	}
 
 	// ピクセルシェーダー作成
 	if (mPSCache.contains(psKey)) {
-		shader->PixelShader = mShaders[psKey]->PixelShader;
+		shader->_mPixelShader = mShaders[psKey]->_mPixelShader;
 	}
 	else {
 		auto psBuffer = road(psPath);
 
 		D3D11::DeviceManager::getInstance().
-			GetDevice()->CreatePixelShader(psBuffer.data(), psBuffer.size(), nullptr, &shader->PixelShader);
+			GetDevice()->CreatePixelShader(psBuffer.data(), psBuffer.size(), nullptr, &shader->_mPixelShader);
 	
 		// キャッシュ登録
-		mPSCache[psKey] = shader->PixelShader;
+		mPSCache[psKey] = shader->_mPixelShader;
 
 		// キャッシュからコンテナに登録
-		shader->PixelShader = mPSCache[psKey];
+		shader->_mPixelShader = mPSCache[psKey];
 	}
 
 	// コンテナに登録

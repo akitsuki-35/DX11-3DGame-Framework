@@ -14,15 +14,23 @@
 #include <unordered_map>
 #include <wrl/client.h>
 
-// シェーダー構造体
-struct SHADER
+/*============================================================
+*	@class	: Shader
+*	@brief	: シェーダーのセット記録
+*============================================================*/
+class Shader
 {
-	std::string KeyName;
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> VertexShader;
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> PixelShader;
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> Layout;
+public:
+	std::string _mKeyName;
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> _mVertexShader{};
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> _mPixelShader{};
+	Microsoft::WRL::ComPtr<ID3D11InputLayout> _mLayout{};
 };
 
+/*============================================================
+*	@class	: ShaderLoader
+*	@brief	: シェーダーのロード・管理
+*============================================================*/
 class ShaderLoader final
 {
 /*--------------------------------------------------
@@ -49,20 +57,20 @@ private:
 ----------------------------------------------------*/
 private:
 	// シェーダーコンテナ
-	std::unordered_map <std::string, std::unique_ptr<SHADER>> mShaders;
+	std::unordered_map <std::string, std::unique_ptr<Shader>> mShaders{};
 
 	// キャッシュ
-	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11VertexShader>> mVSCache;
-	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11PixelShader>> mPSCache;
-	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11InputLayout>>  mLayoutCache;
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11VertexShader>> mVSCache{};
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11PixelShader>> mPSCache{};
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11InputLayout>>  mLayoutCache{};
 
 public:
 	// 登録
-	SHADER* Register(const std::string& keyName,
+	Shader* Register(const std::string& keyName,
 		const char* vsPath, const char* psPath);
 
 	// 登録済みシェーダーの取得
-	SHADER* Get(const std::string& keyName);
+	Shader* Get(const std::string& keyName);
 
 private:
 	std::vector<char> road(const char* filePath);

@@ -36,7 +36,7 @@ void D3D11::BufferManager::Initialize()
 	D3D11::BufferManager::getInstance().SetMaterial(material);
 }
 
-winrt::com_ptr<ID3D11Buffer> D3D11::BufferManager::generateBuffer(UINT size)
+Microsoft::WRL::ComPtr<ID3D11Buffer> D3D11::BufferManager::generateBuffer(UINT size)
 {
 	// 定数バッファ生成
 	D3D11_BUFFER_DESC bufferDesc{};
@@ -49,7 +49,7 @@ winrt::com_ptr<ID3D11Buffer> D3D11::BufferManager::generateBuffer(UINT size)
 
 	ComPtr<ID3D11Buffer> buffer;
 	D3D11::DeviceManager::getInstance().
-		GetDevice()->CreateBuffer(&bufferDesc, nullptr, buffer.put());
+		GetDevice()->CreateBuffer(&bufferDesc, nullptr, &buffer);
 
 	return buffer;
 }
@@ -71,9 +71,9 @@ void D3D11::BufferManager::SetWorldMatrix(DirectX::XMMATRIX worldMatrix)
 	XMFLOAT4X4 worldf;
 	XMStoreFloat4x4(&worldf, XMMatrixTranspose(worldMatrix));
 	DeviceManager::getInstance().
-		GetContext()->UpdateSubresource(_mWorld.get(), 0, nullptr, &worldf, 0, 0);
+		GetContext()->UpdateSubresource(_mWorld.Get(), 0, nullptr, &worldf, 0, 0);
 
-	ID3D11Buffer* buf = _mWorld.get();
+	ID3D11Buffer* buf = _mWorld.Get();
 	DeviceManager::getInstance().
 		GetContext()->VSSetConstantBuffers(0, 1, &buf);
 }
@@ -84,9 +84,9 @@ void D3D11::BufferManager::SetViewMatrix(DirectX::XMMATRIX viewMatrix)
 	XMFLOAT4X4 viewf;
 	XMStoreFloat4x4(&viewf, XMMatrixTranspose(viewMatrix));
 	DeviceManager::getInstance().
-		GetContext()->UpdateSubresource(_mView.get(), 0, nullptr, &viewf, 0, 0);
+		GetContext()->UpdateSubresource(_mView.Get(), 0, nullptr, &viewf, 0, 0);
 
-	ID3D11Buffer* buf = _mView.get();
+	ID3D11Buffer* buf = _mView.Get();
 	DeviceManager::getInstance().
 		GetContext()->VSSetConstantBuffers(1, 1, &buf);
 }
@@ -97,9 +97,9 @@ void D3D11::BufferManager::SetProjectionMatrix(DirectX::XMMATRIX projectionMatri
 	XMFLOAT4X4 projectionf;
 	XMStoreFloat4x4(&projectionf, XMMatrixTranspose(projectionMatrix));
 	DeviceManager::getInstance().
-		GetContext()->UpdateSubresource(_mProjection.get(), 0, nullptr, &projectionf, 0, 0);
+		GetContext()->UpdateSubresource(_mProjection.Get(), 0, nullptr, &projectionf, 0, 0);
 
-	ID3D11Buffer* buf = _mProjection.get();
+	ID3D11Buffer* buf = _mProjection.Get();
 	DeviceManager::getInstance().
 		GetContext()->VSSetConstantBuffers(2, 1, &buf);
 }
@@ -108,9 +108,9 @@ void D3D11::BufferManager::SetMaterial(Element::MATERIAL material)
 {
 	// マテリアル設定
 	DeviceManager::getInstance().
-		GetContext()->UpdateSubresource(_mMaterial.get(), 0, nullptr, &material, 0, 0);
+		GetContext()->UpdateSubresource(_mMaterial.Get(), 0, nullptr, &material, 0, 0);
 
-	ID3D11Buffer* buf = _mMaterial.get();
+	ID3D11Buffer* buf = _mMaterial.Get();
 	DeviceManager::getInstance().
 		GetContext()->VSSetConstantBuffers(3, 1, &buf);
 	DeviceManager::getInstance().
@@ -121,9 +121,9 @@ void D3D11::BufferManager::SetLight(Element::LIGHT light)
 {
 	// ライト設定
 	DeviceManager::getInstance().
-		GetContext()->UpdateSubresource(_mLight.get(), 0, nullptr, &light, 0, 0);
+		GetContext()->UpdateSubresource(_mLight.Get(), 0, nullptr, &light, 0, 0);
 
-	ID3D11Buffer* buf = _mLight.get();
+	ID3D11Buffer* buf = _mLight.Get();
 	DeviceManager::getInstance().
 		GetContext()->VSSetConstantBuffers(4, 1, &buf);
 	DeviceManager::getInstance().

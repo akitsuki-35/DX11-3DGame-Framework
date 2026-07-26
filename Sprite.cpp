@@ -4,11 +4,13 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/01
-*	@updated : 2026/06/02
+*	@updated : 2026/07/24
 *============================================================*/
 #include "Sprite.h"
-#include "Shader2D.h"
+#include "Renderer.h"
+#include "BufferManager.h"
 #include "Texture.h"
+#include "Config.h"
 #include "DebugOstream.h"
 using namespace DirectX;
 
@@ -36,12 +38,12 @@ const void Sprite::Initialize()
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-	Direct3DGetDevice()->CreateBuffer(&bd, NULL, &pVertexBuffer);
+	D3D11::DeviceManager::getInstance().GetDevice()->CreateBuffer(&bd, NULL, &pVertexBuffer);
 }
 
 const void Sprite::Finalize()
 {
-	SAFE_RELEASE(pVertexBuffer);
+	pVertexBuffer->Release();
 }
 
 /*------------------------------------------------------------
@@ -52,18 +54,18 @@ const void Sprite::Draw(Texture* pTexture, const DirectX::XMFLOAT2& position, co
 	pTexture->SetTexture();
 
 	// シェーダーを描画パイプラインに設定
-	Shader2DBeginLinear();
+	Renderer::getInstance().Begin();
 
 	// 頂点バッファをロックする
 	D3D11_MAPPED_SUBRESOURCE msr;
-	Direct3DGetDeviceContext()->Map(pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+	D3D11::DeviceManager::getInstance().GetContext()->Map(pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 
 	// 頂点バッファへの仮想ポインタを取得
 	Vertex* v = (Vertex*)msr.pData;
 
 	// 頂点情報を書き込み
-	const float SCREEN_WIDTH = static_cast<float>(Direct3DGetBackBufferWidth());
-	const float SCREEN_HEIGHT = static_cast<float>(Direct3DGetBackBufferHeight());
+	const float SCREEN_WIDTH = static_cast<float>(Screen::WIDTH);
+	const float SCREEN_HEIGHT = static_cast<float>(Screen::HEIGHT);
 
 	//四角形の描画
 	v[0].position = { position.x, position.y, 0.0f };
@@ -83,12 +85,13 @@ const void Sprite::Draw(Texture* pTexture, const DirectX::XMFLOAT2& position, co
 	v[3].texCoord = { 1.0f, 1.0f };
 
 	// 頂点バッファのロックを解除
-	Direct3DGetDeviceContext()->Unmap(pVertexBuffer, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->Unmap(pVertexBuffer, 0);
 
 	// 頂点バッファを描画パイプラインに設定
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-	Direct3DGetDeviceContext()->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
+	D3D11::DeviceManager::getInstance().GetContext()
+		->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
 
 	// 中心座標を算出
 	float centerX = position.x + size.x / 2;
@@ -98,19 +101,20 @@ const void Sprite::Draw(Texture* pTexture, const DirectX::XMFLOAT2& position, co
 	XMMATRIX transToCenter = XMMatrixTranslation(-centerX, -centerY, 0.0f);
 	XMMATRIX rot = XMMatrixRotationZ(-rotate);
 	XMMATRIX transBack = XMMatrixTranslation(centerX, centerY, 0.0f);
+	XMMATRIX world = transToCenter * rot * transBack;
 
 	// 頂点シェーダーにワールド変換行列を設定
-	Shader2DSetWorldMatrix(transToCenter * rot * transBack);
+	D3D11::BufferManager::getInstance().SetWorldMatrix(world);
 
 	// 頂点シェーダーにプロジェクション変換行列を設定
-	Shader2DSetProjectionMatrix(XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
-	Shader2DSetColor({ 1.0f,1.0f,1.0f,1.0f });
+	D3D11::BufferManager::getInstance().SetProjectionMatrix(XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
+	//D3D11::BufferManager::getInstance().SetMaterial({ 1.0f,1.0f,1.0f,1.0f });
 
 	// プリミティブトポロジ設定
-	Direct3DGetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 	// ポリゴン描画命令発行
-	Direct3DGetDeviceContext()->Draw(NUM_VERTEX, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->Draw(NUM_VERTEX, 0);
 }
 
 /*------------------------------------------------------------
@@ -121,18 +125,18 @@ const void Sprite::Draw(SpriteSheet* pSpriteSheet, const int& patternNum, const 
 	pSpriteSheet->SetTexture();
 
 	// シェーダーを描画パイプラインに設定
-	Shader2DBeginPoint();
+	Renderer::getInstance().Begin();
 
 	// 頂点バッファをロックする
 	D3D11_MAPPED_SUBRESOURCE msr;
-	Direct3DGetDeviceContext()->Map(pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+	D3D11::DeviceManager::getInstance().GetContext()->Map(pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 
 	// 頂点バッファへの仮想ポインタを取得
 	Vertex* v = (Vertex*)msr.pData;
 
 	// 頂点情報を書き込み
-	const float SCREEN_WIDTH = static_cast<float>(Direct3DGetBackBufferWidth());
-	const float SCREEN_HEIGHT = static_cast<float>(Direct3DGetBackBufferHeight());
+	const float SCREEN_WIDTH = static_cast<float>(Screen::WIDTH);
+	const float SCREEN_HEIGHT = static_cast<float>(Screen::HEIGHT);
 
 	// UVパターンのサイズ取得
 	float patternWidth = static_cast<float>(pSpriteSheet->GetPatternSize().x);
@@ -168,12 +172,12 @@ const void Sprite::Draw(SpriteSheet* pSpriteSheet, const int& patternNum, const 
 	v[3].texCoord = { u1, v1 };
 
 	// 頂点バッファのロックを解除
-	Direct3DGetDeviceContext()->Unmap(pVertexBuffer, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->Unmap(pVertexBuffer, 0);
 
 	// 頂点バッファを描画パイプラインに設定
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-	Direct3DGetDeviceContext()->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
 
 	// 中心座標を算出
 	float centerX = position.x + size.x / 2;
@@ -183,17 +187,18 @@ const void Sprite::Draw(SpriteSheet* pSpriteSheet, const int& patternNum, const 
 	XMMATRIX transToCenter = XMMatrixTranslation(-centerX, -centerY, 0.0f);
 	XMMATRIX rot = XMMatrixRotationZ(-rotate);
 	XMMATRIX transBack = XMMatrixTranslation(centerX, centerY, 0.0f);
+	XMMATRIX world = transToCenter * rot * transBack;
 
 	// 頂点シェーダーにワールド変換行列を設定
-	Shader2DSetWorldMatrix(transToCenter * rot * transBack);
+	D3D11::BufferManager::getInstance().SetWorldMatrix(world);
 
 	// 頂点シェーダーにプロジェクション変換行列を設定
-	Shader2DSetProjectionMatrix(XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
-	Shader2DSetColor({ 1.0f,1.0f,1.0f,1.0f });
+	D3D11::BufferManager::getInstance().SetProjectionMatrix(XMMatrixOrthographicOffCenterLH(0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, 0.0f, 1.0f));
+	//D3D11::BufferManager::getInstance().SetMaterial({ 1.0f,1.0f,1.0f,1.0f });
 
 	// プリミティブトポロジ設定
-	Direct3DGetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 	// ポリゴン描画命令発行
-	Direct3DGetDeviceContext()->Draw(NUM_VERTEX, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->Draw(NUM_VERTEX, 0);
 }

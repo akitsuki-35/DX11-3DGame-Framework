@@ -1,9 +1,9 @@
-﻿/*============================================================
-*	@file	 : Vector3.h
-*	@brief	 : 3次元ベクトルクラス
+/*============================================================
+*	@file	 : Vector2.h
+*	@brief	 : 2次元ベクトルクラス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/04/23
+* 　@date	 : 2026/07/24
 *	@updated : 2026/07/24
 *============================================================*/
 #pragma once
@@ -12,112 +12,106 @@
 #include <DirectXMath.h>
 
 /*============================================================
-*	@class	: Vector3
-*	@brief	: 3次元ベクトル
+*	@class	: Vector2
+*	@brief	: 2次元ベクトル
 *============================================================*/
-class Vector3
+class Vector2
 {
 public:
 	float x{};
 	float y{};
-	float z{};
 
 public:
-	constexpr Vector3() = default;
+	constexpr Vector2() = default;
 
-	constexpr Vector3(const Vector3& vector3)
-		: x(vector3.x), y(vector3.y), z(vector3.z){}
-	constexpr Vector3(const float& x, const float& y, const float& z)
-		: x(x), y(y), z(z) {}
-	constexpr Vector3(const DirectX::XMFLOAT3& float3)
-		: x(float3.x), y(float3.y), z(float3.z) {}
-	
+	constexpr Vector2(const Vector2& vector2)
+		: x(vector2.x), y(vector2.y) {}
+	constexpr Vector2(const float& x, const float& y)
+		: x(x), y(y) {}
+	constexpr Vector2(const DirectX::XMFLOAT2& float2)
+		: x(float2.x), y(float2.y) {}
+
 	/*------------------------------------------------------------
 		代入
 	------------------------------------------------------------*/
-	Vector3& operator=(const Vector3& vector3) {
-		x = vector3.x;
-		y = vector3.y;
-		z = vector3.z;
+	Vector2& operator=(const Vector2& vector2) {
+		x = vector2.x;
+		y = vector2.y;
 		return *this;
 	}
 
 	/*------------------------------------------------------------
 		比較
 	------------------------------------------------------------*/
-	bool operator==(const Vector3& vector3) const {
-		return x == vector3.x && y == vector3.y && z == vector3.z;
+	bool operator==(const Vector2& vector2) const {
+		return x == vector2.x && y == vector2.y;
 	}
 
-	bool operator!=(const Vector3& vector3) const {
-		return x != vector3.x || y != vector3.y || z != vector3.z;
+	bool operator!=(const Vector2& vector2) const {
+		return x != vector2.x || y != vector2.y;
 	}
 
 	/*------------------------------------------------------------
 		ベクトルのゼロ化
 	------------------------------------------------------------*/
 	void Zero() {
-		x = y = z = 0.0f;
+		x = y = 0.0f;
 	}
 
 	/*------------------------------------------------------------
 		ベクトルの反転
 	------------------------------------------------------------*/
-	Vector3 operator-() const {
-		return Vector3(-x, -y, -z);
+	Vector2 operator-() const {
+		return Vector2(-x, -y);
 	}
 
 	/*------------------------------------------------------------
 		加減算
 	------------------------------------------------------------*/
-	Vector3 operator+(const Vector3& vector3) const {
-		return Vector3(x + vector3.x, y + vector3.y, z + vector3.z);
+	Vector2 operator+(const Vector2& vector2) const {
+		return Vector2(x + vector2.x, y + vector2.y);
 	}
 
-	Vector3 operator-(const Vector3& vector3) const {
-		return Vector3(x - vector3.x, y - vector3.y, z - vector3.z);
+	Vector2 operator-(const Vector2& vector2) const {
+		return Vector2(x - vector2.x, y - vector2.y);
 	}
 
 	/*------------------------------------------------------------
 		乗除算
 	------------------------------------------------------------*/
-	Vector3 operator*(float scalar) const {
-		return Vector3(x * scalar, y * scalar, z * scalar);
+	Vector2 operator*(float scalar) const {
+		return Vector2(x * scalar, y * scalar);
 	}
 
-	Vector3 operator/(float scalar) const {
+	Vector2 operator/(float scalar) const {
 		float oneOverA = 1.0f / scalar;
-		return Vector3(x * oneOverA, y * oneOverA, z * oneOverA);
+		return Vector2(x * oneOverA, y * oneOverA);
 	}
-	
+
 	/*------------------------------------------------------------
 		代入演算
 	------------------------------------------------------------*/
-	Vector3& operator+=(const Vector3& vector3) {
-		x += vector3.x;
-		y += vector3.y;
-		z += vector3.z;
+	Vector2& operator+=(const Vector2& vector2) {
+		x += vector2.x;
+		y += vector2.y;
 		return *this;
 	}
 
-	Vector3& operator-=(const Vector3& vector3) {
-		x -= vector3.x;
-		y -= vector3.y;
-		z -= vector3.z;
+	Vector2& operator-=(const Vector2& vector2) {
+		x -= vector2.x;
+		y -= vector2.y;
 		return *this;
 	}
 
-	Vector3& operator*=(float scalar) {
+	Vector2& operator*=(float scalar) {
 		x *= scalar;
 		y *= scalar;
-		z *= scalar;
 		return *this;
 	}
 
-	Vector3& operator/=(float scalar) {
+	Vector2& operator/=(float scalar) {
 		x /= scalar;
 		y /= scalar;
-		z /= scalar;
 		return *this;
 	}
 
@@ -125,12 +119,11 @@ public:
 		正規化
 	------------------------------------------------------------*/
 	void Normalize() {
-		float magSq = x * x + y * y + z * z;
+		float magSq = x * x + y * y;
 		if (magSq > 0.0f) {
 			float oneOverMag = 1.0f / std::sqrt(magSq);
 			x *= oneOverMag;
 			y *= oneOverMag;
-			z *= oneOverMag;
 		}
 	}
 
@@ -139,29 +132,20 @@ public:
 	------------------------------------------------------------*/
 	float Length() const
 	{
-		return std::sqrt(x * x + y * y + z * z);
+		return std::sqrt(x * x + y * y);
 	}
 
 	/*------------------------------------------------------------
 		内積
 	------------------------------------------------------------*/
-	static float Dot(const Vector3& a, const Vector3& b) {
-		return a.x * b.x + a.y * b.y + a.z * b.z;
+	static float Dot(const Vector2& a, const Vector2& b) {
+		return a.x * b.x + a.y * b.y;
 	}
 
 	/*------------------------------------------------------------
-		外積
+		XMFLOAT2に変換
 	------------------------------------------------------------*/
-	static Vector3 Cross(const Vector3& a, const Vector3& b) {
-		return Vector3(a.y * b.z - a.z * b.y,
-			a.z * b.x - a.x * b.z,
-			a.x * b.y - a.y * b.x);
-	}
-	
-	/*------------------------------------------------------------
-		XMFLOAT3へ変換
-	------------------------------------------------------------*/
-	DirectX::XMFLOAT3 ConvertToXMFLOAT3() const {
-		return { x, y, z };
+	DirectX::XMFLOAT2 ConvertToXMFLOAT2() const {
+		return { x, y };
 	}
 };

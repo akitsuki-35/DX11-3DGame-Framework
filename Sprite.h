@@ -1,15 +1,14 @@
 ﻿/*============================================================
-*	@file	 : sprite.h
+*	@file	 : Sprite.h
 *	@brief	 : スプライト描画
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/01
-*	@updated : 2026/06/02
+*	@updated : 2026/07/24
 *============================================================*/
-#ifndef SPRITE_H
-#define SPRITE_H
+#pragma once
 
-#include "direct3d.h"
+#include "DeviceManager.h"
 #include <DirectXMath.h>
 
 /*------------------------------------------------------------
@@ -49,5 +48,3 @@ public:
 		const DirectX::XMFLOAT2& position, DirectX::XMFLOAT2 size, const float& rotate,
 		const DirectX::XMFLOAT4& color);
 };
-
-#endif // SPRITE_H

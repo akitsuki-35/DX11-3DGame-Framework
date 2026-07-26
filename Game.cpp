@@ -51,8 +51,8 @@ void Game::Initialize()
 	//box->SetPosition({ 0.0f, 0.0f, -5.0f });
 	//box->SetScale({ 1.0f, 1.0f, 1.0f });
 
-	//AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, 5.0f });
-	//AddGameObject<Tree>()->SetPosition({ -10.0f, 0.0f, -5.0f });
+	AddGameObject<Tree>();
+	//AddGameObject<Tree>();
 
 	//AddGameObject<Particle>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
@@ -96,7 +96,7 @@ void Game::Draw() const
 		if (camera) {
 
 			Vector3 forward = camera->GetForward();
-			Vector3 position = camera->GetPosition();
+			Vector3 position = camera->GetTransform().GetPosition();
 
 			for (GameObject* obj : gameObjects) {
 				obj->CalcCameraZ(position, forward);
