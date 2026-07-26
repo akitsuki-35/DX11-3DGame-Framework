@@ -21,10 +21,10 @@
 class Shader
 {
 public:
-	std::string KeyName;
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> VertexShader;
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> PixelShader;
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> Layout;
+	std::string _mKeyName;
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> _mVertexShader{};
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> _mPixelShader{};
+	Microsoft::WRL::ComPtr<ID3D11InputLayout> _mLayout{};
 };
 
 /*============================================================
@@ -57,12 +57,12 @@ private:
 ----------------------------------------------------*/
 private:
 	// シェーダーコンテナ
-	std::unordered_map <std::string, std::unique_ptr<Shader>> mShaders;
+	std::unordered_map <std::string, std::unique_ptr<Shader>> mShaders{};
 
 	// キャッシュ
-	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11VertexShader>> mVSCache;
-	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11PixelShader>> mPSCache;
-	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11InputLayout>>  mLayoutCache;
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11VertexShader>> mVSCache{};
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11PixelShader>> mPSCache{};
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11InputLayout>>  mLayoutCache{};
 
 public:
 	// 登録

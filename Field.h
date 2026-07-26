@@ -1,15 +1,14 @@
 ﻿/*============================================================
-*	@file	 : field.h
-*	@brief	 : 3Dポリゴン表示
+*	@file	 : Field.h
+*	@brief	 : フィールド
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/28
-*	@updated : 2026/06/02
+*	@updated : 2026/07/26
 *============================================================*/
-#ifndef FIELD_H
-#define FIELD_H
-
-#include "gameobject.h"
+#pragma once
+#include "GameObject.h"
+#include "Mesh.h"
 
 /*============================================================
 *	@class	: Field
@@ -18,7 +17,7 @@
 class Field : public GameObject
 {
 private:
-	ID3D11Buffer* _mVertexBuffer{}; // 頂点バッファ
+	Mesh mMesh{};
 	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
 	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー
 	ID3D11PixelShader* _mPixelShader{}; // ピクセルシェーダー
@@ -33,5 +32,3 @@ public:
 	void Update() override;
 	void Draw() const override;
 };
-
-#endif // FIELD_H

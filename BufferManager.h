@@ -47,11 +47,11 @@ namespace D3D11 {
 		----------------------------------------------------*/
 	private:
 		// 定数バッファ
-		Microsoft::WRL::ComPtr<ID3D11Buffer> _mWorld;
-		Microsoft::WRL::ComPtr<ID3D11Buffer> _mView;
-		Microsoft::WRL::ComPtr<ID3D11Buffer> _mProjection;
-		Microsoft::WRL::ComPtr<ID3D11Buffer> _mMaterial;
-		Microsoft::WRL::ComPtr<ID3D11Buffer> _mLight;
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mWorld{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mView{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mProjection{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mMaterial{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mLight{};
 
 	public:
 		void Initialize();
