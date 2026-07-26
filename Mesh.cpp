@@ -1,6 +1,6 @@
 /*============================================================
 *	@file	 : Mesh.h
-*	@brief	 : ポリゴンメッシュ
+*	@brief	 : ポリゴンメッシュ生成
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
@@ -13,29 +13,14 @@
 #include <DirectXMath.h>
 using namespace DirectX;
 
-bool Mesh::CreatePlane()
+bool Mesh::CreatePlane(MeshType::Plane::Pivot pivot, MeshType::Plane::Axis axis)
 {
-	Element::VERTEX3D vertex[4]{};
+	// 頂点情報定義
+	MeshType::Plane::Desc desc{};
+	desc.pivot = pivot;
+	desc.axis = axis;
 
-	vertex[0].Position = XMFLOAT3(-0.5f, 0.0f, 0.5f);
-	vertex[0].Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
-
-	vertex[1].Position = XMFLOAT3(0.5f, 0.0f, 0.5f);
-	vertex[1].Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
-
-	vertex[2].Position = XMFLOAT3(-0.5f, 0.0f, -0.5f);
-	vertex[2].Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
-
-	vertex[3].Position = XMFLOAT3(0.5f, 0.0f, -0.5f);
-	vertex[3].Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
+	std::array<Element::VERTEX3D, 4> vertex = MeshType::Plane::Create(desc);
 
 	// 頂点バッファ生成
 	D3D11_BUFFER_DESC bd{};
@@ -45,19 +30,13 @@ bool Mesh::CreatePlane()
 	bd.CPUAccessFlags = 0;
 
 	D3D11_SUBRESOURCE_DATA sd{};
-	sd.pSysMem = vertex;
+	sd.pSysMem = vertex.data();
 
 	D3D11::DeviceManager::getInstance().GetDevice()->CreateBuffer(&bd, &sd, _mVertexBuffer.GetAddressOf());
 
 	assert(_mVertexBuffer);
 
 	return true;
-}
-
-void Mesh::Draw() const
-{
-	// 描画
-	D3D11::DeviceManager::getInstance().GetContext()->Draw(4, 0);
 }
 
 void Mesh::Bind() const
@@ -71,4 +50,10 @@ void Mesh::Bind() const
 
 	// プリミティブトポロジ設定
 	D3D11::DeviceManager::getInstance().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+}
+
+void Mesh::Draw() const
+{
+	// 描画命令発行
+	D3D11::DeviceManager::getInstance().GetContext()->Draw(4, 0);
 }

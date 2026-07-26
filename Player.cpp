@@ -1,10 +1,10 @@
 ﻿/*============================================================
-*	@file	 : player.cpp
+*	@file	 : Player.cpp
 *	@brief	 : プレイヤー
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/19
-*	@updated : 2026/06/16
+*	@updated : 2026/07/26
 *============================================================*/
 #include "main.h"
 #include "input.h"
@@ -40,9 +40,6 @@ void Player::Initialize()
 
 	// シェーダー読込
 	mShader = ShaderLoader::getInstance().Get("Unlit");
-
-	//Renderer::getInstance().CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	//Renderer::getInstance().CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 
 	mSE = AddComponent<Audio>(this);
 	mSE->Load("Resources\\Audios\\wan.wav");

@@ -9,6 +9,7 @@
 #pragma once
 
 #include <cmath>
+#include <DirectXMath.h>
 
 /*============================================================
 *	@class	: Vector2
@@ -17,15 +18,18 @@
 class Vector2
 {
 public:
-	float x, y;
+	float x{};
+	float y{};
 
 public:
-	Vector2() = default;
+	constexpr Vector2() = default;
 
-	Vector2(const Vector2& vector2)
+	constexpr Vector2(const Vector2& vector2)
 		: x(vector2.x), y(vector2.y) {}
-	Vector2(const float& x, const float& y)
+	constexpr Vector2(const float& x, const float& y)
 		: x(x), y(y) {}
+	constexpr Vector2(const DirectX::XMFLOAT2& float2)
+		: x(float2.x), y(float2.y) {}
 
 	/*------------------------------------------------------------
 		代入
@@ -136,5 +140,12 @@ public:
 	------------------------------------------------------------*/
 	static float Dot(const Vector2& a, const Vector2& b) {
 		return a.x * b.x + a.y * b.y;
+	}
+
+	/*------------------------------------------------------------
+		XMFLOAT2に変換
+	------------------------------------------------------------*/
+	DirectX::XMFLOAT2 ConvertToXMFLOAT2() const {
+		return { x, y };
 	}
 };

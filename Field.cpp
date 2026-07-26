@@ -14,13 +14,16 @@
 #include "Audio.h"
 
 #include "GraphicsTypes.h"
+#include "MeshTypes.h"
 #include "DirectX11Config.h"
+
+using namespace MeshType;
 
 void Field::Initialize()
 {
 	mLayer = 1;
 
-	mMesh.CreatePlane();
+	mMesh.CreatePlane(Plane::Pivot::Center, Plane::Axis::XZ);
 	mTransform.SetScale({ 30.0f, 30.0f, 30.0f });
 
 	// テクスチャ読込
@@ -32,8 +35,9 @@ void Field::Initialize()
 	assert(_mTexture);
 
 	// シェーダー読込
-	Renderer::getInstance().CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	Renderer::getInstance().CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+	mShader = ShaderLoader::getInstance().Get("Unlit");
+	//Renderer::getInstance().CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
+	//Renderer::getInstance().CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 
 	Audio* bgm = AddComponent<Audio>(this);
 	bgm->Load("Resources\\Audios\\bgm.wav");
@@ -44,9 +48,9 @@ void Field::Finalize()
 {
 	if (_mTexture) _mTexture->Release();
 
-	_mPixelShader->Release();
-	_mVertexShader->Release();
-	_mVertexLayout->Release();
+	//_mPixelShader->Release();
+	//_mVertexShader->Release();
+	//_mVertexLayout->Release();
 	//_mVertexBuffer->Release();
 
 	GameObject::Finalize();
@@ -60,15 +64,11 @@ void Field::Update()
 void Field::Draw() const
 {
 	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(_mVertexLayout);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->_mLayout.Get());
 
 	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(_mVertexShader, NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(_mPixelShader, NULL, 0);
-
-	assert(_mVertexLayout);   // null ならレイアウト未生成
-	assert(_mVertexShader);   // null なら VS 未生成
-	assert(_mPixelShader);    // null なら PS 未生成
+	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->_mVertexShader.Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->_mPixelShader.Get(), NULL, 0);
 
 	// マトリクス設定
 	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());

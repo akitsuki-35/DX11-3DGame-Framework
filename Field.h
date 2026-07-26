@@ -7,8 +7,10 @@
 *	@updated : 2026/07/26
 *============================================================*/
 #pragma once
+
 #include "GameObject.h"
 #include "Mesh.h"
+#include "ShaderLoader.h"
 
 /*============================================================
 *	@class	: Field
@@ -18,9 +20,7 @@ class Field : public GameObject
 {
 private:
 	Mesh mMesh{};
-	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
-	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー
-	ID3D11PixelShader* _mPixelShader{}; // ピクセルシェーダー
+	Shader* mShader{};
 
 	ID3D11ShaderResourceView* _mTexture{}; // テクスチャ
 

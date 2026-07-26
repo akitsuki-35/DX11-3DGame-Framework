@@ -1,6 +1,6 @@
 /*============================================================
 *	@file	 : Mesh.h
-*	@brief	 : ポリゴンメッシュ
+*	@brief	 : ポリゴンメッシュ生成
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
@@ -8,13 +8,14 @@
 *============================================================*/
 #pragma once
 
+#include "MeshTypes.h"
 #include <vector>
 #include <wrl/client.h>
 #include <d3d11.h>
 
 /*============================================================
 *	@class	: Mesh
-*	@brief	: ポリゴンメッシュ
+*	@brief	: ポリゴンメッシュ生成
 *============================================================*/
 class Mesh
 {
@@ -28,7 +29,7 @@ private:
 	// インデックスバッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mIndexBuffer{};
 
-	UINT mVertexStride{};
+	UINT mStride{};
 	UINT mVertexNum{};
 	UINT mIndexNum{};
 	bool mIsIndex{ false };
@@ -37,8 +38,8 @@ public:
 	Mesh() = default;
 	~Mesh() = default;
 
-	bool CreatePlane();
+	bool CreatePlane(MeshType::Plane::Pivot pivot, MeshType::Plane::Axis axis);
 
-	void Draw() const;
 	void Bind() const;
+	void Draw() const;
 };

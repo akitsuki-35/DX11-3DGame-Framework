@@ -236,6 +236,9 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>3Dフレームワーク\Common</Filter>
     </ClCompile>
+    <ClCompile Include="MeshTypes.cpp">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WICTextureLoader11.h">
@@ -455,6 +458,9 @@
       <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
+      <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshTypes.h">
       <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
   </ItemGroup>
