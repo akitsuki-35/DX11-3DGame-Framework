@@ -9,7 +9,7 @@
 #pragma once
 
 #include <d3d11.h>
-#include <winrt/base.h>
+#include <wrl/client.h>
 
 namespace D3D11 {
 /*============================================================
@@ -19,7 +19,7 @@ namespace D3D11 {
 	class DeviceManager final
 	{
 		template <typename T>
-		using ComPtr = winrt::com_ptr<T>;
+		using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 	/*--------------------------------------------------
 		Singleton用
@@ -48,33 +48,33 @@ namespace D3D11 {
 		D3D_FEATURE_LEVEL mFutureLevel{};
 
 		// DX11デバイス
-		winrt::com_ptr<ID3D11Device> _mDevice{};
-		winrt::com_ptr<ID3D11DeviceContext> _mContext{};
-		winrt::com_ptr<IDXGISwapChain> _mSwapChain{};
+		Microsoft::WRL::ComPtr<ID3D11Device> _mDevice{};
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> _mContext{};
+		Microsoft::WRL::ComPtr<IDXGISwapChain> _mSwapChain{};
 
 		// レンダーターゲット
-		winrt::com_ptr<ID3D11RenderTargetView> _mRenderTargetView{};
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> _mRenderTargetView{};
 		
 		// 深度バッファ
-		winrt::com_ptr<ID3D11DepthStencilView> _mDepthStencilView{};
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> _mDepthStencilView{};
 
 		// 深度ステート
-		winrt::com_ptr<ID3D11DepthStencilState>  _mDepthEnable{};
-		winrt::com_ptr<ID3D11DepthStencilState>  _mDepthDisable{};
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>  _mDepthEnable{};
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>  _mDepthDisable{};
 
 		// ブレンドステート
-		winrt::com_ptr<ID3D11BlendState>  _mBlendAlpha{};
-		winrt::com_ptr<ID3D11BlendState>  _mBlendAdd{};
-		winrt::com_ptr<ID3D11BlendState>  _mBlendATC{};
+		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendAlpha{};
+		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendAdd{};
+		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendATC{};
 
 		// ラスタライザステート
-		winrt::com_ptr<ID3D11RasterizerState> _mRasterSolid{};
-		winrt::com_ptr<ID3D11RasterizerState> _mRasterWireframe{};
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> _mRasterSolid{};
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> _mRasterWireframe{};
 
 		// サンプラーステート
-		winrt::com_ptr<ID3D11SamplerState> _mSamplerAnisotropic{};
-		winrt::com_ptr<ID3D11SamplerState> _mSamplerLinear{};
-		winrt::com_ptr<ID3D11SamplerState> _mSamplerPoint{};
+		Microsoft::WRL::ComPtr<ID3D11SamplerState> _mSamplerAnisotropic{};
+		Microsoft::WRL::ComPtr<ID3D11SamplerState> _mSamplerLinear{};
+		Microsoft::WRL::ComPtr<ID3D11SamplerState> _mSamplerPoint{};
 
 	public:
 		bool Initialize();
@@ -90,11 +90,25 @@ namespace D3D11 {
 		void renderStateRegister();
 
 	public:
+		// セッター
+		void SetDepthStencilState(ID3D11DepthStencilState* depthState) { 
+			_mContext->OMSetDepthStencilState(depthState, NULL); };
+		void SetBlendState(ID3D11BlendState* blendState) {
+			float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+			_mContext->OMSetBlendState(blendState, blendFactor, 0xffffffff);
+		};
+		void SetRasterizerState(ID3D11RasterizerState* rasterizerState) {
+			_mContext->RSSetState(rasterizerState);
+		};
+		void SetSamplerState(ID3D11SamplerState* samplerState) {
+			_mContext->PSSetSamplers(0, 1, &samplerState);
+		};
+
 		// ゲッター
-		winrt::com_ptr<ID3D11Device> GetDevice() const { return _mDevice; }
-		winrt::com_ptr<ID3D11DeviceContext> GetContext() const { return _mContext; }
-		winrt::com_ptr<IDXGISwapChain> GetSwapChain() const { return _mSwapChain; }
-		winrt::com_ptr<ID3D11RenderTargetView> GetRenderTargetView() const { return _mRenderTargetView; }
-		winrt::com_ptr<ID3D11DepthStencilView> GetDepthStencilView() const { return _mDepthStencilView; }
+		Microsoft::WRL::ComPtr<ID3D11Device> GetDevice() const { return _mDevice; }
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetContext() const { return _mContext; }
+		Microsoft::WRL::ComPtr<IDXGISwapChain> GetSwapChain() const { return _mSwapChain; }
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> GetRenderTargetView() const { return _mRenderTargetView; }
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> GetDepthStencilView() const { return _mDepthStencilView; }
 	};
 }

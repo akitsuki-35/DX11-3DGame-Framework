@@ -1,10 +1,10 @@
 ﻿/*============================================================
-*	@file	 : player.cpp
+*	@file	 : Player.cpp
 *	@brief	 : プレイヤー
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/19
-*	@updated : 2026/06/16
+*	@updated : 2026/07/26
 *============================================================*/
 #include "main.h"
 #include "input.h"
@@ -40,9 +40,6 @@ void Player::Initialize()
 
 	// シェーダー読込
 	mShader = ShaderLoader::getInstance().Get("Unlit");
-
-	//Renderer::getInstance().CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	//Renderer::getInstance().CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 
 	mSE = AddComponent<Audio>(this);
 	mSE->Load("Resources\\Audios\\wan.wav");
@@ -220,19 +217,13 @@ void Player::Update()
 void Player::Draw() const
 {
 	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->Layout.Get());
+	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->_mLayout.Get());
 
 	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->VertexShader.Get(), NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->PixelShader.Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->_mVertexShader.Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->_mPixelShader.Get(), NULL, 0);
 
 	// マトリクス設定
-	//XMMATRIX w, s, r, t;
-	//s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // 拡大縮小
-	//r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y + XM_PI, mRotation.z); // 回転
-	//t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // 平行移動
-	//w = s * r * t;
-	//D3D11::BufferManager::getInstance().SetWorldMatrix(w);
 	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());
 
 	GameObject::Draw(); // 継承元のDrawを呼び出す

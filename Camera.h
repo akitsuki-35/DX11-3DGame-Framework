@@ -39,7 +39,7 @@ public:
 	Vector3 GetRight() const {
 		Vector3 forward = GetForward();
 		Vector3 up = Vector3(0.0f, 1.0f, 0.0f);
-		Vector3 right = Vector3::cross(up, forward);
+		Vector3 right = Vector3::Cross(up, forward);
 		right.Normalize();
 
 		return right;

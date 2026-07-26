@@ -11,7 +11,7 @@
 #include "DeviceManager.h"
 #include "GraphicsTypes.h"
 
-#include <winrt/base.h>
+#include <wrl/client.h>
 
 namespace D3D11 {
 	/*============================================================
@@ -21,7 +21,7 @@ namespace D3D11 {
 	class BufferManager final
 	{
 		template <typename T>
-		using ComPtr = winrt::com_ptr<T>;
+		using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 		/*--------------------------------------------------
 			Singleton用
@@ -47,18 +47,18 @@ namespace D3D11 {
 		----------------------------------------------------*/
 	private:
 		// 定数バッファ
-		winrt::com_ptr<ID3D11Buffer> _mWorld;
-		winrt::com_ptr<ID3D11Buffer> _mView;
-		winrt::com_ptr<ID3D11Buffer> _mProjection;
-		winrt::com_ptr<ID3D11Buffer> _mMaterial;
-		winrt::com_ptr<ID3D11Buffer> _mLight;
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mWorld{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mView{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mProjection{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mMaterial{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mLight{};
 
 	public:
 		void Initialize();
 
 	private:
 		// 定数バッファ生成
-		winrt::com_ptr<ID3D11Buffer> generateBuffer(UINT size);
+		Microsoft::WRL::ComPtr<ID3D11Buffer> generateBuffer(UINT size);
 
 	public:
 		// セッター
@@ -70,10 +70,10 @@ namespace D3D11 {
 		void SetLight(Element::LIGHT light);
 
 		// ゲッター
-		winrt::com_ptr<ID3D11Buffer> GetWorldBuffer() const { return _mWorld; }
-		winrt::com_ptr<ID3D11Buffer> GetViewBuffer() const { return _mView; }
-		winrt::com_ptr<ID3D11Buffer> GetProjectionBuffer() const { return _mProjection; }
-		winrt::com_ptr<ID3D11Buffer> GetMaterialBuffer() const { return _mMaterial; }
-		winrt::com_ptr<ID3D11Buffer> GetLightBuffer() const { return _mLight; }
+		Microsoft::WRL::ComPtr<ID3D11Buffer> GetWorldBuffer() const { return _mWorld; }
+		Microsoft::WRL::ComPtr<ID3D11Buffer> GetViewBuffer() const { return _mView; }
+		Microsoft::WRL::ComPtr<ID3D11Buffer> GetProjectionBuffer() const { return _mProjection; }
+		Microsoft::WRL::ComPtr<ID3D11Buffer> GetMaterialBuffer() const { return _mMaterial; }
+		Microsoft::WRL::ComPtr<ID3D11Buffer> GetLightBuffer() const { return _mLight; }
 	};
 }

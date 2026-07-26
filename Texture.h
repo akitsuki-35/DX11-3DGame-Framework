@@ -1,13 +1,12 @@
 ﻿/*============================================================
-*	@file	 : texture.h
+*	@file	 : Texture.h
 *	@brief	 : テクスチャ管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
-*	@updated : 2026/06/02
+*	@updated : 2026/07/24
 *============================================================*/
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#pragma once
 
 #include <d3d11.h>
 #include <string>
@@ -15,7 +14,7 @@
 
 /*============================================================
 *	@class	: Texture
-*	@brief	: テクスチャクラス
+*	@brief	: テクスチャ
 *============================================================*/
 class Texture
 {
@@ -57,7 +56,7 @@ public:
 
 /*============================================================
 *	@class	: SpriteSheet
-*	@brief	: スプライトシートクラス（テクスチャを継承）
+*	@brief	: スプライトシート（テクスチャを継承）
 *============================================================*/
 class SpriteSheet : public Texture
 {
@@ -79,8 +78,8 @@ public:
 /*------------------------------------------------------------
 	スプライト関係ゲッター・セッター
 ------------------------------------------------------------*/
-	const int& GetCurrentPattern() { return CurrentPattern; }
-	const int& GetPatternMax() { return patternMax; }
+	const int& GetCurrentPattern() const { return CurrentPattern; }
+	const int& GetPatternMax() const { return patternMax; }
 	const DirectX::XMUINT2& GetPatternMatrix() { return patternMatrix; }
 	const DirectX::XMUINT2& GetPatternSize() { return patternSize; }
 
@@ -89,6 +88,3 @@ public:
 		CurrentPattern = patternNum;
 	}
 };
-
-#endif // TEXTURE_H
-
