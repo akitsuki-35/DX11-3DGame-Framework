@@ -28,27 +28,27 @@ enum class Layer : uint8_t
 	Count
 };
 
+// 描画ソート用情報
+struct SORTKEY
+{
+	Layer layer{};
+	float Zdepth{};
+
+	bool operator<(const SORTKEY& key) const
+	{
+		if (layer != key.layer)
+			return layer < key.layer;
+
+		return Zdepth > key.Zdepth;
+	}
+};
+
 /*============================================================
 *	@class	: Drawable
 *	@brief	: 描画コンポーネント基底クラス
 *============================================================*/
 class Drawable : public Component
 {
-	// 描画ソート用情報
-	struct SORTKEY
-	{
-		Layer layer{};
-		float Zdepth{};
-
-		bool operator<(const SORTKEY& key) const
-		{
-			if (layer != key.layer)
-				return layer < key.layer;
-
-			return Zdepth > key.Zdepth;
-		}
-	};
-
 protected:
 	Mesh mMesh{}; // メッシュ
 	Element::MATERIAL mMaterial{}; // マテリアル
@@ -105,4 +105,5 @@ public:
 	Element::MATERIAL GetMaterial() const { return mMaterial; }
 	Shader* GetShader() const { return _mShader; }
 	Texture& GetTexture() { return _mTexture; }
+	SORTKEY& GetSortKey() { return mSortKey; }
 };

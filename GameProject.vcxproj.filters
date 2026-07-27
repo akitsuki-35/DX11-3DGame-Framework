@@ -463,6 +463,9 @@
     <ClInclude Include="Drawable.h">
       <Filter>3Dフレームワーク\Components\Drawable</Filter>
     </ClInclude>
+    <ClInclude Include="BillboardDrawable.h">
+      <Filter>3Dフレームワーク\Components\Drawable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="hlsl\PixelShader2d.hlsl">

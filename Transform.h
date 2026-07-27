@@ -74,7 +74,7 @@ public:
 	const Vector3& GetScale() const { return mScale; }
 
 	// ワールド行列取得
-	const DirectX::XMMATRIX& GetWorldMatrix() const {
+	DirectX::XMMATRIX GetWorldMatrix() const {
 		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
 		if (mDirty) { 
 			rebuildWorldMatrix(createRotationMatrix());
@@ -83,7 +83,7 @@ public:
 	}
 
 	// ビルボード用ワールド行列取得
-	const DirectX::XMMATRIX& GetBillboardMatrix(const DirectX::XMMATRIX& view) const {
+	DirectX::XMMATRIX GetBillboardMatrix(const DirectX::XMMATRIX& view) const {
 		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
 		rebuildWorldMatrix(createBillboardRotation(view));
 		return mWorldMatrix;
