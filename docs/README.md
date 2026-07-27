@@ -5,10 +5,39 @@ DirectX11 3Dゲームのフレームワーク作成<br>
 
 ---
 ## ブランチ
-
 * master　…　安定版のdevelopをマージ
 * develop　…　futureの内容をマージ
 * future/　…　作業用ブランチ
+
+---
+
+## 命名規則
+
+### 汎用
+| Type | Style | Sample |
+| ---- | ---- | ---- |
+| ローカル変数 | camelCase | valueName |
+| グローバル変数 | g + PascalCase | gValueName |
+| 関数 | PascalCase | FunctionName |
+| 引数 | camelCase | valueName |
+| ポインタ変数 | _ + camelCase or PascalCase | _valueName / _mValueName |
+| 定数 | UPPER_SNAKE_CASE | VALUE_NAME |
+| 名前空間 | PascalCase | NameSpace |
+
+### クラス
+| Type | Style | Sample |
+| ---- | ---- | ---- |
+| クラス | PascalCase | ClassName |
+| メンバ変数 | m + PascalCase | mClassValue |
+| publicメンバ関数 | PascalCase | FunctionName |
+| privateメンバ関数 | camelCase | functionName |
+| privateメンバ関数 | camelCase | functionName |
+
+### 構造体
+| Type | Style | Sample |
+| ---- | ---- | ---- |
+| 構造体 | PascalCase | StructName |
+| 構造体変数 | camelCase | structValue |
 
 ---
 
@@ -56,3 +85,4 @@ DirectX11 3Dゲームのフレームワーク作成<br>
 | perf | コードの最適化 |
 | test | テストの追加・修正 |
 | docs | README, 他テキストファイルの修正 |
+| merge | master, developへのマージ |

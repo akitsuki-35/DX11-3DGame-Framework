@@ -4,24 +4,30 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
-*	@updated : 2026/07/24
+*	@updated : 2026/07/27
 *============================================================*/
 #pragma once
 
-#include "Component.h"
-#include <d3d11.h>
+#include "Drawable.h"
+#include "GameObject.h"
 
 /*============================================================
 *	@class	: PolygonDrawable
 *	@brief	: 板ポリゴン描画
 *============================================================*/
-class PolygonDrawable : public Component
+class PolygonDrawable final : public Drawable
 {
 private:
-	ID3D11Buffer* _mVertexBuffer{}; // 頂点バッファ
-	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
-	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー
-	ID3D11PixelShader* _mPixelShader{}; // ピクセルシェーダー
+	PolygonDrawable(GameObject* owner) {
+		// 不透明レイヤーに描画
+		mSortKey.layer = Layer::World;
+	};
 
-	ID3D11ShaderResourceView* _mTexture{}; // テクスチャ
+	~PolygonDrawable() override = default;
+
+	// ワールド行列取得
+	DirectX::XMMATRIX GetWorldMatrix() const override {
+		_mOwner->GetTransform().GetWorldMatrix();
+	}
+
 };

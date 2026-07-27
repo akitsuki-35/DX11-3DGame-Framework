@@ -445,9 +445,6 @@
     <ClInclude Include="ModelRenderer.h">
       <Filter>3Dフレームワーク\Components\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="DrawableConfig.h">
-      <Filter>3Dフレームワーク\Components\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>3Dフレームワーク\Common</Filter>
     </ClInclude>
@@ -462,6 +459,9 @@
     </ClInclude>
     <ClInclude Include="MeshTypes.h">
       <Filter>3Dフレームワーク\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>3Dフレームワーク\Components\Drawable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

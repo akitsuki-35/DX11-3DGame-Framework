@@ -36,8 +36,6 @@ void Field::Initialize()
 
 	// シェーダー読込
 	mShader = ShaderLoader::getInstance().Get("Unlit");
-	//Renderer::getInstance().CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	//Renderer::getInstance().CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
 
 	Audio* bgm = AddComponent<Audio>(this);
 	bgm->Load("Resources\\Audios\\bgm.wav");
@@ -47,11 +45,6 @@ void Field::Initialize()
 void Field::Finalize()
 {
 	if (_mTexture) _mTexture->Release();
-
-	//_mPixelShader->Release();
-	//_mVertexShader->Release();
-	//_mVertexLayout->Release();
-	//_mVertexBuffer->Release();
 
 	GameObject::Finalize();
 }
@@ -64,11 +57,11 @@ void Field::Update()
 void Field::Draw() const
 {
 	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->_mLayout.Get());
+	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout().Get());
 
 	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->_mVertexShader.Get(), NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->_mPixelShader.Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader().Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader().Get(), NULL, 0);
 
 	// マトリクス設定
 	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());

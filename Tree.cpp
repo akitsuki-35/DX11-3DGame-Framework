@@ -50,22 +50,18 @@ void Tree::Update()
 void Tree::Draw() const
 {
 	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->_mLayout.Get());
+	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout().Get());
 
 	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->_mVertexShader.Get(), NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->_mPixelShader.Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader().Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader().Get(), NULL, 0);
 
 	// ビルボード用マトリクス
 	Camera* camera = Game::GetGameObject<Camera>();
 	XMMATRIX view = camera->GetViewMatrix();
-	XMMATRIX invView = XMMatrixInverse(NULL, view);
-	invView.r[3].m128_f32[0] = 0.0f;
-	invView.r[3].m128_f32[1] = 0.0f;
-	invView.r[3].m128_f32[2] = 0.0f;
 
 	// マトリクス設定
-	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());
+	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetBillboardMatrix(view));
 
 	// マテリアル設定
 	Element::MATERIAL material{};
