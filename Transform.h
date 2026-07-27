@@ -76,7 +76,9 @@ public:
 	// ワールド行列取得
 	const DirectX::XMMATRIX& GetWorldMatrix() const {
 		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
-		if (mDirty) { rebuildWorldMatrix(createRotationMatrix()); }
+		if (mDirty) { 
+			rebuildWorldMatrix(createRotationMatrix());
+		}
 		return mWorldMatrix;
 	}
 

@@ -10,10 +10,12 @@
 
 #include "Component.h"
 #include "Mesh.h"
+#include "Texture.h"
 #include "ShaderLoader.h"
 #include "GraphicsTypes.h"
 #include "DeviceManager.h"
 #include "BufferManager.h"
+#include <sstream>
 #include <DirectXMath.h>
 
 // 描画レイヤー
@@ -51,6 +53,9 @@ protected:
 	Mesh mMesh{}; // メッシュ
 	Element::MATERIAL mMaterial{}; // マテリアル
 	Shader* _mShader{ nullptr }; // シェーダー
+	//Texture* _mTexture{ nullptr }; // テクスチャ
+	Texture _mTexture{}; // テクスチャ
+
 	SORTKEY mSortKey{}; // ソート用情報
 
 	void Bind() const {
@@ -64,22 +69,40 @@ protected:
 		context->PSSetShader(_mShader->GetPixelShader().Get(), nullptr, 0);
 	}
 public:
+	Drawable(GameObject* owner)
+		: Component(owner){}
+
 	// 描画
 	virtual void Draw() const {
+
 		Bind();
 
 		D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());
-		D3D11::BufferManager::getInstance().SetMaterial(mMaterial);
+
+		// マテリアル設定
+		Element::MATERIAL material{};
+		material.Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+		//if (_mTexture)material.TextureEnable = true;
+		//else material.TextureEnable = false;
+		material.TextureEnable = true;
+		D3D11::BufferManager::getInstance().SetMaterial(material);
 
 		mMesh.Bind();
+		_mTexture.Bind();
 		mMesh.Draw();
 	}
 
 	// ワールド行列取得
 	virtual DirectX::XMMATRIX GetWorldMatrix() const = 0;
 
+	// シェーダー読み込み
+	void LoadShader(const std::string& keyName) {
+		_mShader = ShaderLoader::getInstance().Get(keyName);
+	}
+
 	// ゲッター
-	Mesh GetMesh() const { return mMesh; }
+	Mesh& GetMesh() { return mMesh; }
 	Element::MATERIAL GetMaterial() const { return mMaterial; }
 	Shader* GetShader() const { return _mShader; }
+	Texture& GetTexture() { return _mTexture; }
 };

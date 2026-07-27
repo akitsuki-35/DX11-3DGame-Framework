@@ -12,6 +12,7 @@
 #include "DeviceManager.h"
 #include "BufferManager.h"
 #include "Audio.h"
+#include "PolygonDrawable.h"
 
 #include "GraphicsTypes.h"
 #include "MeshTypes.h"
@@ -21,21 +22,30 @@ using namespace MeshType;
 
 void Field::Initialize()
 {
-	mLayer = 1;
+	//mLayer = 1;
 
-	mMesh.CreatePlane(Plane::Pivot::Center, Plane::Axis::XZ);
+	//mMesh.CreatePlane(Plane::Pivot::Center, Plane::Axis::XZ);
+	//mTransform.SetScale({ 30.0f, 30.0f, 30.0f });
+
+	//// テクスチャ読込
+	//TexMetadata metaData;
+	//ScratchImage image;
+	//LoadFromWICFile(L"Resources\\Textures\\glass.jpg", WIC_FLAGS_NONE, &metaData, image);
+	//CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(),
+	//	image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
+	//assert(_mTexture);
+
+	//// シェーダー読込
+	//mShader = ShaderLoader::getInstance().Get("Unlit");
+	
+	PolygonDrawable* drawable = AddComponent<PolygonDrawable>(this);
+
+	drawable->GetMesh().CreatePlane(Plane::Pivot::Center, Plane::Axis::XZ);
 	mTransform.SetScale({ 30.0f, 30.0f, 30.0f });
 
-	// テクスチャ読込
-	TexMetadata metaData;
-	ScratchImage image;
-	LoadFromWICFile(L"Resources\\Textures\\glass.jpg", WIC_FLAGS_NONE, &metaData, image);
-	CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(),
-		image.GetImages(), image.GetImageCount(), metaData, &_mTexture);
-	assert(_mTexture);
+	drawable->GetTexture().Load(L"Resources\\Textures\\glass.jpg");
 
-	// シェーダー読込
-	mShader = ShaderLoader::getInstance().Get("Unlit");
+	drawable->LoadShader("Unlit");
 
 	Audio* bgm = AddComponent<Audio>(this);
 	bgm->Load("Resources\\Audios\\bgm.wav");
@@ -44,7 +54,7 @@ void Field::Initialize()
 
 void Field::Finalize()
 {
-	if (_mTexture) _mTexture->Release();
+	//if (_mTexture) _mTexture->Release();
 
 	GameObject::Finalize();
 }
@@ -56,31 +66,31 @@ void Field::Update()
 
 void Field::Draw() const
 {
-	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout().Get());
+	//// 入力レイアウト設定
+	//D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout().Get());
 
-	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader().Get(), NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader().Get(), NULL, 0);
+	//// シェーダー設定
+	//D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader().Get(), NULL, 0);
+	//D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader().Get(), NULL, 0);
 
-	// マトリクス設定
-	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());
+	//// マトリクス設定
+	//D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());
 
-	// マテリアル設定
-	Element::MATERIAL material{};
-	material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	if (_mTexture)material.TextureEnable = true;
-	else material.TextureEnable = false;
-	D3D11::BufferManager::getInstance().SetMaterial(material);
+	//// マテリアル設定
+	//Element::MATERIAL material{};
+	//material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	//if (_mTexture)material.TextureEnable = true;
+	//else material.TextureEnable = false;
+	//D3D11::BufferManager::getInstance().SetMaterial(material);
 
-	// テクスチャ設定
-	if (_mTexture) {
-		D3D11::DeviceManager::getInstance().GetContext()->PSSetShaderResources(0, 1, &_mTexture);
-	}
+	//// テクスチャ設定
+	//if (_mTexture) {
+	//	D3D11::DeviceManager::getInstance().GetContext()->PSSetShaderResources(0, 1, &_mTexture);
+	//}
 
-	// 描画
-	mMesh.Bind();
-	mMesh.Draw();
+	//// 描画
+	//mMesh.Bind();
+	//mMesh.Draw();
 
 	GameObject::Draw();
 }

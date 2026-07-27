@@ -17,17 +17,19 @@
 *============================================================*/
 class PolygonDrawable final : public Drawable
 {
-private:
-	PolygonDrawable(GameObject* owner) {
+public:
+	PolygonDrawable(GameObject* owner) 
+		: Drawable(owner){
 		// 不透明レイヤーに描画
 		mSortKey.layer = Layer::World;
 	};
 
 	~PolygonDrawable() override = default;
 
+private:
 	// ワールド行列取得
 	DirectX::XMMATRIX GetWorldMatrix() const override {
-		_mOwner->GetTransform().GetWorldMatrix();
+		return _mOwner->GetTransform().GetWorldMatrix();
 	}
 
 };

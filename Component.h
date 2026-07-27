@@ -19,7 +19,8 @@ protected:
 
 public:
 	Component() {}
-	Component(GameObject* Owner) { _mOwner = Owner; }
+	Component(GameObject* owner)
+		: _mOwner(owner){}
 	virtual ~Component() {}
 
 	virtual void Initialize() {};
