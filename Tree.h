@@ -19,11 +19,6 @@
 class Tree : public GameObject
 {
 private:
-	Mesh mMesh{};
-	Shader* mShader{};
-
-	ID3D11ShaderResourceView* _mTexture{}; // テクスチャ
-
 public:
 	Tree() = default;
 

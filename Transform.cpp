@@ -46,10 +46,19 @@ DirectX::XMMATRIX Transform::createTranslationMatrix() const
     return translation;
 }
 
-void Transform::rebuildWorldMatrix() const
+DirectX::XMMATRIX Transform::createBillboardRotation(const DirectX::XMMATRIX& view) const
+{
+    XMMATRIX billboardView = XMMatrixInverse(nullptr, view);
+    billboardView.r[3].m128_f32[0] = 0.0f;
+    billboardView.r[3].m128_f32[1] = 0.0f;
+    billboardView.r[3].m128_f32[2] = 0.0f;
+
+    return billboardView;
+}
+
+void Transform::rebuildWorldMatrix(const DirectX::XMMATRIX& rotation) const
 {
     XMMATRIX scale = createScaleMatrix();
-    XMMATRIX rotation = createRotationMatrix();
     XMMATRIX translation = createTranslationMatrix();
 
     mWorldMatrix = scale * rotation * translation;

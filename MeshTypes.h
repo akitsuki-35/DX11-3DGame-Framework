@@ -47,13 +47,13 @@ namespace MeshType {
 			Count
 		};
 
-		struct Desc
+		struct DESC
 		{
 			Pivot pivot = Pivot::Center;
 			Axis axis = Axis::XZ;
 		};
 
 		// 板ポリゴン生成
-		std::array<Element::VERTEX3D, 4> Create(const Desc& desc);
+		std::array<Element::VERTEX3D, 4> Create(const DESC& desc);
 	}
 }

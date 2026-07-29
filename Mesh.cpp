@@ -16,7 +16,7 @@ using namespace DirectX;
 bool Mesh::CreatePlane(MeshType::Plane::Pivot pivot, MeshType::Plane::Axis axis)
 {
 	// 頂点情報定義
-	MeshType::Plane::Desc desc{};
+	MeshType::Plane::DESC desc{};
 	desc.pivot = pivot;
 	desc.axis = axis;
 

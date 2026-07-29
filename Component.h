@@ -15,15 +15,16 @@
 class Component
 {
 protected:
-	class GameObject* mGameObject = nullptr;
+	class GameObject* _mOwner{ nullptr };
 
 public:
 	Component() {}
-	Component(GameObject* Object) { mGameObject = Object; }
+	Component(GameObject* owner)
+		: _mOwner(owner){}
 	virtual ~Component() {}
 
 	virtual void Initialize() {};
 	virtual void Finalize() {};
 	virtual void Update() {};
-	virtual void Draw() {};
+	virtual void Draw() const {};
 };
