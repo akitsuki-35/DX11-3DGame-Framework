@@ -2,6 +2,6 @@
 # .gitignore
 # 一時ファイル・ビルド生成物を管理から除外
 
-/.vs/
-/_bin/
-/_obj/
+.vs/
+_bin/
+_obj/

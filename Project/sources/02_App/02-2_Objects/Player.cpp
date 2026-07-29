@@ -36,13 +36,13 @@ void Player::Initialize()
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelRenderer>(this)->Load("Assets\\Models\\player.obj");
+	AddComponent<ModelRenderer>(this)->Load("assets\\models\\player.obj");
 
 	// シェーダー読込
 	mShader = ShaderLoader::getInstance().Get("Unlit");
 
 	mSE = AddComponent<Audio>(this);
-	mSE->Load("Assets\\Audios\\wan.wav");
+	mSE->Load("assets\\audio\\wan.wav");
 }
 
 void Player::Finalize()
