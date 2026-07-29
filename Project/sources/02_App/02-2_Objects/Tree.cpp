@@ -46,7 +46,7 @@ void Tree::Initialize()
 	mTransform.SetPosition({ -5.0f,0.0f, 0.0f });
 	mTransform.SetScale({ 8.0f, 10.0f, 0.0f });
 
-	drawable->GetTexture().Load(L"assets\\textures\\Background\\tree.png");
+	drawable->GetTexture().Load(L"assets\\textures\\tree.png");
 
 	drawable->LoadShader("Unlit");
 }
