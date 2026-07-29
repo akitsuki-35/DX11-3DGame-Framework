@@ -27,12 +27,12 @@ void Field::Initialize()
 	drawable->GetMesh().CreatePlane(Plane::Pivot::Center, Plane::Axis::XZ);
 	mTransform.SetScale({ 30.0f, 30.0f, 30.0f });
 
-	drawable->GetTexture().Load(L"Resources\\Textures\\glass.jpg");
+	drawable->GetTexture().Load(L"Assets\\Textures\\glass.jpg");
 
 	drawable->LoadShader("Unlit");
 
 	Audio* bgm = AddComponent<Audio>(this);
-	bgm->Load("Resources\\Audios\\bgm.wav");
+	bgm->Load("Assets\\Audios\\bgm.wav");
 	bgm->Play(true);
 }
 

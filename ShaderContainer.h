@@ -13,6 +13,6 @@
 namespace ShaderSet {
 	inline void initialize() {
 			ShaderLoader::getInstance().Register("Unlit", 
-				"Resources\\Shaders\\unlitTextureVS.cso", "Resources\\Shaders\\unlitTexturePS.cso");
+				"Assets\\Shaders\\unlitTextureVS.cso", "Assets\\Shaders\\unlitTexturePS.cso");
 	}
 }

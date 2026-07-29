@@ -1,165 +1,139 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="シェーダー ファイル">
-      <UniqueIdentifier>{316d835e-c6be-41e5-86e7-17c45cd1cd62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Debug">
-      <UniqueIdentifier>{b40c971e-101e-4ea4-bc5b-984f15af651b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Common">
-      <UniqueIdentifier>{172898ab-e8c4-41d7-853c-a23b63b5b72b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\System">
-      <UniqueIdentifier>{3af65dab-0f65-436f-8cf0-9680d987330e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\System">
-      <UniqueIdentifier>{fd9f8271-84e7-4cab-80b6-49fff06212c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Common">
-      <UniqueIdentifier>{18d3cd50-e814-4366-96f1-09d4cc8af130}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Debug">
-      <UniqueIdentifier>{51c5a1a5-7c62-47ea-b425-582cd0e8119a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3Dフレームワーク">
-      <UniqueIdentifier>{1b269d7f-0295-4617-9c0e-1cf8ed5e52b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3Dフレームワーク\Common">
-      <UniqueIdentifier>{6d238e21-a4ea-4c2c-b06a-40168897765a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ImGui">
-      <UniqueIdentifier>{bca3d428-e11d-4e58-8c0e-d0d8ce746547}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3Dフレームワーク\Scenes">
-      <UniqueIdentifier>{6b73aeb5-90dd-443b-b717-d051455775fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3Dフレームワーク\Objects">
-      <UniqueIdentifier>{240e13a5-0f74-4882-9214-24a8cf71cc75}</UniqueIdentifier>
-    </Filter>
     <Filter Include="未整理">
       <UniqueIdentifier>{f168aaa5-13cf-40d5-b6ed-9eec2ebf1f05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\Engine">
+    <Filter Include="00_Engine">
       <UniqueIdentifier>{5f9a23a6-f09f-47c5-88c7-f09540b6dbe8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\Engine\Core">
+    <Filter Include="00_Engine\00-1_Core">
       <UniqueIdentifier>{0237132d-6efd-4190-be7a-1556ff42d036}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\Engine\Platform">
-      <UniqueIdentifier>{4cfd07e0-80f1-4321-960c-e1c640a7d0be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3Dフレームワーク\Engine\Graphics">
+    <Filter Include="00_Engine\00-2_Graphics">
       <UniqueIdentifier>{a23fa5f7-7fd6-4cfe-8d53-c8b9f0d17b53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\Engine\旧">
-      <UniqueIdentifier>{6a25f9d9-aeea-442f-808e-fd79f897d355}</UniqueIdentifier>
+    <Filter Include="01_Framework">
+      <UniqueIdentifier>{1b269d7f-0295-4617-9c0e-1cf8ed5e52b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\Components">
+    <Filter Include="01_Framework\01-1_Common">
+      <UniqueIdentifier>{6d238e21-a4ea-4c2c-b06a-40168897765a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_App">
+      <UniqueIdentifier>{0018b8ab-874c-4b7d-b792-3655a293171f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Framework\01-2_Components">
       <UniqueIdentifier>{afed10f6-0809-43ff-ab2d-9666210c8cf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3Dフレームワーク\Components\Drawable">
+    <Filter Include="01_Framework\01-2_Components\Drawable">
       <UniqueIdentifier>{3334af44-d530-46be-bd67-f689e7a64f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_App\02-2_Objects">
+      <UniqueIdentifier>{240e13a5-0f74-4882-9214-24a8cf71cc75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_App\02-1_Scenes">
+      <UniqueIdentifier>{6b73aeb5-90dd-443b-b717-d051455775fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_HLSL">
+      <UniqueIdentifier>{316d835e-c6be-41e5-86e7-17c45cd1cd62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04_External">
+      <UniqueIdentifier>{c0578a09-2ea1-405d-8aff-139551c8d192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04_External\ImGui">
+      <UniqueIdentifier>{bca3d428-e11d-4e58-8c0e-d0d8ce746547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99_Debug">
+      <UniqueIdentifier>{b40c971e-101e-4ea4-bc5b-984f15af651b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WICTextureLoader11.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
     <ClCompile Include="include\ImGui\imgui.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="include\ImGui\imgui_demo.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="include\ImGui\imgui_draw.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="include\ImGui\imgui_impl_dx11.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="include\ImGui\imgui_impl_win32.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="include\ImGui\imgui_tables.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="include\ImGui\imgui_widgets.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="DebugCollisiondraw.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
+      <Filter>99_Debug</Filter>
     </ClCompile>
     <ClCompile Include="DebugOstream.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
+      <Filter>99_Debug</Filter>
     </ClCompile>
     <ClCompile Include="DebugText.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
+      <Filter>99_Debug</Filter>
     </ClCompile>
     <ClCompile Include="Debugger.cpp">
-      <Filter>ソース ファイル\Debug</Filter>
+      <Filter>99_Debug</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
     <ClCompile Include="Audio.cpp">
-      <Filter>3Dフレームワーク\Components</Filter>
+      <Filter>01_Framework\01-2_Components</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Explosion.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Field.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Glass.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Polygon2D.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Sky.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Tree.cpp">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>3Dフレームワーク\Scenes</Filter>
+      <Filter>02_App\02-1_Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
-      <Filter>3Dフレームワーク\Scenes</Filter>
+      <Filter>02_App\02-1_Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Result.cpp">
-      <Filter>3Dフレームワーク\Scenes</Filter>
+      <Filter>02_App\02-1_Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>未整理</Filter>
@@ -191,166 +165,148 @@
     <ClCompile Include="Shader2D.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
-    <ClCompile Include="SystemWindow.cpp">
-      <Filter>3Dフレームワーク\Engine\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemTimer.cpp">
-      <Filter>3Dフレームワーク\Engine\Platform</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>3Dフレームワーク\Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager.cpp">
-      <Filter>3Dフレームワーク\Engine\旧</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>3Dフレームワーク\Engine\旧</Filter>
+      <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
-      <Filter>3Dフレームワーク\Engine\Core</Filter>
+      <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
     <ClCompile Include="DeviceManager.cpp">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClCompile>
     <ClCompile Include="BufferManager.cpp">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Shadow.cpp">
-      <Filter>3Dフレームワーク\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderLoader.cpp">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>3Dフレームワーク\Components</Filter>
+      <Filter>01_Framework\01-2_Components</Filter>
     </ClCompile>
     <ClCompile Include="ModelRenderer.cpp">
-      <Filter>3Dフレームワーク\Components\Drawable</Filter>
+      <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
     <ClCompile Include="MeshTypes.cpp">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemTimer.cpp">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemWindow.cpp">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="WICTextureLoader11.cpp">
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WICTextureLoader11.h">
-      <Filter>ヘッダー ファイル\System</Filter>
-    </ClInclude>
     <ClInclude Include="include\ImGui\imconfig.h">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="include\ImGui\imgui.h">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="include\ImGui\imgui_impl_dx11.h">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="include\ImGui\imgui_impl_win32.h">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="include\ImGui\imgui_internal.h">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="include\ImGui\imstb_rectpack.h">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="include\ImGui\imstb_textedit.h">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="include\ImGui\imstb_truetype.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemWindow.h">
-      <Filter>3Dフレームワーク\Engine\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugCollisiondraw.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugMemoryleak.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugOstream.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugText.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="Debugger.h">
-      <Filter>ヘッダー ファイル\Debug</Filter>
+      <Filter>04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="Audio.h">
-      <Filter>3Dフレームワーク\Components</Filter>
+      <Filter>01_Framework\01-2_Components</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>3Dフレームワーク\Components</Filter>
+      <Filter>01_Framework\01-2_Components</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Explosion.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Field.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Glass.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Polygon2D.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Sky.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Tree.h">
-      <Filter>3Dフレームワーク\Objects</Filter>
+      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>3Dフレームワーク\Scenes</Filter>
+      <Filter>02_App\02-1_Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
-      <Filter>3Dフレームワーク\Scenes</Filter>
+      <Filter>02_App\02-1_Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>3Dフレームワーク\Scenes</Filter>
+      <Filter>02_App\02-1_Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Result.h">
-      <Filter>3Dフレームワーク\Scenes</Filter>
+      <Filter>02_App\02-1_Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>未整理</Filter>
@@ -391,102 +347,117 @@
     <ClInclude Include="Subject.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="SystemTimer.h">
-      <Filter>3Dフレームワーク\Engine\Platform</Filter>
-    </ClInclude>
     <ClInclude Include="Main.h">
-      <Filter>3Dフレームワーク\Engine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager.h">
-      <Filter>3Dフレームワーク\Engine\旧</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>3Dフレームワーク\Engine\旧</Filter>
+      <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
-      <Filter>3Dフレームワーク\Engine\Core</Filter>
+      <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
     <ClInclude Include="DeviceManager.h">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Config.h">
-      <Filter>3Dフレームワーク\Engine\Core</Filter>
+      <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
     <ClInclude Include="Utility.h">
-      <Filter>3Dフレームワーク\Engine\Core</Filter>
+      <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
     <ClInclude Include="DirectX11Config.h">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Collision3D.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="BufferManager.h">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsTypes.h">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Shadow.h">
-      <Filter>3Dフレームワーク\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderLoader.h">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderContainer.h">
-      <Filter>3Dフレームワーク\Engine\Graphics</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>3Dフレームワーク\Components</Filter>
+      <Filter>01_Framework\01-2_Components</Filter>
     </ClInclude>
     <ClInclude Include="PolygonDrawable.h">
-      <Filter>3Dフレームワーク\Components\Drawable</Filter>
+      <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="ModelRenderer.h">
-      <Filter>3Dフレームワーク\Components\Drawable</Filter>
+      <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="MeshTypes.h">
-      <Filter>3Dフレームワーク\Common</Filter>
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="Drawable.h">
-      <Filter>3Dフレームワーク\Components\Drawable</Filter>
+      <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="BillboardDrawable.h">
-      <Filter>3Dフレームワーク\Components\Drawable</Filter>
+      <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemTimer.h">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemWindow.h">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderContainer.h">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="WICTextureLoader11.h">
+      <Filter>01_Framework\01-1_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCollisiondraw.h">
+      <Filter>99_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Debugger.h">
+      <Filter>99_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugMemoryleak.h">
+      <Filter>99_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugOstream.h">
+      <Filter>99_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugText.h">
+      <Filter>99_Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="hlsl\PixelShader2d.hlsl">
-      <Filter>シェーダー ファイル</Filter>
+    <FxCompile Include="hlsl\common.hlsl">
+      <Filter>03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="hlsl\unlitTexturePS.hlsl">
-      <Filter>シェーダー ファイル</Filter>
+      <Filter>03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="hlsl\unlitTextureVS.hlsl">
-      <Filter>シェーダー ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="hlsl\VertexShader2d.hlsl">
-      <Filter>シェーダー ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="hlsl\common.hlsl">
-      <Filter>シェーダー ファイル</Filter>
+      <Filter>03_HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\ImGui\imgui.ini">
-      <Filter>ImGui</Filter>
+      <Filter>04_External\ImGui</Filter>
     </None>
   </ItemGroup>
 </Project>
