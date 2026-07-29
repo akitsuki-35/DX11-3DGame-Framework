@@ -14,7 +14,7 @@
 std::unordered_map<std::string, MODEL*> ModelRenderer::m_ModelPool;
 
 
-void ModelRenderer::Draw()
+void ModelRenderer::Draw() const
 {
 
 	// 頂点バッファ設定

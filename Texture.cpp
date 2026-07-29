@@ -4,82 +4,31 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
-*	@updated : 2026/07/24
+*	@updated : 2026/07/27
 *============================================================*/
 #include "Texture.h"
-#include "Sprite.h"
 #include "DeviceManager.h"
-#include <string>
 #include <DirectXTex.h>
-
 using namespace DirectX;
 
-Texture::Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, const float& rotate, const DirectX::XMFLOAT4& color, bool isMipMap)
-	: position(position), drawSize(size), rotate(rotate), color(color)
+bool Texture::Load(const std::wstring& filePath)
 {
-	//テクスチャからのファイルの読み込み
-	TexMetadata metaData;
-	ScratchImage image;
+	// テクスチャ読込
+	TexMetadata metaData{};
+	ScratchImage image{};
+	LoadFromWICFile(filePath.c_str(), WIC_FLAGS_NONE, &metaData, image);
 
-	//画像ファイルの読み込み
-	LoadFromWICFile(pFileName, WIC_FLAGS_NONE, &metaData, image);
+	CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(),
+		image.GetImages(), image.GetImageCount(), metaData, _mSRV.GetAddressOf());
+	assert(_mSRV);
 
-	//画像ファイルのサイズを取得
-	originalSize.x = static_cast<unsigned int>(metaData.width);
-	originalSize.y = static_cast<unsigned int>(metaData.height);
+	return true;
+}
 
-	if (drawSize.x == 0.0f && drawSize.y == 0.0f) {
-		drawSize.x = static_cast<float>(originalSize.x);
-		drawSize.y = static_cast<float>(originalSize.y);
+void Texture::Bind(UINT slot) const
+{
+	// テクスチャのセット
+	if (_mSRV) {
+		D3D11::DeviceManager::getInstance().GetContext()->PSSetShaderResources(slot, 1, _mSRV.GetAddressOf());
 	}
-
-	if (isMipMap)
-	{
-		//ミップマップを作成する
-		ScratchImage mipChain;
-		GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
-		image = std::move(mipChain);
-		metaData = image.GetMetadata();
-	}
-
-	//シェーダーリソースビューの生成
-	HRESULT hr = CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(),
-		image.GetImages(), image.GetImageCount(),
-		metaData, &pShaderResourceView);
-
-	if (FAILED(hr))
-	{
-		MessageBox(nullptr, "テクスチャの読み込みに失敗しました", "エラー", MB_OK);
-		return;
-	}
-}
-
-Texture::~Texture()
-{
-	pShaderResourceView->Release();
-}
-
-void Texture::Draw()
-{
-	Sprite::GetInstance().Draw(this, position, drawSize, rotate, color);
-}
-
-void Texture::SetTexture()
-{
-	// テクスチャ設定
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShaderResources(0, 1, &pShaderResourceView);
-}
-
-SpriteSheet::SpriteSheet(const wchar_t* pFileName, const DirectX::XMUINT2& patternMatrix, const DirectX::XMFLOAT2& position, const DirectX::XMFLOAT2& size, const float& rotate, const DirectX::XMFLOAT4& color, bool isMipMap)
-	:Texture(pFileName, position, size, rotate, color, isMipMap), patternMatrix(patternMatrix)
-{
-	// 総パターン数とパターンサイズをセット
-	patternMax = patternMatrix.x * patternMatrix.y;
-	patternSize.x = originalSize.x / patternMatrix.x;
-	patternSize.y = originalSize.y / patternMatrix.y;
-}
-
-void SpriteSheet::Draw()
-{
-	Sprite::GetInstance().Draw(this, CurrentPattern, position, drawSize, rotate, color);
 }

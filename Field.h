@@ -19,10 +19,10 @@
 class Field : public GameObject
 {
 private:
-	Mesh mMesh{};
-	Shader* mShader{};
+	//Mesh mMesh{};
+	//Shader* mShader{};
 
-	ID3D11ShaderResourceView* _mTexture{}; // テクスチャ
+	//ID3D11ShaderResourceView* _mTexture{}; // テクスチャ
 
 public:
 	Field() = default;

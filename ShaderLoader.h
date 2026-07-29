@@ -14,17 +14,29 @@
 #include <unordered_map>
 #include <wrl/client.h>
 
+/*--------------------------------------------------
+	前方宣言
+----------------------------------------------------*/
+class ShaderLoader;
+
 /*============================================================
 *	@class	: Shader
 *	@brief	: シェーダーのセット記録
 *============================================================*/
 class Shader
 {
-public:
+	friend ShaderLoader;
+private:
 	std::string _mKeyName;
 	Microsoft::WRL::ComPtr<ID3D11VertexShader> _mVertexShader{};
 	Microsoft::WRL::ComPtr<ID3D11PixelShader> _mPixelShader{};
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> _mLayout{};
+
+public:
+	// ゲッター
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> GetVertexShader() const { return _mVertexShader; }
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> GetPixelShader() const { return _mPixelShader; }
+	Microsoft::WRL::ComPtr<ID3D11InputLayout> GetLayout() const { return _mLayout; }
 };
 
 /*============================================================

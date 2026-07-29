@@ -42,8 +42,12 @@ private:
 	DirectX::XMMATRIX createRotationMatrix() const;
 	DirectX::XMMATRIX createTranslationMatrix() const;
 
+	// ビルボード用回転行列作成
+	DirectX::XMMATRIX createBillboardRotation(const DirectX::XMMATRIX& view) const;
+
 	// ワールド行列を更新
-	void rebuildWorldMatrix() const;
+	// ビルボード対応用に引数でRotationを生成
+	void rebuildWorldMatrix(const DirectX::XMMATRIX& rotation) const;
 
 	// 更新フラグをオン
 	void markDirty() { mDirty = true; }
@@ -68,9 +72,20 @@ public:
 	const Vector3& GetPosition() const { return mPosition; }
 	const Vector3& GetRotation() const { return mRotation; }
 	const Vector3& GetScale() const { return mScale; }
-	const DirectX::XMMATRIX& GetWorldMatrix() const {
+
+	// ワールド行列取得
+	DirectX::XMMATRIX GetWorldMatrix() const {
 		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
-		if (mDirty) { rebuildWorldMatrix(); }
+		if (mDirty) { 
+			rebuildWorldMatrix(createRotationMatrix());
+		}
+		return mWorldMatrix;
+	}
+
+	// ビルボード用ワールド行列取得
+	DirectX::XMMATRIX GetBillboardMatrix(const DirectX::XMMATRIX& view) const {
+		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
+		rebuildWorldMatrix(createBillboardRotation(view));
 		return mWorldMatrix;
 	}
 

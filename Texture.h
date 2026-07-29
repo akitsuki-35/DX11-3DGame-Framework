@@ -4,12 +4,13 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
-*	@updated : 2026/07/24
+*	@updated : 2026/07/27
 *============================================================*/
 #pragma once
 
-#include <d3d11.h>
 #include <string>
+#include <wrl/client.h>
+#include <d3d11.h>
 #include <DirectXMath.h>
 
 /*============================================================
@@ -18,73 +19,20 @@
 *============================================================*/
 class Texture
 {
+	template <typename T>
+	using ComPtr = Microsoft::WRL::ComPtr<T>;
+
 protected:
-	DirectX::XMUINT2 originalSize{}; // テクスチャのオリジナルサイズ
-	ID3D11ShaderResourceView* pShaderResourceView{ nullptr }; // シェーダーリソースビュー
+	// サイズ
+	DirectX::XMUINT2 mSize{};
 
-	DirectX::XMFLOAT2 position{}; // 描画座標
-	DirectX::XMFLOAT2 drawSize{}; // 描画サイズ
-	float rotate{}; // 回転角
-	DirectX::XMFLOAT4 color{ 1.0f, 1.0f, 1.0f, 1.0f }; // カラー
+	// シェーダーリソースビュー
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> _mSRV{ nullptr };
 
 public:
-	Texture(const wchar_t* pFileName, const DirectX::XMFLOAT2& position = { 0.0f, 0.0f },
-		const DirectX::XMFLOAT2& size = { 0.0f, 0.0f }, const float& rotate = 0.0f,
-		const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f }, bool isMipMap = true);
+	bool Load(const std::wstring& filePath);
+	void Bind(UINT slot = 0) const;
 
-	virtual ~Texture();
-
-	// 描画
-	virtual void Draw();
-	virtual void SetTexture();
-
-	const DirectX::XMUINT2& GetSize() { return originalSize; }
-
-/*------------------------------------------------------------
-	セッター
-------------------------------------------------------------*/
-	void SetPosition(const DirectX::XMFLOAT2& newPosition) { position = newPosition; }
-	void SetSize(const DirectX::XMFLOAT2& newSize) { drawSize = newSize; }
-	void SetRotate(const float& newRotate) { rotate = newRotate; }
-	void SetColor(const DirectX::XMFLOAT4& newColor) { color = newColor; }
-
-	void BulkUpdate(const DirectX::XMFLOAT2& newPosition, const DirectX::XMFLOAT2& newSize,
-		const float& newRotate, const DirectX::XMFLOAT4& newColor) {
-		SetPosition(newPosition), SetSize(newSize), SetRotate(newRotate), SetColor(newColor);
-	}
-};
-
-/*============================================================
-*	@class	: SpriteSheet
-*	@brief	: スプライトシート（テクスチャを継承）
-*============================================================*/
-class SpriteSheet : public Texture
-{
-private:
-	int patternMax{}; // パターン数
-	int CurrentPattern{}; // 現在のパターン番号
-	DirectX::XMUINT2 patternMatrix{}; // 縦・横のパターン数
-	DirectX::XMUINT2 patternSize{}; // パターンごとのサイズ
-
-public:
-	SpriteSheet(const wchar_t* pFileName, const DirectX::XMUINT2& patternMatrix,
-		const DirectX::XMFLOAT2& position = { 0.0f, 0.0f },
-		const DirectX::XMFLOAT2& size = { 0.0f, 0.0f }, const float& rotate = 0.0f,
-		const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f }, bool isMipMap = true);
-
-	// 描画
-	void Draw() override;
-
-/*------------------------------------------------------------
-	スプライト関係ゲッター・セッター
-------------------------------------------------------------*/
-	const int& GetCurrentPattern() const { return CurrentPattern; }
-	const int& GetPatternMax() const { return patternMax; }
-	const DirectX::XMUINT2& GetPatternMatrix() { return patternMatrix; }
-	const DirectX::XMUINT2& GetPatternSize() { return patternSize; }
-
-	void SetPattern(int patternNum) {
-		if (patternMax < patternNum) return;
-		CurrentPattern = patternNum;
-	}
+	const DirectX::XMUINT2& GetSize() { return mSize; }
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetSRV() { return _mSRV; }
 };

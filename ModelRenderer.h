@@ -71,6 +71,6 @@ public:
 	using Component::Component;
 
 	void Load( const char *FileName );
-	void Draw() override;
+	void Draw() const override;
 
 };

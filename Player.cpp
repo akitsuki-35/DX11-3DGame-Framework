@@ -31,7 +31,7 @@ void Player::Initialize()
 		{ 0.0f, 0.0f, 0.0f },
 		{ 1.0f, 1.0f, 1.0f }
 	);
-	//mPosition = { 0.0f, 0.0f, 0.0f };
+
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
@@ -217,11 +217,11 @@ void Player::Update()
 void Player::Draw() const
 {
 	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->_mLayout.Get());
+	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout().Get());
 
 	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->_mVertexShader.Get(), NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->_mPixelShader.Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader().Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader().Get(), NULL, 0);
 
 	// マトリクス設定
 	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());
