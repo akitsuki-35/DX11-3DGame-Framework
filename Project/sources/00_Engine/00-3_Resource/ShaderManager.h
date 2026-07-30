@@ -53,16 +53,12 @@ private:
 	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11InputLayout>>  mLayoutCache{};
 
 public:
-	// 登録
-	Shader* Register(const std::string& keyName,
-		const char* vsPath, const char* psPath);
-
 	// 登録済みシェーダーの取得
 	Shader* Get(const std::string& keyName);
 
-private:
-	std::vector<char> road(const char* filePath);
-	std::string normalizePath(const char* filePath);
+	// 登録
+	Shader* Register(const std::string& keyName,
+		const char* vsPath, const char* psPath);
 };
 
 namespace ShaderSet {

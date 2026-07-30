@@ -1,43 +1,43 @@
 ﻿/*============================================================
-*	@file	 : filename.h
-*	@brief	 : 
+*	@file	 : Utility.h
+*	@brief	 : 汎用ユーティリティ
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 20XX/XX/XX
-*	@updated : 20XX/XX/XX
+* 　@date	 : 2026/07/30
+*	@updated : 2026/07/30
 *============================================================*/
 #pragma once
 
+#include <string>
+#include <vector>
+#include <cassert>
+#include <shlwapi.h>
 #include <iostream>
-#include <mutex>
+#include <fstream>
 
-class Singleton final
+/*============================================================
+*	@namespace	: Utility
+*	@brief		: 汎用ユーティリティ関数群
+*============================================================*/
+namespace Utility
 {
-private:
-	std::mutex mutex;
+/*--------------------------------------------------
+	ファイル関連
+----------------------------------------------------*/
+	namespace File {
+		// ファイルロード
+		std::vector<char> load(const char* filePath);
 
-	Singleton() = default;
-	Singleton(const Singleton&) = delete;
-	
-	Singleton& operator=(const Singleton&) = delete;
-	Singleton(Singleton&&) = delete;
-
-	Singleton& operator=(Singleton&&) = delete;
-	~Singleton() {};
-
-public:
-	static Singleton& getInstance() {
-		static Singleton instance;
-		return instance;
+		// ファイルパス正規化
+		std::string normalizePath(const char* filePath);
 	}
-};
 
-/*============================================================
-*	@class	: class
-*	@brief	: 
-*============================================================*/
-
-/*============================================================
-*	@namespace	: name
-*	@brief		: 
-*============================================================*/
+/*--------------------------------------------------
+	文字列関連
+----------------------------------------------------*/
+	namespace String 
+	{
+		// std::string→std::wstringに変換
+		std::wstring toWideString(const std::string& string);
+	}
+}

@@ -27,7 +27,7 @@ void Field::Initialize()
 	drawable->GetMesh().CreatePlane(Plane::Pivot::Center, Plane::Axis::XZ);
 	mTransform.SetScale({ 30.0f, 30.0f, 30.0f });
 
-	drawable->GetTexture().Load(L"assets\\textures\\glass.jpg");
+	drawable->LoadTexture("assets\\textures\\glass.jpg");
 
 	drawable->LoadShader("Unlit");
 

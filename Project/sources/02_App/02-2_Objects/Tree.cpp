@@ -24,21 +24,6 @@ void Tree::Initialize()
 {
 	mLayer = 2;
 
-	//mMesh.CreatePlane(Plane::Pivot::CenterBottom, Plane::Axis::XY);
-	//mTransform.SetPosition({ -5.0f,0.0f, 0.0f });
-	//mTransform.SetScale({ 8.0f, 10.0f, 0.0f });
-
-	//// テクスチャ読込
-	//TexMetadata metaData;
-	//ScratchImage image;
-	//LoadFromWICFile(L"Resources\\Textures\\Background\\tree.png", WIC_FLAGS_NONE, &metaData, image);
-	//CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(),
-	//	image.GetImages(), image.GetImageCount(), metaData, &_mTexture); 
-	//assert(_mTexture);
-
-	//// シェーダー読込
-	//mShader = ShaderLoader::getInstance().Get("Unlit");
-
 	BillboardDrawable* drawable = AddComponent<BillboardDrawable>(this);
 
 	drawable->GetMesh().CreatePlane(Plane::Pivot::CenterBottom, Plane::Axis::XY);
@@ -46,18 +31,19 @@ void Tree::Initialize()
 	mTransform.SetPosition({ 0.0f,0.0f, 0.0f });
 	mTransform.SetScale({ 8.0f, 10.0f, 0.0f });
 
-	drawable->GetTexture().Load(L"assets\\textures\\tree.png");
+	drawable->LoadTexture("assets\\textures\\tree.png");
 
 	drawable->LoadShader("Unlit");
 }
 
 void Tree::Finalize()
 {
-
+	GameObject::Finalize();
 }
 
 void Tree::Update()
 {
+	GameObject::Update();
 }
 
 void Tree::Draw() const

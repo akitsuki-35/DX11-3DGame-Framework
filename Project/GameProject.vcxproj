@@ -24,10 +24,13 @@
     <ClCompile Include="sources\00_Engine\00-1_Core\Manager.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Systemtimer.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp" />
+    <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\BufferManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\DeviceManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Renderer.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Mesh.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\MeshTypes.cpp" />
@@ -49,7 +52,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Texture.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Audio.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
@@ -211,12 +213,13 @@
     <ClInclude Include="sources\00_Engine\00-1_Core\Manager.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Systemtimer.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h">
+    <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\BufferManager.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\DeviceManager.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\DirectX11Config.h" />
@@ -224,6 +227,8 @@
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Renderer.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\ShaderManager.h" />
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h" />
+    <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -251,7 +256,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Texture.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Vector2.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Vector3.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\WICTextureLoader11.h" />

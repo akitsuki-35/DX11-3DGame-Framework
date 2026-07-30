@@ -6,20 +6,20 @@
 * 　@date	 : 2026/07/14
 *	@updated : 2026/07/14
 *============================================================*/
-#define _CRT_SECURE_NO_WARNINGS
 #include "ShaderManager.h"
 #include "Shader.h"
 #include "DeviceManager.h"
-#include <cassert>
-#include <shlwapi.h>
-#include <io.h>
-
+#include "Utility.h"
 using namespace Microsoft::WRL;
 
 Shader* ShaderManager::Get(const std::string& keyName)
 {
-	if (mShaders.contains(keyName))
-		return mShaders[keyName].get();
+	auto it = mShaders.find(keyName);
+
+	if (it != mShaders.end())
+	{
+		return it->second.get();
+	}
 
 	return nullptr;
 }
@@ -32,8 +32,8 @@ Shader* ShaderManager::Register(const std::string& keyName, const char* vsPath, 
 	}
 
 	// キャッシュ取得用にパスを正規化
-	std::string vsKey = normalizePath(vsPath);
-	std::string psKey = normalizePath(psPath);
+	std::string vsKey = Utility::File::normalizePath(vsPath);
+	std::string psKey = Utility::File::normalizePath(psPath);
 
 	auto shader = std::make_unique<Shader>();
 	
@@ -43,7 +43,7 @@ Shader* ShaderManager::Register(const std::string& keyName, const char* vsPath, 
 		shader->_mLayout = mLayoutCache[vsKey];
 	}
 	else {
-		auto vsBuffer = road(vsPath);
+		auto vsBuffer = Utility::File::load(vsPath);
 
 		D3D11::DeviceManager::getInstance().
 			GetDevice()->CreateVertexShader(vsBuffer.data(), vsBuffer.size(), nullptr, &shader->_mVertexShader);
@@ -77,7 +77,7 @@ Shader* ShaderManager::Register(const std::string& keyName, const char* vsPath, 
 		shader->_mPixelShader = mShaders[psKey]->_mPixelShader;
 	}
 	else {
-		auto psBuffer = road(psPath);
+		auto psBuffer = Utility::File::load(psPath);
 
 		D3D11::DeviceManager::getInstance().
 			GetDevice()->CreatePixelShader(psBuffer.data(), psBuffer.size(), nullptr, &shader->_mPixelShader);
@@ -93,42 +93,4 @@ Shader* ShaderManager::Register(const std::string& keyName, const char* vsPath, 
 	mShaders[keyName] = std::move(shader);
 
 	return mShaders[keyName].get();
-}
-
-std::vector<char> ShaderManager::road(const char* filePath)
-{
-	FILE* file;
-
-	file = fopen(filePath, "rb");
-	assert(file);
-
-	fseek(file, 0, SEEK_END);
-	long fSize = ftell(file);
-	fseek(file, 0, SEEK_SET);
-
-	std::vector<char> buffer(fSize);
-	fread(buffer.data(), 1, fSize, file);
-	fclose(file);
-
-	return buffer;
-}
-
-std::string ShaderManager::normalizePath(const char* filePath)
-{
-	char fullPath[MAX_PATH];
-
-	// 絶対パス変換
-	if (!GetFullPathNameA(filePath, MAX_PATH, fullPath, nullptr)) {
-		return std::string(filePath);
-	}
-
-	char canonical[MAX_PATH];
-
-	// 正規化
-	if (PathCanonicalizeA(canonical, fullPath)) {
-		return std::string(canonical);
-	}
-
-	// 正規化失敗時は絶対パスを返す
-	return std::string(fullPath);
 }
