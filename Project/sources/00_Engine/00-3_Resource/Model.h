@@ -1,6 +1,6 @@
 ﻿/*============================================================
-*	@file	 : ModelResource.h
-*	@brief	 : モデル内リソース
+*	@file	 : Model.h
+*	@brief	 : モデルリソース
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
@@ -13,11 +13,15 @@
 #include "GraphicsTypes.h"
 #include <vector>
 
-class ModelResource
+/*============================================================
+*	@class	: Model
+*	@brief	: モデルリソース
+*============================================================*/
+class Model
 {
 private:
 
-	// モデル内マテリアル
+	// モデル用マテリアル
 	struct MATERIAL
 	{
 		Element::MATERIAL material{};
@@ -32,7 +36,7 @@ private:
 		uint32_t materialIndex;
 	};
 
-	// モデル内メッシュ
+	// モデル用メッシュ
 	struct MESH
 	{
 		Mesh mesh{};

@@ -219,6 +219,9 @@
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp">
+      <Filter>00_Engine\00-3_Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -293,7 +296,7 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
       <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\PolygonDrawable.h">
+    <ClInclude Include="sources\01_Framework\01-2_Components\SpriteDrawable.h">
       <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\BillboardDrawable.h">
@@ -431,9 +434,6 @@
     <ClInclude Include="sources\Others\Subject.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelResource.h">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h">
       <Filter>00_Engine\00-3_Resource</Filter>
     </ClInclude>
@@ -448,6 +448,12 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h">
       <Filter>00_Engine\00-1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h">
+      <Filter>00_Engine\00-3_Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h">
+      <Filter>00_Engine\00-3_Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@
 *============================================================*/
 #pragma once
 
-#include "Drawable.h"
+#include "SpriteDrawable.h"
 #include "GameObject.h"
 #include "Game.h"
 #include "Camera.h"
@@ -17,11 +17,16 @@
 *	@class	: BillboardDrawable
 *	@brief	: 板ポリゴン描画
 *============================================================*/
-class BillboardDrawable final : public Drawable
+class BillboardDrawable final : public SpriteDrawable
 {
+private:
+	Mesh mMesh{}; // メッシュ
+	Element::MATERIAL mMaterial{}; // マテリアル
+	Texture* _mTexture{ nullptr }; // テクスチャ
+
 public:
 	BillboardDrawable(GameObject* owner)
-		: Drawable(owner) {
+		: SpriteDrawable(owner) {
 		// 不透明レイヤーに描画
 		mSortKey.layer = Layer::Alpha;
 	};
