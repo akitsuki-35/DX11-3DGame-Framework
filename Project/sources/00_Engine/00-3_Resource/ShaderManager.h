@@ -1,5 +1,5 @@
 ﻿/*============================================================
-*	@file	 : ShaderLoader.h
+*	@file	 : ShaderManager.h
 *	@brief	 : シェーダー管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
@@ -8,61 +8,37 @@
 *============================================================*/
 #pragma once
 
+#include "Shader.h"
 #include <d3d11.h>
 #include <string>
 #include <memory>
 #include <unordered_map>
 #include <wrl/client.h>
 
-/*--------------------------------------------------
-	前方宣言
-----------------------------------------------------*/
-class ShaderLoader;
-
 /*============================================================
-*	@class	: Shader
-*	@brief	: シェーダーのセット記録
-*============================================================*/
-class Shader
-{
-	friend ShaderLoader;
-private:
-	std::string _mKeyName;
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> _mVertexShader{};
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> _mPixelShader{};
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> _mLayout{};
-
-public:
-	// ゲッター
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> GetVertexShader() const { return _mVertexShader; }
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> GetPixelShader() const { return _mPixelShader; }
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> GetLayout() const { return _mLayout; }
-};
-
-/*============================================================
-*	@class	: ShaderLoader
+*	@class	: ShaderManager
 *	@brief	: シェーダーのロード・管理
 *============================================================*/
-class ShaderLoader final
+class ShaderManager final
 {
 /*--------------------------------------------------
 	Singleton用
 ----------------------------------------------------*/
 public:
-	static ShaderLoader& getInstance() {
-		static ShaderLoader  instance;
+	static ShaderManager& getInstance() {
+		static ShaderManager  instance;
 		return instance;
 	}
 
 private:
-	ShaderLoader () = default;
-	ShaderLoader (const ShaderLoader&) = delete;
+	ShaderManager() = default;
+	ShaderManager(const ShaderManager&) = delete;
 
-	ShaderLoader & operator=(const ShaderLoader&) = delete;
-	ShaderLoader (ShaderLoader&&) = delete;
+	ShaderManager& operator=(const ShaderManager&) = delete;
+	ShaderManager(ShaderManager&&) = delete;
 
-	ShaderLoader& operator=(ShaderLoader&&) = delete;
-	~ShaderLoader() {};
+	ShaderManager& operator=(ShaderManager&&) = delete;
+	~ShaderManager() {};
 
 /*--------------------------------------------------
 	メンバ変数・メンバ関数
@@ -88,3 +64,10 @@ private:
 	std::vector<char> road(const char* filePath);
 	std::string normalizePath(const char* filePath);
 };
+
+namespace ShaderSet {
+	inline void initialize() {
+		ShaderManager::getInstance().Register("Unlit",
+			"assets\\shaders\\unlitTextureVS.cso", "assets\\shaders\\unlitTexturePS.cso");
+	}
+}

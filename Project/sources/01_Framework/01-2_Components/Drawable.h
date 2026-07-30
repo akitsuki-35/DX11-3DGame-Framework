@@ -1,4 +1,4 @@
-/*============================================================
+﻿/*============================================================
 *	@file	 : Drawable.h
 *	@brief	 : 描画コンポーネント基底クラス
 *
@@ -11,7 +11,7 @@
 #include "Component.h"
 #include "Mesh.h"
 #include "Texture.h"
-#include "ShaderLoader.h"
+#include "Shader.h"
 #include "GraphicsTypes.h"
 #include "DeviceManager.h"
 #include "BufferManager.h"
@@ -97,7 +97,7 @@ public:
 
 	// シェーダー読み込み
 	void LoadShader(const std::string& keyName) {
-		_mShader = ShaderLoader::getInstance().Get(keyName);
+		_mShader = ShaderManager::getInstance().Get(keyName);
 	}
 
 	// ゲッター

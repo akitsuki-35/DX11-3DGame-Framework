@@ -1,5 +1,5 @@
 ﻿/*============================================================
-*	@file	 : ShaderLoader.cpp
+*	@file	 : ShaderManager.cpp
 *	@brief	 : シェーダー管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
@@ -7,7 +7,8 @@
 *	@updated : 2026/07/14
 *============================================================*/
 #define _CRT_SECURE_NO_WARNINGS
-#include "ShaderLoader.h"
+#include "ShaderManager.h"
+#include "Shader.h"
 #include "DeviceManager.h"
 #include <cassert>
 #include <shlwapi.h>
@@ -15,7 +16,7 @@
 
 using namespace Microsoft::WRL;
 
-Shader* ShaderLoader::Get(const std::string& keyName)
+Shader* ShaderManager::Get(const std::string& keyName)
 {
 	if (mShaders.contains(keyName))
 		return mShaders[keyName].get();
@@ -23,7 +24,7 @@ Shader* ShaderLoader::Get(const std::string& keyName)
 	return nullptr;
 }
 
-Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, const char* psPath)
+Shader* ShaderManager::Register(const std::string& keyName, const char* vsPath, const char* psPath)
 {
 	// 登録済みならreturn
 	if (mShaders.contains(keyName)) {
@@ -35,7 +36,6 @@ Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 	std::string psKey = normalizePath(psPath);
 
 	auto shader = std::make_unique<Shader>();
-	shader->_mKeyName = keyName;
 	
 	// 頂点シェーダー作成
 	if (mVSCache.contains(vsKey)) {
@@ -95,7 +95,7 @@ Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 	return mShaders[keyName].get();
 }
 
-std::vector<char> ShaderLoader::road(const char* filePath)
+std::vector<char> ShaderManager::road(const char* filePath)
 {
 	FILE* file;
 
@@ -113,7 +113,7 @@ std::vector<char> ShaderLoader::road(const char* filePath)
 	return buffer;
 }
 
-std::string ShaderLoader::normalizePath(const char* filePath)
+std::string ShaderManager::normalizePath(const char* filePath)
 {
 	char fullPath[MAX_PATH];
 
