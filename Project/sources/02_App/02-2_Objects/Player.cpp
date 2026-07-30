@@ -39,7 +39,7 @@ void Player::Initialize()
 	AddComponent<ModelRenderer>(this)->Load("assets\\models\\player.obj");
 
 	// シェーダー読込
-	mShader = ShaderLoader::getInstance().Get("Unlit");
+	mShader = ShaderManager::getInstance().Get("Unlit");
 
 	mSE = AddComponent<Audio>(this);
 	mSE->Load("assets\\audio\\wan.wav");

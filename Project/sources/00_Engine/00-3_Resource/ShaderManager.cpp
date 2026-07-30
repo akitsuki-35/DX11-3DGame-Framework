@@ -1,29 +1,30 @@
 ﻿/*============================================================
-*	@file	 : ShaderLoader.cpp
+*	@file	 : ShaderManager.cpp
 *	@brief	 : シェーダー管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/14
 *	@updated : 2026/07/14
 *============================================================*/
-#define _CRT_SECURE_NO_WARNINGS
-#include "ShaderLoader.h"
+#include "ShaderManager.h"
+#include "Shader.h"
 #include "DeviceManager.h"
-#include <cassert>
-#include <shlwapi.h>
-#include <io.h>
-
+#include "Utility.h"
 using namespace Microsoft::WRL;
 
-Shader* ShaderLoader::Get(const std::string& keyName)
+Shader* ShaderManager::Get(const std::string& keyName)
 {
-	if (mShaders.contains(keyName))
-		return mShaders[keyName].get();
+	auto it = mShaders.find(keyName);
+
+	if (it != mShaders.end())
+	{
+		return it->second.get();
+	}
 
 	return nullptr;
 }
 
-Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, const char* psPath)
+Shader* ShaderManager::Register(const std::string& keyName, const char* vsPath, const char* psPath)
 {
 	// 登録済みならreturn
 	if (mShaders.contains(keyName)) {
@@ -31,11 +32,10 @@ Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 	}
 
 	// キャッシュ取得用にパスを正規化
-	std::string vsKey = normalizePath(vsPath);
-	std::string psKey = normalizePath(psPath);
+	std::string vsKey = Utility::File::normalizePath(vsPath);
+	std::string psKey = Utility::File::normalizePath(psPath);
 
 	auto shader = std::make_unique<Shader>();
-	shader->_mKeyName = keyName;
 	
 	// 頂点シェーダー作成
 	if (mVSCache.contains(vsKey)) {
@@ -43,7 +43,7 @@ Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 		shader->_mLayout = mLayoutCache[vsKey];
 	}
 	else {
-		auto vsBuffer = road(vsPath);
+		auto vsBuffer = Utility::File::load(vsPath);
 
 		D3D11::DeviceManager::getInstance().
 			GetDevice()->CreateVertexShader(vsBuffer.data(), vsBuffer.size(), nullptr, &shader->_mVertexShader);
@@ -77,7 +77,7 @@ Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 		shader->_mPixelShader = mShaders[psKey]->_mPixelShader;
 	}
 	else {
-		auto psBuffer = road(psPath);
+		auto psBuffer = Utility::File::load(psPath);
 
 		D3D11::DeviceManager::getInstance().
 			GetDevice()->CreatePixelShader(psBuffer.data(), psBuffer.size(), nullptr, &shader->_mPixelShader);
@@ -93,42 +93,4 @@ Shader* ShaderLoader::Register(const std::string& keyName, const char* vsPath, c
 	mShaders[keyName] = std::move(shader);
 
 	return mShaders[keyName].get();
-}
-
-std::vector<char> ShaderLoader::road(const char* filePath)
-{
-	FILE* file;
-
-	file = fopen(filePath, "rb");
-	assert(file);
-
-	fseek(file, 0, SEEK_END);
-	long fSize = ftell(file);
-	fseek(file, 0, SEEK_SET);
-
-	std::vector<char> buffer(fSize);
-	fread(buffer.data(), 1, fSize, file);
-	fclose(file);
-
-	return buffer;
-}
-
-std::string ShaderLoader::normalizePath(const char* filePath)
-{
-	char fullPath[MAX_PATH];
-
-	// 絶対パス変換
-	if (!GetFullPathNameA(filePath, MAX_PATH, fullPath, nullptr)) {
-		return std::string(filePath);
-	}
-
-	char canonical[MAX_PATH];
-
-	// 正規化
-	if (PathCanonicalizeA(canonical, fullPath)) {
-		return std::string(canonical);
-	}
-
-	// 正規化失敗時は絶対パスを返す
-	return std::string(fullPath);
 }

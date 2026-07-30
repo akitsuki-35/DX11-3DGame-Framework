@@ -10,7 +10,7 @@
 
 #include "GameObject.h"
 #include "Mesh.h"
-#include "ShaderLoader.h"
+#include "ShaderManager.h"
 
 /*============================================================
 *	@class	: Field

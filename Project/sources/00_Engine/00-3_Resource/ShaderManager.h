@@ -1,0 +1,69 @@
+﻿/*============================================================
+*	@file	 : ShaderManager.h
+*	@brief	 : シェーダー管理
+*
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/07/14
+*	@updated : 2026/07/14
+*============================================================*/
+#pragma once
+
+#include "Shader.h"
+#include <d3d11.h>
+#include <string>
+#include <memory>
+#include <unordered_map>
+#include <wrl/client.h>
+
+/*============================================================
+*	@class	: ShaderManager
+*	@brief	: シェーダーのロード・管理
+*============================================================*/
+class ShaderManager final
+{
+/*--------------------------------------------------
+	Singleton用
+----------------------------------------------------*/
+public:
+	static ShaderManager& getInstance() {
+		static ShaderManager  instance;
+		return instance;
+	}
+
+private:
+	ShaderManager() = default;
+	ShaderManager(const ShaderManager&) = delete;
+
+	ShaderManager& operator=(const ShaderManager&) = delete;
+	ShaderManager(ShaderManager&&) = delete;
+
+	ShaderManager& operator=(ShaderManager&&) = delete;
+	~ShaderManager() {};
+
+/*--------------------------------------------------
+	メンバ変数・メンバ関数
+----------------------------------------------------*/
+private:
+	// シェーダーコンテナ
+	std::unordered_map <std::string, std::unique_ptr<Shader>> mShaders{};
+
+	// キャッシュ
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11VertexShader>> mVSCache{};
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11PixelShader>> mPSCache{};
+	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11InputLayout>>  mLayoutCache{};
+
+public:
+	// 登録済みシェーダーの取得
+	Shader* Get(const std::string& keyName);
+
+	// 登録
+	Shader* Register(const std::string& keyName,
+		const char* vsPath, const char* psPath);
+};
+
+namespace ShaderSet {
+	inline void initialize() {
+		ShaderManager::getInstance().Register("Unlit",
+			"assets\\shaders\\unlitTextureVS.cso", "assets\\shaders\\unlitTexturePS.cso");
+	}
+}

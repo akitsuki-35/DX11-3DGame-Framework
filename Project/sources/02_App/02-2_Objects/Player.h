@@ -9,7 +9,7 @@
 #pragma once
 
 #include "GameObject.h"
-#include "ShaderLoader.h"
+#include "Shader.h"
 
 class Audio;
 

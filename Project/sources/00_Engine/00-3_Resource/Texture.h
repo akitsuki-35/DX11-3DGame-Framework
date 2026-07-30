@@ -1,6 +1,6 @@
 ﻿/*============================================================
 *	@file	 : Texture.h
-*	@brief	 : テクスチャ管理
+*	@brief	 : テクスチャリソース
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
@@ -15,10 +15,12 @@
 
 /*============================================================
 *	@class	: Texture
-*	@brief	: テクスチャ
+*	@brief	: テクスチャリソース
 *============================================================*/
 class Texture
 {
+	friend class TextureManager;
+
 	template <typename T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 
@@ -30,9 +32,10 @@ protected:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> _mSRV{ nullptr };
 
 public:
-	bool Load(const std::wstring& filePath);
 	void Bind(UINT slot = 0) const;
 
-	const DirectX::XMUINT2& GetSize() { return mSize; }
+	const DirectX::XMUINT2& GetSize() const { return mSize; }
+	const UINT& GetWidth() const { return mSize.x; }
+	const UINT& GetHeight() const { return mSize.y; }
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetSRV() { return _mSRV; }
 };

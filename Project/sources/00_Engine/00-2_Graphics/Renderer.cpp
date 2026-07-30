@@ -10,8 +10,7 @@
 #include "Renderer.h"
 #include "DeviceManager.h"
 #include "BufferManager.h"
-#include "ShaderContainer.h"
-#include "ShaderLoader.h"
+#include "ShaderManager.h"
 #include "SystemWindow.h"
 #include <io.h>
 

@@ -1,4 +1,4 @@
-/*============================================================
+﻿/*============================================================
 *	@file	 : Drawable.h
 *	@brief	 : 描画コンポーネント基底クラス
 *
@@ -10,8 +10,8 @@
 
 #include "Component.h"
 #include "Mesh.h"
-#include "Texture.h"
-#include "ShaderLoader.h"
+#include "TextureManager.h"
+#include "ShaderManager.h"
 #include "GraphicsTypes.h"
 #include "DeviceManager.h"
 #include "BufferManager.h"
@@ -53,8 +53,8 @@ protected:
 	Mesh mMesh{}; // メッシュ
 	Element::MATERIAL mMaterial{}; // マテリアル
 	Shader* _mShader{ nullptr }; // シェーダー
-	//Texture* _mTexture{ nullptr }; // テクスチャ
-	Texture _mTexture{}; // テクスチャ
+	Texture* _mTexture{ nullptr }; // テクスチャ
+	//Texture _mTexture{}; // テクスチャ
 
 	SORTKEY mSortKey{}; // ソート用情報
 
@@ -82,13 +82,14 @@ public:
 		// マテリアル設定
 		Element::MATERIAL material{};
 		material.Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-		//if (_mTexture)material.TextureEnable = true;
-		//else material.TextureEnable = false;
-		material.TextureEnable = true;
+		if (_mTexture)material.TextureEnable = true;
+		else material.TextureEnable = false;
+		//material.TextureEnable = true;
 		D3D11::BufferManager::getInstance().SetMaterial(material);
 
 		mMesh.Bind();
-		_mTexture.Bind();
+		_mTexture->Bind();
+
 		mMesh.Draw();
 	}
 
@@ -97,13 +98,18 @@ public:
 
 	// シェーダー読み込み
 	void LoadShader(const std::string& keyName) {
-		_mShader = ShaderLoader::getInstance().Get(keyName);
+		_mShader = ShaderManager::getInstance().Get(keyName);
+	}
+
+	// テクスチャ読み込み
+	void LoadTexture(const char* fileName) {
+		_mTexture = TextureManager::getInstance().Load(fileName);
 	}
 
 	// ゲッター
 	Mesh& GetMesh() { return mMesh; }
 	Element::MATERIAL GetMaterial() const { return mMaterial; }
 	Shader* GetShader() const { return _mShader; }
-	Texture& GetTexture() { return _mTexture; }
+	Texture* GetTexture() { return _mTexture; }
 	SORTKEY& GetSortKey() { return mSortKey; }
 };
