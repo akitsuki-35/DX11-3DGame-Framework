@@ -21,7 +21,7 @@
 *============================================================*/
 class GameObject
 {
-protected: // 継承先からアクセス可能なメンバ変数
+protected:
 
 	int mLayer{ 1 }; // レイヤー番号
 	float mCameraZ{}; // カメラからの距離（Zソート用）
@@ -33,6 +33,8 @@ protected: // 継承先からアクセス可能なメンバ変数
 	std::vector<Component*> mComponents;
 
 	std::string mTag{};
+
+	// 削除フラグ
 	bool mIsDestroy{ false };
 
 public:
@@ -42,6 +44,7 @@ public:
 	void SetDestroy() { mIsDestroy = true; }
 	bool Destroy() {
 		if (mIsDestroy) {
+			// 削除フラグがオンなら削除
 			Finalize();
 			delete this;
 			return true;
@@ -82,6 +85,25 @@ public:
 	const int& GetLayer() const { return mLayer; }
 	const float& GetCameraZ() const { return mCameraZ; }
 	const Transform& GetTransform() const { return mTransform; }
+	const Vector3& GetPosition() const { return mTransform.GetPosition(); }
+	const Vector3& GetRotation() const { return mTransform.GetRotation(); }
+	const Vector3& GetScale() const { return mTransform.GetScale(); }
+
+	// セッター
+	GameObject& SetPosition(const Vector3& position) {
+		mTransform.SetPosition(position);
+		return *this;
+	}
+
+	GameObject& SetRotation(const Vector3& rotation) {
+		mTransform.SetRotation(rotation);
+		return *this;
+	}
+
+	GameObject& SetScale(const Vector3& scale) {
+		mTransform.SetScale(scale);
+		return *this;
+	}
 
 	// Z値計算
 	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) {

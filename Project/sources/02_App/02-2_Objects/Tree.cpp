@@ -43,7 +43,7 @@ void Tree::Initialize()
 
 	drawable->GetMesh().CreatePlane(Plane::Pivot::CenterBottom, Plane::Axis::XY);
 
-	mTransform.SetPosition({ -5.0f,0.0f, 0.0f });
+	mTransform.SetPosition({ 0.0f,0.0f, 0.0f });
 	mTransform.SetScale({ 8.0f, 10.0f, 0.0f });
 
 	drawable->GetTexture().Load(L"assets\\textures\\tree.png");
