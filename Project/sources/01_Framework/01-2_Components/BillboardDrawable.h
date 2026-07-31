@@ -1,6 +1,6 @@
 ﻿/*============================================================
 *	@file	 : BillboardDrawable.h
-*	@brief	 : 板ポリゴン描画コンポーネント
+*	@brief	 : ビルボード描画コンポーネント
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
@@ -9,7 +9,6 @@
 #pragma once
 
 #include "SpriteDrawable.h"
-#include "GameObject.h"
 #include "Game.h"
 #include "Camera.h"
 

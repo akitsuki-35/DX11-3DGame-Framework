@@ -76,15 +76,6 @@ public:
 		_mShader = ShaderManager::getInstance().Get(keyName);
 	}
 
-	//// テクスチャ読み込み
-	//void LoadTexture(const char* fileName) {
-	//	_mTexture = TextureManager::getInstance().Load(fileName);
-	//}
-
-	//// ゲッター
-	//Mesh& GetMesh() { return mMesh; }
-	//Element::MATERIAL GetMaterial() const { return mMaterial; }
-	//Texture* GetTexture() { return _mTexture; }
 	Shader* GetShader() const { return _mShader; }
 	SORTKEY& GetSortKey() { return mSortKey; }
 

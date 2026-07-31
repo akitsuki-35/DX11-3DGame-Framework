@@ -43,6 +43,12 @@ private:
 		std::vector<SUBSET> subsets;
 	};
 
+	// 頂点バッファ
+	Microsoft::WRL::ComPtr<ID3D11Buffer> _mVertexBuffer{};
+
+	// インデックスバッファ
+	Microsoft::WRL::ComPtr<ID3D11Buffer> _mIndexBuffer{};
+
 	std::vector<MESH> mMeshes;
 	std::vector<MATERIAL> mMaterials;
 };

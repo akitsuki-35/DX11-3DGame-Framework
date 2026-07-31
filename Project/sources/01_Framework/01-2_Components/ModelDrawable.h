@@ -1,10 +1,10 @@
-﻿/*============================================================
-*	@file	 : SpriteDrawable.h
-*	@brief	 : 板ポリゴン描画コンポーネント
+/*============================================================
+*	@file	 : ModelDrawable.h
+*	@brief	 : モデル描画コンポーネント
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/07/24
-*	@updated : 2026/07/27
+* 　@date	 : 2026/07/31
+*	@updated : 2026/07/31
 *============================================================*/
 #pragma once
 
@@ -23,14 +23,14 @@ private:
 
 public:
 	SpriteDrawable(GameObject* owner)
-		: Drawable(owner){
+		: Drawable(owner) {
 		// 不透明レイヤーに描画
 		mSortKey.layer = Layer::World;
 	};
 
 	~SpriteDrawable() override = default;
 
-	void Draw() const override{
+	void Draw() const override {
 		Bind();
 
 		D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());

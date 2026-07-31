@@ -266,6 +266,7 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\BillboardDrawable.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Component.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Drawable.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\ModelDrawable.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\SpriteDrawable.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Transform.h" />
