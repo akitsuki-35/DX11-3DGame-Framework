@@ -1,4 +1,4 @@
-/*============================================================
+﻿/*============================================================
 *	@file	 : ModelDrawable.h
 *	@brief	 : モデル描画コンポーネント
 *
@@ -9,46 +9,28 @@
 #pragma once
 
 #include "Drawable.h"
+#include "ModelManager.h"
+#include "GameObject.h"
 
 /*============================================================
-*	@class	: SpriteDrawable
-*	@brief	: 板ポリゴン描画
+*	@class	: ModelDrawable
+*	@brief	: モデル描画
 *============================================================*/
-class SpriteDrawable : public Drawable
+class ModelDrawable : public Drawable
 {
 private:
-	Mesh mMesh{}; // メッシュ
-	Element::MATERIAL mMaterial{}; // マテリアル
-	Texture* _mTexture{ nullptr }; // テクスチャ
+	Model* _mModel{};
 
 public:
-	SpriteDrawable(GameObject* owner)
+	ModelDrawable(GameObject* owner)
 		: Drawable(owner) {
 		// 不透明レイヤーに描画
 		mSortKey.layer = Layer::World;
 	};
 
-	~SpriteDrawable() override = default;
+	~ModelDrawable() override = default;
 
-	void Draw() const override {
-		Bind();
-
-		D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());
-
-		// マテリアル設定
-		Element::MATERIAL material{};
-		material.Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-		material.TextureEnable = static_cast<bool>(_mTexture != nullptr);
-		D3D11::BufferManager::getInstance().SetMaterial(material);
-
-		mMesh.Bind();
-
-		if (material.TextureEnable) {
-			_mTexture->Bind();
-		}
-
-		mMesh.Draw();
-	}
+	void Draw() const override;
 
 private:
 	// ワールド行列取得
@@ -57,13 +39,8 @@ private:
 	}
 
 public:
-	// テクスチャ読み込み
-	void LoadTexture(const char* fileName) {
-		_mTexture = TextureManager::getInstance().Load(fileName);
+	// モデル読み込み
+	void LoadModel(const char* fileName) {
+		_mModel = ModelManager::getInstance().Load(fileName);
 	}
-
-	// ゲッター
-	Mesh& GetMesh() { return mMesh; }
-	Element::MATERIAL GetMaterial() const { return mMaterial; }
-	Texture* GetTexture() { return _mTexture; }
 };

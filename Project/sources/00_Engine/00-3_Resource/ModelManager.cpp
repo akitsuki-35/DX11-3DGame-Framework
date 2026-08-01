@@ -8,7 +8,6 @@
 *============================================================*/
 #include "ModelManager.h"
 #include "DeviceManager.h"
-#include "ModelRenderer.h"
 #include "Utility.h"
 #include <DirectXTex.h>
 using namespace DirectX;

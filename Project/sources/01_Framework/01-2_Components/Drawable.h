@@ -10,7 +10,6 @@
 
 #include "Component.h"
 #include "Mesh.h"
-#include "TextureManager.h"
 #include "ShaderManager.h"
 #include "GraphicsTypes.h"
 #include "DeviceManager.h"

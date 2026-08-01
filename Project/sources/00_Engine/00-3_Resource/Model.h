@@ -9,7 +9,7 @@
 #pragma once
 
 #include "Texture.h"
-#include "Mesh.h"
+#include "ModelMesh.h"
 #include "GraphicsTypes.h"
 #include <vector>
 
@@ -19,6 +19,9 @@
 *============================================================*/
 class Model
 {
+	friend class ModelManager;
+	friend class ModelDrawable;
+
 private:
 
 	// モデル用マテリアル
@@ -28,27 +31,12 @@ private:
 		Texture texture{};
 	};
 
-	// サブセット
-	struct SUBSET
-	{
-		uint32_t startIndex{};
-		uint32_t indexNum{};
-		uint32_t materialIndex;
-	};
-
-	// モデル用メッシュ
-	struct MESH
-	{
-		Mesh mesh{};
-		std::vector<SUBSET> subsets;
-	};
-
 	// 頂点バッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mVertexBuffer{};
 
 	// インデックスバッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mIndexBuffer{};
 
-	std::vector<MESH> mMeshes;
+	std::vector<ModelMesh> mMeshs;
 	std::vector<MATERIAL> mMaterials;
 };

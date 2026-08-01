@@ -9,6 +9,9 @@
 #pragma once
 
 #include "Drawable.h"
+#include "GameObject.h"
+#include "TextureManager.h"
+#include "ShaderManager.h"
 
 /*============================================================
 *	@class	: SpriteDrawable
