@@ -49,6 +49,7 @@ void Manager::Finalize()
 
 	Audio::UninitMaster();
 	Input::Finalize();
+	Renderer::getInstance().Finalize();
 }
 
 /*------------------------------------------------------------

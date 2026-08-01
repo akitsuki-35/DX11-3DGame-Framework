@@ -40,6 +40,7 @@ private:
 ----------------------------------------------------*/
 public:
 	void Initialize();
+	void Finalize();
 	void Begin();
 	void End();
 	void SetViewport(float width = Screen::WIDTH, float height = Screen::HEIGHT);

@@ -10,6 +10,7 @@
 #include "input.h"
 #include "renderer.h"
 #include "modelRenderer.h"
+#include "ModelDrawable.h"
 #include "game.h"
 #include "audio.h"
 #include "player.h"
@@ -36,7 +37,9 @@ void Player::Initialize()
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelRenderer>(this)->Load("assets\\models\\player.obj");
+	//AddComponent<ModelRenderer>(this);
+	//AddComponent<ModelRenderer>(this)->Load("assets\\models\\player.obj");
+	//AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\player.obj");
 
 	// シェーダー読込
 	mShader = ShaderManager::getInstance().Get("Unlit");
@@ -217,11 +220,11 @@ void Player::Update()
 void Player::Draw() const
 {
 	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout().Get());
+	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout());
 
 	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader().Get(), NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader().Get(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader(), NULL, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader(), NULL, 0);
 
 	// マトリクス設定
 	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());

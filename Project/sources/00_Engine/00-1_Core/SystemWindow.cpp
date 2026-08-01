@@ -67,6 +67,7 @@ void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
 
 void System::Window::Finalize() const
 {
+	DestroyWindow(mHwnd);
 	UnregisterClass(CLASS_NAME, mHInstance);
 	CoUninitialize();
 }

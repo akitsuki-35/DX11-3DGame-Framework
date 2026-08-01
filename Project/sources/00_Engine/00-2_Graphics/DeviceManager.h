@@ -78,6 +78,7 @@ namespace D3D11 {
 
 	public:
 		bool Initialize();
+		void Fainlize();
 
 	private:
 		// デバイス・ステート生成
@@ -105,10 +106,10 @@ namespace D3D11 {
 		};
 
 		// ゲッター
-		Microsoft::WRL::ComPtr<ID3D11Device> GetDevice() const { return _mDevice; }
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetContext() const { return _mContext; }
-		Microsoft::WRL::ComPtr<IDXGISwapChain> GetSwapChain() const { return _mSwapChain; }
-		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> GetRenderTargetView() const { return _mRenderTargetView; }
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> GetDepthStencilView() const { return _mDepthStencilView; }
+		ID3D11Device* GetDevice() const { return _mDevice.Get(); }
+		ID3D11DeviceContext* GetContext() const { return _mContext.Get(); }
+		IDXGISwapChain* GetSwapChain() const { return _mSwapChain.Get(); }
+		ID3D11RenderTargetView* GetRenderTargetView() const { return _mRenderTargetView.Get(); }
+		ID3D11DepthStencilView* GetDepthStencilView() const { return _mDepthStencilView.Get(); }
 	};
 }

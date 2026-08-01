@@ -56,11 +56,11 @@ protected:
 		auto context = D3D11::DeviceManager::getInstance().GetContext();
 
 		// 入力レイアウト設定
-		context->IASetInputLayout(_mShader->GetLayout().Get());
+		context->IASetInputLayout(_mShader->GetLayout());
 
 		// シェーダー設定
-		context->VSSetShader(_mShader->GetVertexShader().Get(), nullptr, 0);
-		context->PSSetShader(_mShader->GetPixelShader().Get(), nullptr, 0);
+		context->VSSetShader(_mShader->GetVertexShader(), nullptr, 0);
+		context->PSSetShader(_mShader->GetPixelShader(), nullptr, 0);
 	}
 
 public:

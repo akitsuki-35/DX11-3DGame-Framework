@@ -47,6 +47,11 @@ public:
 	// ロード
 	Texture* Load(const char* texturePath);
 
+	// クリア
+	void Clear() {
+		mTextures.clear();
+	}
+
 private:
 	bool generateTexture(Texture& texture, const std::string& path);
 };

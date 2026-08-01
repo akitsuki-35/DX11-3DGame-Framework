@@ -6,8 +6,7 @@
 * 　@date	 : 2026/04/11
 *	@updated : 2026/06/02
 *============================================================*/
-#ifndef DEBUG_MEMORYLEAK_H
-#define DEBUG_MEMORYLEAK_H
+#pragma once
 
 // メモリリーク検出箇所を出力するマクロ
 // 他ファイルにインクルードのみで導入可
@@ -19,5 +18,3 @@
 
 #define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #endif // defined(DEBUG) || defined(_DEBUG)
-
-#endif // DEBUG_MEMORYLEAK_H

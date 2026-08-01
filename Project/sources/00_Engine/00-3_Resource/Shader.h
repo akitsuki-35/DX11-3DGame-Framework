@@ -25,7 +25,7 @@ private:
 
 public:
 	// ゲッター
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> GetVertexShader() const { return _mVertexShader; }
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> GetPixelShader() const { return _mPixelShader; }
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> GetLayout() const { return _mLayout; }
+	ID3D11VertexShader* GetVertexShader() const { return _mVertexShader.Get(); }
+	ID3D11PixelShader* GetPixelShader() const { return _mPixelShader.Get(); }
+	ID3D11InputLayout* GetLayout() const { return _mLayout.Get(); }
 };

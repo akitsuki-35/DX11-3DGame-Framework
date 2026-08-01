@@ -8,7 +8,7 @@
 *============================================================*/
 #include "Texture.h"
 #include "DeviceManager.h"
-#include <DirectXTex.h>
+#include <DirectXTex/DirectXTex.h>
 using namespace DirectX;
 
 void Texture::Bind(UINT slot) const

@@ -11,7 +11,9 @@
 #include "DeviceManager.h"
 #include "BufferManager.h"
 #include "ShaderManager.h"
+#include "TextureManager.h"
 #include "SystemWindow.h"
+#include "ModelRenderer.h"
 #include <io.h>
 
 void Renderer::Initialize()
@@ -35,6 +37,16 @@ void Renderer::Initialize()
 	ShaderSet::initialize();
 }
 
+void Renderer::Finalize()
+{
+	ModelRenderer::UnloadAll();
+
+	ShaderManager::getInstance().Clear();
+	TextureManager::getInstance().Clear();
+
+	D3D11::DeviceManager::getInstance().Fainlize();
+}
+
 void Renderer::Begin()
 {
 	// ※ループ先頭で呼出
@@ -42,8 +54,8 @@ void Renderer::Begin()
 
 	// 画面クリア
 	float clearColor[4] = { 0.2f, 0.5f, 0.1f, 1.0f };
-	device.GetContext()->ClearRenderTargetView( device.GetRenderTargetView().Get(), clearColor);
-	device.GetContext()->ClearDepthStencilView( device.GetDepthStencilView().Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+	device.GetContext()->ClearRenderTargetView( device.GetRenderTargetView(), clearColor);
+	device.GetContext()->ClearDepthStencilView( device.GetDepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 void Renderer::SetViewport(float width, float height)
@@ -61,7 +73,7 @@ void Renderer::SetViewport(float width, float height)
 
 void Renderer::End()
 {
-	// ※ループ末尾で呼出
+	// ループ末尾で呼出
 	D3D11::DeviceManager::getInstance().GetSwapChain()->Present(1, 0);
 }
 
