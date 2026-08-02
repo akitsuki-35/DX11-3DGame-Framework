@@ -9,6 +9,7 @@
 #pragma once
 
 #include "Config.h"
+#include <d3d11.h>
 
 /*============================================================
 *	@class	: Renderer
@@ -44,7 +45,4 @@ public:
 	void Begin();
 	void End();
 	void SetViewport(float width = Screen::WIDTH, float height = Screen::HEIGHT);
-
-	void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
-	void CreatePixelShader(ID3D11PixelShader** PixelShader, const char* FileName);
 };

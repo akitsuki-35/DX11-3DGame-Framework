@@ -43,6 +43,6 @@ public:
 	ModelMesh() = default;
 	~ModelMesh() = default;
 
-	void Bind() const;
-	void Draw(const SUBSET& subset) const;
+	void Bind() const {};
+	void Draw(const SUBSET& subset) const {};
 };

@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "GraphicsTypes.h"
-#include <wrl/client.h>
 
 // マテリアル構造体
 struct MODEL_MATERIAL
@@ -38,8 +37,8 @@ struct MODEL_OBJ
 
 struct MODEL
 {
-	Microsoft::WRL::ComPtr<ID3D11Buffer> VertexBuffer{};
-	Microsoft::WRL::ComPtr<ID3D11Buffer> IndexBuffer{};
+	ID3D11Buffer* VertexBuffer{};
+	ID3D11Buffer* IndexBuffer{};
 
 	SUBSET* SubsetArray{};
 	unsigned int	SubsetNum{};

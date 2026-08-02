@@ -75,6 +75,7 @@ public:
 		_mShader = ShaderManager::getInstance().Get(keyName);
 	}
 
+	// ゲッター
 	Shader* GetShader() const { return _mShader; }
 	SORTKEY& GetSortKey() { return mSortKey; }
 

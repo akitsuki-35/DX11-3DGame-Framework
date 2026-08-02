@@ -25,11 +25,12 @@ void ModelRenderer::Draw() const
 	D3D11::DeviceManager::getInstance().GetContext()->IASetVertexBuffers(0, 1, &m_Model->VertexBuffer, &stride, &offset);
 
 	// インデックスバッファ設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetIndexBuffer(m_Model->IndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	D3D11::DeviceManager::getInstance().GetContext()->IASetIndexBuffer(m_Model->IndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	// プリミティブトポロジ設定
 	D3D11::DeviceManager::getInstance().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+	auto a = m_Model->SubsetNum;
 
 	for( unsigned int i = 0; i < m_Model->SubsetNum; i++ )
 	{
@@ -93,9 +94,9 @@ void ModelRenderer::Load(const char *FileName)
 	m_Model = new MODEL{};
 	LoadModel(FileName, m_Model);
 
-	//m_ModelPool[FileName] = m_Model;
+	m_ModelPool[FileName] = m_Model;
 
-	m_ModelPool.emplace(FileName, m_Model);
+	//m_ModelPool.emplace(FileName, m_Model);
 
 }
 

@@ -37,6 +37,6 @@ private:
 	// インデックスバッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mIndexBuffer{};
 
-	std::vector<ModelMesh> mMeshs;
-	std::vector<MATERIAL> mMaterials;
+	std::vector<ModelMesh> mMeshs{};
+	std::vector<MATERIAL> mMaterials{};
 };

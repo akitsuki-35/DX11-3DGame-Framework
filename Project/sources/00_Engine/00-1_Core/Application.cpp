@@ -23,8 +23,8 @@ int Application::Run() const
 		else{
 			if (System::Timer::getInstance().Tick(1000 / 60))
 			{
-				Manager::Update();
-				Manager::Draw();
+				Manager::getInstance().Update();
+				Manager::getInstance().Draw();
 			}
 		}
 	}

@@ -38,7 +38,7 @@ void Player::Initialize()
 
 	// コンポーネント読込
 	//AddComponent<ModelRenderer>(this);
-	//AddComponent<ModelRenderer>(this)->Load("assets\\models\\player.obj");
+	AddComponent<ModelRenderer>(this)->Load("assets\\models\\player.obj");
 	//AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\player.obj");
 
 	// シェーダー読込

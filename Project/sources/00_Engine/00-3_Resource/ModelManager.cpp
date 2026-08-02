@@ -44,7 +44,7 @@ Model* ModelManager::Load(const char* modelPath)
 
 bool ModelManager::generateModel(Model& model, const std::string& path)
 {
-	Assimp::Importer importer;
+	Assimp::Importer importer{};
 
 	// モデルロード
 	const aiScene* scene = importer.ReadFile(

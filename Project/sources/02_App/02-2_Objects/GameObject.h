@@ -30,7 +30,7 @@ protected:
 	Transform mTransform{};
 
 	// コンポーネント
-	std::vector<Component*> mComponents;
+	std::vector<Component*> mComponents{};
 
 	std::string mTag{};
 

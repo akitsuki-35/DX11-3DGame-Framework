@@ -213,9 +213,6 @@
     <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp">
       <Filter>00_Engine\00-3_Resource</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Mesh.cpp">
       <Filter>00_Engine\00-2_Graphics</Filter>
     </ClCompile>
@@ -224,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelDrawable.cpp">
       <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp">
+      <Filter>01_Framework\01-2_Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +449,6 @@
     <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h">
       <Filter>00_Engine\00-3_Resource</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\ModelDrawable.h">
       <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
@@ -463,6 +460,9 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h">
       <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
+      <Filter>01_Framework\01-2_Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

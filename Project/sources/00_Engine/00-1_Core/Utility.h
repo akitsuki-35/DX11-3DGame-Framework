@@ -14,6 +14,7 @@
 #include <shlwapi.h>
 #include <iostream>
 #include <fstream>
+#pragma comment(lib, "Shlwapi.lib")
 
 /*============================================================
 *	@namespace	: Utility
