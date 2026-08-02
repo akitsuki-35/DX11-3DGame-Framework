@@ -8,6 +8,7 @@
 *============================================================*/
 #pragma once
 
+#include "GraphicsTypes.h"
 #include <vector>
 #include <wrl/client.h>
 #include <d3d11.h>
@@ -18,6 +19,9 @@
 *============================================================*/
 class ModelMesh
 {
+	friend class AssimpLoader;
+	friend class ModelDrawable;
+
 	template <typename T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 
@@ -26,10 +30,14 @@ private:
 	// サブセット
 	struct SUBSET
 	{
-		uint32_t startIndex{};
-		uint32_t indexNum{};
-		uint32_t materialIndex{};
+		uint32_t StartIndex{};
+		uint32_t IndexNum{};
+		uint32_t MaterialIndex{};
 	};
+
+	// バッファ生成用一時データ
+	std::vector<Element::VERTEX3D> mVertices{};
+	std::vector<uint32_t> mIndices{};
 
 	// 頂点バッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mVertexBuffer{};
@@ -37,12 +45,24 @@ private:
 	// インデックスバッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mIndexBuffer{};
 
+	// サブセット
 	std::vector<SUBSET> subsets{};
 
 public:
 	ModelMesh() = default;
 	~ModelMesh() = default;
 
-	void Bind() const {};
-	void Draw(const SUBSET& subset) const {};
+	bool Create(const std::vector<Element::VERTEX3D>& vertices,
+		const std::vector<uint32_t>& indices);
+
+	void Bind() const;
+	void Draw(const SUBSET& subset) const;
+
+#ifndef NDEBUG
+	void DebugPrintSubsets() const;
+#endif
+
+private:
+	bool generateVertexBuffer();
+	bool generateIndexBuffer();
 };

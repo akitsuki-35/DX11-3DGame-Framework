@@ -9,6 +9,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include <DirectXMath.h>
 
 /*============================================================
 *	@class	: Camera
@@ -18,7 +19,7 @@ class Camera : public GameObject
 {
 protected:
 	Vector3 mTarget{}; // 注視点
-	XMMATRIX mViewMatrix; // ビュー行列
+	DirectX::XMMATRIX mViewMatrix; // ビュー行列
 
 public:
 	virtual ~Camera() = default;
@@ -27,7 +28,7 @@ public:
 	void Update() override;
 	void Draw() const override;
 
-	XMMATRIX GetViewMatrix() const { return mViewMatrix; }
+	DirectX::XMMATRIX GetViewMatrix() const { return mViewMatrix; }
 
 	Vector3 GetForward() const {
 		Vector3 forward = mTarget - mTransform.GetPosition();

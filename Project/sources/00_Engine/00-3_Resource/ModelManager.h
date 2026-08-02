@@ -16,6 +16,15 @@
 #include <unordered_map>
 #include <wrl/client.h>
 
+/*--------------------------------------------------
+	前方宣言
+----------------------------------------------------*/
+struct aiMesh;
+
+/*============================================================
+*	@class	: ModelManager
+*	@brief	: モデルのロード・管理
+*============================================================*/
 class ModelManager final
 {
 /*--------------------------------------------------
@@ -48,6 +57,8 @@ public:
 	// ロード
 	Model* Load(const char* modelPath);
 
-private:
-	bool generateModel(Model& model, const std::string& path);
+	// クリア
+	void Clear() {
+		mModels.clear();
+	}
 };

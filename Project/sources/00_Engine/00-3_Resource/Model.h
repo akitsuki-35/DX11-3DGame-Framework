@@ -21,6 +21,7 @@ class Model
 {
 	friend class ModelManager;
 	friend class ModelDrawable;
+	friend class AssimpLoader;
 
 private:
 
@@ -31,12 +32,9 @@ private:
 		Texture texture{};
 	};
 
-	// 頂点バッファ
-	Microsoft::WRL::ComPtr<ID3D11Buffer> _mVertexBuffer{};
-
-	// インデックスバッファ
-	Microsoft::WRL::ComPtr<ID3D11Buffer> _mIndexBuffer{};
-
 	std::vector<ModelMesh> mMeshs{};
 	std::vector<MATERIAL> mMaterials{};
+
+public:
+	void AddMesh(ModelMesh&& mesh){ mMeshs.emplace_back(std::move(mesh)); }
 };

@@ -13,6 +13,7 @@
 #include "Transform.h"
 #include <sstream>
 #include <memory>
+#include <vector>
 #include <DirectXMath.h>
 
 /*============================================================

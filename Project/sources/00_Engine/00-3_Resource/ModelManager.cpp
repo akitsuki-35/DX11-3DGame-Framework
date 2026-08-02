@@ -7,14 +7,8 @@
 *	@updated : 2026/07/30
 *============================================================*/
 #include "ModelManager.h"
-#include "DeviceManager.h"
+#include "AssimpLoader.h"
 #include "Utility.h"
-
-// assimp関連
-#include "assimp/Importer.hpp"
-#include "assimp/scene.h"
-#include "assimp/postprocess.h"
-#include "assimp/matrix4x4.h"
 
 Model* ModelManager::Load(const char* modelPath)
 {
@@ -31,7 +25,8 @@ Model* ModelManager::Load(const char* modelPath)
 	// モデル生成
 	std::unique_ptr<Model> model = std::make_unique<Model>();
 
-	if (!generateModel(*model, key))
+	// Loaderからモデルをインポート
+	if (!AssimpLoader::getInstance().generateModel(*model, key))
 		return nullptr;
 
 	Model* result = model.get();
@@ -40,38 +35,4 @@ Model* ModelManager::Load(const char* modelPath)
 	mModels.emplace(key, std::move(model));
 
 	return result;
-}
-
-bool ModelManager::generateModel(Model& model, const std::string& path)
-{
-	Assimp::Importer importer{};
-
-	// モデルロード
-	const aiScene* scene = importer.ReadFile(
-		path,
-		aiProcess_Triangulate |
-		aiProcess_ConvertToLeftHanded | 
-		aiProcess_JoinIdenticalVertices |
-		aiProcess_GenSmoothNormals
-	);
-
-	if (!scene)
-	{
-		OutputDebugStringA(importer.GetErrorString());
-		return false;
-	}
-
-	OutputDebugStringA(
-		("Mesh Count : " + std::to_string(scene->mNumMeshes)).c_str());
-
-	for (unsigned int i = 0; i < scene->mNumMeshes; ++i)
-	{
-		aiMesh* mesh = scene->mMeshes[i];
-
-		OutputDebugStringA(
-			("Vertices : " +
-				std::to_string(mesh->mNumVertices) + "\n").c_str());
-	}
-
-	return true;
 }

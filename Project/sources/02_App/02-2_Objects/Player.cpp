@@ -6,22 +6,16 @@
 * 　@date	 : 2026/05/19
 *	@updated : 2026/07/26
 *============================================================*/
-#include "main.h"
+#include "Player.h"
 #include "input.h"
-#include "renderer.h"
-#include "modelRenderer.h"
 #include "ModelDrawable.h"
-#include "game.h"
-#include "audio.h"
-#include "player.h"
-#include "camera.h"
-#include "bullet.h"
+#include "Game.h"
+#include "Audio.h"
+#include "Camera.h"
+#include "Bullet.h"
 
-#include "tree.h"
-#include "box.h"
-
-#include "DeviceManager.h"
-#include "BufferManager.h"
+#include "Tree.h"
+#include "Box.h"
 
 void Player::Initialize()
 {
@@ -37,9 +31,7 @@ void Player::Initialize()
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	//AddComponent<ModelRenderer>(this);
-	AddComponent<ModelRenderer>(this)->Load("assets\\models\\player.obj");
-	//AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\player.obj");
+	AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\player.obj");
 
 	// シェーダー読込
 	mShader = ShaderManager::getInstance().Get("Unlit");
@@ -91,7 +83,7 @@ void Player::Update()
 	}
 
 	float yaw = atan2f(mVelocity.x, mVelocity.z);
-	yaw += XM_PI;
+	//yaw += XM_PI;
 	rotation.y = yaw;
 
 	// ジャンプ
@@ -219,15 +211,5 @@ void Player::Update()
 
 void Player::Draw() const
 {
-	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout());
-
-	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader(), NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader(), NULL, 0);
-
-	// マトリクス設定
-	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());
-
 	GameObject::Draw(); // 継承元のDrawを呼び出す
 }

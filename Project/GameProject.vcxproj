@@ -29,7 +29,9 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\DeviceManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Mesh.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\MeshTypes.cpp" />
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\ModelMesh.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Renderer.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\AssimpLoader.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
@@ -230,6 +232,7 @@
     <ClInclude Include="sources\00_Engine\00-2_Graphics\MeshTypes.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Renderer.h" />
+    <ClInclude Include="sources\00_Engine\00-3_Resource\AssimpLoader.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h" />

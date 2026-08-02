@@ -225,6 +225,12 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp">
       <Filter>01_Framework\01-2_Components</Filter>
     </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\AssimpLoader.cpp">
+      <Filter>00_Engine\00-3_Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\ModelMesh.cpp">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -463,6 +469,9 @@
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
       <Filter>01_Framework\01-2_Components</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\AssimpLoader.h">
+      <Filter>00_Engine\00-3_Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
