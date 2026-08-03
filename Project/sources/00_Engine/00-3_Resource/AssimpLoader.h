@@ -28,7 +28,6 @@ struct aiMesh;
 *============================================================*/
 class AssimpLoader final 
 {
-	friend class ModelManager;
 /*--------------------------------------------------
 	Singleton用
 ----------------------------------------------------*/
@@ -55,9 +54,11 @@ private:
 	// テクスチャ検索用
 	std::unordered_map<std::string, Texture*> mTextureMap{};
 
+public:
 	// モデル生成
-	bool generateModel(Model& model, const std::string& path);
+	bool GenerateModel(Model& model, const std::string& path);
 
+private:
 	// メッシュ生成
 	bool loadMeshes(const aiScene* scene, Model& model);
 

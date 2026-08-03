@@ -27,7 +27,11 @@ void ModelDrawable::Draw() const
             
             D3D11::BufferManager::getInstance().SetMaterial(material);
 
-            if (material.TextureEnable) {
+            if (mTextures.Diffuse)
+            {
+                mTextures.Diffuse->Bind();
+            }
+            else if (material.TextureEnable) {
                 _mModel->mMaterials[subset.MaterialIndex]._Texture->Bind();
             }
 

@@ -84,6 +84,16 @@ public:
 		return component;
 	}
 
+	template <typename T> // テンプレート関数
+	T* GetComponent() {
+		for (Component* component : mComponents) {
+			// RTTI（実行時型情報）
+			T* find = dynamic_cast<T*>(component);
+			if (find) return find;
+		}
+		return nullptr;
+	}
+
 	// ゲッター
 	const int& GetLayer() const { return mLayer; }
 	const float& GetCameraZ() const { return mCameraZ; }
