@@ -1,15 +1,15 @@
 ﻿/*============================================================
-*	@file	 : enemy.h
+*	@file	 : Enemy.h
 *	@brief	 : エネミー
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/19
-*	@updated : 2026/06/02
+*	@updated : 2026/08/03
 *============================================================*/
-#ifndef ENEMY_H
-#define ENEMY_H
+#pragma once
 
-#include "gameobject.h"
+#include "GameObject.h"
+#include "Shader.h"
 
 /*============================================================
 *	@class	: Enemy
@@ -20,10 +20,7 @@ class Enemy : public GameObject
 private:
 	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
 	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
-
-	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
-	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー
-	ID3D11PixelShader* _mPixelShader{}; // ピクセルシェーダー
+	Shader* mShader{};
 
 public:
 	Enemy() = default;
@@ -33,5 +30,3 @@ public:
 	void Update() override;
 	void Draw() const override;
 };
-
-#endif // ENEMY_H

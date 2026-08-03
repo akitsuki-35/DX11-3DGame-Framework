@@ -47,7 +47,7 @@ void Game::Initialize()
 
 	AddGameObject<Field>();
 	AddGameObject<Player>();
-	//AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
 	//AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
 	//AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
 	//Box* box = AddGameObject<Box>();

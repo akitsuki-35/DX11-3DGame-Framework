@@ -8,6 +8,7 @@
 *============================================================*/
 #include "ModelManager.h"
 #include "AssimpLoader.h"
+#include "TextureManager.h"
 #include "Utility.h"
 
 Model* ModelManager::Load(const char* modelPath)
@@ -26,7 +27,7 @@ Model* ModelManager::Load(const char* modelPath)
 	std::unique_ptr<Model> model = std::make_unique<Model>();
 
 	// Loaderからモデルをインポート
-	if (!AssimpLoader::getInstance().generateModel(*model, key))
+	if (!AssimpLoader::getInstance().GenerateModel(*model, key))
 		return nullptr;
 
 	Model* result = model.get();

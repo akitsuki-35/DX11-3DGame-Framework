@@ -24,7 +24,7 @@ void Player::Initialize()
 	mTransform = Transform(
 		{ 0.0f, 0.0f, 0.0f },
 		{ 0.0f, 0.0f, 0.0f },
-		{ 0.1f, 0.1f, 0.1f }
+		{ 1.0f, 1.0f, 1.0f }
 	);
 
 	mVelocity = { 0.0f, 0.0f, 0.0f };

@@ -36,7 +36,7 @@ namespace AssimpDebug {
 	void printTextureElement(const aiTexture* tex, unsigned int index);
 }
 
-bool AssimpLoader::generateModel(Model& model, const std::string& path)
+bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 {
 	mTextureMap.clear();
 
@@ -60,7 +60,7 @@ bool AssimpLoader::generateModel(Model& model, const std::string& path)
 	if (!loadMeshes(scene, model))
 		return false;
 
-	// テクスチャ読み込み
+	// 埋め込みテクスチャ読み込み
 	if (!loadTextures(scene, model))
 		return false;
 
@@ -201,25 +201,26 @@ bool AssimpLoader::loadTextures(const aiScene* scene, Model& model)
 		ScratchImage image{};
 
 		// テクスチャ読み込み
-		LoadFromWICMemory(reinterpret_cast<const uint8_t*>(tex->pcData),
+		HRESULT hr = LoadFromWICMemory(reinterpret_cast<const uint8_t*>(tex->pcData),
 			static_cast<size_t>(tex->mWidth), WIC_FLAGS_NONE, &metadata, image);
+		if (FAILED(hr)) return false;
 
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 
-		HRESULT hr = CreateShaderResourceView(
+		hr = CreateShaderResourceView(
 			D3D11::DeviceManager::getInstance().GetDevice(),
 			image.GetImages(), image.GetImageCount(), metadata, srv.GetAddressOf());
-
 		if (FAILED(hr)) return false;
 
 		// サイズとSRVを登録
 		texture->mSize = { static_cast<UINT>(metadata.width), static_cast<UINT>(metadata.height) };
 		texture->_mSRV = srv;
 
+		// モデルへ登録
+		Texture* ptr = texture.get();
 		model.mTextures.push_back(std::move(texture));
 
 		// 検索用マップへ登録
-		Texture* ptr = model.mTextures.back().get();
 		mTextureMap.emplace(tex->mFilename.C_Str(), ptr);
 	}
 
@@ -233,11 +234,10 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
 		Model::MATERIAL material{};
 
 		aiMaterial* aiMat = scene->mMaterials[i];
-		aiColor4D color{};
-
-		aiString path{};
 
 		// テクスチャ取得
+		aiString path{};
+
 		if (aiMat->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS) {
 			auto it = mTextureMap.find(path.C_Str());
 
@@ -248,6 +248,8 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
 		}
 
 		// カラー取得
+		aiColor4D color{};
+
 		if (AI_SUCCESS == aiGetMaterialColor(aiMat, AI_MATKEY_COLOR_DIFFUSE, &color)) {
 			material.Material.Diffuse = {
 				color.r,

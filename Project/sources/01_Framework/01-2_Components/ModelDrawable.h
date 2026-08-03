@@ -10,7 +10,14 @@
 
 #include "Drawable.h"
 #include "ModelManager.h"
+#include "TextureManager.h"
 #include "GameObject.h"
+#include <filesystem>
+
+/*--------------------------------------------------
+	前方宣言
+----------------------------------------------------*/
+class Texture;
 
 /*============================================================
 *	@class	: ModelDrawable
@@ -18,8 +25,33 @@
 *============================================================*/
 class ModelDrawable : public Drawable
 {
+	// テクスチャ
+	struct ModelTextures
+	{
+		Texture* Diffuse{};
+		Texture* Normal{};
+		Texture* Roughness{};
+		Texture* Metalness{};
+		Texture* Rump{};
+	};
+
+public:
+	// テクスチャタイプ
+	enum class TextureType
+	{
+		Diffuse,
+		Normal,
+		Roughness,
+		Metalness,
+		Ramp
+	};
+
 private:
 	Model* _mModel{};
+	ModelTextures mTextures{};
+	
+	// ディレクトリ(テクスチャ検索用)
+	std::filesystem::path mDirectory{};
 
 public:
 	ModelDrawable(GameObject* owner)
@@ -40,7 +72,60 @@ private:
 
 public:
 	// モデル読み込み
-	void LoadModel(const char* fileName) {
+	ModelDrawable* LoadModel(const char* fileName) {
 		_mModel = ModelManager::getInstance().Load(fileName);
+
+		// モデルディレクトリ取得
+		mDirectory = fileName;
+		mDirectory = mDirectory.parent_path();
+
+		return this;
+	}
+
+	ModelDrawable* LoadTexture(std::string textureName, TextureType type) {
+		switch (type)
+		{
+		case TextureType::Diffuse:
+			mTextures.Diffuse = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+		
+		case TextureType::Normal:
+			mTextures.Normal = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+		
+		case TextureType::Roughness:
+			mTextures.Roughness = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+
+		case TextureType::Metalness:
+			mTextures.Metalness = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+
+		case TextureType::Ramp:
+			mTextures.Rump = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+
+		default:
+			break;
+		}
+
+		return this;
+	}
+
+private:
+	// 外部テクスチャのパスを生成
+	std::string converttoTexturePath(const std::string& textureName) {
+		// テクスチャファイル名からパスを生成
+
+		// モデルと同ディレクトリから参照
+		// モデル用テクスチャを1ディレクトリに集結するため、複数ディレクトリの参照は原則不可
+		std::string texturePath = mDirectory.string() + "\\" + textureName;
+
+		return texturePath;
 	}
 };
