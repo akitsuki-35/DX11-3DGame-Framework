@@ -1,44 +1,56 @@
 ﻿/*============================================================
-*	@file	 : manager.h
+*	@file	 : Manager.h
 *	@brief	 : マネージャー
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/06/02
+*	@updated : 2026/08/02
 *============================================================*/
-#ifndef MANAGER_H
-#define MANAGER_H
+#pragma once
 
-#include "main.h"
-#include "gameobject.h"
-#include "scene.h"
-
-/*------------------------------------------------------------
-	前方宣言
-------------------------------------------------------------*/
-class Scene;
+#include "Scene.h"
+#include <memory>
 
 /*============================================================
 *	@class	: Manager
 *	@brief	: ゲーム全体の処理を管理するマネージャークラス
 *============================================================*/
-class Manager
+class Manager final
 {
+/*--------------------------------------------------
+	Singleton用
+----------------------------------------------------*/
+public:
+	static Manager& getInstance() {
+		static Manager instance;
+		return instance;
+	}
+
 private:
-	//static std::list<GameObject*> gameObjects;
-	static Scene* mCurrentScene;
-	static Scene* mNextScene;
+	Manager() = default;
+	Manager(const Manager&) = delete;
+
+	Manager& operator=(const Manager&) = delete;
+	Manager(Manager&&) = delete;
+
+	Manager& operator=(Manager&&) = delete;
+	~Manager() {};
+
+/*--------------------------------------------------
+	メンバ変数・メンバ関数
+----------------------------------------------------*/
+private:
+	std::unique_ptr<Scene> mCurrentScene{};
+	std::unique_ptr<Scene> mNextScene{};
 
 public:
-	static void Initialize();
-	static void Finalize();
-	static void Update();
-	static void Draw();
+	void Initialize();
+	void Finalize();
+	void Update();
+	void Draw();
 
 	template <class T>
-	static void SceneChange() {
-		mNextScene = new T();
+	void SceneChange() {
+		mNextScene = std::make_unique<T>();
 	}
 };
-
-#endif // MANAGER_H

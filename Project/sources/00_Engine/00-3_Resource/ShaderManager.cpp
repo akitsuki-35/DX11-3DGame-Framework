@@ -10,6 +10,7 @@
 #include "Shader.h"
 #include "DeviceManager.h"
 #include "Utility.h"
+
 using namespace Microsoft::WRL;
 
 Shader* ShaderManager::Get(const std::string& keyName)

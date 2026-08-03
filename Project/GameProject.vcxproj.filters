@@ -78,12 +78,6 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Mesh.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\MeshTypes.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Particle.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
@@ -95,9 +89,6 @@
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-2_Components\Audio.cpp">
       <Filter>01_Framework\01-2_Components</Filter>
@@ -219,6 +210,27 @@
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp">
+      <Filter>00_Engine\00-3_Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\Mesh.cpp">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\MeshTypes.cpp">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\ModelDrawable.cpp">
+      <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp">
+      <Filter>01_Framework\01-2_Components</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\AssimpLoader.cpp">
+      <Filter>00_Engine\00-3_Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\ModelMesh.cpp">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -263,12 +275,6 @@
     <ClInclude Include="sources\01_Framework\01-1_Common\Input.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Mesh.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\MeshTypes.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Particle.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
@@ -290,10 +296,7 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\Drawable.h">
       <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\PolygonDrawable.h">
+    <ClInclude Include="sources\01_Framework\01-2_Components\SpriteDrawable.h">
       <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\BillboardDrawable.h">
@@ -431,9 +434,6 @@
     <ClInclude Include="sources\Others\Subject.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelResource.h">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h">
       <Filter>00_Engine\00-3_Resource</Filter>
     </ClInclude>
@@ -448,6 +448,30 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h">
       <Filter>00_Engine\00-1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h">
+      <Filter>00_Engine\00-3_Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h">
+      <Filter>00_Engine\00-3_Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\ModelDrawable.h">
+      <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\Mesh.h">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\MeshTypes.h">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h">
+      <Filter>00_Engine\00-2_Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
+      <Filter>01_Framework\01-2_Components</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\AssimpLoader.h">
+      <Filter>00_Engine\00-3_Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

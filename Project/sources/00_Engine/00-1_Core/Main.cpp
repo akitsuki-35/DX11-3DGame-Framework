@@ -18,7 +18,7 @@
 #include <thread>
 
 // ImGui
-#include <imgui_impl_win32.h>
+#include <ImGui/imgui_impl_win32.h>
 /*------------------------------------------------------------
 	ローカル関数 プロトタイプ宣言
 ------------------------------------------------------------*/
@@ -39,7 +39,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	// ウィンドウ初期化
 	System::Window::getInstance().Initialize(hInstance);
 
-	Manager::Initialize();
+	Manager::getInstance().Initialize();
 
 #if defined(DEBUG) || defined(_DEBUG)
 	//Debugger::GetInstance().Initialize(g_Window);
@@ -68,8 +68,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	//Debugger::GetInstance().Finalize();
 #endif // defined(DEBUG) || defined(_DEBUG)
 
-	Manager::Finalize();
-	System::Window::getInstance().Finalize();
+	Manager::getInstance().Finalize();	
 
 	return isQuit;
 }

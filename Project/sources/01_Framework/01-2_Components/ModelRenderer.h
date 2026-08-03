@@ -5,10 +5,10 @@
 // マテリアル構造体
 struct MODEL_MATERIAL
 {
-	char						Name[256];
-	Element::MATERIAL			Material;
-	char						TextureName[256];
-	ID3D11ShaderResourceView*	Texture;
+	char						Name[256]{};
+	Element::MATERIAL			Material{};
+	char						TextureName[256]{};
+	ID3D11ShaderResourceView* Texture{};
 
 };
 
@@ -16,32 +16,32 @@ struct MODEL_MATERIAL
 // 描画サブセット構造体
 struct SUBSET
 {
-	unsigned int	StartIndex;
-	unsigned int	IndexNum;
-	MODEL_MATERIAL	Material;
+	unsigned int	StartIndex{};
+	unsigned int	IndexNum{};
+	MODEL_MATERIAL	Material{};
 };
 
 
 // モデル構造体
 struct MODEL_OBJ
 {
-	Element::VERTEX3D *VertexArray;
-	unsigned int	VertexNum;
+	Element::VERTEX3D* VertexArray{};
+	unsigned int	VertexNum{};
 
-	unsigned int	*IndexArray;
-	unsigned int	IndexNum;
+	unsigned int* IndexArray{};
+	unsigned int	IndexNum{};
 
-	SUBSET			*SubsetArray;
-	unsigned int	SubsetNum;
+	SUBSET* SubsetArray{};
+	unsigned int	SubsetNum{};
 };
 
 struct MODEL
 {
-	ID3D11Buffer*	VertexBuffer;
-	ID3D11Buffer*	IndexBuffer;
+	ID3D11Buffer* VertexBuffer{};
+	ID3D11Buffer* IndexBuffer{};
 
-	SUBSET*			SubsetArray;
-	unsigned int	SubsetNum;
+	SUBSET* SubsetArray{};
+	unsigned int	SubsetNum{};
 };
 
 
@@ -73,4 +73,8 @@ public:
 	void Load( const char *FileName );
 	void Draw() const override;
 
+	static size_t GetPoolSize()
+	{
+		return m_ModelPool.size();
+	}
 };

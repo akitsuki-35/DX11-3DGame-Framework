@@ -13,7 +13,6 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include <wrl/client.h>
 
 class TextureManager final
 {
@@ -46,6 +45,11 @@ private:
 public:
 	// ロード
 	Texture* Load(const char* texturePath);
+
+	// クリア
+	void Clear() {
+		mTextures.clear();
+	}
 
 private:
 	bool generateTexture(Texture& texture, const std::string& path);

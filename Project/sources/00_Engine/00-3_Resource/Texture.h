@@ -20,6 +20,7 @@
 class Texture
 {
 	friend class TextureManager;
+	friend class AssimpLoader;
 
 	template <typename T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
@@ -37,5 +38,5 @@ public:
 	const DirectX::XMUINT2& GetSize() const { return mSize; }
 	const UINT& GetWidth() const { return mSize.x; }
 	const UINT& GetHeight() const { return mSize.y; }
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetSRV() { return _mSRV; }
+	ID3D11ShaderResourceView* GetSRV() { return _mSRV.Get(); }
 };

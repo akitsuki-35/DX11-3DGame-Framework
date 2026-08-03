@@ -16,6 +16,8 @@ std::unordered_map<std::string, MODEL*> ModelRenderer::m_ModelPool;
 
 void ModelRenderer::Draw() const
 {
+	if (!m_Model)
+		return;
 
 	// 頂点バッファ設定
 	UINT stride = sizeof(Element::VERTEX3D);
@@ -28,6 +30,7 @@ void ModelRenderer::Draw() const
 	// プリミティブトポロジ設定
 	D3D11::DeviceManager::getInstance().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+	auto a = m_Model->SubsetNum;
 
 	for( unsigned int i = 0; i < m_Model->SubsetNum; i++ )
 	{
@@ -51,11 +54,10 @@ void ModelRenderer::Preload(const char *FileName)
 		return;
 	}
 
-	MODEL* model = new MODEL;
+	MODEL* model = new MODEL{};
 	LoadModel(FileName, model);
 
 	m_ModelPool[FileName] = model;
-
 }
 
 
@@ -89,17 +91,19 @@ void ModelRenderer::Load(const char *FileName)
 		return;
 	}
 
-	m_Model = new MODEL;
+	m_Model = new MODEL{};
 	LoadModel(FileName, m_Model);
 
 	m_ModelPool[FileName] = m_Model;
+
+	//m_ModelPool.emplace(FileName, m_Model);
 
 }
 
 void ModelRenderer::LoadModel( const char *FileName, MODEL *Model)
 {
 
-	MODEL_OBJ modelObj;
+	MODEL_OBJ modelObj{};
 	LoadObj( FileName, &modelObj );
 
 
@@ -114,7 +118,7 @@ void ModelRenderer::LoadModel( const char *FileName, MODEL *Model)
 		bd.CPUAccessFlags = 0;
 
 		D3D11_SUBRESOURCE_DATA sd;
-		ZeroMemory( &sd, sizeof(sd) );
+		ZeroMemory( &sd		, sizeof(sd) );
 		sd.pSysMem = modelObj.VertexArray;
 
 		D3D11::DeviceManager::getInstance().GetDevice()->CreateBuffer( &bd, &sd, &Model->VertexBuffer );
@@ -154,10 +158,10 @@ void ModelRenderer::LoadModel( const char *FileName, MODEL *Model)
 			// テクスチャ読み込み
 			TexMetadata metadata;
 			ScratchImage image;
-			wchar_t wc[256];
+			wchar_t wc[256]{};
 			mbstowcs(wc, modelObj.SubsetArray[i].Material.TextureName, sizeof(wc));
 			LoadFromWICFile(wc, WIC_FLAGS_NONE, &metadata, image);
-			CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(), image.GetImages(), image.GetImageCount(), metadata, &Model->SubsetArray[i].Material.Texture);
+			CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice(), image.GetImages(), image.GetImageCount(), metadata, &Model->SubsetArray[i].Material.Texture);
 
 			if (Model->SubsetArray[i].Material.Texture)
 				Model->SubsetArray[i].Material.Material.TextureEnable = true;

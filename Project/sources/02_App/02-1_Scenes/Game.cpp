@@ -30,6 +30,9 @@
 
 #include "score.h"
 
+#include "DeviceManager.h"
+#include "DirectX11Config.h"
+
 std::list<GameObject*> Game::gameObjects;
 
 void Game::Initialize()
@@ -66,6 +69,8 @@ void Game::Finalize()
 		obj->Finalize();
 		delete obj;
 	}
+
+	gameObjects.clear();
 }
 
 void Game::Update(double elapsedTime)
@@ -107,14 +112,16 @@ void Game::Draw() const
 		}
 	}
 
-	for (int layer = 0; layer < 4; layer++)
-	{
-		for (GameObject* obj : gameObjects) {
-			if (obj->GetLayer() == layer) {
-				obj->Draw();
+		D3D11::DeviceManager::getInstance().SetSamplerState(D3D11::RenderState::Sampler::Anisotropic);
+
+		for (int layer = 0; layer < 4; layer++)
+		{
+			for (GameObject* obj : gameObjects) {
+				if (obj->GetLayer() == layer) {
+					obj->Draw();
+				}
 			}
 		}
-	}
 
 	Renderer::getInstance().End();
 }

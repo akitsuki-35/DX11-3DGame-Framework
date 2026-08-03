@@ -1,6 +1,6 @@
 ﻿/*============================================================
 *	@file	 : BillboardDrawable.h
-*	@brief	 : 板ポリゴン描画コンポーネント
+*	@brief	 : ビルボード描画コンポーネント
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
@@ -8,8 +8,7 @@
 *============================================================*/
 #pragma once
 
-#include "Drawable.h"
-#include "GameObject.h"
+#include "SpriteDrawable.h"
 #include "Game.h"
 #include "Camera.h"
 
@@ -17,11 +16,16 @@
 *	@class	: BillboardDrawable
 *	@brief	: 板ポリゴン描画
 *============================================================*/
-class BillboardDrawable final : public Drawable
+class BillboardDrawable final : public SpriteDrawable
 {
+private:
+	Mesh mMesh{}; // メッシュ
+	Element::MATERIAL mMaterial{}; // マテリアル
+	Texture* _mTexture{ nullptr }; // テクスチャ
+
 public:
 	BillboardDrawable(GameObject* owner)
-		: Drawable(owner) {
+		: SpriteDrawable(owner) {
 		// 不透明レイヤーに描画
 		mSortKey.layer = Layer::Alpha;
 	};

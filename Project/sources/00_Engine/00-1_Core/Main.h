@@ -23,7 +23,7 @@
 #include <DirectXMath.h>
 using namespace DirectX;
 
-#include <DirectXTex.h>
+#include <DirectXTex/DirectXTex.h>
 
 #pragma comment (lib, "winmm.lib")
 

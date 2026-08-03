@@ -10,7 +10,6 @@
 
 #include "DeviceManager.h"
 #include "GraphicsTypes.h"
-
 #include <wrl/client.h>
 
 namespace D3D11 {
@@ -23,9 +22,9 @@ namespace D3D11 {
 		template <typename T>
 		using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-		/*--------------------------------------------------
-			Singleton用
-		----------------------------------------------------*/
+	/*--------------------------------------------------
+		Singleton用
+	----------------------------------------------------*/
 	public:
 		static BufferManager& getInstance() {
 			static BufferManager instance;
@@ -42,9 +41,9 @@ namespace D3D11 {
 		BufferManager& operator=(BufferManager&&) = delete;
 		~BufferManager() {};
 
-		/*--------------------------------------------------
-			メンバ変数・メンバ関数
-		----------------------------------------------------*/
+	/*--------------------------------------------------
+		メンバ変数・メンバ関数
+	----------------------------------------------------*/
 	private:
 		// 定数バッファ
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mWorld{};
@@ -70,10 +69,10 @@ namespace D3D11 {
 		void SetLight(Element::LIGHT light);
 
 		// ゲッター
-		Microsoft::WRL::ComPtr<ID3D11Buffer> GetWorldBuffer() const { return _mWorld; }
-		Microsoft::WRL::ComPtr<ID3D11Buffer> GetViewBuffer() const { return _mView; }
-		Microsoft::WRL::ComPtr<ID3D11Buffer> GetProjectionBuffer() const { return _mProjection; }
-		Microsoft::WRL::ComPtr<ID3D11Buffer> GetMaterialBuffer() const { return _mMaterial; }
-		Microsoft::WRL::ComPtr<ID3D11Buffer> GetLightBuffer() const { return _mLight; }
+		ID3D11Buffer* GetWorldBuffer() const { return _mWorld.Get(); }
+		ID3D11Buffer* GetViewBuffer() const { return _mView.Get(); }
+		ID3D11Buffer* GetProjectionBuffer() const { return _mProjection.Get(); }
+		ID3D11Buffer* GetMaterialBuffer() const { return _mMaterial.Get(); }
+		ID3D11Buffer* GetLightBuffer() const { return _mLight.Get(); }
 	};
 }

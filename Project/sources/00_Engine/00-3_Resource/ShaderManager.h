@@ -45,7 +45,7 @@ private:
 ----------------------------------------------------*/
 private:
 	// シェーダーコンテナ
-	std::unordered_map <std::string, std::unique_ptr<Shader>> mShaders{};
+	std::unordered_map<std::string, std::unique_ptr<Shader>> mShaders{};
 
 	// キャッシュ
 	std::unordered_map<std::string, Microsoft::WRL::ComPtr<ID3D11VertexShader>> mVSCache{};
@@ -59,6 +59,14 @@ public:
 	// 登録
 	Shader* Register(const std::string& keyName,
 		const char* vsPath, const char* psPath);
+
+	// クリア
+	void Clear() {
+		mShaders.clear();
+		mVSCache.clear();
+		mPSCache.clear();
+		mLayoutCache.clear();
+	}
 };
 
 namespace ShaderSet {

@@ -1,0 +1,75 @@
+﻿/*============================================================
+*	@file	 : AssimpLoader.h
+*	@brief	 : assimpによるモデルロード
+*
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/08/02
+*	@updated : 2026/08/02
+*============================================================*/
+#pragma once
+
+#include "ModelMesh.h"
+#include "GraphicsTypes.h"
+#include <string>
+#include <vector>
+#include <unordered_map>
+
+/*--------------------------------------------------
+	前方宣言
+----------------------------------------------------*/
+class Model;
+class Texture;
+struct aiScene;
+struct aiMesh;
+
+/*============================================================
+*	@class	: AssimpLoader
+*	@brief	: assimpによるモデルロード・生成
+*============================================================*/
+class AssimpLoader final 
+{
+	friend class ModelManager;
+/*--------------------------------------------------
+	Singleton用
+----------------------------------------------------*/
+public:
+	static AssimpLoader& getInstance() {
+		static AssimpLoader  instance;
+		return instance;
+	}
+
+private:
+	AssimpLoader() = default;
+	AssimpLoader(const AssimpLoader&) = delete;
+
+	AssimpLoader& operator=(const AssimpLoader&) = delete;
+	AssimpLoader(AssimpLoader&&) = delete;
+
+	AssimpLoader& operator=(AssimpLoader&&) = delete;
+	~AssimpLoader() {};
+
+/*--------------------------------------------------
+	メンバ変数・メンバ関数
+----------------------------------------------------*/
+private:
+	// テクスチャ検索用
+	std::unordered_map<std::string, Texture*> mTextureMap{};
+
+	// モデル生成
+	bool generateModel(Model& model, const std::string& path);
+
+	// メッシュ生成
+	bool loadMeshes(const aiScene* scene, Model& model);
+
+	// 頂点データ取得
+	Element::VERTEX3D convertVertex(const aiMesh* mesh, int v);
+
+	// サブセット生成
+	ModelMesh::SUBSET createSubset(const aiMesh* mesh, uint32_t startIndex, uint32_t indexNum);
+
+	// 埋め込みテクスチャ取得
+	bool loadTextures(const aiScene* scene, Model& model);
+
+	// マテリアル取得
+	void loadMaterials(const aiScene* scene, Model& model);
+};

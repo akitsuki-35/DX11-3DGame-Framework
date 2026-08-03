@@ -12,7 +12,7 @@
 #include "DeviceManager.h"
 #include "BufferManager.h"
 #include "Audio.h"
-#include "PolygonDrawable.h"
+#include "SpriteDrawable.h"
 
 #include "GraphicsTypes.h"
 #include "MeshTypes.h"
@@ -22,7 +22,7 @@ using namespace MeshType;
 
 void Field::Initialize()
 {
-	PolygonDrawable* drawable = AddComponent<PolygonDrawable>(this);
+	SpriteDrawable* drawable = AddComponent<SpriteDrawable>(this);
 
 	drawable->GetMesh().CreatePlane(Plane::Pivot::Center, Plane::Axis::XZ);
 	mTransform.SetScale({ 30.0f, 30.0f, 30.0f });

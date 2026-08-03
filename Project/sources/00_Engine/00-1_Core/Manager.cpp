@@ -15,9 +15,6 @@
 #include "scene.h"
 #include "audio.h"
 
-Scene* Manager::mCurrentScene{ nullptr };
-Scene* Manager::mNextScene{ nullptr };
-
 /*------------------------------------------------------------
 	初期化
 ------------------------------------------------------------*/
@@ -28,9 +25,8 @@ void Manager::Initialize()
 	Audio::InitMaster();
 
 	SceneChange<Game>();
-	mCurrentScene = mNextScene;
-    mNextScene = nullptr;
-    mCurrentScene->Initialize();
+	mCurrentScene = std::move(mNextScene);
+	mCurrentScene->Initialize();
 }
 
 /*------------------------------------------------------------
@@ -38,17 +34,30 @@ void Manager::Initialize()
 ------------------------------------------------------------*/
 void Manager::Finalize()
 {
-	mCurrentScene->Finalize();
-	if (mNextScene) {
-		if (mCurrentScene) {
-			delete mCurrentScene;
+	//mCurrentScene->Finalize();
+	//if (mNextScene) {
+	//	if (mCurrentScene) {
+	//		delete mCurrentScene;
+	//	}
+	//	mCurrentScene = mNextScene;
+	//	mNextScene = nullptr;
+	//}
+
+	if (mNextScene)
+	{
+		if (mCurrentScene)
+		{
+			mCurrentScene->Finalize();
 		}
-		mCurrentScene = mNextScene;
-		mNextScene = nullptr;
+
+		mCurrentScene = std::move(mNextScene);
+
+		mCurrentScene->Initialize();
 	}
 
 	Audio::UninitMaster();
 	Input::Finalize();
+	Renderer::getInstance().Finalize();
 }
 
 /*------------------------------------------------------------
@@ -60,14 +69,17 @@ void Manager::Update()
 
 	if(mCurrentScene) mCurrentScene->Update(1.0/60.0);
 
-	if (mNextScene != nullptr) {
-		if (mCurrentScene) {
+	if (mNextScene)
+	{
+		if (mCurrentScene)
+		{
 			mCurrentScene->Finalize();
-			delete mCurrentScene;
 		}
 
-		mCurrentScene = mNextScene;
-		mNextScene = nullptr;
+		mCurrentScene.reset();
+
+		mCurrentScene = std::move(mNextScene);
+
 		mCurrentScene->Initialize();
 	}
 }

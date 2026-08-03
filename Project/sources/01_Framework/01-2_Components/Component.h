@@ -21,7 +21,7 @@ public:
 	Component() {}
 	Component(GameObject* owner)
 		: _mOwner(owner){}
-	virtual ~Component() {}
+	virtual ~Component() = default;
 
 	virtual void Initialize() {};
 	virtual void Finalize() {};

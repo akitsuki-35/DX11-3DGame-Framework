@@ -32,6 +32,12 @@ bool D3D11::DeviceManager::Initialize()
 	return true;
 }
 
+void D3D11::DeviceManager::Fainlize()
+{
+	_mContext->ClearState();
+	_mContext->Flush();
+}
+
 bool D3D11::DeviceManager::generateDeviceAndSwapChain()
 {
 	HRESULT hr = S_OK;
@@ -258,7 +264,7 @@ bool D3D11::DeviceManager::generateSamplerState()
 	hr = _mDevice->CreateSamplerState(&samplerDesc, &_mSamplerPoint);
 	if (FAILED(hr)) { return false; }
 
-	_mContext->PSSetSamplers(0, 1, &_mSamplerAnisotropic);
+	_mContext->PSSetSamplers(0, 1, _mSamplerAnisotropic.GetAddressOf());
 
 	return true;
 }

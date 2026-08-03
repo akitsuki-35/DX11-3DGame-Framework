@@ -9,7 +9,7 @@
 #include "TextureManager.h"
 #include "DeviceManager.h"
 #include "Utility.h"
-#include <DirectXTex.h>
+#include <DirectXTex/DirectXTex.h>
 using namespace DirectX;
 
 Texture* TextureManager::Load(const char* texturePath)
@@ -51,7 +51,7 @@ bool TextureManager::generateTexture(Texture& texture, const std::string& path)
 	HRESULT hr = LoadFromWICFile(wide.c_str(), WIC_FLAGS_NONE, &metaData, image);
 	if (FAILED(hr)) return false;
 
-	hr = CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice().Get(),
+	hr = CreateShaderResourceView(D3D11::DeviceManager::getInstance().GetDevice(),
 		image.GetImages(), image.GetImageCount(), metaData, texture._mSRV.GetAddressOf());
 	if (FAILED(hr)) return false;
 

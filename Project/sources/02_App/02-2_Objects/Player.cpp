@@ -6,21 +6,16 @@
 * 　@date	 : 2026/05/19
 *	@updated : 2026/07/26
 *============================================================*/
-#include "main.h"
+#include "Player.h"
 #include "input.h"
-#include "renderer.h"
-#include "modelRenderer.h"
-#include "game.h"
-#include "audio.h"
-#include "player.h"
-#include "camera.h"
-#include "bullet.h"
+#include "ModelDrawable.h"
+#include "Game.h"
+#include "Audio.h"
+#include "Camera.h"
+#include "Bullet.h"
 
-#include "tree.h"
-#include "box.h"
-
-#include "DeviceManager.h"
-#include "BufferManager.h"
+#include "Tree.h"
+#include "Box.h"
 
 void Player::Initialize()
 {
@@ -29,14 +24,14 @@ void Player::Initialize()
 	mTransform = Transform(
 		{ 0.0f, 0.0f, 0.0f },
 		{ 0.0f, 0.0f, 0.0f },
-		{ 1.0f, 1.0f, 1.0f }
+		{ 0.1f, 0.1f, 0.1f }
 	);
 
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelRenderer>(this)->Load("assets\\models\\player.obj");
+	AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\kirby.fbx");
 
 	// シェーダー読込
 	mShader = ShaderManager::getInstance().Get("Unlit");
@@ -88,7 +83,7 @@ void Player::Update()
 	}
 
 	float yaw = atan2f(mVelocity.x, mVelocity.z);
-	yaw += XM_PI;
+	yaw += DirectX::XM_PI;
 	rotation.y = yaw;
 
 	// ジャンプ
@@ -98,18 +93,18 @@ void Player::Update()
 
 			// スケールアニメーション
 			//mTransform.SetScale({ 0.75f, 2.0f, 0.75f });
-			scale.y = 2.0f;
-			scale.x = 0.75f;
-			scale.z = 0.75f;
+			//scale.y = 2.0f;
+			//scale.x = 0.75f;
+			//scale.z = 0.75f;
 
 			mSE->Play();
 		}
 	}
 
 	// スケールを元に戻す
-	scale.x += (1.0f - scale.x) * 0.1f;
-	scale.y += (1.0f - scale.y) * 0.1f;
-	scale.z += (1.0f - scale.z) * 0.1f;
+	//scale.x += (1.0f - scale.x) * 0.1f;
+	//scale.y += (1.0f - scale.y) * 0.1f;
+	//scale.z += (1.0f - scale.z) * 0.1f;
 
 	// 重力加速度
 	mVelocity.y += -g * dt;
@@ -202,10 +197,10 @@ void Player::Update()
 	//}
 	
 	// 移動アニメーション
-	if (mGround) {
-		mMoveAnimation += mVelocity.Length() * dt;
-		scale.y += sinf(mMoveAnimation * 3.0f) * 0.03f;
-	}
+	//if (mGround) {
+	//	mMoveAnimation += mVelocity.Length() * dt;
+	//	scale.y += sinf(mMoveAnimation * 3.0f) * 0.03f;
+	//}
 
 	mTransform.SetPosition(position);
 	mTransform.SetRotation(rotation);
@@ -216,15 +211,5 @@ void Player::Update()
 
 void Player::Draw() const
 {
-	// 入力レイアウト設定
-	D3D11::DeviceManager::getInstance().GetContext()->IASetInputLayout(mShader->GetLayout().Get());
-
-	// シェーダー設定
-	D3D11::DeviceManager::getInstance().GetContext()->VSSetShader(mShader->GetVertexShader().Get(), NULL, 0);
-	D3D11::DeviceManager::getInstance().GetContext()->PSSetShader(mShader->GetPixelShader().Get(), NULL, 0);
-
-	// マトリクス設定
-	D3D11::BufferManager::getInstance().SetWorldMatrix(mTransform.GetWorldMatrix());
-
 	GameObject::Draw(); // 継承元のDrawを呼び出す
 }

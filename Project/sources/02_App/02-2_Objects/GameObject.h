@@ -13,6 +13,7 @@
 #include "Transform.h"
 #include <sstream>
 #include <memory>
+#include <vector>
 #include <DirectXMath.h>
 
 /*============================================================
@@ -30,7 +31,7 @@ protected:
 	Transform mTransform{};
 
 	// コンポーネント
-	std::vector<Component*> mComponents;
+	std::vector<Component*> mComponents{};
 
 	std::string mTag{};
 
@@ -60,6 +61,8 @@ public:
 			component->Finalize();
 			delete component;
 		}
+
+		mComponents.clear();
 	}
 	virtual void Update() {
 		for (Component* component : mComponents) {
@@ -75,8 +78,8 @@ public:
 	template <typename T> // テンプレート関数
 	T* AddComponent(GameObject* object) {
 		T* component = new T(object);
-		component->Initialize();
 		mComponents.push_back(component);
+		component->Initialize();
 
 		return component;
 	}
