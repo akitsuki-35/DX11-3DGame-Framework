@@ -11,11 +11,14 @@
 #include "ModelMesh.h"
 #include "GraphicsTypes.h"
 #include <string>
+#include <vector>
+#include <unordered_map>
 
 /*--------------------------------------------------
 	前方宣言
 ----------------------------------------------------*/
 class Model;
+class Texture;
 struct aiScene;
 struct aiMesh;
 
@@ -49,8 +52,14 @@ private:
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 private:
+	// テクスチャ検索用
+	std::unordered_map<std::string, Texture*> mTextureMap{};
+
 	// モデル生成
 	bool generateModel(Model& model, const std::string& path);
+
+	// メッシュ生成
+	bool loadMeshes(const aiScene* scene, Model& model);
 
 	// 頂点データ取得
 	Element::VERTEX3D convertVertex(const aiMesh* mesh, int v);
@@ -58,6 +67,9 @@ private:
 	// サブセット生成
 	ModelMesh::SUBSET createSubset(const aiMesh* mesh, uint32_t startIndex, uint32_t indexNum);
 
+	// 埋め込みテクスチャ取得
+	bool loadTextures(const aiScene* scene, Model& model);
+
 	// マテリアル取得
-	void convertMaterial(const aiScene* scene, Model& model);
+	void loadMaterials(const aiScene* scene, Model& model);
 };

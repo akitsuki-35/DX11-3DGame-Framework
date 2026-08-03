@@ -20,6 +20,7 @@
 class Texture
 {
 	friend class TextureManager;
+	friend class AssimpLoader;
 
 	template <typename T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;

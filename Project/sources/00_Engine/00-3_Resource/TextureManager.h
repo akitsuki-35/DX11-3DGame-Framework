@@ -13,7 +13,6 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include <wrl/client.h>
 
 class TextureManager final
 {

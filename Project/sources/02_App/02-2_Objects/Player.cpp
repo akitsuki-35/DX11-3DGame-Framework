@@ -24,14 +24,14 @@ void Player::Initialize()
 	mTransform = Transform(
 		{ 0.0f, 0.0f, 0.0f },
 		{ 0.0f, 0.0f, 0.0f },
-		{ 1.0f, 1.0f, 1.0f }
+		{ 0.1f, 0.1f, 0.1f }
 	);
 
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\player.obj");
+	AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\kirby.fbx");
 
 	// シェーダー読込
 	mShader = ShaderManager::getInstance().Get("Unlit");
@@ -83,7 +83,7 @@ void Player::Update()
 	}
 
 	float yaw = atan2f(mVelocity.x, mVelocity.z);
-	//yaw += XM_PI;
+	yaw += DirectX::XM_PI;
 	rotation.y = yaw;
 
 	// ジャンプ
@@ -93,18 +93,18 @@ void Player::Update()
 
 			// スケールアニメーション
 			//mTransform.SetScale({ 0.75f, 2.0f, 0.75f });
-			scale.y = 2.0f;
-			scale.x = 0.75f;
-			scale.z = 0.75f;
+			//scale.y = 2.0f;
+			//scale.x = 0.75f;
+			//scale.z = 0.75f;
 
 			mSE->Play();
 		}
 	}
 
 	// スケールを元に戻す
-	scale.x += (1.0f - scale.x) * 0.1f;
-	scale.y += (1.0f - scale.y) * 0.1f;
-	scale.z += (1.0f - scale.z) * 0.1f;
+	//scale.x += (1.0f - scale.x) * 0.1f;
+	//scale.y += (1.0f - scale.y) * 0.1f;
+	//scale.z += (1.0f - scale.z) * 0.1f;
 
 	// 重力加速度
 	mVelocity.y += -g * dt;
@@ -197,10 +197,10 @@ void Player::Update()
 	//}
 	
 	// 移動アニメーション
-	if (mGround) {
-		mMoveAnimation += mVelocity.Length() * dt;
-		scale.y += sinf(mMoveAnimation * 3.0f) * 0.03f;
-	}
+	//if (mGround) {
+	//	mMoveAnimation += mVelocity.Length() * dt;
+	//	scale.y += sinf(mMoveAnimation * 3.0f) * 0.03f;
+	//}
 
 	mTransform.SetPosition(position);
 	mTransform.SetRotation(rotation);

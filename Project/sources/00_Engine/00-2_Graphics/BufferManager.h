@@ -10,7 +10,6 @@
 
 #include "DeviceManager.h"
 #include "GraphicsTypes.h"
-
 #include <wrl/client.h>
 
 namespace D3D11 {

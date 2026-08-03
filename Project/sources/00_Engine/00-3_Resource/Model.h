@@ -11,6 +11,7 @@
 #include "Texture.h"
 #include "ModelMesh.h"
 #include "GraphicsTypes.h"
+#include <memory>
 #include <vector>
 
 /*============================================================
@@ -28,13 +29,16 @@ private:
 	// モデル用マテリアル
 	struct MATERIAL
 	{
-		Element::MATERIAL material{};
-		Texture texture{};
+		Element::MATERIAL Material{};
+		Texture* _Texture{};
 	};
 
-	std::vector<ModelMesh> mMeshs{};
+	std::vector<ModelMesh> mMeshes{};
 	std::vector<MATERIAL> mMaterials{};
 
+	// 埋め込みテクスチャ
+	std::vector<std::unique_ptr<Texture>> mTextures{};
+
 public:
-	void AddMesh(ModelMesh&& mesh){ mMeshs.emplace_back(std::move(mesh)); }
+	void AddMesh(ModelMesh&& mesh){ mMeshes.emplace_back(std::move(mesh)); }
 };
