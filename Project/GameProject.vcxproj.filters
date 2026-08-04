@@ -49,6 +49,21 @@
     <Filter Include="02_App\02-2_Objects">
       <UniqueIdentifier>{240e13a5-0f74-4882-9214-24a8cf71cc75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00_Engine\00-3_Resource\Model">
+      <UniqueIdentifier>{2f8f377a-0370-4944-ba5b-87464f62e2f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00_Engine\00-3_Resource\Shader">
+      <UniqueIdentifier>{35ba1298-4479-43f1-b54a-7292bfe3ba89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00_Engine\00-3_Resource\Texture">
+      <UniqueIdentifier>{592118a8-79cc-4d3c-98ce-452887d795c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00_Engine\00-2_Graphics\Mesh">
+      <UniqueIdentifier>{1318ff4e-78d6-4d90-9766-5111a055245b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00_Engine\00-2_Graphics\DX11">
+      <UniqueIdentifier>{f8e30804-6f19-4e1a-baf0-f66f0faec06d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp">
@@ -65,15 +80,6 @@
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\BufferManager.cpp">
-      <Filter>00_Engine\00-2_Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\DeviceManager.cpp">
-      <Filter>00_Engine\00-2_Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Renderer.cpp">
-      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
@@ -198,38 +204,44 @@
     <ClCompile Include="sources\Others\Mouse.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Mesh.cpp">
-      <Filter>00_Engine\00-2_Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\MeshTypes.cpp">
-      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelDrawable.cpp">
       <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-3_Resource\AssimpLoader.cpp">
-      <Filter>00_Engine\00-3_Resource</Filter>
+      <Filter>00_Engine\00-3_Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp">
+      <Filter>00_Engine\00-3_Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp">
+      <Filter>00_Engine\00-3_Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp">
+      <Filter>00_Engine\00-3_Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp">
+      <Filter>00_Engine\00-3_Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\Mesh.cpp">
+      <Filter>00_Engine\00-2_Graphics\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\MeshTypes.cpp">
+      <Filter>00_Engine\00-2_Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-2_Graphics\ModelMesh.cpp">
-      <Filter>00_Engine\00-2_Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\BufferManager.cpp">
+      <Filter>00_Engine\00-2_Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\DeviceManager.cpp">
+      <Filter>00_Engine\00-2_Graphics\DX11</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\Renderer.cpp">
+      <Filter>00_Engine\00-2_Graphics\DX11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,21 +265,6 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
       <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\BufferManager.h">
-      <Filter>00_Engine\00-2_Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\DeviceManager.h">
-      <Filter>00_Engine\00-2_Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\DirectX11Config.h">
-      <Filter>00_Engine\00-2_Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\GraphicsTypes.h">
-      <Filter>00_Engine\00-2_Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Renderer.h">
-      <Filter>00_Engine\00-2_Graphics</Filter>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">
       <Filter>01_Framework\01-1_Common</Filter>
@@ -434,44 +431,56 @@
     <ClInclude Include="sources\Others\Subject.h">
       <Filter>未整理</Filter>
     </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\ShaderManager.h">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h">
       <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h">
-      <Filter>00_Engine\00-3_Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h">
-      <Filter>00_Engine\00-3_Resource</Filter>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\ModelDrawable.h">
       <Filter>01_Framework\01-2_Components\Drawable</Filter>
     </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\AssimpLoader.h">
+      <Filter>00_Engine\00-3_Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h">
+      <Filter>00_Engine\00-3_Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h">
+      <Filter>00_Engine\00-3_Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h">
+      <Filter>00_Engine\00-3_Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\ShaderManager.h">
+      <Filter>00_Engine\00-3_Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h">
+      <Filter>00_Engine\00-3_Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h">
+      <Filter>00_Engine\00-3_Resource\Texture</Filter>
+    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Mesh.h">
-      <Filter>00_Engine\00-2_Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\MeshTypes.h">
-      <Filter>00_Engine\00-2_Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h">
-      <Filter>00_Engine\00-2_Graphics</Filter>
+      <Filter>00_Engine\00-2_Graphics\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
-      <Filter>01_Framework\01-2_Components</Filter>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\BufferManager.h">
+      <Filter>00_Engine\00-2_Graphics\DX11</Filter>
     </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\AssimpLoader.h">
-      <Filter>00_Engine\00-3_Resource</Filter>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\DeviceManager.h">
+      <Filter>00_Engine\00-2_Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\DirectX11Config.h">
+      <Filter>00_Engine\00-2_Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\GraphicsTypes.h">
+      <Filter>00_Engine\00-2_Graphics\DX11</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\Renderer.h">
+      <Filter>00_Engine\00-2_Graphics\DX11</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

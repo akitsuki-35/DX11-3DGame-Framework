@@ -31,7 +31,8 @@ void Player::Initialize()
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\kirby.fbx");
+	AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\box.obj");
+		//->LoadTexture("sky.jpg",ModelDrawable::TextureType::Diffuse);
 
 	// シェーダー読込
 	mShader = ShaderManager::getInstance().Get("Unlit");

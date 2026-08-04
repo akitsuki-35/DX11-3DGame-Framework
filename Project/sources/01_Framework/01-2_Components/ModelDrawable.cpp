@@ -19,19 +19,30 @@ void ModelDrawable::Draw() const
     {
         mesh.Bind();
 
+        // マテリアル設定
         for (auto& subset : mesh.subsets)
         {
             Element::MATERIAL material{};
             material.Diffuse = _mModel->mMaterials[subset.MaterialIndex].Material.Diffuse;
-            material.TextureEnable = _mModel->mMaterials[subset.MaterialIndex].Material.TextureEnable;
+
+            if (mTextures.Diffuse || _mModel->mMaterials[subset.MaterialIndex].Material.TextureEnable) {
+                // 埋め込みテクスチャまたは外部テクスチャが存在
+                material.TextureEnable = true;
+            }
+            else if (_mModel->mMaterials[subset.MaterialIndex].Material.TextureEnable) {
+                // 埋め込みテクスチャまたは外部テクスチャが存在しない
+                material.TextureEnable = false;
+            }
             
             D3D11::BufferManager::getInstance().SetMaterial(material);
 
             if (mTextures.Diffuse)
             {
+                // 埋め込みテクスチャまたは外部テクスチャを使用して描画
                 mTextures.Diffuse->Bind();
             }
             else if (material.TextureEnable) {
+                // ランバートカラーのみで描画
                 _mModel->mMaterials[subset.MaterialIndex]._Texture->Bind();
             }
 

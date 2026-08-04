@@ -11,8 +11,7 @@
 #include "BufferManager.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
-#include "SystemWindow.h"
-#include "ModelRenderer.h"
+#include "SystemWindow.h"+
 
 void Renderer::Initialize()
 {

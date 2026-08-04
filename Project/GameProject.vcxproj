@@ -58,7 +58,6 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Audio.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelDrawable.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Transform.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
@@ -272,7 +271,6 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\Component.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Drawable.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\ModelDrawable.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\SpriteDrawable.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Transform.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h" />

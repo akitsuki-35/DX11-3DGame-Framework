@@ -8,7 +8,9 @@
 *============================================================*/
 #include "AssimpLoader.h"
 #include "DeviceManager.h"
+#include "TextureManager.h"
 #include "Model.h"
+#include "Utility.h"
 #include <memory>
 #include <Windows.h>
 #include <wrl/client.h>
@@ -65,7 +67,7 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		return false;
 
 	// マテリアル読み込み
-	loadMaterials(scene, model);
+	loadMaterials(scene, model, path);
 
 	mTextureMap.clear();
 
@@ -227,7 +229,7 @@ bool AssimpLoader::loadTextures(const aiScene* scene, Model& model)
 	return true;
 }
 
-void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
+void AssimpLoader::loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath)
 {
 	// マテリアル取得
 	for (unsigned int i = 0; i < scene->mNumMaterials; ++i) {
@@ -239,11 +241,32 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
 		aiString path{};
 
 		if (aiMat->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS) {
-			auto it = mTextureMap.find(path.C_Str());
 
-			if (it != mTextureMap.end()) {
-				material._Texture = it->second;
-				material.Material.TextureEnable = true;
+			if (scene->mNumTextures > 0) {
+				// 埋め込みテクスチャ取得
+				auto it = mTextureMap.find(path.C_Str());
+
+				if (it != mTextureMap.end()) {
+					material._Texture = it->second;
+					material.Material.TextureEnable = true;
+				}
+			}
+			else {
+				// mtlファイルからテクスチャ取得
+				std::filesystem::path dir = Utility::File::getDirectoryPath(modelPath.c_str());
+
+				// mtlファイル登録テクスチャ探索用パス
+				std::filesystem::path mtlTexPath = dir / path.C_Str();
+
+				// mtlファイル登録テクスチャをロード
+				material._Texture = TextureManager::getInstance().Load(mtlTexPath.string().c_str());
+
+				if (!material._Texture) {
+					return;
+				}
+				else {
+					material.Material.TextureEnable = true;
+				}
 			}
 		}
 

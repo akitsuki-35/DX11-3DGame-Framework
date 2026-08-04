@@ -12,7 +12,7 @@
 #include "ModelManager.h"
 #include "TextureManager.h"
 #include "GameObject.h"
-#include <filesystem>
+#include "Utility.h"
 
 /*--------------------------------------------------
 	前方宣言
@@ -76,8 +76,10 @@ public:
 		_mModel = ModelManager::getInstance().Load(fileName);
 
 		// モデルディレクトリ取得
-		mDirectory = fileName;
-		mDirectory = mDirectory.parent_path();
+		//mDirectory = fileName;
+		//mDirectory = mDirectory.parent_path();
+
+		mDirectory = Utility::File::getDirectoryPath(fileName);
 
 		return this;
 	}
@@ -124,7 +126,7 @@ private:
 
 		// モデルと同ディレクトリから参照
 		// モデル用テクスチャを1ディレクトリに集結するため、複数ディレクトリの参照は原則不可
-		std::string texturePath = mDirectory.string() + "\\" + textureName;
+		std::string texturePath = mDirectory.string() + textureName;
 
 		return texturePath;
 	}

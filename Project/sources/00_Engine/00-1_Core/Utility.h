@@ -14,6 +14,7 @@
 #include <shlwapi.h>
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #pragma comment(lib, "Shlwapi.lib")
 
 /*============================================================
@@ -31,6 +32,9 @@ namespace Utility
 
 		// ファイルパス正規化
 		std::string normalizePath(const char* filePath);
+
+		// ディレクトリのパス取得
+		std::filesystem::path getDirectoryPath(const char* filePath);
 	}
 
 /*--------------------------------------------------

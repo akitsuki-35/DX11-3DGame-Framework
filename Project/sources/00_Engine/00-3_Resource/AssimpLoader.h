@@ -72,5 +72,5 @@ private:
 	bool loadTextures(const aiScene* scene, Model& model);
 
 	// マテリアル取得
-	void loadMaterials(const aiScene* scene, Model& model);
+	void loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath);
 };

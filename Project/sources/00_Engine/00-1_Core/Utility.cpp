@@ -50,6 +50,18 @@ std::string Utility::File::normalizePath(const char* filePath)
 	return std::string(fullPath);
 }
 
+std::filesystem::path Utility::File::getDirectoryPath(const char* filePath)
+{
+	// ディレクトリのパス取得
+	std::filesystem::path directory = filePath;
+	directory = directory.parent_path();
+	
+	// 文字列連結によるパス組み立て用
+	directory += "\\";
+
+	return directory;
+}
+
 std::wstring Utility::String::toWideString(const std::string& string)
 {
 	// std::string→std::wstringに変換
