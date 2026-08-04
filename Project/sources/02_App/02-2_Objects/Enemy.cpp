@@ -4,10 +4,10 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/19
-*	@updated : 2026/08/03
+*	@updated : 2026/08/04
 *============================================================*/
 #include "Enemy.h"
-#include "ModelDrawable.h"
+#include "ModelRenderer.h"
 
 void Enemy::Initialize()
 {
@@ -23,10 +23,7 @@ void Enemy::Initialize()
 	mAccel = { 0.0f, 0.0f, 0.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\player.obj");
-
-	// シェーダー読込
-	mShader = ShaderManager::getInstance().Get("Unlit");
+	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\player.obj")->LoadShader("Unlit");
 }
 
 void Enemy::Finalize()

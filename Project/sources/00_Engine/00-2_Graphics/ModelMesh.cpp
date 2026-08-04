@@ -4,11 +4,10 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/02
-*	@updated : 2026/08/02
+*	@updated : 2026/08/04
 *============================================================*/
 #include "ModelMesh.h"
 #include "DeviceManager.h"
-#include <string>
 
 bool ModelMesh::Create(const std::vector<Element::VERTEX3D>& vertices, const std::vector<uint32_t>& indices)
 {
@@ -44,27 +43,6 @@ void ModelMesh::Draw(const SUBSET& subset) const
 {
 	// 描画
 	D3D11::DeviceManager::getInstance().GetContext()->DrawIndexed(subset.IndexNum, subset.StartIndex, 0);
-}
-
-void ModelMesh::DebugPrintSubsets() const
-{
-#ifndef NDEBUG
-	for (size_t i = 0; i < subsets.size(); ++i)
-	{
-		const auto& subset = subsets[i];
-
-		std::string log =
-			"Subset[" + std::to_string(i) + "]\n" +
-			" StartIndex : " +
-			std::to_string(subset.StartIndex) + "\n" +
-			" IndexNum : " +
-			std::to_string(subset.IndexNum) + "\n" +
-			" MaterialIndex : " +
-			std::to_string(subset.MaterialIndex) + "\n";
-
-		OutputDebugStringA(log.c_str());
-	}
-#endif
 }
 
 bool ModelMesh::generateVertexBuffer()

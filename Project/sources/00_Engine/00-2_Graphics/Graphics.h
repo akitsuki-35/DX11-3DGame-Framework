@@ -4,12 +4,11 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/07/24
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "Config.h"
-#include <d3d11.h>
 
 namespace D3D11 {
 /*============================================================

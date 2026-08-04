@@ -1,24 +1,24 @@
 ﻿/*============================================================
-*	@file	 : manager.cpp
-*	@brief	 : マネージャー
+*	@file	 : SceneManager.cpp
+*	@brief	 : シーン管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/06/16
+*	@updated : 2026/08/04
 *============================================================*/
-#include "main.h"
-#include "Manager.h"
+
+#include "SceneManager.h"
 #include "Graphics.h"
-#include "input.h"
-#include "game.h"
-#include "title.h"
-#include "scene.h"
-#include "audio.h"
+#include "Input.h"
+#include "Game.h"
+#include "Title.h"
+#include "Scene.h"
+#include "Audio.h"
 
 /*------------------------------------------------------------
 	初期化
 ------------------------------------------------------------*/
-void Manager::Initialize()
+void SceneManager::Initialize()
 {
 	D3D11::Graphics::getInstance().Initialize();
 	Input::Initialize();
@@ -32,7 +32,7 @@ void Manager::Initialize()
 /*------------------------------------------------------------
 	終了
 ------------------------------------------------------------*/
-void Manager::Finalize()
+void SceneManager::Finalize()
 {
 	if (mNextScene)
 	{
@@ -54,7 +54,7 @@ void Manager::Finalize()
 /*------------------------------------------------------------
 	更新
 ------------------------------------------------------------*/
-void Manager::Update()
+void SceneManager::Update()
 {
 	Input::Update();
 
@@ -78,7 +78,7 @@ void Manager::Update()
 /*------------------------------------------------------------
 	描画
 ------------------------------------------------------------*/
-void Manager::Draw()
+void SceneManager::Draw()
 {
 	D3D11::Graphics::getInstance().Begin();
 

@@ -4,16 +4,13 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/02
-*	@updated : 2026/08/02
+*	@updated : 2026/08/04
 *============================================================*/
 #include "AssimpLoader.h"
 #include "DeviceManager.h"
 #include "TextureManager.h"
 #include "Model.h"
 #include "Utility.h"
-#include <memory>
-#include <Windows.h>
-#include <wrl/client.h>
 #include <DirectXTex/DirectXTex.h>
 
 // assimp関連
@@ -25,9 +22,10 @@
 using namespace Element;
 using namespace DirectX;
 
-/*--------------------------------------------------
-	デバッグ用関数 プロトタイプ宣言
-----------------------------------------------------*/
+/*============================================================
+*	@namespace	: AssimpDebug
+*	@brief		: Assimp関連デバッグ関数群
+*============================================================*/
 namespace AssimpDebug {
 	void printMeshCount(const aiScene* scene);
 	void printVertexCount(const aiMesh* mesh);
@@ -207,16 +205,16 @@ bool AssimpLoader::loadTextures(const aiScene* scene, Model& model)
 			static_cast<size_t>(tex->mWidth), WIC_FLAGS_NONE, &metadata, image);
 		if (FAILED(hr)) return false;
 
-		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> _srv;
 
 		hr = CreateShaderResourceView(
 			D3D11::DeviceManager::getInstance().GetDevice(),
-			image.GetImages(), image.GetImageCount(), metadata, srv.GetAddressOf());
+			image.GetImages(), image.GetImageCount(), metadata, _srv.GetAddressOf());
 		if (FAILED(hr)) return false;
 
 		// サイズとSRVを登録
 		texture->mSize = { static_cast<UINT>(metadata.width), static_cast<UINT>(metadata.height) };
-		texture->_mSRV = srv;
+		texture->_mSRV = _srv;
 
 		// モデルへ登録
 		Texture* ptr = texture.get();

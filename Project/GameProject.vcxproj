@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp" />
-    <ClCompile Include="sources\00_Engine\00-1_Core\Manager.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Systemtimer.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp" />
@@ -49,15 +48,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Sprite.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Audio.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\ModelDrawable.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Transform.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
@@ -66,6 +59,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="sources\02_App\02-1_Scenes\SceneManager.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Title.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -213,7 +207,6 @@
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Config.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Main.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\Manager.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Systemtimer.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
@@ -257,21 +250,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Sprite.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Vector2.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Vector3.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\WICTextureLoader11.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Audio.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\BillboardDrawable.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\BillboardRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Component.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\Drawable.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelDrawable.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\SpriteDrawable.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\Renderer.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\SpriteRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Transform.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Result.h">
@@ -281,6 +268,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\Scene.h" />
+    <ClInclude Include="sources\02_App\02-1_Scenes\SceneManager.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Title.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

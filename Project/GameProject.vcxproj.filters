@@ -40,9 +40,6 @@
     <Filter Include="01_Framework\01-2_Components">
       <UniqueIdentifier>{afed10f6-0809-43ff-ab2d-9666210c8cf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Framework\01-2_Components\Drawable">
-      <UniqueIdentifier>{3334af44-d530-46be-bd67-f689e7a64f56}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_App\02-1_Scenes">
       <UniqueIdentifier>{6b73aeb5-90dd-443b-b717-d051455775fa}</UniqueIdentifier>
     </Filter>
@@ -64,15 +61,15 @@
     <Filter Include="00_Engine\00-2_Graphics\D3D11">
       <UniqueIdentifier>{f8e30804-6f19-4e1a-baf0-f66f0faec06d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Framework\01-2_Components\Renderer">
+      <UniqueIdentifier>{3334af44-d530-46be-bd67-f689e7a64f56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-1_Core\Manager.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\Systemtimer.cpp">
@@ -88,9 +85,6 @@
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Sprite.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp">
@@ -207,8 +201,8 @@
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\ModelDrawable.cpp">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-3_Resource\AssimpLoader.cpp">
       <Filter>00_Engine\00-3_Resource\Model</Filter>
@@ -243,6 +237,9 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Graphics.cpp">
       <Filter>00_Engine\00-2_Graphics\D3D11</Filter>
     </ClCompile>
+    <ClCompile Include="sources\02_App\02-1_Scenes\SceneManager.cpp">
+      <Filter>02_App\02-1_Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -252,9 +249,6 @@
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Main.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Manager.h">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Systemtimer.h">
@@ -278,9 +272,6 @@
     <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Sprite.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Vector2.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
@@ -290,14 +281,14 @@
     <ClInclude Include="sources\01_Framework\01-1_Common\WICTextureLoader11.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\Drawable.h">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    <ClInclude Include="sources\01_Framework\01-2_Components\Renderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\SpriteDrawable.h">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    <ClInclude Include="sources\01_Framework\01-2_Components\SpriteRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\BillboardDrawable.h">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    <ClInclude Include="sources\01_Framework\01-2_Components\BillboardRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\Audio.h">
       <Filter>01_Framework\01-2_Components</Filter>
@@ -434,8 +425,8 @@
     <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelDrawable.h">
-      <Filter>01_Framework\01-2_Components\Drawable</Filter>
+    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-3_Resource\AssimpLoader.h">
       <Filter>00_Engine\00-3_Resource\Model</Filter>
@@ -481,6 +472,9 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Graphics.h">
       <Filter>00_Engine\00-2_Graphics\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-1_Scenes\SceneManager.h">
+      <Filter>02_App\02-1_Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

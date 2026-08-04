@@ -1,15 +1,15 @@
 ﻿/*============================================================
-*	@file	 : ModelDrawable.cpp
+*	@file	 : ModelRenderer.cpp
 *	@brief	 : モデル描画コンポーネント
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/01
-*	@updated : 2026/08/01
+*	@updated : 2026/08/04
 *============================================================*/
-#include "ModelDrawable.h"
+#include "ModelRenderer.h"
 #include "BufferManager.h"
 
-void ModelDrawable::Draw() const
+void ModelRenderer::Draw() const
 {
 	if (!_mModel) return;
 
@@ -34,6 +34,7 @@ void ModelDrawable::Draw() const
                 material.TextureEnable = false;
             }
             
+            // マテリアルのセット
             D3D11::BufferManager::getInstance().SetMaterial(material);
 
             if (mTextures.Diffuse)

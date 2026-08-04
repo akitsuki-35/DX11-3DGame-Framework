@@ -1,19 +1,17 @@
 ﻿/*============================================================
 *	@file	 : ModelManager.h
-*	@brief	 : テクスチャ管理
+*	@brief	 : モデルリソース管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "Model.h"
-#include <d3d11.h>
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include <wrl/client.h>
 
 /*============================================================
 *	@class	: ModelManager

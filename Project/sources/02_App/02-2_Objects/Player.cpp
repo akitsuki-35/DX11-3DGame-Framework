@@ -4,11 +4,11 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/19
-*	@updated : 2026/07/26
+*	@updated : 2026/08/04
 *============================================================*/
 #include "Player.h"
-#include "input.h"
-#include "ModelDrawable.h"
+#include "Input.h"
+#include "ModelRenderer.h"
 #include "Game.h"
 #include "Audio.h"
 #include "Camera.h"
@@ -31,10 +31,7 @@ void Player::Initialize()
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelDrawable>(this)->LoadModel("assets\\models\\player.obj");
-
-	// シェーダー読込
-	mShader = ShaderManager::getInstance().Get("Unlit");
+	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\player.obj")->LoadShader("Unlit");
 
 	mSE = AddComponent<Audio>(this);
 	mSE->Load("assets\\audio\\wan.wav");

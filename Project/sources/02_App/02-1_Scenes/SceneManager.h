@@ -1,10 +1,10 @@
 ﻿/*============================================================
-*	@file	 : Manager.h
-*	@brief	 : シーンマネージャー
+*	@file	 : SceneManager.h
+*	@brief	 : シーン管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/08/02
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
@@ -12,29 +12,29 @@
 #include <memory>
 
 /*============================================================
-*	@class	: Manager
-*	@brief	: ゲーム全体の処理を管理するマネージャークラス
+*	@class	: SceneManager
+*	@brief	: シーン管理
 *============================================================*/
-class Manager final
+class SceneManager final
 {
 /*--------------------------------------------------
 	Singleton用
 ----------------------------------------------------*/
 public:
-	static Manager& getInstance() {
-		static Manager instance;
+	static SceneManager& getInstance() {
+		static SceneManager instance;
 		return instance;
 	}
 
 private:
-	Manager() = default;
-	Manager(const Manager&) = delete;
+	SceneManager() = default;
+	SceneManager(const SceneManager&) = delete;
 
-	Manager& operator=(const Manager&) = delete;
-	Manager(Manager&&) = delete;
+	SceneManager& operator=(const SceneManager&) = delete;
+	SceneManager(SceneManager&&) = delete;
 
-	Manager& operator=(Manager&&) = delete;
-	~Manager() {};
+	SceneManager& operator=(SceneManager&&) = delete;
+	~SceneManager() {};
 
 /*--------------------------------------------------
 	メンバ変数・メンバ関数

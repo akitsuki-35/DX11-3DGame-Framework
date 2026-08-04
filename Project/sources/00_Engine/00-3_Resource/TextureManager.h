@@ -1,15 +1,14 @@
 ﻿/*============================================================
 *	@file	 : TextureManager.h
-*	@brief	 : テクスチャ管理
+*	@brief	 : テクスチャリソース管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "Texture.h"
-#include <d3d11.h>
 #include <string>
 #include <memory>
 #include <unordered_map>
@@ -52,5 +51,6 @@ public:
 	}
 
 private:
+	// テクスチャ生成
 	bool generateTexture(Texture& texture, const std::string& path);
 };

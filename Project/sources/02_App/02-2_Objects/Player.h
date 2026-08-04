@@ -4,12 +4,11 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/19
-*	@updated : 2026/07/21
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "GameObject.h"
-#include "Shader.h"
 
 class Audio;
 
@@ -25,8 +24,6 @@ private:
 	float mRotationVel{ 0.0f };
 	bool mGround{ true };
 	float mMoveAnimation{ 0.0f };
-
-	Shader* mShader{};
 
 	Audio* mSE{};
 

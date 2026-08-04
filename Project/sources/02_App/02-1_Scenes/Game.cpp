@@ -1,15 +1,15 @@
 ﻿/*============================================================
-*	@file	 : game.cpp
+*	@file	 : Game.cpp
 *	@brief	 : ゲームシーン
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/28
-*	@updated : 2026/06/23
+*	@updated : 2026/08/04
 *============================================================*/
 #include "main.h"
 #include "game.h"
 #include "scene.h"
-#include "manager.h"
+#include "SceneManager.h"
 #include "input.h"
 #include "camera.h"
 #include "gameobject.h"

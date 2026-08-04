@@ -4,13 +4,11 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/06/02
-*	@updated : 2026/07/26
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "GameObject.h"
-#include "Mesh.h"
-#include "ShaderManager.h"
 
 /*============================================================
 *	@class	: Tree
@@ -18,7 +16,6 @@
 *============================================================*/
 class Tree : public GameObject
 {
-private:
 public:
 	Tree() = default;
 

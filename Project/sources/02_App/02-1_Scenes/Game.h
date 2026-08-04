@@ -1,16 +1,16 @@
 ﻿/*============================================================
-*	@file	 : game.h
+*	@file	 : Game.h
 *	@brief	 : ゲームシーン
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/28
-*	@updated : 2026/06/23
+*	@updated : 2026/08/04
 *============================================================*/
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
-#include "scene.h"
-#include "gameobject.h"
+#include "Scene.h"
+#include "GameObject.h"
+#include <list>
 
 /*------------------------------------------------------------
 	前方宣言
@@ -64,5 +64,3 @@ public:
 		return objects;
 	}
 };
-
-#endif // GAME_H

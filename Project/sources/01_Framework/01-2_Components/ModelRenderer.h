@@ -1,5 +1,5 @@
 ﻿/*============================================================
-*	@file	 : ModelDrawable.h
+*	@file	 : ModelRenderer.h
 *	@brief	 : モデル描画コンポーネント
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
@@ -8,7 +8,7 @@
 *============================================================*/
 #pragma once
 
-#include "Drawable.h"
+#include "Renderer.h"
 #include "ModelManager.h"
 #include "TextureManager.h"
 #include "GameObject.h"
@@ -20,10 +20,10 @@
 class Texture;
 
 /*============================================================
-*	@class	: ModelDrawable
+*	@class	: ModelRenderer
 *	@brief	: モデル描画
 *============================================================*/
-class ModelDrawable : public Drawable
+class ModelRenderer : public Renderer
 {
 	// テクスチャ
 	struct ModelTextures
@@ -54,13 +54,13 @@ private:
 	std::filesystem::path mDirectory{};
 
 public:
-	ModelDrawable(GameObject* owner)
-		: Drawable(owner) {
+	ModelRenderer(GameObject* owner)
+		: Renderer(owner) {
 		// 不透明レイヤーに描画
 		mSortKey.layer = Layer::World;
 	};
 
-	~ModelDrawable() override = default;
+	~ModelRenderer() override = default;
 
 	void Draw() const override;
 
@@ -72,19 +72,16 @@ private:
 
 public:
 	// モデル読み込み
-	ModelDrawable* LoadModel(const char* fileName) {
+	ModelRenderer* LoadModel(const char* fileName) {
 		_mModel = ModelManager::getInstance().Load(fileName);
 
 		// モデルディレクトリ取得
-		//mDirectory = fileName;
-		//mDirectory = mDirectory.parent_path();
-
 		mDirectory = Utility::File::getDirectoryPath(fileName);
 
 		return this;
 	}
 
-	ModelDrawable* LoadTexture(std::string textureName, TextureType type) {
+	ModelRenderer* LoadTexture(std::string textureName, TextureType type) {
 		switch (type)
 		{
 		case TextureType::Diffuse:

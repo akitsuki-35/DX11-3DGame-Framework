@@ -1,13 +1,12 @@
 ﻿/*============================================================
 *	@file	 : ShaderManager.cpp
-*	@brief	 : シェーダー管理
+*	@brief	 : シェーダーリソース管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/14
-*	@updated : 2026/07/14
+*	@updated : 2026/08/04
 *============================================================*/
 #include "ShaderManager.h"
-#include "Shader.h"
 #include "DeviceManager.h"
 #include "Utility.h"
 

@@ -1,19 +1,17 @@
 ﻿/*============================================================
 *	@file	 : ShaderManager.h
-*	@brief	 : シェーダー管理
+*	@brief	 : シェーダーリソース管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/14
-*	@updated : 2026/07/14
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "Shader.h"
-#include <d3d11.h>
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include <wrl/client.h>
 
 /*============================================================
 *	@class	: ShaderManager

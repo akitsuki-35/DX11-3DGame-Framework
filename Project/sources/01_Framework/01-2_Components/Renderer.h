@@ -1,20 +1,16 @@
 ﻿/*============================================================
-*	@file	 : Drawable.h
+*	@file	 : Renderer.h
 *	@brief	 : 描画コンポーネント基底クラス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/27
-*	@updated : 2026/07/27
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "Component.h"
-#include "Mesh.h"
-#include "ShaderManager.h"
-#include "Elements.h"
 #include "DeviceManager.h"
-#include "BufferManager.h"
-#include <sstream>
+#include "ShaderManager.h"
 #include <DirectXMath.h>
 
 // 描画レイヤー
@@ -43,14 +39,17 @@ struct SORTKEY
 };
 
 /*============================================================
-*	@class	: Drawable
+*	@class	: Renderer
 *	@brief	: 描画コンポーネント基底クラス
 *============================================================*/
-class Drawable : public Component
+class Renderer : public Component
 {
 protected:
-	Shader* _mShader{ nullptr }; // シェーダー
-	SORTKEY mSortKey{}; // ソート用情報
+	// シェーダー
+	Shader* _mShader{ nullptr };
+
+	// ソート用情報
+	SORTKEY mSortKey{};
 
 	void Bind() const {
 		auto context = D3D11::DeviceManager::getInstance().GetContext();
@@ -64,7 +63,7 @@ protected:
 	}
 
 public:
-	Drawable(GameObject* owner)
+	Renderer(GameObject* owner)
 		: Component(owner){}
 
 	// 描画

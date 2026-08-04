@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : Graphics.cpp
-*	@brief	 : 描画
+*	@brief	 : 描画システム制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/06/02
+*	@updated : 2026/08/04
 *============================================================*/
 #include "Graphics.h"
 #include "DeviceManager.h"

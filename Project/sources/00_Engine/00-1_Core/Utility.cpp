@@ -4,9 +4,14 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #include "Utility.h"
+#include <fstream>
+#include <cassert>
+#include <shlwapi.h>
+
+#pragma comment(lib, "Shlwapi.lib")
 
 std::vector<char> Utility::File::load(const char* filePath)
 {

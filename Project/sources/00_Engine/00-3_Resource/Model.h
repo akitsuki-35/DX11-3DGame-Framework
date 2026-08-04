@@ -21,7 +21,7 @@
 class Model
 {
 	friend class ModelManager;
-	friend class ModelDrawable;
+	friend class ModelRenderer;
 	friend class AssimpLoader;
 
 private:

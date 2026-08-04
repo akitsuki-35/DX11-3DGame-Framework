@@ -4,18 +4,13 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include <string>
 #include <vector>
-#include <cassert>
-#include <shlwapi.h>
-#include <iostream>
-#include <fstream>
 #include <filesystem>
-#pragma comment(lib, "Shlwapi.lib")
 
 /*============================================================
 *	@namespace	: Utility

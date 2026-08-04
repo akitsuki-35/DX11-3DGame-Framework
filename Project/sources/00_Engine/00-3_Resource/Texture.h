@@ -4,14 +4,13 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
-*	@updated : 2026/07/27
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
-#include <string>
-#include <wrl/client.h>
 #include <d3d11.h>
 #include <DirectXMath.h>
+#include <wrl/client.h>
 
 /*============================================================
 *	@class	: Texture

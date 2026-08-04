@@ -4,15 +4,12 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/06/02
-*	@updated : 2026/07/26
+*	@updated : 2026/08/04
 *============================================================*/
-#include "Main.h"
 #include "Tree.h"
-#include "DeviceManager.h"
-#include "BufferManager.h"
-#include "Audio.h"
-#include "BillboardDrawable.h"
+#include "BillboardRenderer.h"
 #include "MeshTypes.h"
+#include "Audio.h"
 
 using namespace MeshType;
 
@@ -20,7 +17,7 @@ void Tree::Initialize()
 {
 	mLayer = 2;
 
-	BillboardDrawable* drawable = AddComponent<BillboardDrawable>(this);
+	BillboardRenderer* drawable = AddComponent<BillboardRenderer>(this);
 
 	drawable->GetMesh().CreatePlane(Plane::Pivot::CenterBottom, Plane::Axis::XY);
 

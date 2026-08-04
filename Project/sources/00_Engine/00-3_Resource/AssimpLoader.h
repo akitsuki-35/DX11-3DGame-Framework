@@ -4,14 +4,12 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/02
-*	@updated : 2026/08/02
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "ModelMesh.h"
-#include "Elements.h"
 #include <string>
-#include <vector>
 #include <unordered_map>
 
 /*--------------------------------------------------
@@ -51,7 +49,7 @@ private:
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 private:
-	// テクスチャ検索用
+	// 埋め込みテクスチャ検索用
 	std::unordered_map<std::string, Texture*> mTextureMap{};
 
 public:

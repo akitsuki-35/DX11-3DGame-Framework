@@ -8,7 +8,6 @@
 *============================================================*/
 #include "DeviceManager.h"
 #include "SystemWindow.h"
-
 #include "Config.h"
 #include "D3D11Config.h"
 

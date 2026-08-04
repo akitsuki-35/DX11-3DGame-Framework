@@ -4,21 +4,18 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/28
-*	@updated : 2026/06/09
+*	@updated : 2026/08/04
 *============================================================*/
-#include "Main.h"
 #include "Field.h"
-#include "DeviceManager.h"
-#include "BufferManager.h"
-#include "Audio.h"
-#include "SpriteDrawable.h"
+#include "SpriteRenderer.h"
 #include "MeshTypes.h"
+#include "Audio.h"
 
 using namespace MeshType;
 
 void Field::Initialize()
 {
-	SpriteDrawable* drawable = AddComponent<SpriteDrawable>(this);
+	SpriteRenderer* drawable = AddComponent<SpriteRenderer>(this);
 
 	drawable->GetMesh().CreatePlane(Plane::Pivot::Center, Plane::Axis::XZ);
 	mTransform.SetScale({ 30.0f, 30.0f, 30.0f });
