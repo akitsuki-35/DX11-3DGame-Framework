@@ -8,7 +8,7 @@
 *============================================================*/
 #include "Mesh.h"
 #include "DeviceManager.h"
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include <cassert>
 #include <DirectXMath.h>
 using namespace DirectX;

@@ -8,15 +8,11 @@
 *============================================================*/
 #include "Main.h"
 #include "Tree.h"
-#include "Renderer.h"
 #include "DeviceManager.h"
 #include "BufferManager.h"
 #include "Audio.h"
 #include "BillboardDrawable.h"
-
-#include "GraphicsTypes.h"
 #include "MeshTypes.h"
-#include "DirectX11Config.h"
 
 using namespace MeshType;
 

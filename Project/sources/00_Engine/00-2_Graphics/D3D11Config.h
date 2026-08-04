@@ -1,5 +1,5 @@
 ﻿/*============================================================
-*	@file	 : DirectX11Config.h
+*	@file	 : D3D11Config.h
 *	@brief	 : DirectX11用設定定義
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）

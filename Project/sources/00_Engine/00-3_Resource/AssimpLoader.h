@@ -9,7 +9,7 @@
 #pragma once
 
 #include "ModelMesh.h"
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -72,5 +72,5 @@ private:
 	bool loadTextures(const aiScene* scene, Model& model);
 
 	// マテリアル取得
-	void loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath);
+	void loadMaterials(const aiScene* scene, Model& model);
 };

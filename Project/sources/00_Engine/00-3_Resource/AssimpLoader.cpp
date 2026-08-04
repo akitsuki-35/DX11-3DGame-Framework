@@ -67,7 +67,7 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		return false;
 
 	// マテリアル読み込み
-	loadMaterials(scene, model, path);
+	loadMaterials(scene, model);
 
 	mTextureMap.clear();
 
@@ -229,7 +229,7 @@ bool AssimpLoader::loadTextures(const aiScene* scene, Model& model)
 	return true;
 }
 
-void AssimpLoader::loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath)
+void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
 {
 	// マテリアル取得
 	for (unsigned int i = 0; i < scene->mNumMaterials; ++i) {
@@ -248,23 +248,6 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model, const std::
 
 				if (it != mTextureMap.end()) {
 					material._Texture = it->second;
-					material.Material.TextureEnable = true;
-				}
-			}
-			else {
-				// mtlファイルからテクスチャ取得
-				std::filesystem::path dir = Utility::File::getDirectoryPath(modelPath.c_str());
-
-				// mtlファイル登録テクスチャ探索用パス
-				std::filesystem::path mtlTexPath = dir / path.C_Str();
-
-				// mtlファイル登録テクスチャをロード
-				material._Texture = TextureManager::getInstance().Load(mtlTexPath.string().c_str());
-
-				if (!material._Texture) {
-					return;
-				}
-				else {
 					material.Material.TextureEnable = true;
 				}
 			}

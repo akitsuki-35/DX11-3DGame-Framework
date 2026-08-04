@@ -10,7 +10,7 @@
 
 #include "Texture.h"
 #include "ModelMesh.h"
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include <memory>
 #include <vector>
 

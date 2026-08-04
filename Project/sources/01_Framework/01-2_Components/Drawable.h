@@ -11,7 +11,7 @@
 #include "Component.h"
 #include "Mesh.h"
 #include "ShaderManager.h"
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include "DeviceManager.h"
 #include "BufferManager.h"
 #include <sstream>

@@ -9,7 +9,6 @@
 #include "main.h"
 #include "game.h"
 #include "scene.h"
-#include "renderer.h"
 #include "manager.h"
 #include "input.h"
 #include "camera.h"
@@ -31,7 +30,7 @@
 #include "score.h"
 
 #include "DeviceManager.h"
-#include "DirectX11Config.h"
+#include "D3D11Config.h"
 
 std::list<GameObject*> Game::gameObjects;
 
@@ -91,8 +90,6 @@ void Game::Update(double elapsedTime)
 
 void Game::Draw() const
 {
-	Renderer::getInstance().Begin();
-
 	// Zソート
 	{
 		Camera* camera = GetGameObject<Camera>();
@@ -122,6 +119,4 @@ void Game::Draw() const
 				}
 			}
 		}
-
-	Renderer::getInstance().End();
 }

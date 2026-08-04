@@ -8,7 +8,7 @@
 *============================================================*/
 #pragma once
 
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include <vector>
 #include <wrl/client.h>
 #include <d3d11.h>

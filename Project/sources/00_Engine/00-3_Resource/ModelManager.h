@@ -9,7 +9,6 @@
 #pragma once
 
 #include "Model.h"
-#include "GraphicsTypes.h"
 #include <d3d11.h>
 #include <string>
 #include <memory>

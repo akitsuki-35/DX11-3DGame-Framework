@@ -9,7 +9,6 @@
 #include "main.h"
 #include "game.h"
 #include "camera.h"
-#include "renderer.h"
 #include "input.h"
 #include "player.h"
 

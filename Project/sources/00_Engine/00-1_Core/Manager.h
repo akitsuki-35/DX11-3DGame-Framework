@@ -1,6 +1,6 @@
 ﻿/*============================================================
 *	@file	 : Manager.h
-*	@brief	 : マネージャー
+*	@brief	 : シーンマネージャー
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21

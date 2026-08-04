@@ -1,5 +1,5 @@
 ﻿/*============================================================
-*	@file	 : GraphicsTypes.h 
+*	@file	 : Elements.h 
 *	@brief	 : 構造体定義
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）

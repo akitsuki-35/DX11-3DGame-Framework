@@ -8,7 +8,7 @@
 *============================================================*/
 #include "main.h"
 #include "Manager.h"
-#include "Renderer.h"
+#include "Graphics.h"
 #include "input.h"
 #include "game.h"
 #include "title.h"
@@ -20,7 +20,7 @@
 ------------------------------------------------------------*/
 void Manager::Initialize()
 {
-	Renderer::getInstance().Initialize();
+	D3D11::Graphics::getInstance().Initialize();
 	Input::Initialize();
 	Audio::InitMaster();
 
@@ -34,15 +34,6 @@ void Manager::Initialize()
 ------------------------------------------------------------*/
 void Manager::Finalize()
 {
-	//mCurrentScene->Finalize();
-	//if (mNextScene) {
-	//	if (mCurrentScene) {
-	//		delete mCurrentScene;
-	//	}
-	//	mCurrentScene = mNextScene;
-	//	mNextScene = nullptr;
-	//}
-
 	if (mNextScene)
 	{
 		if (mCurrentScene)
@@ -57,7 +48,7 @@ void Manager::Finalize()
 
 	Audio::UninitMaster();
 	Input::Finalize();
-	Renderer::getInstance().Finalize();
+	D3D11::Graphics::getInstance().Finalize();
 }
 
 /*------------------------------------------------------------
@@ -89,5 +80,9 @@ void Manager::Update()
 ------------------------------------------------------------*/
 void Manager::Draw()
 {
+	D3D11::Graphics::getInstance().Begin();
+
 	if(mCurrentScene) mCurrentScene->Draw();
+
+	D3D11::Graphics::getInstance().End();
 }

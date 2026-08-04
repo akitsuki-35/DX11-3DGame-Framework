@@ -9,14 +9,14 @@
 #pragma once
 
 #include "DeviceManager.h"
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include <wrl/client.h>
 
 namespace D3D11 {
-	/*============================================================
-	*	@class	: BufferManager
-	*	@brief	: 定数バッファ管理
-	*============================================================*/
+/*============================================================
+*	@class	: BufferManager
+*	@brief	: 定数バッファ管理
+*============================================================*/
 	class BufferManager final
 	{
 		template <typename T>
