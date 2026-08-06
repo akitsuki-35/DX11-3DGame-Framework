@@ -93,9 +93,6 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\Audio.cpp">
       <Filter>01_Framework\01-2_Components</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\Transform.cpp">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClCompile>
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp">
       <Filter>02_App\02-1_Scenes</Filter>
     </ClCompile>
@@ -126,13 +123,10 @@
     <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp">
       <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Glass.cpp">
+    <ClCompile Include="sources\02_App\02-2_Objects\Grass.cpp">
       <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Player.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Polygon2D.cpp">
       <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Score.cpp">
@@ -240,6 +234,9 @@
     <ClCompile Include="sources\02_App\02-1_Scenes\SceneManager.cpp">
       <Filter>02_App\02-1_Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-1_Common\Transform.cpp">
+      <Filter>01_Framework\01-1_Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -296,9 +293,6 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\Component.h">
       <Filter>01_Framework\01-2_Components</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\Transform.h">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h">
       <Filter>02_App\02-1_Scenes</Filter>
     </ClInclude>
@@ -338,13 +332,10 @@
     <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
       <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Glass.h">
+    <ClInclude Include="sources\02_App\02-2_Objects\Grass.h">
       <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Player.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Polygon2D.h">
       <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Score.h">
@@ -475,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\SceneManager.h">
       <Filter>02_App\02-1_Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-1_Common\Transform.h">
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

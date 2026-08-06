@@ -4,13 +4,16 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/02
-*	@updated : 2026/08/04
+*	@updated : 2026/08/02
 *============================================================*/
 #include "AssimpLoader.h"
 #include "DeviceManager.h"
 #include "TextureManager.h"
 #include "Model.h"
 #include "Utility.h"
+#include <memory>
+#include <Windows.h>
+#include <wrl/client.h>
 #include <DirectXTex/DirectXTex.h>
 
 // assimp関連
@@ -22,10 +25,9 @@
 using namespace Element;
 using namespace DirectX;
 
-/*============================================================
-*	@namespace	: AssimpDebug
-*	@brief		: Assimp関連デバッグ関数群
-*============================================================*/
+/*--------------------------------------------------
+	デバッグ用関数 プロトタイプ宣言
+----------------------------------------------------*/
 namespace AssimpDebug {
 	void printMeshCount(const aiScene* scene);
 	void printVertexCount(const aiMesh* mesh);
@@ -51,7 +53,7 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		aiProcess_GenSmoothNormals
 	);
 
-	if (!scene){
+	if (!scene) {
 		OutputDebugStringA(importer.GetErrorString());
 		return false;
 	}
@@ -65,7 +67,7 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		return false;
 
 	// マテリアル読み込み
-	loadMaterials(scene, model);
+	loadMaterials(scene, model, path);
 
 	mTextureMap.clear();
 
@@ -205,16 +207,16 @@ bool AssimpLoader::loadTextures(const aiScene* scene, Model& model)
 			static_cast<size_t>(tex->mWidth), WIC_FLAGS_NONE, &metadata, image);
 		if (FAILED(hr)) return false;
 
-		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> _srv;
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv;
 
 		hr = CreateShaderResourceView(
 			D3D11::DeviceManager::getInstance().GetDevice(),
-			image.GetImages(), image.GetImageCount(), metadata, _srv.GetAddressOf());
+			image.GetImages(), image.GetImageCount(), metadata, srv.GetAddressOf());
 		if (FAILED(hr)) return false;
 
 		// サイズとSRVを登録
 		texture->mSize = { static_cast<UINT>(metadata.width), static_cast<UINT>(metadata.height) };
-		texture->_mSRV = _srv;
+		texture->_mSRV = srv;
 
 		// モデルへ登録
 		Texture* ptr = texture.get();
@@ -227,7 +229,7 @@ bool AssimpLoader::loadTextures(const aiScene* scene, Model& model)
 	return true;
 }
 
-void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
+void AssimpLoader::loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath)
 {
 	// マテリアル取得
 	for (unsigned int i = 0; i < scene->mNumMaterials; ++i) {
@@ -246,6 +248,23 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
 
 				if (it != mTextureMap.end()) {
 					material._Texture = it->second;
+					material.Material.TextureEnable = true;
+				}
+			}
+			else {
+				// mtlファイルからテクスチャ取得
+				std::filesystem::path dir = Utility::File::getDirectoryPath(modelPath.c_str());
+
+				// mtlファイル登録テクスチャ探索用パス
+				std::filesystem::path mtlTexPath = dir / path.C_Str();
+
+				// mtlファイル登録テクスチャをロード
+				material._Texture = TextureManager::getInstance().Load(mtlTexPath.string().c_str());
+
+				if (!material._Texture) {
+					return;
+				}
+				else {
 					material.Material.TextureEnable = true;
 				}
 			}

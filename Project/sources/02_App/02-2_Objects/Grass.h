@@ -1,6 +1,6 @@
 ﻿/*============================================================
-*	@file	 : Sky.h
-*	@brief	 : スカイドーム
+*	@file	 : Grass.h
+*	@brief	 : 草のビルボード
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/06/09
@@ -11,17 +11,13 @@
 #include "GameObject.h"
 
 /*============================================================
-*	@class	: Sky
-*	@brief	: スカイドーム
+*	@class	: Grass
+*	@brief	: 草のビルボード
 *============================================================*/
-class Sky : public GameObject
+class Grass : public GameObject
 {
-private:
-	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
-	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
-
 public:
-	Sky() = default;
+	Grass() = default;
 
 	void Initialize() override;
 	void Finalize() override;

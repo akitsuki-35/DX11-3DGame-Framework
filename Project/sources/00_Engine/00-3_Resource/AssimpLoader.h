@@ -4,12 +4,14 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/02
-*	@updated : 2026/08/04
+*	@updated : 2026/08/02
 *============================================================*/
 #pragma once
 
 #include "ModelMesh.h"
+#include "Elements.h"
 #include <string>
+#include <vector>
 #include <unordered_map>
 
 /*--------------------------------------------------
@@ -24,11 +26,11 @@ struct aiMesh;
 *	@class	: AssimpLoader
 *	@brief	: assimpによるモデルロード・生成
 *============================================================*/
-class AssimpLoader final 
+class AssimpLoader final
 {
-/*--------------------------------------------------
-	Singleton用
-----------------------------------------------------*/
+	/*--------------------------------------------------
+		Singleton用
+	----------------------------------------------------*/
 public:
 	static AssimpLoader& getInstance() {
 		static AssimpLoader  instance;
@@ -45,11 +47,11 @@ private:
 	AssimpLoader& operator=(AssimpLoader&&) = delete;
 	~AssimpLoader() {};
 
-/*--------------------------------------------------
-	メンバ変数・メンバ関数
-----------------------------------------------------*/
+	/*--------------------------------------------------
+		メンバ変数・メンバ関数
+	----------------------------------------------------*/
 private:
-	// 埋め込みテクスチャ検索用
+	// テクスチャ検索用
 	std::unordered_map<std::string, Texture*> mTextureMap{};
 
 public:
@@ -70,5 +72,5 @@ private:
 	bool loadTextures(const aiScene* scene, Model& model);
 
 	// マテリアル取得
-	void loadMaterials(const aiScene* scene, Model& model);
+	void loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath);
 };

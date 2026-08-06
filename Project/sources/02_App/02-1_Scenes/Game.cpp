@@ -15,7 +15,6 @@
 #include "gameobject.h"
 
 #include "field.h"
-#include "polygon2d.h"
 #include "player.h"
 #include "enemy.h"
 #include "bullet.h"
@@ -42,24 +41,22 @@ void Game::Initialize()
 
 	AddGameObject<Camera>();
 
-	//AddGameObject<Sky>();
+	AddGameObject<Sky>();
 
 	AddGameObject<Field>();
 	AddGameObject<Player>();
 	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
-	//AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
-	//AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
-	//Box* box = AddGameObject<Box>();
-	//box->SetPosition({ 0.0f, 0.0f, -5.0f });
-	//box->SetScale({ 1.0f, 1.0f, 1.0f });
+	AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
+	Box* box = AddGameObject<Box>();
+	box->SetPosition({ 0.0f, 0.0f, -5.0f });
+	box->SetScale({ 1.0f, 1.0f, 1.0f });
 
 	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 5.0f });
 
 	//AddGameObject<Particle>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
 	//AddGameObject<Score>()->SetPosition({ 120.0f, 32.0f, 0.0f });
-
-	//AddGameObject<Polygon2D>()->Initialize({0.0f, 0.0f}, { 100.0f, 100.0f }, L"Resources\\Textures\\rock.jpg");
 }
 
 void Game::Finalize()

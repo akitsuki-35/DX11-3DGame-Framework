@@ -1,115 +1,55 @@
 ﻿/*============================================================
-*	@file	 : explosion.cpp
+*	@file	 : Explosion.cpp
 *	@brief	 : 爆発エフェクト
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/06/09
-*	@updated : 2026/06/09
+*	@updated : 2026/08/06
 *============================================================*/
-#include "main.h"
-#include "explosion.h"
-#include "renderer.h"
-#include "game.h"
-#include "camera.h"
-#include "texture.h"
+#include "Explosion.h"
+#include "DeviceManager.h"
+#include "TextureManager.h"
+#include "BillboardRenderer.h"
+#include "MeshTypes.h"
 
-Explosion::Explosion(const wchar_t* pFileName)
-{
-	// テクスチャ読込
-	TexMetadata metaData;
-	ScratchImage image;
-	LoadFromWICFile(pFileName, WIC_FLAGS_NONE, &metaData, image);
-	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &pTexture);
-	assert(pTexture);
-}
+using namespace MeshType;
 
 void Explosion::Initialize()
 {
 	mLayer = 2;
 
-	VERTEX_3D vertex[4];
+	BillboardRenderer* drawable = AddComponent<BillboardRenderer>(this);
 
-	vertex[0].Position = XMFLOAT3(-1.0f, 1.0f, 0.0f);
-	vertex[0].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
-	vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
+	drawable->GetMesh().CreatePlane(Plane::Pivot::Center, Plane::Axis::XY);
 
-	vertex[1].Position = XMFLOAT3(1.0f, 1.0f, 0.0f);
-	vertex[1].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
-	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
+	mTransform.SetPosition({ 0.0f,0.0f, 0.0f });
+	mTransform.SetScale({ 1.0f, 1.0f, 0.0f });
 
-	vertex[2].Position = XMFLOAT3(-1.0f, -1.0f, 0.0f);
-	vertex[2].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
-	vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
+	drawable->LoadTexture("assets\\textures\\Effects\\Explosion.png");
 
-	vertex[3].Position = XMFLOAT3(1.0f, -1.0f, 0.0f);
-	vertex[3].Normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
-	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
-
-	// 頂点バッファ生成
-	D3D11_BUFFER_DESC bd{};
-	bd.Usage = D3D11_USAGE_DYNAMIC;
-	bd.ByteWidth = sizeof(VERTEX_3D) * 4;
-	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-	D3D11_SUBRESOURCE_DATA sd{};
-	sd.pSysMem = vertex;
-
-	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &pVertexBuffer);
-
-	// 自作アニメーションクラスに対応させたい…ッ！
-	//pExplosion = new Animation(new SpriteSheet(L"Resources/Textures/Effects/Explosion.png", { 4, 4 }), 0.25, false);
-
-	// テクスチャ読込
-	TexMetadata metaData;
-	ScratchImage image;
-	LoadFromWICFile(L"Resources\\Textures\\Effects\\Explosion.png", WIC_FLAGS_NONE, &metaData, image);
-	CreateShaderResourceView(Renderer::GetDevice(), image.GetImages(), image.GetImageCount(), metaData, &pTexture);
-	assert(pTexture);
-
-	// シェーダー読込
-	Renderer::CreateVertexShader(&pVertexShader, &pVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	Renderer::CreatePixelShader(&pPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+	drawable->LoadShader("Unlit");
 }
 
 void Explosion::Finalize()
 {
 	if (pTexture) pTexture->Release();
-
-	//delete pExplosion;
-
-	pPixelShader->Release();
-	pVertexShader->Release();
-	pVertexLayout->Release();
-	pVertexBuffer->Release();
 }
 
 void Explosion::Update()
 {
-	frame++;
+	mFrame++;
 
-	if (frame >= 16) {
+	if (mFrame >= 16) {
 		SetDestroy();
 	}
 }
 
 void Explosion::Draw() const
 {
-	// 入力レイアウト設定
-	Renderer::GetDeviceContext()->IASetInputLayout(pVertexLayout);
-
-	// シェーダー設定
-	Renderer::GetDeviceContext()->VSSetShader(pVertexShader, NULL, 0);
-	Renderer::GetDeviceContext()->PSSetShader(pPixelShader, NULL, 0);
-
 	// UV座標書き換え
 	{
 		D3D11_MAPPED_SUBRESOURCE msr;
-		Renderer::GetDeviceContext()->Map(pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+		D3D11::DeviceManager::getInstance().GetContext()->Map(pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 
 		VERTEX_3D* vertex = (VERTEX_3D*)msr.pData;
 
