@@ -51,6 +51,7 @@
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Transform.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Audio.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
@@ -219,7 +220,8 @@
     <ClInclude Include="sources\00_Engine\00-2_Graphics\MeshTypes.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Graphics.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\AnimationClip.h" />
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Animation.h" />
+    <ClInclude Include="sources\00_Engine\00-3_Resource\AnimationManager.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\AssimpLoader.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h" />
@@ -228,6 +230,7 @@
     <ClInclude Include="sources\00_Engine\00-3_Resource\Skeleton.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h" />
+    <ClInclude Include="sources\01_Framework\01-1_Common\BoneTransform.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -241,6 +244,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-1_Common\Quaternion.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -251,6 +255,7 @@
     <ClInclude Include="sources\01_Framework\01-1_Common\Vector2.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Vector3.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\WICTextureLoader11.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\Animator.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Audio.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\BillboardRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Component.h" />
@@ -440,18 +445,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\unlitTexturePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\unlitTextureVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -606,6 +613,7 @@ xcopy /Y "$(ProjectDir)assimp-vc143-mt.dll" "$(TargetDir)"</Command>
       <AdditionalIncludeDirectories>$(ProjectDir)sources\04_External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

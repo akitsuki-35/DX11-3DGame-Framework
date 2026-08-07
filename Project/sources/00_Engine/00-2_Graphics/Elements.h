@@ -25,6 +25,9 @@ namespace Element {
 		DirectX::XMFLOAT3 Normal;
 		DirectX::XMFLOAT4 Diffuse;
 		DirectX::XMFLOAT2 TexCoord;
+
+		uint32_t BoneIndices[4]{};
+		float BoneWeights[4]{};
 	};
 
 	/*--------------------------------------------------

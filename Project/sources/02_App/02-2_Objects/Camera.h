@@ -19,7 +19,7 @@ class Camera : public GameObject
 {
 protected:
 	Vector3 mTarget{}; // 注視点
-	DirectX::XMMATRIX mViewMatrix; // ビュー行列
+	DirectX::XMMATRIX mViewMatrix{}; // ビュー行列
 
 public:
 	virtual ~Camera() = default;

@@ -116,6 +116,9 @@ public:
 		return this;
 	}
 
+	// ゲッター
+	Model* GetModel() const{ return _mModel; }
+
 private:
 	// 外部テクスチャのパスを生成
 	std::string converttoTexturePath(const std::string& textureName) {

@@ -13,7 +13,13 @@ void ModelRenderer::Draw() const
 {
 	if (!_mModel) return;
 
+    // ワールド行列セット
 	D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());
+
+    // ボーン行列セット
+    if (_mModel->GetSkeleton().GetBoneCount() > 0) {
+        D3D11::BufferManager::getInstance().SetBoneMatrices(_mModel->GetSkeleton());
+    }
 
     for (auto& mesh : _mModel->mMeshes)
     {

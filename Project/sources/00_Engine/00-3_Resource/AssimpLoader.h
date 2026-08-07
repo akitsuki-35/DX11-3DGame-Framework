@@ -20,6 +20,7 @@
 class Model;
 class Texture;
 class Skeleton;
+class Animation;
 struct aiScene;
 struct aiMesh;
 struct aiNode;
@@ -62,7 +63,7 @@ public:
 
 private:
 	// メッシュ生成
-	bool loadMeshes(const aiScene* scene, Model& model);
+	bool loadMeshes(const aiScene* scene, Model& model, const Skeleton& skeleton);
 
 	// 頂点データ取得
 	Element::VERTEX3D convertVertex(const aiMesh* mesh, int v);
@@ -82,6 +83,7 @@ private:
 	*============================================================*/
 	class AiAnimationLoader
 	{
+		friend AssimpLoader;
 	public:
 		static bool GenerateAnim(const aiScene* scene, Skeleton& skeleton);
 
@@ -91,5 +93,10 @@ private:
 
 		// ボーン階層取得
 		static bool loadBoneHierarchy(const aiNode* node, Skeleton& skeleton, int parentIndex);
+
+		// アニメーション取得
+		static bool loadAnimations(const aiScene* scene, const Skeleton& skeleton);
+		static bool loadAnimationClip(const aiScene* scene, const Skeleton& skeleton,
+			Animation& animation,UINT index);
 	};
 };

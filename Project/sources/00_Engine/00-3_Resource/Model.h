@@ -43,4 +43,5 @@ private:
 
 public:
 	void AddMesh(ModelMesh&& mesh){ mMeshes.emplace_back(std::move(mesh)); }
+	Skeleton& GetSkeleton() { return mSkeleton; }
 };

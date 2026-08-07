@@ -55,12 +55,20 @@ cbuffer LightBuffer : register(b4)
 	LIGHT Light;
 }
 
+cbuffer BoneBuffer : register(b6)
+{
+    float4x4 BoneMatrices[128];
+};
+
 struct VS_IN
 {
 	float4 Position		: POSITION0;
 	float4 Normal		: NORMAL0;
 	float4 Diffuse		: COLOR0;
 	float2 TexCoord		: TEXCOORD0;
+	
+    uint4 BoneIndices : BLENDINDICES;
+    float4 BoneWeights : BLENDWEIGHT;
 };
 
 

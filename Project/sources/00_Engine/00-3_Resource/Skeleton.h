@@ -34,6 +34,9 @@ private:
     std::unordered_map<std::string, int> mBoneMap{};
     std::vector<Bone> mBones{};
 
+    std::vector<DirectX::XMFLOAT4X4>mSkinningMatrices{};
+    DirectX::XMFLOAT4X4 mGlobalInverse{};
+
 public:
     int AddBone(const Bone& bone){
         int index = static_cast<int>(mBones.size());
@@ -45,8 +48,15 @@ public:
 
     int FindBone(const std::string& name) const;
 
+    void Update();
+
     // ゲッター
-    const Bone& GetBone(size_t index) const { return mBones[index]; }
     Bone& GetBone(size_t index) { return mBones[index]; }
     size_t GetBoneCount() const { return mBones.size(); }
+    const std::vector<DirectX::XMFLOAT4X4>& GetSkinningMatrices() const { return mSkinningMatrices; }
+    DirectX::XMFLOAT4X4& GetGlobalInverse() { return mGlobalInverse; }
+
+private:
+    void updateGlobal(int index);
+    void updateSkinningMatrices();
 };
