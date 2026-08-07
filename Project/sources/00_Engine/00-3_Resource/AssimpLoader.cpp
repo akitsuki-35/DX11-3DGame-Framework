@@ -10,10 +10,12 @@
 #include "DeviceManager.h"
 #include "TextureManager.h"
 #include "Model.h"
+#include "Skeleton.h"
 #include "Utility.h"
 #include <memory>
 #include <Windows.h>
 #include <wrl/client.h>
+#include <DirectXMath.h>
 #include <DirectXTex/DirectXTex.h>
 
 // assimp関連
@@ -24,6 +26,19 @@
 
 using namespace Element;
 using namespace DirectX;
+
+namespace
+{
+	DirectX::XMFLOAT4X4 convertMatrix(const aiMatrix4x4& matrix)
+	{
+		return DirectX::XMFLOAT4X4{
+			matrix.a1, matrix.a2, matrix.a3, matrix.a4,
+			matrix.b1, matrix.b2, matrix.b3, matrix.b4,
+			matrix.c1, matrix.c2, matrix.c3, matrix.c4,
+			matrix.d1, matrix.d2, matrix.d3, matrix.d4
+		};
+	}
+}
 
 /*--------------------------------------------------
 	デバッグ用関数 プロトタイプ宣言
@@ -36,6 +51,7 @@ namespace AssimpDebug {
 	void printConvertedIndex(const std::vector<uint32_t>& indices,
 		uint32_t startIndex, uint32_t indexNum);
 	void printTextureElement(const aiTexture* tex, unsigned int index);
+	void printAnimationElement(const aiScene* scene);
 }
 
 bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
@@ -52,6 +68,11 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_GenSmoothNormals
 	);
+
+	if (scene->mAnimations) {
+		AssimpDebug::printAnimationElement(scene);
+		AiAnimationLoader::GenerateAnim(scene, model.mSkeleton);
+	}
 
 	if (!scene) {
 		OutputDebugStringA(importer.GetErrorString());
@@ -287,6 +308,95 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model, const std::
 }
 
 /*--------------------------------------------------
+	アニメーション関連ロード
+----------------------------------------------------*/
+bool AssimpLoader::AiAnimationLoader::GenerateAnim(const aiScene* scene, Skeleton& skeleton)
+{
+	if (!loadBones(scene, skeleton)) {
+		return false;
+	}
+
+	if (!loadBoneHierarchy(scene->mRootNode, skeleton, -1)) {
+		return false;
+	}
+
+	for (size_t i = 0; i < skeleton.GetBoneCount(); i++)
+	{
+		auto& bone = skeleton.GetBone(i);
+
+		OutputDebugStringA(
+			std::format(
+				"{} Parent:{}\n",
+				bone.Name,
+				bone.ParentIndex
+			).c_str()
+		);
+	}
+}
+
+bool AssimpLoader::AiAnimationLoader::loadBones(const aiScene* scene, Skeleton& skeleton)
+{
+	// 全メッシュ検索
+	for (UINT meshIndex = 0; meshIndex < scene->mNumMeshes; meshIndex++)
+	{
+		const aiMesh* mesh = scene->mMeshes[meshIndex];
+
+		// メッシュ内のボーンを検索
+		for (UINT i = 0; i < mesh->mNumBones; i++)
+		{
+			const aiBone* aiBone = mesh->mBones[i];
+			int boneIndex = skeleton.FindBone(aiBone->mName.C_Str());
+
+			// 登録済みならスキップ
+			if (boneIndex != -1){
+				continue;
+			}
+
+			// ボーン登録
+			Skeleton::Bone bone{};
+			bone.Name = aiBone->mName.C_Str();
+			bone.Offset = convertMatrix(aiBone->mOffsetMatrix);
+			int index = skeleton.AddBone(bone);
+
+			OutputDebugStringA(std::format("Bone : {} Index : {}\n", bone.Name,
+					index).c_str());
+		}
+	}
+
+	return true;
+}
+
+bool AssimpLoader::AiAnimationLoader::loadBoneHierarchy(const aiNode* node, Skeleton& skeleton, int parentIndex)
+{
+	// ボーン階層取得
+	int currentIndex = parentIndex;
+
+	int boneIndex = skeleton.FindBone(node->mName.C_Str());
+
+	if (boneIndex != -1)
+	{
+		currentIndex = boneIndex;
+
+		auto& bone = skeleton.GetBone(boneIndex);
+
+		// 親ボーンインデックス登録
+		bone.ParentIndex = parentIndex;
+
+		//ローカル行列取得
+		bone.Local = convertMatrix(node->mTransformation);
+	}
+
+	// 子ノードを検索
+	for (UINT i = 0; i < node->mNumChildren; i++)
+	{
+		// 再帰呼び出し
+		loadBoneHierarchy(node->mChildren[i], skeleton, currentIndex);
+	}
+
+	return true;
+}
+
+/*--------------------------------------------------
 	デバッグ用関数
 ----------------------------------------------------*/
 void AssimpDebug::printMeshCount(const aiScene* scene)
@@ -383,6 +493,50 @@ void AssimpDebug::printTextureElement(const aiTexture* tex, unsigned int index)
 		" Filename : " + std::string(tex->mFilename.C_Str()) + "\n" +
 		" Width : " + std::to_string(tex->mWidth) + "\n" +
 		" Height : " + std::to_string(tex->mHeight) + "\n";
+
+	OutputDebugStringA(log.c_str());
+
+#endif
+}
+
+void AssimpDebug::printAnimationElement(const aiScene* scene)
+{
+#ifndef NDEBUG
+
+	std::string log = "----------printAnimationElement----------\n";
+
+	// シーン情報取得
+	log += std::format("Scene\n" " Meshes:{}\n" " Materials:{}\n" " Animations:{}\n",
+		scene->mNumMeshes, scene->mNumMaterials, scene->mNumAnimations).c_str();
+
+	// アニメーション情報取得
+	const aiAnimation* anim = scene->mAnimations[0];
+
+	log += std::format("Animation\n" "Name:{}\n" "Duration:{}\n" "TicksPerSecond:{}\n" "Channels:{}\n",
+		anim->mName.C_Str(), anim->mDuration, anim->mTicksPerSecond, anim->mNumChannels).c_str();
+
+	// チャンネル情報取得
+	for (UINT i = 0; i < anim->mNumChannels; i++)
+	{
+		auto channel = anim->mChannels[i];
+
+		log += std::format("Channel:{}\n", channel->mNodeName.C_Str()).c_str();
+	}
+
+	// キー情報取得
+	const aiNodeAnim* channel = anim->mChannels[0];
+
+	log += std::format("PositionKeys:{}\n" "RotationKeys:{}\n" "ScaleKeys:{}\n",
+		channel->mNumPositionKeys, channel->mNumRotationKeys, channel->mNumScalingKeys).c_str();
+
+	for (UINT i = 0; i < channel->mNumRotationKeys; i++)
+	{
+		auto& key = channel->mRotationKeys[i];
+
+		log += std::format("Time:{}\n" "Quat:{} {} {} {}\n",
+			key.mTime, key.mValue.x, key.mValue.y, key.mValue.z, key.mValue.w
+		).c_str();
+	}
 
 	OutputDebugStringA(log.c_str());
 

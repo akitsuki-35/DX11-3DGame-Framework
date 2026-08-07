@@ -64,6 +64,9 @@
     <Filter Include="01_Framework\01-2_Components\Renderer">
       <UniqueIdentifier>{3334af44-d530-46be-bd67-f689e7a64f56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00_Engine\00-3_Resource\Animation">
+      <UniqueIdentifier>{b584a70b-e592-406f-9797-bc1a55ad8012}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp">
@@ -237,6 +240,7 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\Transform.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Skeleton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -469,6 +473,12 @@
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Transform.h">
       <Filter>01_Framework\01-1_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Skeleton.h">
+      <Filter>00_Engine\00-3_Resource\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\AnimationClip.h">
+      <Filter>00_Engine\00-3_Resource\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

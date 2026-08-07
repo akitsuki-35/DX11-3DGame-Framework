@@ -10,6 +10,7 @@
 
 #include "Texture.h"
 #include "ModelMesh.h"
+#include "Skeleton.h"
 #include "Elements.h"
 #include <memory>
 #include <vector>
@@ -35,6 +36,7 @@ private:
 
 	std::vector<ModelMesh> mMeshes{};
 	std::vector<MATERIAL> mMaterials{};
+	Skeleton mSkeleton{};
 
 	// 埋め込みテクスチャ
 	std::vector<std::unique_ptr<Texture>> mTextures{};

@@ -19,8 +19,10 @@
 ----------------------------------------------------*/
 class Model;
 class Texture;
+class Skeleton;
 struct aiScene;
 struct aiMesh;
+struct aiNode;
 
 /*============================================================
 *	@class	: AssimpLoader
@@ -28,9 +30,9 @@ struct aiMesh;
 *============================================================*/
 class AssimpLoader final
 {
-	/*--------------------------------------------------
-		Singleton用
-	----------------------------------------------------*/
+/*--------------------------------------------------
+	Singleton用
+----------------------------------------------------*/
 public:
 	static AssimpLoader& getInstance() {
 		static AssimpLoader  instance;
@@ -47,9 +49,9 @@ private:
 	AssimpLoader& operator=(AssimpLoader&&) = delete;
 	~AssimpLoader() {};
 
-	/*--------------------------------------------------
-		メンバ変数・メンバ関数
-	----------------------------------------------------*/
+/*--------------------------------------------------
+	メンバ変数・メンバ関数
+----------------------------------------------------*/
 private:
 	// テクスチャ検索用
 	std::unordered_map<std::string, Texture*> mTextureMap{};
@@ -73,4 +75,21 @@ private:
 
 	// マテリアル取得
 	void loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath);
+
+	/*============================================================
+	*	@class	: AiAnimationLoader
+	*	@brief	: アニメーション関連取得
+	*============================================================*/
+	class AiAnimationLoader
+	{
+	public:
+		static bool GenerateAnim(const aiScene* scene, Skeleton& skeleton);
+
+	private:
+		// ボーン取得
+		static bool loadBones(const aiScene* scene, Skeleton& skeleton);
+
+		// ボーン階層取得
+		static bool loadBoneHierarchy(const aiNode* node, Skeleton& skeleton, int parentIndex);
+	};
 };

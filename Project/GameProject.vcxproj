@@ -33,6 +33,7 @@
     <ClCompile Include="sources\00_Engine\00-3_Resource\AssimpLoader.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Skeleton.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp" />
@@ -218,11 +219,13 @@
     <ClInclude Include="sources\00_Engine\00-2_Graphics\MeshTypes.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Graphics.h" />
+    <ClInclude Include="sources\00_Engine\00-3_Resource\AnimationClip.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\AssimpLoader.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\ShaderManager.h" />
+    <ClInclude Include="sources\00_Engine\00-3_Resource\Skeleton.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">

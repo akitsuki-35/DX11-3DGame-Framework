@@ -31,7 +31,8 @@ void Player::Initialize()
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\player.obj")->LoadShader("Unlit");
+	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\Test.fbx")->
+		LoadTexture("sky.jpg", ModelRenderer::TextureType::Diffuse)->LoadShader("Unlit");
 
 	mSE = AddComponent<Audio>(this);
 	mSE->Load("assets\\audio\\wan.wav");
