@@ -29,14 +29,20 @@ using namespace DirectX;
 
 namespace
 {
-	DirectX::XMFLOAT4X4 convertMatrix(const aiMatrix4x4& matrix)
-	{
-		return {
-			matrix.a1, matrix.a2, matrix.a3, matrix.a4,
-			matrix.b1, matrix.b2, matrix.b3, matrix.b4,
-			matrix.c1, matrix.c2, matrix.c3, matrix.c4,
-			matrix.d1, matrix.d2, matrix.d3, matrix.d4
+	DirectX::XMFLOAT4X4 convertMatrix(const aiMatrix4x4& m) {
+		DirectX::XMFLOAT4X4 out {
+			m.a1, m.b1, m.c1, m.d1,
+			m.a2, m.b2, m.c2, m.d2,
+			m.a3, m.b3, m.c3, m.d3,
+			m.a4, m.b4, m.c4, m.d4
 		};
+
+		//out._13 *= -1.0f;
+		//out._23 *= -1.0f;
+		//out._33 *= -1.0f;
+		//out._43 *= -1.0f;
+
+		return out;
 	}
 }
 
@@ -76,10 +82,14 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		return false;
 	}
 
+	// ボーン階層登録
 	if (!AiAnimationLoader::loadBoneHierarchy(scene->mRootNode, model.mSkeleton, -1)) {
 		return false;
 	}
 
+	model.mSkeleton.UpdateBindPose();
+
+	// ボーン読み込み
 	if (!AiAnimationLoader::loadBones(scene, model.mSkeleton)) {
 		return false;
 	}
@@ -88,6 +98,7 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 	if (!loadMeshes(scene, model, model.mSkeleton))
 		return false;
 
+	// アニメーション読み込み
 	if (scene->mAnimations) {
 		AiAnimationLoader::GenerateAnim(scene, model.mSkeleton);
 	}
@@ -136,31 +147,37 @@ bool AssimpLoader::loadMeshes(const aiScene* scene, Model& model, const Skeleton
 				continue;
 			}
 
-			// ウェイト正規化
 			for (UINT weightIndex = 0; weightIndex < aiBone->mNumWeights; weightIndex++) {
 				UINT vertexId = aiBone->mWeights[weightIndex].mVertexId;
-				const aiVertexWeight& weight = aiBone->mWeights[weightIndex];
+
+				float weight = aiBone->mWeights[weightIndex].mWeight;
 
 				for (int slot = 0; slot < 4; slot++) {
 					if (vertices[vertexId].BoneWeights[slot] == 0.0f) {
-						vertices[vertexId].BoneIndices[slot] =
-							static_cast<uint32_t>(skeletonIndex);
+						vertices[vertexId].BoneIndices[slot] = static_cast<uint32_t>(skeletonIndex);
 
-						vertices[vertexId].BoneWeights[slot] = weight.mWeight;
-
-						//float total =
-						//	vertices[weight.mVertexId].BoneWeights[0] +
-						//	vertices[weight.mVertexId].BoneWeights[1] +
-						//	vertices[weight.mVertexId].BoneWeights[2] +
-						//	vertices[weight.mVertexId].BoneWeights[3];
-
-						//if (total > 0)
-						//{
-						//	vertices[weight.mVertexId].BoneWeights[slot] /= total;
-						//}
+						vertices[vertexId].BoneWeights[slot] = weight;
 
 						break;
 					}
+				}
+			}
+		}
+
+		// ウェイト正規化
+		for (auto& vertex : vertices)
+		{
+			float total =
+				vertex.BoneWeights[0] +
+				vertex.BoneWeights[1] +
+				vertex.BoneWeights[2] +
+				vertex.BoneWeights[3];
+
+			if (total > 0.0f)
+			{
+				for (int i = 0; i < 4; ++i)
+				{
+					vertex.BoneWeights[i] /= total;
 				}
 			}
 		}
@@ -382,52 +399,33 @@ bool AssimpLoader::AiAnimationLoader::GenerateAnim(const aiScene* scene, Skeleto
 bool AssimpLoader::AiAnimationLoader::loadBones(const aiScene* scene, Skeleton& skeleton)
 {
 	aiMatrix4x4 inverse = scene->mRootNode->mTransformation.Inverse();
+	skeleton.SetGlobalInverse(convertMatrix(inverse));
 
-	DirectX::XMMATRIX dxInverse = DirectX::XMMatrixSet(
-			inverse.a1, inverse.a2, inverse.a3, inverse.a4,
-			inverse.b1, inverse.b2, inverse.b3, inverse.b4,
-			inverse.c1, inverse.c2, inverse.c3, inverse.c4,
-			inverse.d1, inverse.d2, inverse.d3, inverse.d4);
-
-	DirectX::XMStoreFloat4x4(&skeleton.GetGlobalInverse(), dxInverse);
-
-	// 全メッシュ検索
-	for (UINT meshIndex = 0; meshIndex < scene->mNumMeshes; meshIndex++)
+	for (UINT i = 0; i < scene->mNumMeshes; i++)
 	{
-		const aiMesh* mesh = scene->mMeshes[meshIndex];
+		const aiMesh* mesh = scene->mMeshes[i];
 
-		// メッシュ内のボーンを検索
-		for (UINT i = 0; i < mesh->mNumBones; i++)
-		{
-			const aiBone* aiBone = mesh->mBones[i];
+		for (UINT j = 0; j < mesh->mNumBones; j++) {
+			const aiBone* aiBone = mesh->mBones[j];
+			std::string name = aiBone->mName.C_Str();
 
-			int skeletonIndex = skeleton.FindBone(aiBone->mName.C_Str());
-
-			if (skeletonIndex == -1)
-			{
+			int index = skeleton.GetBoneIndex(name);
+			
+			if (index < 0) {
 				continue;
 			}
+			
+			Skeleton::Bone& bone = skeleton.GetBone(index);
 
-			skeleton.GetBone(skeletonIndex).Offset =
-				convertMatrix(aiBone->mOffsetMatrix);
+			XMMATRIX bindGlobal = XMLoadFloat4x4(&bone.BindGlobal);
 
-			//const aiBone* aiBone = mesh->mBones[i];
-			//int boneIndex = skeleton.FindBone(aiBone->mName.C_Str());
+			XMMATRIX offset = XMMatrixInverse(nullptr, bindGlobal);
 
-			//auto offset = aiBone->mOffsetMatrix;
-
-			//// 登録済みならスキップ
-			//if (boneIndex != -1){
-			//	continue;
-			//}
-
-			//// ボーン登録
-			//Skeleton::Bone bone{};
-			//bone.Name = aiBone->mName.C_Str();
-			//bone.Offset = convertMatrix(aiBone->mOffsetMatrix);
-			//skeleton.AddBone(bone);
+			XMStoreFloat4x4(&bone.Offset, offset);
 		}
 	}
+
+	skeleton.Update();
 
 	return true;
 }
@@ -439,11 +437,12 @@ bool AssimpLoader::AiAnimationLoader::loadBoneHierarchy(const aiNode* node, Skel
 
 	int boneIndex = skeleton.FindBone(node->mName.C_Str());
 
-	if (boneIndex == -1)
-	{
+	if (boneIndex == -1) {
 		Skeleton::Bone bone{};
+
 		bone.Name = node->mName.C_Str();
-		bone.Local = convertMatrix(node->mTransformation);
+		bone.BindLocal = convertMatrix(node->mTransformation);
+		bone.Local = bone.BindLocal;
 
 		boneIndex = skeleton.AddBone(bone);
 	}
@@ -451,14 +450,16 @@ bool AssimpLoader::AiAnimationLoader::loadBoneHierarchy(const aiNode* node, Skel
 	auto& bone = skeleton.GetBone(boneIndex);
 
 	bone.ParentIndex = parentIndex;
-	bone.Local = convertMatrix(node->mTransformation);
+	bone.BindLocal = convertMatrix(node->mTransformation);
+	bone.Local = bone.BindLocal;
 
 	currentIndex = boneIndex;
 
-	for (UINT i = 0; i < node->mNumChildren; i++)
-	{
+	for (UINT i = 0; i < node->mNumChildren; i++) {
 		loadBoneHierarchy(node->mChildren[i], skeleton, currentIndex);
 	}
+
+	//skeleton.UpdateBindPose();
 
 	return true;
 }
@@ -510,15 +511,13 @@ bool AssimpLoader::AiAnimationLoader::loadAnimationClip(const aiScene* scene, co
 		// Assimpの名前に親階層が付いている場合を除去
 		size_t separator = boneName.find_last_of('|');
 
-		if (separator != std::string::npos)
-		{
+		if (separator != std::string::npos) {
 			boneName = boneName.substr(separator + 1);
 		}
 
 		int boneIndex = skeleton.FindBone(boneName);
 
-		if (boneIndex == -1)
-		{
+		if (boneIndex == -1) {
 			continue;
 		}
 

@@ -7,6 +7,7 @@
 *	@updated : 2026/08/07
 *============================================================*/
 #include "Skeleton.h"
+using namespace DirectX;
 
 int Skeleton::FindBone(const std::string& name) const
 {
@@ -37,7 +38,7 @@ void Skeleton::Update()
 void Skeleton::updateGlobal(int index)
 {
     Bone& bone = mBones[index];
-
+    
     DirectX::XMMATRIX local = DirectX::XMLoadFloat4x4(&bone.Local);
 
     if (bone.ParentIndex == -1) {
@@ -52,11 +53,40 @@ void Skeleton::updateGlobal(int index)
     }
 
     // 子ボーンを更新
-    for (size_t i = 0; i < mBones.size(); i++)
-    {
+    for (size_t i = 0; i < mBones.size(); i++) {
         if (mBones[i].ParentIndex == index) {
             updateGlobal(static_cast<int>(i));
         }
+    }
+}
+
+void Skeleton::UpdateBindPose()
+{
+    for (size_t i = 0; i < mBones.size(); i++)
+    {
+        if (mBones[i].ParentIndex == -1)
+            updateBindGlobal(static_cast<int>(i));
+    }
+}
+
+void Skeleton::updateBindGlobal(int index)
+{
+    Bone& bone = mBones[index];
+
+    XMMATRIX local = XMLoadFloat4x4(&bone.BindLocal);
+
+    if (bone.ParentIndex == -1) {
+        XMStoreFloat4x4(&bone.BindGlobal, local);
+    }
+    else {
+        XMMATRIX parent = XMLoadFloat4x4(&mBones[bone.ParentIndex].BindGlobal);
+        XMStoreFloat4x4(&bone.BindGlobal, parent * local);
+    }
+
+    // 子ボーンを更新
+    for (size_t i = 0; i < mBones.size(); i++) {
+        if (mBones[i].ParentIndex == index)
+            updateBindGlobal(static_cast<int>(i));
     }
 }
 
@@ -76,7 +106,7 @@ void Skeleton::updateSkinningMatrices()
         DirectX::XMMATRIX offset = DirectX::XMLoadFloat4x4(&bone.Offset);
 
         // スキニング行列作成
-        DirectX::XMMATRIX skinning = global * offset;
+        DirectX::XMMATRIX skinning = globalInverse * global * offset;
 
         DirectX::XMStoreFloat4x4(&mSkinningMatrices[i], skinning);
     }

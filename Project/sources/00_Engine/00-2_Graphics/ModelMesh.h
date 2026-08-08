@@ -56,8 +56,6 @@ public:
 	bool Create(const std::vector<Element::VERTEX3D>& vertices,
 		const std::vector<uint32_t>& indices);
 
-	void SetBoneWeight(size_t vertexIndex, uint32_t boneIndex, float weight);
-
 	void Bind() const;
 	void Draw(const SUBSET& subset) const;
 

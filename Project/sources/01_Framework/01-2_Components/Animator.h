@@ -37,7 +37,7 @@ public:
     void Update(double dt);
 
     // ゲッター
-    double GetCurrentTime() const { return mCurrentTime; }
+    double GetTime() const { return mCurrentTime; }
 
 private:
     bool setSkeleton() {

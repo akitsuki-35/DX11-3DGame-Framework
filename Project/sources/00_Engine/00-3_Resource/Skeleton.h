@@ -28,6 +28,10 @@ public:
         DirectX::XMFLOAT4X4 Offset{}; // オフセット行列
         DirectX::XMFLOAT4X4 Local{}; // ローカル変換
         DirectX::XMFLOAT4X4 Global{}; // グローバル変換
+
+        // バインドポーズ
+        DirectX::XMFLOAT4X4 BindLocal{};
+        DirectX::XMFLOAT4X4 BindGlobal{};
     };
 
 private:
@@ -49,14 +53,25 @@ public:
     int FindBone(const std::string& name) const;
 
     void Update();
+    void UpdateBindPose();
+
+    void SetGlobalInverse(const DirectX::XMFLOAT4X4& matrix){ mGlobalInverse = matrix; }
 
     // ゲッター
     Bone& GetBone(size_t index) { return mBones[index]; }
+    int GetBoneIndex(std::string name) {
+        auto it = mBoneMap.find(name);
+        if (it != mBoneMap.end()) {
+            return it->second;
+        }
+
+        return -1;
+    }
     size_t GetBoneCount() const { return mBones.size(); }
     const std::vector<DirectX::XMFLOAT4X4>& GetSkinningMatrices() const { return mSkinningMatrices; }
-    DirectX::XMFLOAT4X4& GetGlobalInverse() { return mGlobalInverse; }
 
 private:
+    void updateBindGlobal(int index);
     void updateGlobal(int index);
     void updateSkinningMatrices();
 };

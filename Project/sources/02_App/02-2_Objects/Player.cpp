@@ -24,9 +24,9 @@ void Player::Initialize()
 
 	mTransform = Transform(
 		{ 0.0f, 1.0f, 0.0f },
-		{ 0.0f, 0.0f, 0.0f },
+		{ DirectX::XMConvertToRadians(90.0f), 0.0f, 0.0f},
 		{ 0.5f, 0.5f, 0.5f }
-	);
+	);		
 
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 50.0f, 0.0f, 50.0f };
@@ -34,9 +34,9 @@ void Player::Initialize()
 	// コンポーネント読込
 	//AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\Test.fbx")->
 	//	LoadTexture("sky.jpg", ModelRenderer::TextureType::Diffuse)->LoadShader("Unlit");
+	//AddComponent<Animator>(this)->Set("Take 001");
 
 	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\Wolf.fbx")->LoadShader("Unlit");
-
 	AddComponent<Animator>(this)->Set("AnimalArmature|Idle");
 
 	mSE = AddComponent<Audio>(this);
@@ -86,6 +86,7 @@ void Player::Update()
 	}
 
 	float yaw = atan2f(mVelocity.x, mVelocity.z);
+	yaw += DirectX::XM_PI;
 	rotation.y = yaw;
 
 	// ジャンプ
@@ -122,8 +123,8 @@ void Player::Update()
 	mGround = false;
 
 	// 地面との衝突判定
-	if (position.y < 0.0f) {
-		position.y = 0.0f;
+	if (position.y < 1.0f) {
+		position.y = 1.0f;
 		mVelocity.y = 0.0f;
 		mGround = true;
 	}

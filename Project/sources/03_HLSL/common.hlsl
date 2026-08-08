@@ -57,7 +57,7 @@ cbuffer LightBuffer : register(b4)
 
 cbuffer BoneBuffer : register(b6)
 {
-    float4x4 BoneMatrices[128];
+    column_major float4x4 BoneMatrices[128];
 };
 
 struct VS_IN

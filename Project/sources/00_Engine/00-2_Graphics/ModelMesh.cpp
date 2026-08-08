@@ -25,21 +25,6 @@ bool ModelMesh::Create(const std::vector<Element::VERTEX3D>& vertices, const std
 	return true;
 }
 
-void ModelMesh::SetBoneWeight(size_t vertexIndex, uint32_t boneIndex, float weight)
-{
-	if (vertexIndex >= mVertices.size()){
-		return;
-	}
-
-	for (size_t i = 0; i < 4; i++){
-		if (mVertices[vertexIndex].BoneWeights[i] == 0.0f) {
-			mVertices[vertexIndex].BoneIndices[i] = boneIndex;
-			mVertices[vertexIndex].BoneWeights[i] = weight;
-			return;
-		}
-	}
-}
-
 void ModelMesh::Bind() const
 {
 	// 頂点バッファ設定

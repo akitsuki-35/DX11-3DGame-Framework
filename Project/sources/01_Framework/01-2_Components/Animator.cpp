@@ -10,6 +10,7 @@
 #include "Skeleton.h"
 #include "BoneTransform.h"
 #include <cmath>
+using namespace DirectX;
 
 void Animator::Update(double dt)
 {
@@ -46,21 +47,20 @@ void Animator::calculateBoneTransform(const Animation::Channel& channel, double 
     // スケール更新
     transform.Scale = calculateScale(channel.Scales, time);
 
-    // ローカル行列更新
     auto& bone = mSkeleton->GetBone(channel.BoneIndex);
 
-    DirectX::XMMATRIX matrix = transform.ToMatrix();
-    DirectX::XMStoreFloat4x4(&bone.Local, matrix);
+    XMMATRIX animLocal = transform.ToMatrix();
+    XMMATRIX bindLocal = XMLoadFloat4x4(&bone.BindLocal);
 
-    //auto& bone = mSkeleton->GetBone(channel.BoneIndex);
+    XMMATRIX finalLocal = animLocal;
 
-    //bone.Local = bone.Local;
+    XMStoreFloat4x4(&bone.Local, finalLocal);
 }
 
 Vector3 Animator::calculatePosition(const std::vector<Animation::KeyPosition>& keys, double time)
 {
     if (keys.empty()) {
-        return {};
+        return { 0.0f, 0.0f, 0.0f };
     }
 
     if (keys.size() == 1) {
@@ -87,7 +87,7 @@ Vector3 Animator::calculatePosition(const std::vector<Animation::KeyPosition>& k
 Quaternion Animator::calculateRotation(const std::vector<Animation::KeyRotation>& keys, double time)
 {
     if (keys.empty()) {
-        return {};
+        return { 0.0f, 0.0f, 0.0f, 1.0f };
     }
 
     if (keys.size() == 1) {
@@ -114,7 +114,7 @@ Quaternion Animator::calculateRotation(const std::vector<Animation::KeyRotation>
 Vector3 Animator::calculateScale(const std::vector<Animation::KeyScale>& keys, double time)
 {
     if (keys.empty()) {
-        return { 1.0f,1.0f,1.0f };
+        return { 1.0f, 1.0f, 1.0f };
     }
 
     if (keys.size() == 1) {
