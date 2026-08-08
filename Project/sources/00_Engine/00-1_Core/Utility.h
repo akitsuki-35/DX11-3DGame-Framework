@@ -4,17 +4,13 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include <string>
 #include <vector>
-#include <cassert>
-#include <shlwapi.h>
-#include <iostream>
-#include <fstream>
-#pragma comment(lib, "Shlwapi.lib")
+#include <filesystem>
 
 /*============================================================
 *	@namespace	: Utility
@@ -31,6 +27,9 @@ namespace Utility
 
 		// ファイルパス正規化
 		std::string normalizePath(const char* filePath);
+
+		// ディレクトリのパス取得
+		std::filesystem::path getDirectoryPath(const char* filePath);
 	}
 
 /*--------------------------------------------------

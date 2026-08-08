@@ -64,11 +64,13 @@ public:
 
 		mComponents.clear();
 	}
+
 	virtual void Update() {
 		for (Component* component : mComponents) {
 			component->Update();
 		}
 	}
+
 	virtual void Draw() const {
 		for (Component* component : mComponents) {
 			component->Draw();

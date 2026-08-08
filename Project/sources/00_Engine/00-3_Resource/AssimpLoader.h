@@ -9,7 +9,7 @@
 #pragma once
 
 #include "ModelMesh.h"
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -19,14 +19,17 @@
 ----------------------------------------------------*/
 class Model;
 class Texture;
+class Skeleton;
+class Animation;
 struct aiScene;
 struct aiMesh;
+struct aiNode;
 
 /*============================================================
 *	@class	: AssimpLoader
 *	@brief	: assimpによるモデルロード・生成
 *============================================================*/
-class AssimpLoader final 
+class AssimpLoader final
 {
 /*--------------------------------------------------
 	Singleton用
@@ -60,7 +63,7 @@ public:
 
 private:
 	// メッシュ生成
-	bool loadMeshes(const aiScene* scene, Model& model);
+	bool loadMeshes(const aiScene* scene, Model& model, const Skeleton& skeleton);
 
 	// 頂点データ取得
 	Element::VERTEX3D convertVertex(const aiMesh* mesh, int v);
@@ -72,5 +75,28 @@ private:
 	bool loadTextures(const aiScene* scene, Model& model);
 
 	// マテリアル取得
-	void loadMaterials(const aiScene* scene, Model& model);
+	void loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath);
+
+	/*============================================================
+	*	@class	: AiAnimationLoader
+	*	@brief	: アニメーション関連取得
+	*============================================================*/
+	class AiAnimationLoader
+	{
+		friend AssimpLoader;
+	public:
+		static bool GenerateAnim(const aiScene* scene, Skeleton& skeleton);
+
+	private:
+		// ボーン取得
+		static bool loadBones(const aiScene* scene, Skeleton& skeleton);
+
+		// ボーン階層取得
+		static bool loadBoneHierarchy(const aiNode* node, Skeleton& skeleton, int parentIndex);
+
+		// アニメーション取得
+		static bool loadAnimations(const aiScene* scene, const Skeleton& skeleton);
+		static bool loadAnimationClip(const aiScene* scene, const Skeleton& skeleton,
+			Animation& animation,UINT index);
+	};
 };

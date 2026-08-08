@@ -1,20 +1,19 @@
 ﻿/*============================================================
-*	@file	 : Renderer.cpp
-*	@brief	 : 描画
+*	@file	 : Graphics.cpp
+*	@brief	 : 描画システム制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/06/02
+*	@updated : 2026/08/04
 *============================================================*/
-#include "Renderer.h"
+#include "Graphics.h"
 #include "DeviceManager.h"
 #include "BufferManager.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
 #include "SystemWindow.h"
-#include "ModelRenderer.h"
 
-void Renderer::Initialize()
+void D3D11::Graphics::Initialize()
 {
 	HRESULT hr = S_OK;
 	
@@ -35,17 +34,15 @@ void Renderer::Initialize()
 	ShaderSet::initialize();
 }
 
-void Renderer::Finalize()
+void D3D11::Graphics::Finalize()
 {
-	//ModelRenderer::UnloadAll();
-
 	ShaderManager::getInstance().Clear();
 	TextureManager::getInstance().Clear();
 
 	D3D11::DeviceManager::getInstance().Fainlize();
 }
 
-void Renderer::Begin()
+void D3D11::Graphics::Begin()
 {
 	// ※ループ先頭で呼出
 	auto& device = D3D11::DeviceManager::getInstance();
@@ -56,7 +53,7 @@ void Renderer::Begin()
 	device.GetContext()->ClearDepthStencilView( device.GetDepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
-void Renderer::SetViewport(float width, float height)
+void D3D11::Graphics::SetViewport(float width, float height)
 {
 	// ビューポート設定
 	D3D11_VIEWPORT viewport{};
@@ -69,7 +66,7 @@ void Renderer::SetViewport(float width, float height)
 	D3D11::DeviceManager::getInstance().GetContext()->RSSetViewports(1, &viewport);
 }
 
-void Renderer::End()
+void D3D11::Graphics::End()
 {
 	// ループ末尾で呼出
 	D3D11::DeviceManager::getInstance().GetSwapChain()->Present(1, 0);

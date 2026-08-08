@@ -1,22 +1,20 @@
 ﻿/*============================================================
-*	@file	 : game.cpp
+*	@file	 : Game.cpp
 *	@brief	 : ゲームシーン
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/28
-*	@updated : 2026/06/23
+*	@updated : 2026/08/04
 *============================================================*/
 #include "main.h"
 #include "game.h"
 #include "scene.h"
-#include "renderer.h"
-#include "manager.h"
+#include "SceneManager.h"
 #include "input.h"
 #include "camera.h"
 #include "gameobject.h"
 
 #include "field.h"
-#include "polygon2d.h"
 #include "player.h"
 #include "enemy.h"
 #include "bullet.h"
@@ -31,7 +29,7 @@
 #include "score.h"
 
 #include "DeviceManager.h"
-#include "DirectX11Config.h"
+#include "D3D11Config.h"
 
 std::list<GameObject*> Game::gameObjects;
 
@@ -47,7 +45,7 @@ void Game::Initialize()
 
 	AddGameObject<Field>();
 	AddGameObject<Player>();
-	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
+	//AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
 	//AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
 	//AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
 	//Box* box = AddGameObject<Box>();
@@ -59,8 +57,6 @@ void Game::Initialize()
 	//AddGameObject<Particle>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
 	//AddGameObject<Score>()->SetPosition({ 120.0f, 32.0f, 0.0f });
-
-	//AddGameObject<Polygon2D>()->Initialize({0.0f, 0.0f}, { 100.0f, 100.0f }, L"Resources\\Textures\\rock.jpg");
 }
 
 void Game::Finalize()
@@ -73,7 +69,7 @@ void Game::Finalize()
 	gameObjects.clear();
 }
 
-void Game::Update(double elapsedTime)
+void Game::Update(double /*elapsedTime*/)
 {
 	for (GameObject* obj : gameObjects) {
 		obj->Update();
@@ -91,8 +87,6 @@ void Game::Update(double elapsedTime)
 
 void Game::Draw() const
 {
-	Renderer::getInstance().Begin();
-
 	// Zソート
 	{
 		Camera* camera = GetGameObject<Camera>();
@@ -122,6 +116,4 @@ void Game::Draw() const
 				}
 			}
 		}
-
-	Renderer::getInstance().End();
 }

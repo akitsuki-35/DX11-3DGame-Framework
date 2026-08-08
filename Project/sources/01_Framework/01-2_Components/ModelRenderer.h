@@ -1,80 +1,133 @@
-﻿#pragma once
+﻿/*============================================================
+*	@file	 : ModelRenderer.h
+*	@brief	 : モデル描画コンポーネント
+*
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/07/31
+*	@updated : 2026/07/31
+*============================================================*/
+#pragma once
 
-#include "GraphicsTypes.h"
+#include "Renderer.h"
+#include "ModelManager.h"
+#include "TextureManager.h"
+#include "GameObject.h"
+#include "Utility.h"
 
-// マテリアル構造体
-struct MODEL_MATERIAL
+/*--------------------------------------------------
+	前方宣言
+----------------------------------------------------*/
+class Texture;
+
+/*============================================================
+*	@class	: ModelRenderer
+*	@brief	: モデル描画
+*============================================================*/
+class ModelRenderer : public Renderer
 {
-	char						Name[256]{};
-	Element::MATERIAL			Material{};
-	char						TextureName[256]{};
-	ID3D11ShaderResourceView* Texture{};
-
-};
-
-
-// 描画サブセット構造体
-struct SUBSET
-{
-	unsigned int	StartIndex{};
-	unsigned int	IndexNum{};
-	MODEL_MATERIAL	Material{};
-};
-
-
-// モデル構造体
-struct MODEL_OBJ
-{
-	Element::VERTEX3D* VertexArray{};
-	unsigned int	VertexNum{};
-
-	unsigned int* IndexArray{};
-	unsigned int	IndexNum{};
-
-	SUBSET* SubsetArray{};
-	unsigned int	SubsetNum{};
-};
-
-struct MODEL
-{
-	ID3D11Buffer* VertexBuffer{};
-	ID3D11Buffer* IndexBuffer{};
-
-	SUBSET* SubsetArray{};
-	unsigned int	SubsetNum{};
-};
-
-
-#include "component.h"
-#include <string>
-#include <unordered_map>
-
-
-class ModelRenderer : public Component
-{
-private:
-
-	static std::unordered_map<std::string, MODEL*> m_ModelPool;
-
-	static void LoadModel(const char *FileName, MODEL *Model);
-	static void LoadObj( const char *FileName, MODEL_OBJ *ModelObj );
-	static void LoadMaterial( const char *FileName, MODEL_MATERIAL **MaterialArray, unsigned int *MaterialNum );
-
-	MODEL* m_Model{};
+	// テクスチャ
+	struct ModelTextures
+	{
+		Texture* Diffuse{};
+		Texture* Normal{};
+		Texture* Roughness{};
+		Texture* Metalness{};
+		Texture* Rump{};
+	};
 
 public:
+	// テクスチャタイプ
+	enum class TextureType
+	{
+		Diffuse,
+		Normal,
+		Roughness,
+		Metalness,
+		Ramp
+	};
 
-	static void Preload( const char *FileName );
-	static void UnloadAll();
+private:
+	Model* _mModel{};
+	ModelTextures mTextures{};
+	
+	// ディレクトリ(テクスチャ検索用)
+	std::filesystem::path mDirectory{};
 
+public:
+	ModelRenderer(GameObject* owner)
+		: Renderer(owner) {
+		// 不透明レイヤーに描画
+		mSortKey.layer = Layer::World;
+	};
 
-	using Component::Component;
+	~ModelRenderer() override = default;
 
-	void Load( const char *FileName );
 	void Draw() const override;
 
-	static size_t GetPoolSize()
-	{
-		return m_ModelPool.size();
+private:
+	// ワールド行列取得
+	DirectX::XMMATRIX GetWorldMatrix() const override {
+		return _mOwner->GetTransform().GetWorldMatrix();
+	}
+
+public:
+	// モデル読み込み
+	ModelRenderer* LoadModel(const char* fileName) {
+		_mModel = ModelManager::getInstance().Load(fileName);
+
+		// モデルディレクトリ取得
+		mDirectory = Utility::File::getDirectoryPath(fileName);
+
+		return this;
+	}
+
+	ModelRenderer* LoadTexture(std::string textureName, TextureType type) {
+		switch (type)
+		{
+		case TextureType::Diffuse:
+			mTextures.Diffuse = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+		
+		case TextureType::Normal:
+			mTextures.Normal = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+		
+		case TextureType::Roughness:
+			mTextures.Roughness = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+
+		case TextureType::Metalness:
+			mTextures.Metalness = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+
+		case TextureType::Ramp:
+			mTextures.Rump = TextureManager::getInstance().Load(
+				converttoTexturePath(textureName).c_str());
+			break;
+
+		default:
+			break;
+		}
+
+		return this;
+	}
+
+	// ゲッター
+	Model* GetModel() const{ return _mModel; }
+
+private:
+	// 外部テクスチャのパスを生成
+	std::string converttoTexturePath(const std::string& textureName) {
+		// テクスチャファイル名からパスを生成
+
+		// モデルと同ディレクトリから参照
+		// モデル用テクスチャを1ディレクトリに集結するため、複数ディレクトリの参照は原則不可
+		std::string texturePath = mDirectory.string() + textureName;
+
+		return texturePath;
 	}
 };

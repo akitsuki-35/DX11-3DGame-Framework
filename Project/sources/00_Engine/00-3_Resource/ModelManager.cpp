@@ -1,14 +1,13 @@
 ﻿/*============================================================
 *	@file	 : ModelManager.cpp
-*	@brief	 : テクスチャ管理
+*	@brief	 : モデルリソース管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #include "ModelManager.h"
 #include "AssimpLoader.h"
-#include "TextureManager.h"
 #include "Utility.h"
 
 Model* ModelManager::Load(const char* modelPath)

@@ -4,13 +4,11 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/28
-*	@updated : 2026/07/26
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
 #include "GameObject.h"
-#include "Mesh.h"
-#include "ShaderManager.h"
 
 /*============================================================
 *	@class	: Field
@@ -18,12 +16,6 @@
 *============================================================*/
 class Field : public GameObject
 {
-private:
-	//Mesh mMesh{};
-	//Shader* mShader{};
-
-	//ID3D11ShaderResourceView* _mTexture{}; // テクスチャ
-
 public:
 	Field() = default;
 	

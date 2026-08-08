@@ -9,6 +9,7 @@
 #include "BufferManager.h"
 #include "DeviceManager.h"
 #include "Config.h"
+#include "Skeleton.h"
 
 using namespace DirectX;
 
@@ -20,6 +21,7 @@ void D3D11::BufferManager::Initialize()
 	_mProjection = generateBuffer(sizeof(DirectX::XMMATRIX));
 	_mMaterial = generateBuffer(sizeof(Element::MATERIAL));
 	_mLight = generateBuffer(sizeof(Element::LIGHT));
+	_mBones = generateBuffer(sizeof(BoneBuffer));
 
 	// ライト初期化
 	Element::LIGHT light{};
@@ -128,4 +130,28 @@ void D3D11::BufferManager::SetLight(Element::LIGHT light)
 		GetContext()->VSSetConstantBuffers(4, 1, &buf);
 	DeviceManager::getInstance().
 		GetContext()->PSSetConstantBuffers(4, 1, &buf);
+}
+
+void D3D11::BufferManager::SetBoneMatrices(const Skeleton& skeleton)
+{
+	BoneBuffer buffer{};
+
+	const auto& matrices = skeleton.GetSkinningMatrices();
+
+	const size_t count = std::min(matrices.size(),static_cast<size_t>(MaxBones));
+
+	for (size_t i = 0; i < count; i++) {
+		DirectX::XMMATRIX matrix = DirectX::XMLoadFloat4x4(&matrices[i]);
+
+		matrix = DirectX::XMMatrixTranspose(matrix);
+
+		DirectX::XMStoreFloat4x4(&buffer.Matrices[i], matrix);
+	}
+
+	DeviceManager::getInstance().GetContext()->UpdateSubresource(_mBones.Get(),
+		0, nullptr, &buffer, 0, 0);
+
+	ID3D11Buffer* buf = _mBones.Get();
+
+	DeviceManager::getInstance().GetContext()->VSSetConstantBuffers(6, 1, &buf);
 }

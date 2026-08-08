@@ -1,18 +1,18 @@
 ﻿/*============================================================
-*	@file	 : Tree.h
+*	@file	 : Grass.h
 *	@brief	 : 木のビルボード
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/06/02
-*	@updated : 2026/08/04
+*	@updated : 2026/08/06
 *============================================================*/
-#include "Tree.h"
+#include "Grass.h"
 #include "BillboardRenderer.h"
 #include "MeshTypes.h"
 
 using namespace MeshType;
 
-void Tree::Initialize()
+void Grass::Initialize()
 {
 	mLayer = 2;
 
@@ -23,22 +23,22 @@ void Tree::Initialize()
 	mTransform.SetPosition({ 0.0f,0.0f, 0.0f });
 	mTransform.SetScale({ 8.0f, 10.0f, 0.0f });
 
-	drawable->LoadTexture("assets\\textures\\tree.png");
+	drawable->LoadTexture("assets\\textures\\grass.png");
 
 	drawable->LoadShader("Unlit");
 }
 
-void Tree::Finalize()
+void Grass::Finalize()
 {
 	GameObject::Finalize();
 }
 
-void Tree::Update()
+void Grass::Update()
 {
 	GameObject::Update();
 }
 
-void Tree::Draw() const
+void Grass::Draw() const
 {
 	GameObject::Draw();
 }

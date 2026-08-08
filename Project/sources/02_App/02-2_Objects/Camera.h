@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : Camera.h
-*	@brief	 : カメラ
+*	@brief	 : カメラオブジェクト
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/26
-*	@updated : 2026/07/21
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
@@ -19,7 +19,7 @@ class Camera : public GameObject
 {
 protected:
 	Vector3 mTarget{}; // 注視点
-	DirectX::XMMATRIX mViewMatrix; // ビュー行列
+	DirectX::XMMATRIX mViewMatrix{}; // ビュー行列
 
 public:
 	virtual ~Camera() = default;

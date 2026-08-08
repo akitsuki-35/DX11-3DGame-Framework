@@ -4,12 +4,13 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #include "TextureManager.h"
 #include "DeviceManager.h"
 #include "Utility.h"
 #include <DirectXTex/DirectXTex.h>
+
 using namespace DirectX;
 
 Texture* TextureManager::Load(const char* texturePath)

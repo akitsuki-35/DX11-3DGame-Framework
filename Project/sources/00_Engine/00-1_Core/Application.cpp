@@ -9,8 +9,7 @@
 #include "Application.h"
 #include "SystemWindow.h"
 #include "SystemTimer.h"
-#include "Manager.h"
-#include <Windows.h>
+#include "SceneManager.h"
 
 int Application::Run() const
 {
@@ -23,8 +22,8 @@ int Application::Run() const
 		else{
 			if (System::Timer::getInstance().Tick(1000 / 60))
 			{
-				Manager::getInstance().Update();
-				Manager::getInstance().Draw();
+				SceneManager::getInstance().Update();
+				SceneManager::getInstance().Draw();
 			}
 		}
 	}

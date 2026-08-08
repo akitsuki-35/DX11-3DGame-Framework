@@ -10,7 +10,8 @@
 
 #include "Texture.h"
 #include "ModelMesh.h"
-#include "GraphicsTypes.h"
+#include "Skeleton.h"
+#include "Elements.h"
 #include <memory>
 #include <vector>
 
@@ -21,7 +22,7 @@
 class Model
 {
 	friend class ModelManager;
-	friend class ModelDrawable;
+	friend class ModelRenderer;
 	friend class AssimpLoader;
 
 private:
@@ -35,10 +36,12 @@ private:
 
 	std::vector<ModelMesh> mMeshes{};
 	std::vector<MATERIAL> mMaterials{};
+	Skeleton mSkeleton{};
 
 	// 埋め込みテクスチャ
 	std::vector<std::unique_ptr<Texture>> mTextures{};
 
 public:
 	void AddMesh(ModelMesh&& mesh){ mMeshes.emplace_back(std::move(mesh)); }
+	Skeleton& GetSkeleton() { return mSkeleton; }
 };

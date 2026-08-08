@@ -8,14 +8,9 @@
 *============================================================*/
 #pragma once
 
-#include <iostream>
-#include <mutex>
-
 class Singleton final
 {
 private:
-	std::mutex mutex;
-
 	Singleton() = default;
 	Singleton(const Singleton&) = delete;
 	

@@ -4,11 +4,11 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/01
-*	@updated : 2026/08/01
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include <vector>
 #include <wrl/client.h>
 #include <d3d11.h>
@@ -20,7 +20,7 @@
 class ModelMesh
 {
 	friend class AssimpLoader;
-	friend class ModelDrawable;
+	friend class ModelRenderer;
 
 	template <typename T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
@@ -52,15 +52,12 @@ public:
 	ModelMesh() = default;
 	~ModelMesh() = default;
 
+	// モデルメッシュ生成
 	bool Create(const std::vector<Element::VERTEX3D>& vertices,
 		const std::vector<uint32_t>& indices);
 
 	void Bind() const;
 	void Draw(const SUBSET& subset) const;
-
-#ifndef NDEBUG
-	void DebugPrintSubsets() const;
-#endif
 
 private:
 	bool generateVertexBuffer();

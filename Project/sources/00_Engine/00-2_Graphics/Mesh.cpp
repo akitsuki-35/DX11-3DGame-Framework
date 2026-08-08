@@ -4,13 +4,12 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
-*	@updated : 2026/07/24
+*	@updated : 2026/08/04
 *============================================================*/
 #include "Mesh.h"
 #include "DeviceManager.h"
-#include "GraphicsTypes.h"
+#include "Elements.h"
 #include <cassert>
-#include <DirectXMath.h>
 using namespace DirectX;
 
 bool Mesh::CreatePlane(MeshType::Plane::Pivot pivot, MeshType::Plane::Axis axis)

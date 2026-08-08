@@ -4,9 +4,14 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #include "Utility.h"
+#include <fstream>
+#include <cassert>
+#include <shlwapi.h>
+
+#pragma comment(lib, "Shlwapi.lib")
 
 std::vector<char> Utility::File::load(const char* filePath)
 {
@@ -48,6 +53,18 @@ std::string Utility::File::normalizePath(const char* filePath)
 
 	// 正規化失敗時は絶対パスを返す
 	return std::string(fullPath);
+}
+
+std::filesystem::path Utility::File::getDirectoryPath(const char* filePath)
+{
+	// ディレクトリのパス取得
+	std::filesystem::path directory = filePath;
+	directory = directory.parent_path();
+	
+	// 文字列連結によるパス組み立て用
+	directory += "\\";
+
+	return directory;
 }
 
 std::wstring Utility::String::toWideString(const std::string& string)

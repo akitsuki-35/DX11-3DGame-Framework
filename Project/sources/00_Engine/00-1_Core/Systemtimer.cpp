@@ -10,6 +10,7 @@
 
 void System::Timer::Initialize()
 {
+    // タイマー初期化
     timeBeginPeriod(1);
     mExecLastTime = timeGetTime();
     mCurrentTime = 0;
@@ -17,6 +18,7 @@ void System::Timer::Initialize()
 
 bool System::Timer::Tick(double frameRate)
 {
+    // タイマー進行
     mCurrentTime = timeGetTime();
 
     if ((mCurrentTime - mExecLastTime) >= (frameRate)) {

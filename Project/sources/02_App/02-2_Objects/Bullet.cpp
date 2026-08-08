@@ -1,43 +1,36 @@
 ﻿/*============================================================
-*	@file	 : bullet.cpp
+*	@file	 : Bullet.cpp
 *	@brief	 : 弾
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/06/02
-*	@updated : 2026/06/02
+*	@updated : 2026/08/06
 *============================================================*/
-#include "main.h"
-#include "game.h"
-#include "bullet.h"
-#include "input.h"
-#include "renderer.h"
-#include "modelRenderer.h"
-#include "enemy.h"
-#include "explosion.h"
-#include "score.h"
+#include "Game.h"
+#include "Bullet.h"
+#include "Input.h"
+#include "ModelRenderer.h"
+#include "Enemy.h"
 
 void Bullet::Initialize()
 {
 	mLayer = 1;
 
-	mPosition = { 0.0f, 0.0f, 0.0f };
+	mTransform = Transform(
+		{ 0.0f, 0.0f, 0.0f },
+		{ 0.0f, 0.0f, 0.0f },
+		{ 1.0f, 1.0f, 1.0f }
+	);
+
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 0.0f, 0.0f, 0.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelRenderer>(this)->Load("Resources\\Models\\bullet.obj");
-
-	// シェーダー読込
-	Renderer::CreateVertexShader(&_mVertexShader, &_mVertexLayout, "Resources\\Shaders\\unlitTextureVS.cso");
-	Renderer::CreatePixelShader(&_mPixelShader, "Resources\\Shaders\\unlitTexturePS.cso");
+	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\bullet.obj")->LoadShader("Unlit");
 }
 
 void Bullet::Finalize()
 {
-	_mPixelShader->Release();
-	_mVertexShader->Release();
-	_mVertexLayout->Release();
-
 	GameObject::Finalize();
 }
 
@@ -45,22 +38,24 @@ void Bullet::Update()
 {
 	float dt = 1.0f / 60.0f;
 
-	mPosition += mVelocity * dt;
+	Vector3 position = mTransform.GetPosition();
+
+	position += mVelocity * dt;
 
 	// 敵との衝突判定
 	auto enemys = Game::GetGameObjects<Enemy>();
 	for (auto enemy : enemys) {
-		Vector3 dir = enemy->GetPosition() - mPosition;
+		Vector3 dir = enemy->GetPosition() - position;
 		float length = dir.Length();
 
 		if (length < 1.0f) {
 			enemy->SetDestroy();
 			SetDestroy();
 
-			Game::AddGameObject<Explosion>()->SetPosition({ enemy->GetPosition().x,
-				enemy->GetPosition().y + 1.0f, enemy->GetPosition().z });
+			//Game::AddGameObject<Explosion>()->SetPosition({ enemy->GetPosition().x,
+			//	enemy->GetPosition().y + 1.0f, enemy->GetPosition().z });
 
-			Game::GetGameObject<Score>()->Add(1);
+			//Game::GetGameObject<Score>()->Add(1);
 
 			break;
 		}
@@ -73,25 +68,12 @@ void Bullet::Update()
 		SetDestroy();
 	}
 
+	mTransform.SetPosition(position);
+
 	GameObject::Update();
 }
 
 void Bullet::Draw() const
 {
-	// 入力レイアウト設定
-	Renderer::GetDeviceContext()->IASetInputLayout(_mVertexLayout);
-
-	// シェーダー設定
-	Renderer::GetDeviceContext()->VSSetShader(_mVertexShader, NULL, 0);
-	Renderer::GetDeviceContext()->PSSetShader(_mPixelShader, NULL, 0);
-
-	// マトリクス設定
-	XMMATRIX w, s, r, t;
-	s = XMMatrixScaling(mScale.x, mScale.y, mScale.z); // 拡大縮小
-	r = XMMatrixRotationRollPitchYaw(mRotation.x, mRotation.y, mRotation.z); // 回転
-	t = XMMatrixTranslation(mPosition.x, mPosition.y, mPosition.z); // 平行移動
-	w = s * r * t;
-	Renderer::SetWorldMatrix(w);
-
 	GameObject::Draw(); // 継承元のDrawを呼び出す
 }

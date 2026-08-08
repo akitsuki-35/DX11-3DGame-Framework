@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/05
-*	@updated : 2026/07/07
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
@@ -54,9 +54,14 @@ namespace System {
 	public:
 		void Initialize(HINSTANCE hInstance, int width = Screen::WIDTH, int height = Screen::HEIGHT);
 		void Finalize() const;
+
+		// ウィンドウ表示
 		void Show(int nCmdShow) const;
+
+		// Windowsメッセージ
 		int ProcessMessage() const;
 
+		// ウィンドウハンドル取得
 		HWND GetHandle() const { return mHwnd; }
 	};
 }

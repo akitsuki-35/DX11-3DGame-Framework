@@ -4,19 +4,22 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/14
-*	@updated : 2026/07/14
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
-#include "DeviceManager.h"
-#include "GraphicsTypes.h"
+#include "Elements.h"
+#include <vector>
+#include <d3d11.h>
 #include <wrl/client.h>
 
+class Skeleton;
+
 namespace D3D11 {
-	/*============================================================
-	*	@class	: BufferManager
-	*	@brief	: 定数バッファ管理
-	*============================================================*/
+/*============================================================
+*	@class	: BufferManager
+*	@brief	: 定数バッファ管理
+*============================================================*/
 	class BufferManager final
 	{
 		template <typename T>
@@ -51,6 +54,13 @@ namespace D3D11 {
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mProjection{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mMaterial{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mLight{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mBones{};
+
+		static constexpr size_t MaxBones = 128;
+		struct BoneBuffer
+		{
+			DirectX::XMFLOAT4X4 Matrices[MaxBones]{};
+		};
 
 	public:
 		void Initialize();
@@ -67,6 +77,7 @@ namespace D3D11 {
 		void SetProjectionMatrix(DirectX::XMMATRIX projectionMatrix);
 		void SetMaterial(Element::MATERIAL material);
 		void SetLight(Element::LIGHT light);
+		void SetBoneMatrices(const Skeleton& skeleton);
 
 		// ゲッター
 		ID3D11Buffer* GetWorldBuffer() const { return _mWorld.Get(); }
@@ -74,5 +85,6 @@ namespace D3D11 {
 		ID3D11Buffer* GetProjectionBuffer() const { return _mProjection.Get(); }
 		ID3D11Buffer* GetMaterialBuffer() const { return _mMaterial.Get(); }
 		ID3D11Buffer* GetLightBuffer() const { return _mLight.Get(); }
+		ID3D11Buffer* GetBoneBuffer() const { return _mBones.Get(); }
 	};
 }

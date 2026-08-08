@@ -8,9 +8,8 @@
 *============================================================*/
 #include "DeviceManager.h"
 #include "SystemWindow.h"
-
 #include "Config.h"
-#include "DirectX11Config.h"
+#include "D3D11Config.h"
 
 bool D3D11::DeviceManager::Initialize()
 {

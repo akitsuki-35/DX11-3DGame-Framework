@@ -1,48 +1,56 @@
 ﻿/*============================================================
-*	@file	 : Renderer.h
-*	@brief	 : 描画クラス
+*	@file	 : SceneManager.h
+*	@brief	 : シーン管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/07/24
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
-#include "Config.h"
-#include <d3d11.h>
+#include "Scene.h"
+#include <memory>
 
 /*============================================================
-*	@class	: Renderer
-*	@brief	: 描画クラス
+*	@class	: SceneManager
+*	@brief	: シーン管理
 *============================================================*/
-class Renderer final
+class SceneManager final
 {
 /*--------------------------------------------------
 	Singleton用
 ----------------------------------------------------*/
 public:
-	static Renderer& getInstance() {
-		static Renderer instance;
+	static SceneManager& getInstance() {
+		static SceneManager instance;
 		return instance;
 	}
 
 private:
-	Renderer() = default;
-	Renderer(const Renderer&) = delete;
+	SceneManager() = default;
+	SceneManager(const SceneManager&) = delete;
 
-	Renderer& operator=(const Renderer&) = delete;
-	Renderer(Renderer&&) = delete;
+	SceneManager& operator=(const SceneManager&) = delete;
+	SceneManager(SceneManager&&) = delete;
 
-	Renderer& operator=(Renderer&&) = delete;
-	~Renderer() {};
+	SceneManager& operator=(SceneManager&&) = delete;
+	~SceneManager() {};
 
 /*--------------------------------------------------
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
+private:
+	std::unique_ptr<Scene> mCurrentScene{};
+	std::unique_ptr<Scene> mNextScene{};
+
 public:
 	void Initialize();
 	void Finalize();
-	void Begin();
-	void End();
-	void SetViewport(float width = Screen::WIDTH, float height = Screen::HEIGHT);
+	void Update();
+	void Draw();
+
+	template <class T>
+	void SceneChange() {
+		mNextScene = std::make_unique<T>();
+	}
 };

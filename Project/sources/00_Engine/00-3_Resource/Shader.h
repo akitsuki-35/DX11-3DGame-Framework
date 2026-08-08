@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/07/30
+*	@updated : 2026/08/04
 *============================================================*/
 #pragma once
 
@@ -19,8 +19,13 @@ class Shader
 {
 	friend class ShaderManager;
 private:
+	// 頂点シェーダー
 	Microsoft::WRL::ComPtr<ID3D11VertexShader> _mVertexShader{};
+	
+	// ピクセルシェーダー
 	Microsoft::WRL::ComPtr<ID3D11PixelShader> _mPixelShader{};
+
+	// 頂点レイアウト
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> _mLayout{};
 
 public:

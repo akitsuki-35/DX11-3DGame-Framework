@@ -4,18 +4,15 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/07/07
+*	@updated : 2026/08/04
 *============================================================*/
-#include "Main.h"
-#include "Application.h"
-
 // System
 #include "SystemWindow.h"
 #include "SystemTimer.h"
+#include "Application.h"
 
-#include "Manager.h"
+#include "SceneManager.h"
 #include "Debugger.h"
-#include <thread>
 
 // ImGui
 #include <ImGui/imgui_impl_win32.h>
@@ -39,7 +36,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	// ウィンドウ初期化
 	System::Window::getInstance().Initialize(hInstance);
 
-	Manager::getInstance().Initialize();
+	SceneManager::getInstance().Initialize();
 
 #if defined(DEBUG) || defined(_DEBUG)
 	//Debugger::GetInstance().Initialize(g_Window);
@@ -68,7 +65,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	//Debugger::GetInstance().Finalize();
 #endif // defined(DEBUG) || defined(_DEBUG)
 
-	Manager::getInstance().Finalize();	
+	SceneManager::getInstance().Finalize();	
 
 	return isQuit;
 }

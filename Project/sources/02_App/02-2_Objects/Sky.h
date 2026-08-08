@@ -1,15 +1,14 @@
 ﻿/*============================================================
-*	@file	 : sky.h
+*	@file	 : Sky.h
 *	@brief	 : スカイドーム
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/06/09
-*	@updated : 2026/06/09
+*	@updated : 2026/08/06
 *============================================================*/
-#ifndef SKY_H
-#define SKY_H
+#pragma once
 
-#include "gameobject.h"
+#include "GameObject.h"
 
 /*============================================================
 *	@class	: Sky
@@ -21,10 +20,6 @@ private:
 	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
 	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
 
-	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト
-	ID3D11VertexShader* _mVertexShader{}; // 頂点シェーダー
-	ID3D11PixelShader* _mPixelShader{}; // ピクセルシェーダー
-
 public:
 	Sky() = default;
 
@@ -33,5 +28,3 @@ public:
 	void Update() override;
 	void Draw() const override;
 };
-
-#endif // Sky_H

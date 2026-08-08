@@ -1,5 +1,5 @@
 ﻿/*============================================================
-*	@file	 : GraphicsTypes.h 
+*	@file	 : Elements.h 
 *	@brief	 : 構造体定義
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
@@ -25,6 +25,9 @@ namespace Element {
 		DirectX::XMFLOAT3 Normal;
 		DirectX::XMFLOAT4 Diffuse;
 		DirectX::XMFLOAT2 TexCoord;
+
+		uint32_t BoneIndices[4]{};
+		float BoneWeights[4]{};
 	};
 
 	/*--------------------------------------------------

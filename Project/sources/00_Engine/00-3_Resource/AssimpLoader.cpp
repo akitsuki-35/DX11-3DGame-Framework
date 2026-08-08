@@ -8,10 +8,14 @@
 *============================================================*/
 #include "AssimpLoader.h"
 #include "DeviceManager.h"
+#include "TextureManager.h"
+#include "AnimationManager.h"
 #include "Model.h"
+#include "Utility.h"
 #include <memory>
 #include <Windows.h>
 #include <wrl/client.h>
+#include <DirectXMath.h>
 #include <DirectXTex/DirectXTex.h>
 
 // assimp関連
@@ -23,9 +27,29 @@
 using namespace Element;
 using namespace DirectX;
 
+namespace
+{
+	DirectX::XMFLOAT4X4 convertMatrix(const aiMatrix4x4& m) {
+		DirectX::XMFLOAT4X4 out {
+			m.a1, m.b1, m.c1, m.d1,
+			m.a2, m.b2, m.c2, m.d2,
+			m.a3, m.b3, m.c3, m.d3,
+			m.a4, m.b4, m.c4, m.d4
+		};
+
+		//out._13 *= -1.0f;
+		//out._23 *= -1.0f;
+		//out._33 *= -1.0f;
+		//out._43 *= -1.0f;
+
+		return out;
+	}
+}
+
 /*--------------------------------------------------
 	デバッグ用関数 プロトタイプ宣言
 ----------------------------------------------------*/
+#ifndef NDEBUG
 namespace AssimpDebug {
 	void printMeshCount(const aiScene* scene);
 	void printVertexCount(const aiMesh* mesh);
@@ -34,7 +58,9 @@ namespace AssimpDebug {
 	void printConvertedIndex(const std::vector<uint32_t>& indices,
 		uint32_t startIndex, uint32_t indexNum);
 	void printTextureElement(const aiTexture* tex, unsigned int index);
+	void printAnimationElement(const aiScene* scene);
 }
+#endif
 
 bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 {
@@ -51,28 +77,45 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		aiProcess_GenSmoothNormals
 	);
 
-	if (!scene){
+	if (!scene) {
 		OutputDebugStringA(importer.GetErrorString());
 		return false;
 	}
 
-	// メッシュ読み込み
-	if (!loadMeshes(scene, model))
+	// ボーン階層登録
+	if (!AiAnimationLoader::loadBoneHierarchy(scene->mRootNode, model.mSkeleton, -1)) {
 		return false;
+	}
+
+	model.mSkeleton.UpdateBindPose();
+
+	// ボーン読み込み
+	if (!AiAnimationLoader::loadBones(scene, model.mSkeleton)) {
+		return false;
+	}
+
+	// メッシュ読み込み
+	if (!loadMeshes(scene, model, model.mSkeleton))
+		return false;
+
+	// アニメーション読み込み
+	if (scene->mAnimations) {
+		AiAnimationLoader::GenerateAnim(scene, model.mSkeleton);
+	}
 
 	// 埋め込みテクスチャ読み込み
 	if (!loadTextures(scene, model))
 		return false;
 
 	// マテリアル読み込み
-	loadMaterials(scene, model);
+	loadMaterials(scene, model, path);
 
 	mTextureMap.clear();
 
 	return true;
 }
 
-bool AssimpLoader::loadMeshes(const aiScene* scene, Model& model)
+bool AssimpLoader::loadMeshes(const aiScene* scene, Model& model, const Skeleton& skeleton)
 {
 	for (unsigned int m = 0; m < scene->mNumMeshes; ++m) {
 
@@ -90,6 +133,53 @@ bool AssimpLoader::loadMeshes(const aiScene* scene, Model& model)
 		----------------------------------------------------*/
 		for (unsigned int v = 0; v < mesh->mNumVertices; ++v) {
 			vertices.push_back(convertVertex(mesh, v));
+		}
+
+		/*--------------------------------------------------
+			頂点ウェイト取得
+		----------------------------------------------------*/
+		for (UINT boneIndex = 0; boneIndex < mesh->mNumBones; boneIndex++) {
+			const aiBone* aiBone = mesh->mBones[boneIndex];
+
+			int skeletonIndex = skeleton.FindBone(aiBone->mName.C_Str());
+
+			if (skeletonIndex < 0) {
+				continue;
+			}
+
+			for (UINT weightIndex = 0; weightIndex < aiBone->mNumWeights; weightIndex++) {
+				UINT vertexId = aiBone->mWeights[weightIndex].mVertexId;
+
+				float weight = aiBone->mWeights[weightIndex].mWeight;
+
+				for (int slot = 0; slot < 4; slot++) {
+					if (vertices[vertexId].BoneWeights[slot] == 0.0f) {
+						vertices[vertexId].BoneIndices[slot] = static_cast<uint32_t>(skeletonIndex);
+
+						vertices[vertexId].BoneWeights[slot] = weight;
+
+						break;
+					}
+				}
+			}
+		}
+
+		// ウェイト正規化
+		for (auto& vertex : vertices)
+		{
+			float total =
+				vertex.BoneWeights[0] +
+				vertex.BoneWeights[1] +
+				vertex.BoneWeights[2] +
+				vertex.BoneWeights[3];
+
+			if (total > 0.0f)
+			{
+				for (int i = 0; i < 4; ++i)
+				{
+					vertex.BoneWeights[i] /= total;
+				}
+			}
 		}
 
 		/*--------------------------------------------------
@@ -171,6 +261,16 @@ Element::VERTEX3D AssimpLoader::convertVertex(const aiMesh* mesh, int v)
 		};
 	}
 
+	vertex.BoneIndices[0] = 0;
+	vertex.BoneIndices[1] = 0;
+	vertex.BoneIndices[2] = 0;
+	vertex.BoneIndices[3] = 0;
+
+	vertex.BoneWeights[0] = 0.0f;
+	vertex.BoneWeights[1] = 0.0f;
+	vertex.BoneWeights[2] = 0.0f;
+	vertex.BoneWeights[3] = 0.0f;
+
 	return vertex;
 }
 
@@ -227,7 +327,7 @@ bool AssimpLoader::loadTextures(const aiScene* scene, Model& model)
 	return true;
 }
 
-void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
+void AssimpLoader::loadMaterials(const aiScene* scene, Model& model, const std::string& modelPath)
 {
 	// マテリアル取得
 	for (unsigned int i = 0; i < scene->mNumMaterials; ++i) {
@@ -239,11 +339,32 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
 		aiString path{};
 
 		if (aiMat->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS) {
-			auto it = mTextureMap.find(path.C_Str());
 
-			if (it != mTextureMap.end()) {
-				material._Texture = it->second;
-				material.Material.TextureEnable = true;
+			if (scene->mNumTextures > 0) {
+				// 埋め込みテクスチャ取得
+				auto it = mTextureMap.find(path.C_Str());
+
+				if (it != mTextureMap.end()) {
+					material._Texture = it->second;
+					material.Material.TextureEnable = true;
+				}
+			}
+			else {
+				// mtlファイルからテクスチャ取得
+				std::filesystem::path dir = Utility::File::getDirectoryPath(modelPath.c_str());
+
+				// mtlファイル登録テクスチャ探索用パス
+				std::filesystem::path mtlTexPath = dir / path.C_Str();
+
+				// mtlファイル登録テクスチャをロード
+				material._Texture = TextureManager::getInstance().Load(mtlTexPath.string().c_str());
+
+				if (!material._Texture) {
+					return;
+				}
+				else {
+					material.Material.TextureEnable = true;
+				}
 			}
 		}
 
@@ -263,6 +384,197 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model)
 	}
 }
 
+/*--------------------------------------------------
+	アニメーション関連ロード
+----------------------------------------------------*/
+bool AssimpLoader::AiAnimationLoader::GenerateAnim(const aiScene* scene, Skeleton& skeleton)
+{
+	if (!loadAnimations(scene, skeleton)) {
+		return false;
+	}
+
+	return true;
+}
+
+bool AssimpLoader::AiAnimationLoader::loadBones(const aiScene* scene, Skeleton& skeleton)
+{
+	aiMatrix4x4 inverse = scene->mRootNode->mTransformation.Inverse();
+	skeleton.SetGlobalInverse(convertMatrix(inverse));
+
+	for (UINT i = 0; i < scene->mNumMeshes; i++)
+	{
+		const aiMesh* mesh = scene->mMeshes[i];
+
+		for (UINT j = 0; j < mesh->mNumBones; j++) {
+			const aiBone* aiBone = mesh->mBones[j];
+			std::string name = aiBone->mName.C_Str();
+
+			int index = skeleton.GetBoneIndex(name);
+			
+			if (index < 0) {
+				continue;
+			}
+			
+			Skeleton::Bone& bone = skeleton.GetBone(index);
+
+			XMMATRIX bindGlobal = XMLoadFloat4x4(&bone.BindGlobal);
+
+			XMMATRIX offset = XMMatrixInverse(nullptr, bindGlobal);
+
+			XMStoreFloat4x4(&bone.Offset, offset);
+		}
+	}
+
+	skeleton.Update();
+
+	return true;
+}
+
+bool AssimpLoader::AiAnimationLoader::loadBoneHierarchy(const aiNode* node, Skeleton& skeleton, int parentIndex)
+{
+	// ボーン階層取得
+	int currentIndex = parentIndex;
+
+	int boneIndex = skeleton.FindBone(node->mName.C_Str());
+
+	if (boneIndex == -1) {
+		Skeleton::Bone bone{};
+
+		bone.Name = node->mName.C_Str();
+		bone.BindLocal = convertMatrix(node->mTransformation);
+		bone.Local = bone.BindLocal;
+
+		boneIndex = skeleton.AddBone(bone);
+	}
+
+	auto& bone = skeleton.GetBone(boneIndex);
+
+	bone.ParentIndex = parentIndex;
+	bone.BindLocal = convertMatrix(node->mTransformation);
+	bone.Local = bone.BindLocal;
+
+	currentIndex = boneIndex;
+
+	for (UINT i = 0; i < node->mNumChildren; i++) {
+		loadBoneHierarchy(node->mChildren[i], skeleton, currentIndex);
+	}
+
+	//skeleton.UpdateBindPose();
+
+	return true;
+}
+
+bool AssimpLoader::AiAnimationLoader::loadAnimations(const aiScene* scene, const Skeleton& skeleton)
+{
+	if (scene->mNumAnimations == 0) {
+		return false;
+	}
+
+	for (UINT i = 0; i < scene->mNumAnimations; i++) {
+		auto animation = std::make_unique<Animation>();
+
+		loadAnimationClip(scene, skeleton, *animation, i);
+
+		// Managerに登録
+		std::string name = scene->mAnimations[i]->mName.C_Str();
+		AnimationManager::getInstance().Register(name, std::move(animation));
+	}
+
+	return true;
+}
+
+bool AssimpLoader::AiAnimationLoader::loadAnimationClip(const aiScene* scene, const Skeleton& skeleton, Animation& animation, UINT index)
+{
+	// アニメーションが存在しなければreturn
+	if (scene->mNumAnimations == 0) {
+		return false;
+	}
+
+	// 指定したアニメーションを取得
+	const aiAnimation* aiAnim = scene->mAnimations[index];
+
+	/*--------------------------------------------------
+		アニメーション全体情報登録
+	----------------------------------------------------*/
+	// 総再生時間
+	animation.mDuration = aiAnim->mDuration;
+
+	// 1秒あたりのTick数
+	animation.mTicksPerSecond = aiAnim->mTicksPerSecond != 0 ? aiAnim->mTicksPerSecond : 25.0;
+
+	// ボーンごとのアニメーションチャンネル取得
+	for (UINT channelIndex = 0; channelIndex < aiAnim->mNumChannels; channelIndex++) {
+		const aiNodeAnim* aiChannel = aiAnim->mChannels[channelIndex];
+
+		std::string boneName = aiChannel->mNodeName.C_Str();
+
+		// Assimpの名前に親階層が付いている場合を除去
+		size_t separator = boneName.find_last_of('|');
+
+		if (separator != std::string::npos) {
+			boneName = boneName.substr(separator + 1);
+		}
+
+		int boneIndex = skeleton.FindBone(boneName);
+
+		if (boneIndex == -1) {
+			continue;
+		}
+
+		Animation::Channel channel{};
+		channel.BoneIndex = boneIndex;
+
+		/*--------------------------------------------------
+			移動キー
+		----------------------------------------------------*/
+		for (UINT i = 0; i < aiChannel->mNumPositionKeys; i++) {
+			const aiVectorKey& key = aiChannel->mPositionKeys[i];
+
+			Animation::KeyPosition position{};
+
+			position.Time =	key.mTime;
+			position.Position = { key.mValue.x, key.mValue.y, key.mValue.z };
+
+			channel.Positions.push_back(position);
+		}
+
+		/*--------------------------------------------------
+			回転キー
+		----------------------------------------------------*/
+		for (UINT i = 0; i < aiChannel->mNumRotationKeys; i++) {
+			const aiQuatKey& key = aiChannel->mRotationKeys[i];
+
+			Animation::KeyRotation rotation{};
+
+			rotation.Time = key.mTime;
+			rotation.Rotation = { key.mValue.x, key.mValue.y, key.mValue.z, key.mValue.w };
+
+
+			channel.Rotations.push_back(rotation);
+		}
+
+		/*--------------------------------------------------
+			拡大縮小キー
+		----------------------------------------------------*/
+		for (UINT i = 0; i < aiChannel->mNumScalingKeys; i++) {
+			const aiVectorKey& key = aiChannel->mScalingKeys[i];
+
+			Animation::KeyScale scale{};
+
+			scale.Time = key.mTime;
+			scale.Scale = { key.mValue.x, key.mValue.y, key.mValue.z };
+
+			channel.Scales.push_back(scale);
+		}
+
+		// チャンネル情報登録
+		animation.AddChannel(channel);
+	}
+
+	return true;
+}
+
+#ifndef NDEBUG
 /*--------------------------------------------------
 	デバッグ用関数
 ----------------------------------------------------*/
@@ -365,3 +677,48 @@ void AssimpDebug::printTextureElement(const aiTexture* tex, unsigned int index)
 
 #endif
 }
+
+void AssimpDebug::printAnimationElement(const aiScene* scene)
+{
+#ifndef NDEBUG
+
+	std::string log = "----------printAnimationElement----------\n";
+
+	// シーン情報取得
+	log += std::format("Scene\n" " Meshes:{}\n" " Materials:{}\n" " Animations:{}\n",
+		scene->mNumMeshes, scene->mNumMaterials, scene->mNumAnimations).c_str();
+
+	// アニメーション情報取得
+	const aiAnimation* anim = scene->mAnimations[0];
+
+	log += std::format("Animation\n" "Name:{}\n" "Duration:{}\n" "TicksPerSecond:{}\n" "Channels:{}\n",
+		anim->mName.C_Str(), anim->mDuration, anim->mTicksPerSecond, anim->mNumChannels).c_str();
+
+	// チャンネル情報取得
+	for (UINT i = 0; i < anim->mNumChannels; i++)
+	{
+		auto channel = anim->mChannels[i];
+
+		log += std::format("Channel:{}\n", channel->mNodeName.C_Str()).c_str();
+	}
+
+	// キー情報取得
+	const aiNodeAnim* channel = anim->mChannels[0];
+
+	log += std::format("PositionKeys:{}\n" "RotationKeys:{}\n" "ScaleKeys:{}\n",
+		channel->mNumPositionKeys, channel->mNumRotationKeys, channel->mNumScalingKeys).c_str();
+
+	for (UINT i = 0; i < channel->mNumRotationKeys; i++)
+	{
+		auto& key = channel->mRotationKeys[i];
+
+		log += std::format("Time:{}\n" "Quat:{} {} {} {}\n",
+			key.mTime, key.mValue.x, key.mValue.y, key.mValue.z, key.mValue.w
+		).c_str();
+	}
+
+	OutputDebugStringA(log.c_str());
+
+#endif
+}
+#endif
