@@ -72,14 +72,11 @@ void Skeleton::updateSkinningMatrices()
         // グローバル行列取得
         DirectX::XMMATRIX global = DirectX::XMLoadFloat4x4(&bone.Global);
 
-        DirectX::XMFLOAT4X4 debugGlobal{};
-        DirectX::XMStoreFloat4x4(&debugGlobal, global);
-
         // オフセット行列取得
         DirectX::XMMATRIX offset = DirectX::XMLoadFloat4x4(&bone.Offset);
 
         // スキニング行列作成
-        DirectX::XMMATRIX skinning = globalInverse * global * offset;
+        DirectX::XMMATRIX skinning = global * offset;
 
         DirectX::XMStoreFloat4x4(&mSkinningMatrices[i], skinning);
     }
