@@ -52,21 +52,24 @@ Audio* AudioManager::Load(const char* audioPath)
 
 bool AudioManager::generateAudio(Audio& audio, const std::string& path)
 {
+	// ファイル拡張子を取得
 	std::string ext = Utility::File::getFileExtension(path);
 
+	// ファイル拡張子からオーディオ形式を取得
 	AudioType type = getType(ext);
 
+	// オーディオ形式に応じたロード処理
 	switch (type)
 	{
-	case AudioManager::AudioType::wav:
+	case AudioManager::AudioType::WAV:
 		return loadWav(audio, path);
 		break;
 	
-	case AudioManager::AudioType::mp3:
+	case AudioManager::AudioType::MP3:
 		return loadMp3(audio, path);
 		break;
 
-	case AudioManager::AudioType::ogg:
+	case AudioManager::AudioType::OGG:
 		return loadOgg(audio, path);
 		break;
 
@@ -79,14 +82,15 @@ bool AudioManager::generateAudio(Audio& audio, const std::string& path)
 
 AudioManager::AudioType AudioManager::getType(const std::string& ext)
 {
+	// ファイル拡張子からオーディオ形式を取得
 	if (ext == "wav") {
-		return AudioType::wav;
+		return AudioType::WAV;
 	}
 	else if (ext == "mp3") {
-		return AudioType::mp3;
+		return AudioType::MP3;
 	}
 	else if (ext == "ogg") {
-		return AudioType::ogg;
+		return AudioType::OGG;
 	}
 
 	return AudioType();
@@ -94,6 +98,8 @@ AudioManager::AudioType AudioManager::getType(const std::string& ext)
 
 bool AudioManager::loadWav(Audio& audio, const std::string& path)
 {
+	// wavファイル読み込み
+
 	HMMIO hmmio{ nullptr };
 	MMIOINFO mmioInfo = {};
 	MMCKINFO riffChunk = {}; // RIFFチャンク用
@@ -150,9 +156,13 @@ bool AudioManager::loadWav(Audio& audio, const std::string& path)
 
 bool AudioManager::loadMp3(Audio& audio, const std::string& path)
 {
-	mp3dec_t mp3d;
+	// wavファイル読み込み
+
+	// mp3デコーダ初期化
+	mp3dec_t mp3d{};
 	mp3dec_init(&mp3d);
 
+	// デコード
 	mp3dec_file_info_t info{};
 	int ret = mp3dec_load(&mp3d, path.c_str(), &info, nullptr, nullptr);
 
@@ -164,18 +174,22 @@ bool AudioManager::loadMp3(Audio& audio, const std::string& path)
 	audio.mPCM.resize(info.samples * sizeof(short));
 	memcpy(audio.mPCM.data(), info.buffer, audio.mPCM.size());
 
-	// フォーマット設定
-	audio.mFormat.wFormatTag = WAVE_FORMAT_PCM;
-	audio.mFormat.nChannels = info.channels;
-	audio.mFormat.nSamplesPerSec = info.hz;
-	audio.mFormat.wBitsPerSample = 16;
+	// フォーマット情報設定
+	audio.mFormat.wFormatTag = WAVE_FORMAT_PCM; // PCM固定
+	audio.mFormat.nChannels = info.channels; // チャンネル数
+	audio.mFormat.nSamplesPerSec = info.hz; // サンプリングレート
+	audio.mFormat.wBitsPerSample = 16; // 16bitPCM
 	audio.mFormat.nBlockAlign = (audio.mFormat.nChannels * audio.mFormat.wBitsPerSample) / 8;
 	audio.mFormat.nAvgBytesPerSec = audio.mFormat.nSamplesPerSec * audio.mFormat.nBlockAlign;
-	audio.mFormat.cbSize = 0;
+	audio.mFormat.cbSize = 0; // 拡張なし
 
+	// 総バイト数を取得
 	audio.mBytes = (UINT)audio.mPCM.size();
+	
+	// 総サンプル数算出
 	audio.mSamples = audio.mBytes / audio.mFormat.nBlockAlign;
 
+	// PCMバッファを解放
 	free(info.buffer);
 
 	return true;
@@ -183,35 +197,42 @@ bool AudioManager::loadMp3(Audio& audio, const std::string& path)
 
 bool AudioManager::loadOgg(Audio& audio, const std::string& path)
 {
-	int channels = 0;
-	int sampleRate = 0;
-	short* pcm = nullptr;
+	// wavファイル読み込み
 
+	int channels = 0; // チャンネル数
+	int sampleRate = 0; // サンプリングレート
+	short* pcm = nullptr; // stb_vorbisがmallocで返す16bitPCM
+
+	// デコード
 	int samples = stb_vorbis_decode_filename(path.c_str(), &channels, &sampleRate, &pcm);
 	
 	if (samples <= 0 || pcm == nullptr) {
 		return false;
 	}
 
-	// 総サンプル数を算出
+	// PCMの総サンプル数を算出
 	int total = samples * channels;
 
 	// PCMをコピー
 	audio.mPCM.resize(total * sizeof(short));
 	memcpy(audio.mPCM.data(), pcm, audio.mPCM.size());
 
-	// フォーマット設定
-	audio.mFormat.wFormatTag = WAVE_FORMAT_PCM;
-	audio.mFormat.nChannels = channels;
-	audio.mFormat.nSamplesPerSec = sampleRate;
-	audio.mFormat.wBitsPerSample = 16;
+	// フォーマット情報設定
+	audio.mFormat.wFormatTag = WAVE_FORMAT_PCM; // PCM固定
+	audio.mFormat.nChannels = channels; // チャンネル数
+	audio.mFormat.nSamplesPerSec = sampleRate; // サンプリングレート
+	audio.mFormat.wBitsPerSample = 16; // 16bitPCM
 	audio.mFormat.nBlockAlign = (channels * 16) / 8;
 	audio.mFormat.nAvgBytesPerSec = sampleRate * audio.mFormat.nBlockAlign;
-	audio.mFormat.cbSize = 0;
+	audio.mFormat.cbSize = 0; // 拡張なし
 
+	// 総バイト数を取得
 	audio.mBytes = (UINT)audio.mPCM.size();
+	
+	// サンプル数算出
 	audio.mSamples = audio.mBytes / audio.mFormat.nBlockAlign;
 
+	// stb_vorbisがmallocしたPCMを解放
 	free(pcm);
 
 	return true;

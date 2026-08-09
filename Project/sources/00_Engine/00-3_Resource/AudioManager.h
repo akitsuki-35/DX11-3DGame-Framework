@@ -44,9 +44,9 @@ private:
 	// オーディオ形式
 	enum class AudioType : char
 	{
-		wav,
-		mp3,
-		ogg
+		WAV,
+		MP3,
+		OGG
 	};
 
 private:

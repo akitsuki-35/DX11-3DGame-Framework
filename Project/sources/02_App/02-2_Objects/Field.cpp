@@ -11,6 +11,7 @@
 #include "MeshTypes.h"
 #include "AudioPlayer.h"
 #include "Utility.h"
+#include "input.h"
 
 using namespace MeshType;
 
@@ -26,6 +27,7 @@ void Field::Initialize()
 	drawable->LoadShader("Unlit");
 
 	AudioPlayer* bgm = AddComponent<AudioPlayer>(this)->LoadAudio("assets\\audio\\tukito_break_out_in_the_middle.ogg");
+	bgm->SetVolume(0.1f);
 	bgm->Play(true);
 }
 
@@ -36,6 +38,17 @@ void Field::Finalize()
 
 void Field::Update()
 {
+	if (Input::GetKeyTrigger('Z')) {
+		GameObject::GetComponent<AudioPlayer>()->Pause();
+	}
+	if (Input::GetKeyTrigger('X')) {
+		GameObject::GetComponent<AudioPlayer>()->Resume();
+	}
+	if (Input::GetKeyTrigger('C')) {
+		GameObject::GetComponent<AudioPlayer>()->Stop();
+	}
+
+
 	GameObject::Update();
 }
 

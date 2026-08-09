@@ -31,31 +31,42 @@ void AudioPlayer::InitializeMaster()
 
 void AudioPlayer::FinalizeMaster()
 {
+	// マスタリングボイス解放
 	if (mMasteringVoice) {
 		mMasteringVoice->DestroyVoice();
 		mMasteringVoice = nullptr;
 	}
 
+	// XAudio解放
 	if (mXaudio) {
 		mXaudio->Release();
 		mXaudio = nullptr;
 	}
 
+	// COM終了処理
 	CoUninitialize();
 }
 
 void AudioPlayer::Finalize()
 {
 	if (mSourceVoice) {
+		// 再生停止
 		mSourceVoice->Stop();
+
+		// バッファ解放
 		mSourceVoice->FlushSourceBuffers();
+		
+		// ボイス破棄
 		mSourceVoice->DestroyVoice();
+		
+		// nullptrで上書き
 		mSourceVoice = nullptr;
 	}
 }
 
 AudioPlayer* AudioPlayer::LoadAudio(const char* fileName)
 {
+	// オーディオファイルのロード
 	_mAudio = AudioManager::getInstance().Load(fileName);
 	assert(_mAudio);
 
@@ -68,24 +79,31 @@ AudioPlayer* AudioPlayer::LoadAudio(const char* fileName)
 
 void AudioPlayer::Play(bool isLoop)
 {
-	if (!_mAudio || !mSourceVoice) return;
+	if (!_mAudio || !mSourceVoice) {
+		return;
+	}
 
+	// バッファのクリア
 	mSourceVoice->Stop();
 	mSourceVoice->FlushSourceBuffers();
 
 	// バッファ設定
 	XAUDIO2_BUFFER buf{};
-	buf.AudioBytes = _mAudio->GetAudioBytes();
-	buf.pAudioData = _mAudio->GetPCM();
-	buf.PlayBegin = 0;
-	buf.PlayLength = _mAudio->GetSamples();
+	buf.AudioBytes = _mAudio->GetAudioBytes(); // PCM総バイト数
+	buf.pAudioData = _mAudio->GetPCM(); // PCMデータ先頭
+	buf.PlayBegin = 0; // 再生開始位置
+	buf.PlayLength = _mAudio->GetSamples(); // 再生サンプル数
 
+	// ループ再生設定
 	if (isLoop) {
 		buf.LoopBegin = 0;
 		buf.LoopLength = _mAudio->GetSamples();
 		buf.LoopCount = XAUDIO2_LOOP_INFINITE;
 	}
 
+	// バッファ登録
 	mSourceVoice->SubmitSourceBuffer(&buf);
+
+	// 再生
 	mSourceVoice->Start();
 }
