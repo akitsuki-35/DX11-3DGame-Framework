@@ -13,7 +13,7 @@
 #include "Game.h"
 #include "Title.h"
 #include "Scene.h"
-#include "Audio.h"
+#include "AudioPlayer.h"
 
 /*------------------------------------------------------------
 	初期化
@@ -22,7 +22,7 @@ void SceneManager::Initialize()
 {
 	D3D11::Graphics::getInstance().Initialize();
 	Input::Initialize();
-	Audio::InitMaster();
+	AudioPlayer::InitializeMaster();
 
 	SceneChange<Game>();
 	mCurrentScene = std::move(mNextScene);
@@ -46,7 +46,7 @@ void SceneManager::Finalize()
 		mCurrentScene->Initialize();
 	}
 
-	Audio::UninitMaster();
+	AudioPlayer::FinalizeMaster();
 	Input::Finalize();
 	D3D11::Graphics::getInstance().Finalize();
 }

@@ -11,7 +11,7 @@
 #include "ModelRenderer.h"
 #include "Animator.h"
 #include "Game.h"
-#include "Audio.h"
+#include "AudioPlayer.h"
 #include "Camera.h"
 #include "Bullet.h"
 
@@ -39,8 +39,7 @@ void Player::Initialize()
 	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\Wolf.fbx")->LoadShader("Unlit");
 	AddComponent<Animator>(this)->Set("AnimalArmature|Idle");
 
-	mSE = AddComponent<Audio>(this);
-	mSE->Load("assets\\audio\\wan.wav");
+	mSE = AddComponent<AudioPlayer>(this)->LoadAudio("assets\\audio\\wan.wav");
 }
 
 void Player::Finalize()

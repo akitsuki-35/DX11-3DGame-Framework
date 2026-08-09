@@ -50,10 +50,13 @@ public:
         return index;
     }
 
+    // ボーン取得
     int FindBone(const std::string& name) const;
 
     void Update();
-    void UpdateBindPose();
+
+    // バインドポーズ計算
+    void CalculateBindPose();
 
     void SetGlobalInverse(const DirectX::XMFLOAT4X4& matrix){ mGlobalInverse = matrix; }
 
@@ -71,7 +74,7 @@ public:
     const std::vector<DirectX::XMFLOAT4X4>& GetSkinningMatrices() const { return mSkinningMatrices; }
 
 private:
-    void updateBindGlobal(int index);
+    void calculateBindGlobal(int index);
     void updateGlobal(int index);
     void updateSkinningMatrices();
 };

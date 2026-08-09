@@ -9,7 +9,8 @@
 #include "Field.h"
 #include "SpriteRenderer.h"
 #include "MeshTypes.h"
-#include "Audio.h"
+#include "AudioPlayer.h"
+#include "Utility.h"
 
 using namespace MeshType;
 
@@ -24,8 +25,7 @@ void Field::Initialize()
 
 	drawable->LoadShader("Unlit");
 
-	Audio* bgm = AddComponent<Audio>(this);
-	bgm->Load("assets\\audio\\bgm.wav");
+	AudioPlayer* bgm = AddComponent<AudioPlayer>(this)->LoadAudio("assets\\audio\\tukito_break_out_in_the_middle.ogg");
 	bgm->Play(true);
 }
 

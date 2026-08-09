@@ -43,18 +43,21 @@ private:
     bool setSkeleton() {
         Model* model{};
 
+        // オブジェクトのModelRendererコンポーネント取得
         ModelRenderer* renderer = _mOwner->GetComponent<ModelRenderer>();
 
         if (!renderer) {
             return false;
         }
 
+        // ModelRendererのモデル取得
         model = renderer->GetModel();
 
         if (!model) {
             return false;
         }
 
+        // モデルからスケルトンを取得
         mSkeleton = &model->GetSkeleton();
 
         return true;

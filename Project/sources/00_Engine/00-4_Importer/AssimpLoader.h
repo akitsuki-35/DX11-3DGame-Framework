@@ -54,7 +54,7 @@ private:
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 private:
-	// テクスチャ検索用
+	// 埋め込みテクスチャ検索用マップ
 	std::unordered_map<std::string, Texture*> mTextureMap{};
 
 public:
@@ -62,6 +62,12 @@ public:
 	bool GenerateModel(Model& model, const std::string& path);
 
 private:
+	// ボーン取得
+	bool loadBones(const aiNode* node, Skeleton& skeleton, int parentIndex);
+
+	// ボーンのオフセット行列作成
+	bool calculateBoneOffsets(const aiScene* scene, Skeleton& skeleton);
+
 	// メッシュ生成
 	bool loadMeshes(const aiScene* scene, Model& model, const Skeleton& skeleton);
 
@@ -79,23 +85,16 @@ private:
 
 	/*============================================================
 	*	@class	: AiAnimationLoader
-	*	@brief	: アニメーション関連取得
+	*	@brief	: アニメーション読み込み
 	*============================================================*/
 	class AiAnimationLoader
 	{
 		friend AssimpLoader;
-	public:
-		static bool GenerateAnim(const aiScene* scene, Skeleton& skeleton);
-
 	private:
-		// ボーン取得
-		static bool loadBones(const aiScene* scene, Skeleton& skeleton);
-
-		// ボーン階層取得
-		static bool loadBoneHierarchy(const aiNode* node, Skeleton& skeleton, int parentIndex);
-
 		// アニメーション取得
 		static bool loadAnimations(const aiScene* scene, const Skeleton& skeleton);
+
+		// 単一アニメーション取得
 		static bool loadAnimationClip(const aiScene* scene, const Skeleton& skeleton,
 			Animation& animation,UINT index);
 	};

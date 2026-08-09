@@ -30,6 +30,9 @@ namespace Utility
 
 		// ディレクトリのパス取得
 		std::filesystem::path getDirectoryPath(const char* filePath);
+
+		// ファイル拡張子取得
+		std::string getFileExtension(const std::string& filePath);
 	}
 
 /*--------------------------------------------------

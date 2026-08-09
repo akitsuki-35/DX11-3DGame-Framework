@@ -34,12 +34,10 @@ private:
 		Texture* _Texture{};
 	};
 
-	std::vector<ModelMesh> mMeshes{};
-	std::vector<MATERIAL> mMaterials{};
-	Skeleton mSkeleton{};
-
-	// 埋め込みテクスチャ
-	std::vector<std::unique_ptr<Texture>> mTextures{};
+	std::vector<ModelMesh> mMeshes{}; // メッシュ
+	std::vector<MATERIAL> mMaterials{}; // マテリアル
+	Skeleton mSkeleton{}; // スケルトン
+	std::vector<std::unique_ptr<Texture>> mTextures{}; // 埋め込みテクスチャ
 
 public:
 	void AddMesh(ModelMesh&& mesh){ mMeshes.emplace_back(std::move(mesh)); }

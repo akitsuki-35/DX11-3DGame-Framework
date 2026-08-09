@@ -67,6 +67,20 @@ std::filesystem::path Utility::File::getDirectoryPath(const char* filePath)
 	return directory;
 }
 
+std::string Utility::File::getFileExtension(const std::string& filePath)
+{
+	// ファイル拡張子取得
+	auto pos = filePath.find_last_of('.');
+
+	std::string ext = filePath.substr(pos + 1);
+	
+	for (auto& c : ext) {
+		c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+	}
+
+	return ext;
+}
+
 std::wstring Utility::String::toWideString(const std::string& string)
 {
 	// std::string→std::wstringに変換

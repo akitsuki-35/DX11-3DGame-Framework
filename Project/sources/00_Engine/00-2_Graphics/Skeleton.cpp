@@ -28,10 +28,12 @@ void Skeleton::Update()
         Bone& bone = mBones[i];
 
         if (bone.ParentIndex == -1) {
+            // グローバル行列更新
             updateGlobal(static_cast<int>(i));
         }
     }
 
+    // スキニング行列更新
     updateSkinningMatrices();
 }
 
@@ -39,16 +41,20 @@ void Skeleton::updateGlobal(int index)
 {
     Bone& bone = mBones[index];
     
+    // ボーンのローカル行列取得
     DirectX::XMMATRIX local = DirectX::XMLoadFloat4x4(&bone.Local);
 
+    // 親ボーンの有無を検索
     if (bone.ParentIndex == -1) {
+        // 親がいない場合はLocal = Global
         DirectX::XMStoreFloat4x4(&bone.Global, local);
     }
     else {
-        DirectX::XMMATRIX parent = DirectX::XMLoadFloat4x4(&mBones[bone.ParentIndex].Global);
-
-        DirectX::XMMATRIX global = parent * local;
-
+        // 親のグローバル行列取得
+        DirectX::XMMATRIX parentGlobal = DirectX::XMLoadFloat4x4(&mBones[bone.ParentIndex].Global);
+        
+        // 子Global = 親Global * 子Local
+        DirectX::XMMATRIX global = parentGlobal * local;
         DirectX::XMStoreFloat4x4(&bone.Global, global);
     }
 
@@ -60,33 +66,39 @@ void Skeleton::updateGlobal(int index)
     }
 }
 
-void Skeleton::UpdateBindPose()
+void Skeleton::CalculateBindPose()
 {
-    for (size_t i = 0; i < mBones.size(); i++)
-    {
-        if (mBones[i].ParentIndex == -1)
-            updateBindGlobal(static_cast<int>(i));
+    for (size_t i = 0; i < mBones.size(); i++) {
+        if (mBones[i].ParentIndex == -1) {
+            // BindGlobalを計算
+            calculateBindGlobal(static_cast<int>(i));
+        }
     }
 }
 
-void Skeleton::updateBindGlobal(int index)
+void Skeleton::calculateBindGlobal(int index)
 {
     Bone& bone = mBones[index];
 
+    // BindLocal取得
     XMMATRIX local = XMLoadFloat4x4(&bone.BindLocal);
 
     if (bone.ParentIndex == -1) {
+        // ルートボーンのBindGlobal = BindLocal
         XMStoreFloat4x4(&bone.BindGlobal, local);
     }
     else {
-        XMMATRIX parent = XMLoadFloat4x4(&mBones[bone.ParentIndex].BindGlobal);
-        XMStoreFloat4x4(&bone.BindGlobal, parent * local);
+        // 親ボーンのBindGlobal取得
+        XMMATRIX parentBindGlobal = XMLoadFloat4x4(&mBones[bone.ParentIndex].BindGlobal);
+
+        // 子BindGlobal = 親BindGlobal * 子BindLocal
+        XMStoreFloat4x4(&bone.BindGlobal, parentBindGlobal * local);
     }
 
     // 子ボーンを更新
     for (size_t i = 0; i < mBones.size(); i++) {
         if (mBones[i].ParentIndex == index)
-            updateBindGlobal(static_cast<int>(i));
+            calculateBindGlobal(static_cast<int>(i));
     }
 }
 
@@ -94,12 +106,13 @@ void Skeleton::updateSkinningMatrices()
 {
     mSkinningMatrices.resize(mBones.size());
 
+    // モデル全体の逆行列を取得
     DirectX::XMMATRIX globalInverse = XMLoadFloat4x4(&mGlobalInverse);
 
     for (size_t i = 0; i < mBones.size(); ++i) {
         const Bone& bone = mBones[i];
 
-        // グローバル行列取得
+        // アニメーション適用後のグローバル行列を取得
         DirectX::XMMATRIX global = DirectX::XMLoadFloat4x4(&bone.Global);
 
         // オフセット行列取得
@@ -107,7 +120,6 @@ void Skeleton::updateSkinningMatrices()
 
         // スキニング行列作成
         DirectX::XMMATRIX skinning = globalInverse * global * offset;
-
         DirectX::XMStoreFloat4x4(&mSkinningMatrices[i], skinning);
     }
 }
