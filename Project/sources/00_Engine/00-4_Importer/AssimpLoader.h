@@ -90,6 +90,7 @@ private:
 	class AiAnimationLoader
 	{
 		friend AssimpLoader;
+
 	private:
 		// アニメーション取得
 		static bool loadAnimations(const aiScene* scene, const Skeleton& skeleton);

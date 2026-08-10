@@ -30,10 +30,27 @@ public:
 
     // 回転を補間
     static Quaternion Slerp(const Quaternion& a, const Quaternion& b, float t) {
+        t = (t < 0.0f) ? 0.0f : ((t > 1.0f) ? 1.0f : t);
+
         // 球面補間
         DirectX::XMVECTOR qa = DirectX::XMVectorSet(a.x, a.y, a.z, a.w);
         DirectX::XMVECTOR qb = DirectX::XMVectorSet(b.x, b.y, b.z, b.w);
+
+        // 正規化
+        qa = DirectX::XMQuaternionNormalize(qa);
+        qb = DirectX::XMQuaternionNormalize(qb);
+
+        // 内積を計算
+        DirectX::XMVECTOR dotV = DirectX::XMQuaternionDot(qa, qb);
+        float dot;
+        DirectX::XMStoreFloat(&dot, dotV);
+
+        if (dot < 0.0f) {
+            qb = DirectX::XMVectorNegate(qb);
+        }
+
         DirectX::XMVECTOR result = DirectX::XMQuaternionSlerp(qa, qb, t);
+        result = DirectX::XMQuaternionNormalize(result);
 
         DirectX::XMFLOAT4 value{};
         DirectX::XMStoreFloat4(&value, result);

@@ -529,13 +529,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="sources\03_HLSL\common.hlsl">
+    <FxCompile Include="sources\03_HLSL\Common.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="sources\03_HLSL\unlitTexturePS.hlsl">
+    <FxCompile Include="sources\03_HLSL\UnlitPS.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="sources\03_HLSL\unlitTextureVS.hlsl">
+    <FxCompile Include="sources\03_HLSL\UnlitVS.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
   </ItemGroup>

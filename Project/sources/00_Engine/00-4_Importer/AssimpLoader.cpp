@@ -81,6 +81,9 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		return false;
 	}
 
+	// バインドポーズ計算
+	model.mSkeleton.CalculateBindPose();
+
 	// ボーンのオフセット行列作成
 	if (!calculateBoneOffsets(scene, model.mSkeleton)) {
 		return false;
@@ -133,17 +136,10 @@ bool AssimpLoader::loadBones(const aiNode* node, Skeleton& skeleton, int parentI
 	auto& bone = skeleton.GetBone(boneIndex);
 	bone.ParentIndex = parentIndex;
 
-	// ローカル行列再設定
-	bone.BindLocal = convertMatrix(node->mTransformation);
-	bone.Local = bone.BindLocal;
-
 	// 子ノードを処理
 	for (UINT i = 0; i < node->mNumChildren; i++) {
 		loadBones(node->mChildren[i], skeleton, boneIndex);
 	}
-
-	// バインドポーズ計算
-	skeleton.CalculateBindPose();
 
 	return true;
 }
@@ -177,6 +173,8 @@ bool AssimpLoader::calculateBoneOffsets(const aiScene* scene, Skeleton& skeleton
 			XMMATRIX bindGlobal = XMLoadFloat4x4(&bone.BindGlobal);
 
 			// オフセット計算
+			bone.Offset = convertMatrix(aiBone->mOffsetMatrix);
+			
 			XMMATRIX offset = XMMatrixInverse(nullptr, bindGlobal);
 			XMStoreFloat4x4(&bone.Offset, offset);
 		}
@@ -232,7 +230,7 @@ bool AssimpLoader::loadMeshes(const aiScene* scene, Model& model, const Skeleton
 
 				// BoneWeightsとBoneIndicesを登録
 				for (int slot = 0; slot < 4; slot++) {
-					if (vertices[vertexId].BoneWeights[slot] == 0.0f) {
+					if (vertices[vertexId].BoneWeights[slot] == 0.0f && vertices[vertexId].BoneIndices[slot] == 0) {
 						vertices[vertexId].BoneIndices[slot] = static_cast<uint32_t>(skeletonIndex);
 
 						vertices[vertexId].BoneWeights[slot] = weight;
@@ -519,13 +517,6 @@ bool AssimpLoader::AiAnimationLoader::loadAnimationClip(const aiScene* scene, co
 		// ボーン名取得
 		std::string boneName = aiChannel->mNodeName.C_Str();
 
-		// 取得した名前の親階層を消去
-		size_t separator = boneName.find_last_of('|');
-
-		if (separator != std::string::npos) {
-			boneName = boneName.substr(separator + 1);
-		}
-
 		// ボーンインデックス取得
 		int boneIndex = skeleton.FindBone(boneName);
 
@@ -545,7 +536,7 @@ bool AssimpLoader::AiAnimationLoader::loadAnimationClip(const aiScene* scene, co
 
 			Animation::KeyPosition position{};
 
-			position.Time =	key.mTime;
+			position.Time = static_cast<double>(key.mTime);
 			position.Position = { key.mValue.x, key.mValue.y, key.mValue.z };
 
 			channel.Positions.push_back(position);
@@ -559,7 +550,7 @@ bool AssimpLoader::AiAnimationLoader::loadAnimationClip(const aiScene* scene, co
 
 			Animation::KeyRotation rotation{};
 
-			rotation.Time = key.mTime;
+			rotation.Time = static_cast<double>(key.mTime);
 			rotation.Rotation = { key.mValue.x, key.mValue.y, key.mValue.z, key.mValue.w };
 
 
@@ -574,7 +565,7 @@ bool AssimpLoader::AiAnimationLoader::loadAnimationClip(const aiScene* scene, co
 
 			Animation::KeyScale scale{};
 
-			scale.Time = key.mTime;
+			scale.Time = static_cast<double>(key.mTime);
 			scale.Scale = { key.mValue.x, key.mValue.y, key.mValue.z };
 
 			channel.Scales.push_back(scale);
@@ -587,10 +578,10 @@ bool AssimpLoader::AiAnimationLoader::loadAnimationClip(const aiScene* scene, co
 	return true;
 }
 
-#ifndef NDEBUG
 /*--------------------------------------------------
 	デバッグ用関数
 ----------------------------------------------------*/
+#ifndef NDEBUG
 void AssimpDebug::printMeshCount(const aiScene* scene)
 {
 #ifndef NDEBUG

@@ -162,9 +162,13 @@ public:
 		補間
 	------------------------------------------------------------*/
 	static Vector3 Lerp(const Vector3& a, const Vector3& b, float t) {
-		return Vector3(a.x + (b.x - a.x) * t,
-			a.y + (b.y - a.y) * t,
-			a.z + (b.z - a.z) * t);
+		t = (t < 0.0f) ? 0.0f : ((t > 1.0f) ? 1.0f : t);
+
+		return Vector3(
+			a.x * (1.0f - t) + b.x * t,
+			a.y * (1.0f - t) + b.y * t,
+			a.z * (1.0f - t) + b.z * t
+		);
 	}
 	
 	/*------------------------------------------------------------

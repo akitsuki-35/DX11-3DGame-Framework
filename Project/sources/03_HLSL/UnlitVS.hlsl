@@ -1,17 +1,20 @@
-
-#include "common.hlsl"
-
+/*------------------------------------------------------------
+	ライトなし頂点シェーダー
+------------------------------------------------------------*/
+#include "Common.hlsl"
 
 void main(in VS_IN In, out PS_IN Out)
 {
+    // ボーンウェイト取得
     float weight =
         In.BoneWeights.x +
         In.BoneWeights.y +
         In.BoneWeights.z +
         In.BoneWeights.w;
-
+    
     float4 skinnedPosition = float4(0.0f, 0.0f, 0.0f, 0.0f);
 
+    // スキニング行列適用
     if (weight > 0.0f)
     {
         skinnedPosition += mul(BoneMatrices[In.BoneIndices.x], In.Position) * In.BoneWeights.x;
@@ -31,9 +34,4 @@ void main(in VS_IN In, out PS_IN Out)
     Out.Position = mul(skinnedPosition, wvp);
     Out.TexCoord = In.TexCoord;
     Out.Diffuse = In.Diffuse * Material.Diffuse;
-
-	//Out.Position = mul(In.Position, wvp);
-	//Out.TexCoord = In.TexCoord;
-	//Out.Diffuse = In.Diffuse * Material.Diffuse;
 }
-

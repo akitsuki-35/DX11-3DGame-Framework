@@ -41,16 +41,16 @@ void Game::Initialize()
 
 	AddGameObject<Camera>();
 
-	//AddGameObject<Sky>();
+	AddGameObject<Sky>();
 
 	AddGameObject<Field>();
 	AddGameObject<Player>();
-	//AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
-	//AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
-	//AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
-	//Box* box = AddGameObject<Box>();
-	//box->SetPosition({ 0.0f, 0.0f, -5.0f });
-	//box->SetScale({ 1.0f, 1.0f, 1.0f });
+	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
+	Box* box = AddGameObject<Box>();
+	box->SetPosition({ 0.0f, 0.0f, -5.0f });
+	box->SetScale({ 1.0f, 1.0f, 1.0f });
 
 	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 5.0f });
 
