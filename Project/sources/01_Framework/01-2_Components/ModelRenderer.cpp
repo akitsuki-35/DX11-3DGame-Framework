@@ -13,6 +13,8 @@ void ModelRenderer::Draw() const
 {
 	if (!_mModel) return;
 
+    Bind();
+
     // ワールド行列セット
 	D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());
 
@@ -35,7 +37,7 @@ void ModelRenderer::Draw() const
                 // 埋め込みテクスチャまたは外部テクスチャが存在
                 material.TextureEnable = true;
             }
-            else if (_mModel->mMaterials[subset.MaterialIndex].Material.TextureEnable) {
+            else {
                 // 埋め込みテクスチャまたは外部テクスチャが存在しない
                 material.TextureEnable = false;
             }
@@ -45,12 +47,16 @@ void ModelRenderer::Draw() const
 
             if (mTextures.Diffuse)
             {
-                // 埋め込みテクスチャまたは外部テクスチャを使用して描画
+                // 外部テクスチャを使用して描画
                 mTextures.Diffuse->Bind();
             }
             else if (material.TextureEnable) {
-                // ランバートカラーのみで描画
+                // 埋め込みテクスチャを使用して描画
                 _mModel->mMaterials[subset.MaterialIndex]._Texture->Bind();
+            }
+            else {
+                Texture* dummy = TextureManager::getInstance().Load("assets\\textures\\Common\\white.png");
+                dummy->Bind();
             }
 
             mesh.Draw(subset);

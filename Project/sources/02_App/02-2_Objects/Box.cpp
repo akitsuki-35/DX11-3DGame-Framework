@@ -20,7 +20,7 @@ void Box::Initialize()
 	);
 
 	// コンポーネント読込
-	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\box.obj")->LoadShader("Unlit");
+	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\box.obj")->LoadShader("Directional");
 
 	// シェーダー読込
 }

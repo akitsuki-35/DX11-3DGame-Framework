@@ -33,7 +33,7 @@ void Player::Initialize()
 
 	// コンポーネント読込
 	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\Test.fbx")->
-		LoadTexture("sky.jpg", ModelRenderer::TextureType::Diffuse)->LoadShader("Unlit");
+		LoadShader("Directional");
 	AddComponent<Animator>(this)->Set("Take 001");
 
 	mSE = AddComponent<AudioPlayer>(this)->LoadAudio("assets\\audio\\wan.wav");

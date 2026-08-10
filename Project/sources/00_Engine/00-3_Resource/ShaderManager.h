@@ -71,5 +71,8 @@ namespace ShaderSet {
 	inline void initialize() {
 		ShaderManager::getInstance().Register("Unlit",
 			"assets\\shaders\\UnlitVS.cso", "assets\\shaders\\UnlitPS.cso");
+
+		ShaderManager::getInstance().Register("Directional",
+			"assets\\shaders\\DirectionalVS.cso", "assets\\shaders\\DirectionalPS.cso");
 	}
 }

@@ -4,6 +4,7 @@
 /*------------------------------------------------------------
 	構造体定義
 ------------------------------------------------------------*/
+// VS構造体
 struct VS_IN
 {
     float4 Position : POSITION0;
@@ -15,13 +16,17 @@ struct VS_IN
     float4 BoneWeights : BLENDWEIGHT;
 };
 
+// PS構造体
 struct PS_IN
 {
     float4 Position : SV_POSITION;
+    float4 WorldPosition : POSITION0;
+    float4 Normal : NORMAL0;
     float4 Diffuse : COLOR0;
     float2 TexCoord : TEXCOORD0;
 };
 
+// マテリアル
 struct MATERIAL
 {
     float4 Ambient;
@@ -33,6 +38,7 @@ struct MATERIAL
     float2 Dummy;
 };
 
+// ライト
 struct LIGHT
 {
     int Enable;

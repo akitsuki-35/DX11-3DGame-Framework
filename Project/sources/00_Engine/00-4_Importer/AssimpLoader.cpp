@@ -375,6 +375,13 @@ bool AssimpLoader::loadTextures(const aiScene* scene, Model& model)
 	for (unsigned int i = 0; i < scene->mNumTextures; ++i) {
 		const aiTexture* tex = scene->mTextures[i];
 
+		// キャッシュが存在すれば返す
+		auto it = mTextureMap.find(tex->mFilename.C_Str());
+
+		if (it != mTextureMap.end()) {
+			model.mTextures.emplace_back(it->second);
+		}
+
 		// テクスチャ生成;
 		auto texture = std::make_unique<Texture>();
 

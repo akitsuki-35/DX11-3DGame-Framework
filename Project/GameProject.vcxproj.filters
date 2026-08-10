@@ -538,6 +538,12 @@
     <FxCompile Include="sources\03_HLSL\UnlitVS.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
+    <FxCompile Include="sources\03_HLSL\DirectionalPS.hlsl">
+      <Filter>03_HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\DirectionalVS.hlsl">
+      <Filter>03_HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sources\04_External\include\ImGui\imgui.ini">
