@@ -264,6 +264,9 @@
     <ClCompile Include="sources\00_Engine\00-3_Resource\AudioManager.cpp">
       <Filter>00_Engine\00-3_Resource\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp">
+      <Filter>00_Engine\00-4_Importer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -526,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="sources\04_External\include\minimp3\minimp3_ex.h">
       <Filter>04_External\minimp3</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-4_Importer\FontLoader.h">
+      <Filter>00_Engine\00-4_Importer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -176,7 +176,7 @@ bool AudioManager::loadMp3(Audio& audio, const std::string& path)
 
 	// フォーマット情報設定
 	audio.mFormat.wFormatTag = WAVE_FORMAT_PCM; // PCM固定
-	audio.mFormat.nChannels = info.channels; // チャンネル数
+	audio.mFormat.nChannels = static_cast<WORD>(info.channels); // チャンネル数
 	audio.mFormat.nSamplesPerSec = info.hz; // サンプリングレート
 	audio.mFormat.wBitsPerSample = 16; // 16bitPCM
 	audio.mFormat.nBlockAlign = (audio.mFormat.nChannels * audio.mFormat.wBitsPerSample) / 8;
@@ -219,10 +219,10 @@ bool AudioManager::loadOgg(Audio& audio, const std::string& path)
 
 	// フォーマット情報設定
 	audio.mFormat.wFormatTag = WAVE_FORMAT_PCM; // PCM固定
-	audio.mFormat.nChannels = channels; // チャンネル数
+	audio.mFormat.nChannels = static_cast<WORD>(channels); // チャンネル数
 	audio.mFormat.nSamplesPerSec = sampleRate; // サンプリングレート
 	audio.mFormat.wBitsPerSample = 16; // 16bitPCM
-	audio.mFormat.nBlockAlign = (channels * 16) / 8;
+	audio.mFormat.nBlockAlign = static_cast<WORD>((channels * 16) / 8);
 	audio.mFormat.nAvgBytesPerSec = sampleRate * audio.mFormat.nBlockAlign;
 	audio.mFormat.cbSize = 0; // 拡張なし
 
