@@ -7,7 +7,10 @@
 *	@updated : 2026/08/11
 *============================================================*/
 #include "FontLoader.h"
+#include "Utility.h"
 #include <Windows.h>
+
+using namespace Microsoft::WRL;
 
 //const void FontRenderer::Initialize(HWND hWnd)
 //{
@@ -46,57 +49,88 @@
 //	SAFE_RELEASE(pBackBuffer);
 //}
 
-bool FontLoader::Load(IDWriteFactory* factory, const std::string& path, Font& font)
+IDWriteFactory* FontLoader::Initialize()
 {
-	// フォントファイル読み込み
-	HANDLE file = CreateFileA(path.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, nullptr);
-	
-	if (file == INVALID_HANDLE_VALUE) { 
+	// ファクトリ生成
+	ComPtr<IDWriteFactory> factory;
+	HRESULT hr = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(IDWriteFactory),
+		reinterpret_cast<IUnknown**>(factory.GetAddressOf()));
+	if (FAILED(hr)) {
+		return nullptr;
+	}
+
+	return factory.Get();
+}
+
+bool FontLoader::Load(IDWriteFactory* factory, Font& font, const char* fontPath)
+{
+	if (!factory || !fontPath) {
 		return false;
 	}
 
-	DWORD size = GetFileSize(file, nullptr);
-	std::vector<BYTE> buffer(size);
+	// パスをstd::wstringに変換
+	const std::wstring wide = Utility::String::toWideString(fontPath);
 
-	DWORD readBytes{};
-	
-	if (!ReadFile(file, buffer.data(), size, &readBytes, nullptr)) {
+	// フォントファイル取得
+	ComPtr<IDWriteFontFile> fontFile{};
+	HRESULT hr = factory->CreateFontFileReference(wide.c_str(), nullptr, fontFile.GetAddressOf());
+	if (FAILED(hr)) {
 		return false;
 	}
 
-	CloseHandle(file);
-
-	// ストリームとローダーを生成
-	auto* stream = new IDWriteStream(buffer.data(), buffer.size());
-	auto* loader = new IDWriteLoader(stream);
-
-	// DirectWriteにローダーを登録
-	factory->RegisterFontFileLoader(loader);
-
-	// フォントファイル生成
-	IDWriteFontFile* fontFile = nullptr;
-	
-	HRESULT hr = factory->CreateCustomFontFileReference(nullptr, 0, loader, &fontFile);
-	if (FAILED(hr)) { 
-		return false;
-	}
-
-	//  FontFace(フォント実体)生成
-	IDWriteFontFace* fontFace = nullptr;
-	hr = factory->CreateFontFace(DWRITE_FONT_FACE_TYPE_TRUETYPE, 1, &fontFile, 0,
-		DWRITE_FONT_SIMULATIONS_NONE, &fontFace);
-	
+	// フォントフェース作成
+	IDWriteFontFile* fontFileArray[] = { fontFile.Get() };
+	hr = factory->CreateFontFace(DWRITE_FONT_FACE_TYPE_TRUETYPE, 1, fontFileArray,
+		0, DWRITE_FONT_SIMULATIONS_NONE, font.Face.ReleaseAndGetAddressOf());
 	if (FAILED(hr)) {
 		return false;
 	}
 
 	// メトリクス取得
-	DWRITE_FONT_METRICS metrics{};
-	fontFace->GetMetrics(&metrics);
+	font.Face->GetMetrics(&font.Metrics);
 
-	// フォント登録
-	font.Face = fontFace;
-	font.Metrics = metrics;
+	//DWORD size = GetFileSize(file, nullptr);
+	//std::vector<BYTE> buffer(size);
 
-	return true;
+	//DWORD readBytes{};
+	//
+	//if (!ReadFile(file, buffer.data(), size, &readBytes, nullptr)) {
+	//	return false;
+	//}
+
+	//CloseHandle(file);
+
+	//// ストリームとローダーを生成
+	//auto* stream = new IDWriteStream(buffer.data(), buffer.size());
+	//auto* loader = new IDWriteLoader(stream);
+
+	//// DirectWriteにローダーを登録
+	//factory->RegisterFontFileLoader(loader);
+
+	//// フォントファイル生成
+	//IDWriteFontFile* fontFile = nullptr;
+	//
+	//HRESULT hr = factory->CreateCustomFontFileReference(nullptr, 0, loader, &fontFile);
+	//if (FAILED(hr)) { 
+	//	return false;
+	//}
+
+	////  FontFace(フォント実体)生成
+	//IDWriteFontFace* fontFace = nullptr;
+	//hr = factory->CreateFontFace(DWRITE_FONT_FACE_TYPE_TRUETYPE, 1, &fontFile, 0,
+	//	DWRITE_FONT_SIMULATIONS_NONE, &fontFace);
+	//
+	//if (FAILED(hr)) {
+	//	return false;
+	//}
+
+	//// メトリクス取得
+	//DWRITE_FONT_METRICS metrics{};
+	//fontFace->GetMetrics(&metrics);
+
+	//// フォント登録
+	//font.Face = fontFace;
+	//font.Metrics = metrics;
+
+	//return true;
 }

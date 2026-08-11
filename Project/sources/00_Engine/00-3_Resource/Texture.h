@@ -19,6 +19,7 @@
 class Texture
 {
 	friend class TextureManager;
+	friend class FontManager;
 	friend class AssimpLoader;
 
 	template <typename T>

@@ -9,12 +9,12 @@
 #pragma once
 
 #include <dwrite.h>
-#include <string>
 #include <vector>
+#include <wrl/client.h>
 
 // フォントデータ
 struct Font {
-	IDWriteFontFace* Face{ nullptr };
+	Microsoft::WRL::ComPtr<IDWriteFontFace> Face{ nullptr };
 	DWRITE_FONT_METRICS Metrics{};
 	float Size = 32.0f;
 };
@@ -25,6 +25,9 @@ struct Font {
 *============================================================*/
 class FontLoader final
 {
+	template <typename T>
+	using ComPtr = Microsoft::WRL::ComPtr<T>;
+
 /*--------------------------------------------------
 	Singleton用
 ----------------------------------------------------*/
@@ -48,7 +51,8 @@ private:
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 public:
-	bool Load(IDWriteFactory* factory, const std::string& path, Font& font);
+	IDWriteFactory* Initialize();
+	bool Load(IDWriteFactory* factory, Font& font, const char* fontPath);
 
 private:
 
@@ -74,7 +78,7 @@ private:
 				return E_FAIL;
 			}
 
-			// データ先頭コメント
+			// データ先頭ポインタ
 			*fragmentStart = &mData[(size_t)fileOffset];
 			
 			*fragmentContext = nullptr;

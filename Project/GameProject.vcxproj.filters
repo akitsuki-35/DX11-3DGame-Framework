@@ -79,6 +79,9 @@
     <Filter Include="04_External\minimp3">
       <UniqueIdentifier>{cdf2c124-6f16-4b29-a8ad-f381264abd07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00_Engine\00-3_Resource\Font">
+      <UniqueIdentifier>{337f3baa-a7ba-439d-ade6-592b9e1674f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp">
@@ -266,6 +269,9 @@
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp">
       <Filter>00_Engine\00-4_Importer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\FontManager.cpp">
+      <Filter>00_Engine\00-3_Resource\Font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -532,6 +538,9 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-4_Importer\FontLoader.h">
       <Filter>00_Engine\00-4_Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-3_Resource\FontManager.h">
+      <Filter>00_Engine\00-3_Resource\Font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

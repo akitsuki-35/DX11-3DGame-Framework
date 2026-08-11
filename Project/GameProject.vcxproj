@@ -32,6 +32,7 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Graphics.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Skeleton.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\AudioManager.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\FontManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="sources\00_Engine\00-3_Resource\AnimationManager.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Audio.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\AudioManager.h" />
+    <ClInclude Include="sources\00_Engine\00-3_Resource\FontManager.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h" />
