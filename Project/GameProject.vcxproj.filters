@@ -82,6 +82,9 @@
     <Filter Include="00_Engine\00-3_Resource\Font">
       <UniqueIdentifier>{337f3baa-a7ba-439d-ade6-592b9e1674f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00_Engine\00-2_Graphics\UI">
+      <UniqueIdentifier>{30ec2ba0-824a-4adb-8f03-8211996e7d09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp">
@@ -272,6 +275,12 @@
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-3_Resource\FontManager.cpp">
       <Filter>00_Engine\00-3_Resource\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\UIStyle.cpp">
+      <Filter>00_Engine\00-2_Graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\UICanvas.cpp">
+      <Filter>00_Engine\00-2_Graphics\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -542,6 +551,15 @@
     <ClInclude Include="sources\00_Engine\00-3_Resource\FontManager.h">
       <Filter>00_Engine\00-3_Resource\Font</Filter>
     </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\UIRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\UICanvas.h">
+      <Filter>00_Engine\00-2_Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\UIStyle.h">
+      <Filter>00_Engine\00-2_Graphics\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="sources\03_HLSL\Common.hlsl">
@@ -557,6 +575,9 @@
       <Filter>03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\DirectionalVS.hlsl">
+      <Filter>03_HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\UISpriteVS.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
   </ItemGroup>

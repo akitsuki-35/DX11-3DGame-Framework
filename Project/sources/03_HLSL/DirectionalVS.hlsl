@@ -5,8 +5,9 @@
 
 void main(in VS_IN In, out PS_IN Out)
 {
-    matrix wvp;
-    wvp = mul(World, View); // World * View
+    Out = (PS_IN) 0;
+    
+    matrix wvp = mul(World, View); // World * View
     wvp = mul(wvp, Projection); // wvp * Projection
     Out.Position = mul(In.Position, wvp); // 頂点座標を行列で変換して出力
     
@@ -25,8 +26,7 @@ void main(in VS_IN In, out PS_IN Out)
     light = saturate(light); // 0.0～1.0に収める
     
     // 出力
-    Out.Diffuse.rgb;
-    Out.Diffuse.rgb = light * Material.Diffuse + Light.Diffuse; // 明るさを頂点カラーとして出力
+    Out.Diffuse.rgb = light * Material.Diffuse.rgb + Light.Diffuse.rgb; // 明るさを頂点カラーとして出力
     Out.Diffuse.a = In.Diffuse.a; // 元の頂点のアルファ値のまま出力
     Out.TexCoord = In.TexCoord; // テクスチャ座標を出力
 }

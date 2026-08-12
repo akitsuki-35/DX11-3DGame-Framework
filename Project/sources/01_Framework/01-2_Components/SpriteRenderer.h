@@ -67,8 +67,9 @@ private:
 
 public:
 	// テクスチャ読み込み
-	void LoadTexture(const char* fileName) {
+	SpriteRenderer* LoadTexture(const char* fileName) {
 		_mTexture = TextureManager::getInstance().Load(fileName);
+		return this;
 	}
 
 	// ゲッター

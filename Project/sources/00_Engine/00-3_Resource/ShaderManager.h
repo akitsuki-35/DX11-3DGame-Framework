@@ -69,6 +69,9 @@ public:
 
 namespace ShaderSet {
 	inline void initialize() {
+		ShaderManager::getInstance().Register("UI",
+			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\UnlitPS.cso");
+
 		ShaderManager::getInstance().Register("Unlit",
 			"assets\\shaders\\UnlitVS.cso", "assets\\shaders\\UnlitPS.cso");
 

@@ -5,6 +5,8 @@
 
 void main(in VS_IN In, out PS_IN Out)
 {
+    Out = (PS_IN) 0;
+    
     // ボーンウェイト取得
     float weight =
         In.BoneWeights.x +
@@ -27,8 +29,7 @@ void main(in VS_IN In, out PS_IN Out)
         skinnedPosition = In.Position;
     }
 
-    matrix wvp;
-    wvp = mul(World, View);
+    matrix wvp = mul(World, View);
     wvp = mul(wvp, Projection);
 
     Out.Position = mul(skinnedPosition, wvp);

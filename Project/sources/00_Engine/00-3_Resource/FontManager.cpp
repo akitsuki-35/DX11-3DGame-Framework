@@ -13,37 +13,6 @@
 
 Font* FontManager::GetFont(const std::string& keyName)
 {	
-
-    return nullptr;
-}
-
-Glyph* FontManager::GetGlyph(Font* font, uint32_t codePoint)
-{
-	// キャッシュが存在すれば返す
-	auto it = mGlyphs.find(codePoint);
-
-	if (it != mGlyphs.end()) {
-		return it->second.get();
-	}
-
-	// Glyph生成
-	std::unique_ptr<Glyph> glyph = std::make_unique<Glyph>();
-
-	if (!generateGlyph(*glyph, font, codePoint)) {
-		return nullptr;
-	}
-
-    // 文字を一時変数に格納
-    Glyph* g = glyph.get();
-
-    // コンテナへ登録
-    mGlyphs.emplace(codePoint, std::move(glyph));
-
-	return g;
-}
-
-Font* FontManager::Register(const std::string& keyName, const char* fontPath)
-{
     // キャッシュが存在すれば返す
     auto it = mFonts.find(keyName);
 
@@ -51,10 +20,45 @@ Font* FontManager::Register(const std::string& keyName, const char* fontPath)
         return it->second.get();
     }
 
+    return nullptr;
+}
+
+Glyph* FontManager::GetGlyph(Font* font, uint32_t codePoint)
+{
+	// キャッシュが存在すれば返す
+	auto it = mAtlas[font].find(codePoint);
+
+	if (it != mAtlas[font].end()) {
+		return it->second.get();
+	}
+
+	// 文字テクスチャ生成
+	std::unique_ptr<Glyph> glyph = std::make_unique<Glyph>();
+
+	if (!generateGlyph(*glyph, font, codePoint)) {
+		return nullptr;
+	}
+
+    // 文字テクスチャを一時変数に格納
+    Glyph* g = glyph.get();
+
+    // コンテナへ登録
+    mAtlas[font].emplace(codePoint, std::move(glyph));
+
+	return g;
+}
+
+Font* FontManager::Register(const std::string& keyName, const char* fontPath)
+{
+    // 登録済みならreturn
+    if (mFonts.contains(keyName)) {
+        return mFonts[keyName].get();
+    }
+
     // フォント生成
     std::unique_ptr<Font> font = std::make_unique<Font>();
 
-    if (!FontLoader::getInstance().Load(_mFactory.Get(), *font, fontPath)) {
+    if (!FontLoader::Load(_mFactory.Get(), *font, fontPath)) {
         return nullptr;
     }
 
@@ -76,7 +80,7 @@ bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)
 
     // GlyphRun作成
     DWRITE_GLYPH_RUN glyphRun{};
-    glyphRun.fontFace = font->Face;
+    glyphRun.fontFace = font->Face.Get();
     glyphRun.fontEmSize = font->Size;
     glyphRun.glyphCount = 1;
     glyphRun.glyphIndices = &glyphIndex;

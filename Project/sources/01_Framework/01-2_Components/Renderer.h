@@ -70,8 +70,9 @@ public:
 	virtual void Draw() const = 0;
 
 	// シェーダー読み込み
-	void LoadShader(const std::string& keyName) {
+	Renderer* LoadShader(const std::string& keyName) {
 		_mShader = ShaderManager::getInstance().Get(keyName);
+		return this;
 	}
 
 	// ゲッター

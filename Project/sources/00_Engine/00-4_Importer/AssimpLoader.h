@@ -92,6 +92,8 @@ private:
 		friend AssimpLoader;
 
 	private:
+		AiAnimationLoader() = delete;
+
 		// アニメーション取得
 		static bool loadAnimations(const aiScene* scene, const Skeleton& skeleton);
 
