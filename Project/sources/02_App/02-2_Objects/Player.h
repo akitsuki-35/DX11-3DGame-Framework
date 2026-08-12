@@ -10,7 +10,7 @@
 
 #include "GameObject.h"
 
-class Audio;
+class AudioPlayer;
 
 /*============================================================
 *	@class	: Player
@@ -25,7 +25,7 @@ private:
 	bool mGround{ true };
 	float mMoveAnimation{ 0.0f };
 
-	Audio* mSE{};
+	AudioPlayer* mSE{};
 
 public:
 	Player() = default;

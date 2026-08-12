@@ -103,7 +103,6 @@ namespace {
         pos += offset;
         position = { pos.x, pos.y, position.z };
 
-
         // 向きを変換
         position = ConvertAxis(position, AXIS_TABLE[static_cast<size_t>(desc.axis)]);
 
@@ -120,8 +119,7 @@ std::array<Element::VERTEX3D, 4> MeshType::Plane::Create(const DESC& desc)
 {
     std::array<Element::VERTEX3D, 4> vertices{};
 
-    for (size_t i = 0; i < vertices.size(); ++i)
-    {
+    for (size_t i = 0; i < vertices.size(); ++i) {
         vertices[i] = CreateVertex(i, desc);
     }
 

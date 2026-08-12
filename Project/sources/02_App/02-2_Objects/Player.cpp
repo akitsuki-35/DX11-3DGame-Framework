@@ -11,7 +11,7 @@
 #include "ModelRenderer.h"
 #include "Animator.h"
 #include "Game.h"
-#include "Audio.h"
+#include "AudioPlayer.h"
 #include "Camera.h"
 #include "Bullet.h"
 
@@ -23,24 +23,20 @@ void Player::Initialize()
 	mLayer = 1;
 
 	mTransform = Transform(
-		{ 0.0f, 1.0f, 0.0f },
-		{ DirectX::XMConvertToRadians(90.0f), 0.0f, 0.0f},
-		{ 0.5f, 0.5f, 0.5f }
+		{ 0.0f, 0.0f, 0.0f },
+		{ 0.0f, 0.0f, 0.0f },
+		{ 1.0f, 1.0f, 1.0f }
 	);		
 
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 50.0f, 0.0f, 50.0f };
 
 	// コンポーネント読込
-	//AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\Test.fbx")->
-	//	LoadTexture("sky.jpg", ModelRenderer::TextureType::Diffuse)->LoadShader("Unlit");
-	//AddComponent<Animator>(this)->Set("Take 001");
+	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\Test.fbx")->
+		LoadShader("Directional");
+	AddComponent<Animator>(this)->Set("Take 001");
 
-	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\Wolf.fbx")->LoadShader("Unlit");
-	AddComponent<Animator>(this)->Set("AnimalArmature|Idle");
-
-	mSE = AddComponent<Audio>(this);
-	mSE->Load("assets\\audio\\wan.wav");
+	mSE = AddComponent<AudioPlayer>(this)->LoadAudio("assets\\audio\\wan.wav");
 }
 
 void Player::Finalize()
@@ -86,7 +82,6 @@ void Player::Update()
 	}
 
 	float yaw = atan2f(mVelocity.x, mVelocity.z);
-	yaw += DirectX::XM_PI;
 	rotation.y = yaw;
 
 	// ジャンプ
@@ -95,19 +90,19 @@ void Player::Update()
 			mVelocity.y += j; // 撃力
 
 			//スケールアニメーション
-			//mTransform.SetScale({ 0.75f, 2.0f, 0.75f });
-			//scale.y = 2.0f;
-			//scale.x = 0.75f;
-			//scale.z = 0.75f;
+			mTransform.SetScale({ 0.75f, 2.0f, 0.75f });
+			scale.y = 2.0f;
+			scale.x = 0.75f;
+			scale.z = 0.75f;
 
 			mSE->Play();
 		}
 	}
 
 	// スケールを元に戻す
-	//scale.x += (1.0f - scale.x) * 0.1f;
-	//scale.y += (1.0f - scale.y) * 0.1f;
-	//scale.z += (1.0f - scale.z) * 0.1f;
+	scale.x += (1.0f - scale.x) * 0.1f;
+	scale.y += (1.0f - scale.y) * 0.1f;
+	scale.z += (1.0f - scale.z) * 0.1f;
 
 	// 重力加速度
 	mVelocity.y += -g * dt;
@@ -123,8 +118,8 @@ void Player::Update()
 	mGround = false;
 
 	// 地面との衝突判定
-	if (position.y < 1.0f) {
-		position.y = 1.0f;
+	if (position.y < 0.0f) {
+		position.y = 0.0f;
 		mVelocity.y = 0.0f;
 		mGround = true;
 	}
@@ -179,17 +174,17 @@ void Player::Update()
 	//	}
 	//}
 
-	//if (!oldGround && mGround) {
-	//	// スケールアニメーション
-	//	scale.y = 0.5f;
-	//	scale.x = 1.5f;
-	//	scale.z = 1.5f;
-	//}
+	if (!oldGround && mGround) {
+		// スケールアニメーション
+		scale.y = 0.5f;
+		scale.x = 1.5f;
+		scale.z = 1.5f;
+	}
 
 	// スケールを元に戻す
-	//scale.x += (1.0f - scale.x) * 0.1f;
-	//scale.y += (1.0f - scale.y) * 0.1f;
-	//scale.z += (1.0f - scale.z) * 0.1f;
+	scale.x += (1.0f - scale.x) * 0.1f;
+	scale.y += (1.0f - scale.y) * 0.1f;
+	scale.z += (1.0f - scale.z) * 0.1f;
 
 	// 弾の発射
 	if (Input::GetKeyTrigger('J')) {
@@ -200,10 +195,10 @@ void Player::Update()
 	}
 	
 	// 移動アニメーション
-	//if (mGround) {
-	//	mMoveAnimation += mVelocity.Length() * dt;
-	//	scale.y += sinf(mMoveAnimation * 3.0f) * 0.03f;
-	//}
+	if (mGround) {
+		mMoveAnimation += mVelocity.Length() * dt;
+		scale.y += sinf(mMoveAnimation * 3.0f) * 0.03f;
+	}
 
 	mTransform.SetPosition(position);
 	mTransform.SetRotation(rotation);

@@ -50,8 +50,6 @@ void Animator::calculateBoneTransform(const Animation::Channel& channel, double 
     auto& bone = mSkeleton->GetBone(channel.BoneIndex);
 
     XMMATRIX animLocal = transform.ToMatrix();
-    XMMATRIX bindLocal = XMLoadFloat4x4(&bone.BindLocal);
-
     XMMATRIX finalLocal = animLocal;
 
     XMStoreFloat4x4(&bone.Local, finalLocal);

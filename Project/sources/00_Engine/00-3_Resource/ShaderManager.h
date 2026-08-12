@@ -69,7 +69,13 @@ public:
 
 namespace ShaderSet {
 	inline void initialize() {
+		ShaderManager::getInstance().Register("UI",
+			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\UnlitPS.cso");
+
 		ShaderManager::getInstance().Register("Unlit",
-			"assets\\shaders\\unlitTextureVS.cso", "assets\\shaders\\unlitTexturePS.cso");
+			"assets\\shaders\\UnlitVS.cso", "assets\\shaders\\UnlitPS.cso");
+
+		ShaderManager::getInstance().Register("Directional",
+			"assets\\shaders\\DirectionalVS.cso", "assets\\shaders\\DirectionalPS.cso");
 	}
 }

@@ -41,22 +41,22 @@ void Game::Initialize()
 
 	AddGameObject<Camera>();
 
-	//AddGameObject<Sky>();
+	AddGameObject<Sky>();
 
 	AddGameObject<Field>();
 	AddGameObject<Player>();
-	//AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
-	//AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
-	//AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
-	//Box* box = AddGameObject<Box>();
-	//box->SetPosition({ 0.0f, 0.0f, -5.0f });
-	//box->SetScale({ 1.0f, 1.0f, 1.0f });
+	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
+	AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
+	Box* box = AddGameObject<Box>();
+	box->SetPosition({ 0.0f, 0.0f, -5.0f });
+	box->SetScale({ 1.0f, 1.0f, 1.0f });
 
 	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 5.0f });
 
 	//AddGameObject<Particle>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
-	//AddGameObject<Score>()->SetPosition({ 120.0f, 32.0f, 0.0f });
+	AddGameObject<Score>();
 }
 
 void Game::Finalize()
@@ -106,14 +106,14 @@ void Game::Draw() const
 		}
 	}
 
-		D3D11::DeviceManager::getInstance().SetSamplerState(D3D11::RenderState::Sampler::Anisotropic);
+	D3D11::DeviceManager::getInstance().SetSamplerState(D3D11::RenderState::Sampler::Anisotropic);
 
-		for (int layer = 0; layer < 4; layer++)
-		{
-			for (GameObject* obj : gameObjects) {
-				if (obj->GetLayer() == layer) {
-					obj->Draw();
-				}
+	for (int layer = 0; layer < 4; layer++)
+	{
+		for (GameObject* obj : gameObjects) {
+			if (obj->GetLayer() == layer) {
+				obj->Draw();
 			}
 		}
+	}
 }

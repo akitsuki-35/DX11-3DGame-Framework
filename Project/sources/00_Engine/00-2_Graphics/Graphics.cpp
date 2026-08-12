@@ -11,6 +11,7 @@
 #include "BufferManager.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
+#include "FontManager.h"
 #include "SystemWindow.h"
 
 void D3D11::Graphics::Initialize()
@@ -32,6 +33,10 @@ void D3D11::Graphics::Initialize()
 
 	// シェーダー読み込み
 	ShaderSet::initialize();
+
+	// DirectWriteファクトリ生成
+	FontManager::getInstance().Initialize(FontLoader::Initialize());
+	FontSet::initialize();
 }
 
 void D3D11::Graphics::Finalize()

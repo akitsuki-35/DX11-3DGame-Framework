@@ -26,13 +26,14 @@ Model* ModelManager::Load(const char* modelPath)
 	std::unique_ptr<Model> model = std::make_unique<Model>();
 
 	// Loaderからモデルをインポート
-	if (!AssimpLoader::getInstance().GenerateModel(*model, key))
+	if (!AssimpLoader::getInstance().GenerateModel(*model, key)) {
 		return nullptr;
+	}
 
-	Model* result = model.get();
+	Model* m = model.get();
 	
 	// モデル登録
 	mModels.emplace(key, std::move(model));
 
-	return result;
+	return m;
 }

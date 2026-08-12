@@ -16,16 +16,14 @@ void Tree::Initialize()
 {
 	mLayer = 2;
 
-	BillboardRenderer* drawable = AddComponent<BillboardRenderer>(this);
+	BillboardRenderer* renderer = AddComponent<BillboardRenderer>(this);
 
-	drawable->GetMesh().CreatePlane(Plane::Pivot::CenterBottom, Plane::Axis::XY);
+	renderer->GetMesh().CreatePlane(Plane::Pivot::CenterBottom, Plane::Axis::XY);
 
 	mTransform.SetPosition({ 0.0f,0.0f, 0.0f });
 	mTransform.SetScale({ 8.0f, 10.0f, 0.0f });
 
-	drawable->LoadTexture("assets\\textures\\tree.png");
-
-	drawable->LoadShader("Unlit");
+	renderer->LoadTexture("assets\\textures\\tree.png")->LoadShader("Unlit");
 }
 
 void Tree::Finalize()

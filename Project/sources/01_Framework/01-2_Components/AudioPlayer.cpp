@@ -1,0 +1,109 @@
+﻿/*============================================================
+*	@file	 : AudioPlayer.cpp
+*	@brief	 : オーディオ再生
+*
+* 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
+* 　@date	 : 2026/08/09
+*	@updated : 2026/08/09
+*============================================================*/
+#include "AudioPlayer.h"
+#include "AudioManager.h"
+#include <cassert>
+
+IXAudio2* AudioPlayer::mXaudio{ nullptr };
+IXAudio2MasteringVoice* AudioPlayer::mMasteringVoice{ nullptr };
+
+void AudioPlayer::InitializeMaster()
+{
+	// COM初期化
+	HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+	assert(SUCCEEDED(hr));
+
+	// XAudio生成
+	hr = XAudio2Create(&mXaudio, 0);
+	assert(SUCCEEDED(hr));
+
+	// マスタリングボイス生成
+	hr = mXaudio->CreateMasteringVoice(&mMasteringVoice);
+	assert(SUCCEEDED(hr));
+}
+
+
+void AudioPlayer::FinalizeMaster()
+{
+	// マスタリングボイス解放
+	if (mMasteringVoice) {
+		mMasteringVoice->DestroyVoice();
+		mMasteringVoice = nullptr;
+	}
+
+	// XAudio解放
+	if (mXaudio) {
+		mXaudio->Release();
+		mXaudio = nullptr;
+	}
+
+	// COM終了処理
+	CoUninitialize();
+}
+
+void AudioPlayer::Finalize()
+{
+	if (mSourceVoice) {
+		// 再生停止
+		mSourceVoice->Stop();
+
+		// バッファ解放
+		mSourceVoice->FlushSourceBuffers();
+		
+		// ボイス破棄
+		mSourceVoice->DestroyVoice();
+		
+		// nullptrで上書き
+		mSourceVoice = nullptr;
+	}
+}
+
+AudioPlayer* AudioPlayer::LoadAudio(const char* fileName)
+{
+	// オーディオファイルのロード
+	_mAudio = AudioManager::getInstance().Load(fileName);
+	assert(_mAudio);
+
+	// サウンドソース作成
+	HRESULT hr = mXaudio->CreateSourceVoice(&mSourceVoice, _mAudio->GetFormat());
+	assert(SUCCEEDED(hr));
+
+	return this;
+}
+
+void AudioPlayer::Play(bool isLoop)
+{
+	if (!_mAudio || !mSourceVoice) {
+		return;
+	}
+
+	// バッファのクリア
+	mSourceVoice->Stop();
+	mSourceVoice->FlushSourceBuffers();
+
+	// バッファ設定
+	XAUDIO2_BUFFER buf{};
+	buf.AudioBytes = _mAudio->GetAudioBytes(); // PCM総バイト数
+	buf.pAudioData = _mAudio->GetPCM(); // PCMデータ先頭
+	buf.PlayBegin = 0; // 再生開始位置
+	buf.PlayLength = _mAudio->GetSamples(); // 再生サンプル数
+
+	// ループ再生設定
+	if (isLoop) {
+		buf.LoopBegin = 0;
+		buf.LoopLength = _mAudio->GetSamples();
+		buf.LoopCount = XAUDIO2_LOOP_INFINITE;
+	}
+
+	// バッファ登録
+	mSourceVoice->SubmitSourceBuffer(&buf);
+
+	// 再生
+	mSourceVoice->Start();
+}
