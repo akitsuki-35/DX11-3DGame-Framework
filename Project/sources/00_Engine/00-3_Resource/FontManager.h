@@ -8,6 +8,7 @@
 *============================================================*/
 #pragma once
 
+#include "FontLoader.h"
 #include <string>
 #include <memory>
 #include <unordered_map>
@@ -15,20 +16,10 @@
 #include <dwrite.h>
 #include <wrl/client.h>
 
-/*--------------------------------------------------
-	前方宣言
-----------------------------------------------------*/
-struct Font;
-class Texture;
-
 // 文字テクスチャデータ
 struct Glyph
 {
-	//Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> SRV{ nullptr };  // テクスチャ
-	// int Width = 0;
-	// int Height = 0;
-
-	Texture* Texture{ nullptr };
+	std::shared_ptr<class Texture> Texture{ nullptr };
 
     int BearingX = 0;   // 左側の余白
     int BearingY = 0;   // 上側の余白
@@ -73,7 +64,7 @@ private:
 	std::unordered_map<Font*, std::unordered_map<uint32_t, std::unique_ptr<Glyph>>> mAtlas{};
 
 	// DirectWriteファクトリ
-	Microsoft::WRL::ComPtr <IDWriteFactory> _mFactory{ nullptr };
+	Microsoft::WRL::ComPtr<IDWriteFactory> _mFactory{ nullptr };
 
 public:
 	void Initialize(IDWriteFactory* factory) {

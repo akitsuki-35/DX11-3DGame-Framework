@@ -59,6 +59,7 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -279,6 +280,7 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\Renderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\SpriteRenderer.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\UIRenderer.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Result.h">

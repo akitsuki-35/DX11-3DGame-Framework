@@ -8,19 +8,20 @@
 *============================================================*/
 #include "Score.h"
 #include "UIRenderer.h"
+#include "TextRenderer.h"
 
 void Score::Initialize()
 {
 	mLayer = 3;
 
-	UIRenderer* renderer = AddComponent<UIRenderer>(this);
+	TextRenderer* renderer = AddComponent<TextRenderer>(this);
 
 	renderer->GetCanvas().CreateCanvas(UIStyle::Pivot::LeftTop);
 
 	mTransform.SetPosition({ 0.0f, 0.0f, 0.0f });
 	mTransform.SetScale({ 1000.0f, 100.0f, 0.0f });
 
-	renderer->LoadTexture("assets\\textures\\game_ui.png")->LoadShader("UI");
+	renderer->SetFont("MPLUS_Regular")->SetText("あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波")->LoadShader("UI");
 
 	mValue = 0;
 }

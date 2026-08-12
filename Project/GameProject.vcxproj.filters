@@ -282,6 +282,9 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\UICanvas.cpp">
       <Filter>00_Engine\00-2_Graphics\UI</Filter>
     </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -559,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\UIStyle.h">
       <Filter>00_Engine\00-2_Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

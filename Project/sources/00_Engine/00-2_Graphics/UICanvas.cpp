@@ -30,6 +30,8 @@ bool UICanvas::CreateCanvas(UIStyle::Pivot pivot)
 
 	assert(_mVertexBuffer);
 
+	mPivot = pivot;
+
 	return true;
 }
 

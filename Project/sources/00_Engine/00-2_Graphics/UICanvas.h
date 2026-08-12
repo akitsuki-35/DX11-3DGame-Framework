@@ -22,6 +22,9 @@ class UICanvas
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 private:
+	// ピボット
+	UIStyle::Pivot mPivot{ UIStyle::Pivot::LeftTop };
+
 	// 頂点バッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mVertexBuffer{};
 
@@ -41,4 +44,7 @@ public:
 
 	void Bind() const;
 	void Draw() const;
+
+	// ゲッター
+	UIStyle::Pivot GetPivot() const { return mPivot; }
 };

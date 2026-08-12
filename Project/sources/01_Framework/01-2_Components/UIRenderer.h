@@ -22,7 +22,7 @@
 *============================================================*/
 class UIRenderer : public Renderer
 {
-private:
+protected:
 	// キャンバス
 	UICanvas mCanvas{};
 

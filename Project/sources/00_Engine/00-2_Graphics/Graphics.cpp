@@ -12,7 +12,6 @@
 #include "ShaderManager.h"
 #include "TextureManager.h"
 #include "FontManager.h"
-#include "FontLoader.h"
 #include "SystemWindow.h"
 
 void D3D11::Graphics::Initialize()
