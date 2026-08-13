@@ -10,6 +10,8 @@
 #include "FontLoader.h"
 #include "DeviceManager.h"
 #include "Texture.h"
+#include <d3d11.h>
+#include <dwrite.h>
 
 using namespace Microsoft::WRL;
 
@@ -68,6 +70,12 @@ Font* FontManager::Register(const std::string& keyName, const char* fontPath)
     mFonts.emplace(keyName, std::move(font));
 
     return mFonts[keyName].get();
+}
+
+void FontManager::Clear()
+{
+    mFonts.clear();
+    mAtlas.clear();
 }
 
 bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)

@@ -9,6 +9,15 @@
 #include "Skeleton.h"
 using namespace DirectX;
 
+int Skeleton::AddBone(const Bone& bone)
+{
+    int index = static_cast<int>(mBones.size());
+    mBones.push_back(bone);
+    mBoneMap.emplace(bone.Name, index);
+
+    return index;
+}
+
 int Skeleton::FindBone(const std::string& name) const
 {
     // ボーン探索
@@ -74,6 +83,16 @@ void Skeleton::CalculateBindPose()
             calculateBindGlobal(static_cast<int>(i));
         }
     }
+}
+
+int Skeleton::GetBoneIndex(const std::string& name)
+{
+    auto it = mBoneMap.find(name);
+    if (it != mBoneMap.end()) {
+        return it->second;
+    }
+
+    return -1;
 }
 
 void Skeleton::calculateBindGlobal(int index)

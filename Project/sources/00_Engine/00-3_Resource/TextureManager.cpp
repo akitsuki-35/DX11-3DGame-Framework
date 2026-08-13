@@ -7,6 +7,7 @@
 *	@updated : 2026/08/04
 *============================================================*/
 #include "TextureManager.h"
+#include "Texture.h"
 #include "DeviceManager.h"
 #include "Utility.h"
 #include <DirectXTex/DirectXTex.h>
@@ -39,6 +40,11 @@ Texture* TextureManager::Load(const char* texturePath)
 	mTextures.emplace(key, std::move(texture));
 
 	return t;
+}
+
+void TextureManager::Clear()
+{
+	mTextures.clear();
 }
 
 bool TextureManager::generateTexture(Texture& texture, const std::string& path)

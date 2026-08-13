@@ -8,10 +8,14 @@
 *============================================================*/
 #pragma once
 
-#include "Audio.h"
 #include <string>
 #include <memory>
 #include <unordered_map>
+
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+class Audio;
 
 /*============================================================
 *	@class	: AudioManager
@@ -58,9 +62,7 @@ public:
 	Audio* Load(const char* audioPath);
 
 	// クリア
-	void Clear() {
-		mAudios.clear();
-	}
+	void Clear();
 
 private:
 	// オーディオ生成

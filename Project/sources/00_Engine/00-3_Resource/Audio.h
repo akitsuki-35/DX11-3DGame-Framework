@@ -24,7 +24,6 @@ private:
     WAVEFORMATEX mFormat{}; // フォーマット
     UINT mBytes{ 0 }; // PCMバイト数
     UINT mSamples{ 0 }; // サンプル数
-    //std::string mPath{};
 	
 public:
     // PCMデータ取得

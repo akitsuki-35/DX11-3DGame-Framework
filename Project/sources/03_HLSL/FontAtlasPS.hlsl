@@ -1,5 +1,5 @@
 /*------------------------------------------------------------
-	ライトなしピクセルシェーダー
+	フォントアトラス用ピクセルシェーダー
 ------------------------------------------------------------*/
 #include "Common.hlsl"
 
@@ -8,13 +8,8 @@ SamplerState	gSamplerState : register(s0);
 
 void main(in PS_IN In, out float4 outDiffuse : SV_Target)
 {
-	if (Material.TextureEnable)
-	{
-		outDiffuse = gTexture.Sample(gSamplerState, In.TexCoord);
-		outDiffuse *= In.Diffuse;
-	}
-	else
-	{
-		outDiffuse = In.Diffuse;
-	}	
+    outDiffuse.rgb = In.Diffuse.rgb;
+    
+    float alpha = gTexture.Sample(gSamplerState, In.TexCoord).a;
+    outDiffuse.a = In.Diffuse.a * alpha;
 }

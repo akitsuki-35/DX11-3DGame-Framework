@@ -11,6 +11,8 @@
 #include "BufferManager.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
+#include "Texture.h"
+#include "FontLoader.h"
 #include "FontManager.h"
 #include "SystemWindow.h"
 

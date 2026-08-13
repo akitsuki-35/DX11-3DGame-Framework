@@ -9,6 +9,7 @@
 #include "ModelManager.h"
 #include "AssimpLoader.h"
 #include "Utility.h"
+#include "Model.h"
 
 Model* ModelManager::Load(const char* modelPath)
 {
@@ -36,4 +37,9 @@ Model* ModelManager::Load(const char* modelPath)
 	mModels.emplace(key, std::move(model));
 
 	return m;
+}
+
+void ModelManager::Clear()
+{
+	mModels.clear();
 }

@@ -56,11 +56,11 @@ namespace D3D11 {
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mLight{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mBones{};
 
-		static constexpr size_t MaxBones = 128;
-		struct BoneBuffer
-		{
-			DirectX::XMFLOAT4X4 Matrices[MaxBones]{};
-		};
+		//static constexpr size_t MaxBones = 128;
+		//struct BoneBuffer
+		//{
+		//	DirectX::XMFLOAT4X4 Matrices[MaxBones]{};
+		//};
 
 	public:
 		void Initialize();

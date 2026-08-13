@@ -8,7 +8,11 @@
 *============================================================*/
 #include "AudioPlayer.h"
 #include "AudioManager.h"
+#include "Audio.h"
 #include <cassert>
+#include <iostream>
+#include <algorithm>
+#include <xaudio2.h>
 
 IXAudio2* AudioPlayer::mXaudio{ nullptr };
 IXAudio2MasteringVoice* AudioPlayer::mMasteringVoice{ nullptr };
@@ -106,4 +110,36 @@ void AudioPlayer::Play(bool isLoop)
 
 	// 再生
 	mSourceVoice->Start();
+}
+
+void AudioPlayer::Pause()
+{
+	if (mSourceVoice) {
+		mSourceVoice->Stop();
+	}
+}
+
+void AudioPlayer::Resume()
+{
+	if (mSourceVoice) {
+		mSourceVoice->Start();
+	}
+}
+
+void AudioPlayer::Stop()
+{
+	if (mSourceVoice) {
+		mSourceVoice->Stop();
+		mSourceVoice->FlushSourceBuffers();
+	}
+}
+
+void AudioPlayer::SetVolume(float Volume)
+{
+	// 0.0f～1.0f間で補間
+	mVolume = std::clamp(Volume, 0.0f, 1.0f);
+
+	if (mSourceVoice) {
+		mSourceVoice->SetVolume(mVolume);
+	}
 }

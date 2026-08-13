@@ -9,14 +9,14 @@
 #pragma once
 
 #include "Component.h"
-#include <xaudio2.h>
-#include <iostream>
-#include <algorithm>
 
 /*--------------------------------------------------
 	前方宣言
 ----------------------------------------------------*/
 class Audio;
+struct IXAudio2;
+struct IXAudio2MasteringVoice;
+struct IXAudio2SourceVoice;
 
 /*============================================================
 *	@class	: AudioPlayer
@@ -48,35 +48,15 @@ public:
 	void Play(bool isLoop = false);
 
 	// 一時停止
-	void Pause() {
-		if (mSourceVoice) {
-			mSourceVoice->Stop();
-		}
-	}
+	void Pause();
 
 	// 再開
-	void Resume() {
-		if (mSourceVoice) {
-			mSourceVoice->Start();
-		}
-	}
+	void Resume();
 
 	// 停止
-	void Stop() {
-		if (mSourceVoice) {
-			mSourceVoice->Stop();
-			mSourceVoice->FlushSourceBuffers();
-		}
-	}
+	void Stop();
 
 	// ボリューム変更
-	void SetVolume(float Volume) {
-		// 0.0f～1.0f間で補間
-		mVolume = std::clamp(Volume, 0.0f, 1.0f);
-
-		if (mSourceVoice) {
-			mSourceVoice->SetVolume(mVolume);
-		}
-	}
+	void SetVolume(float Volume);
 };
 

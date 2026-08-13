@@ -33,14 +33,18 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Skeleton.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\UICanvas.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\UIStyle.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Animation.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\AnimationManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\AudioManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\FontManager.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Model.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\AssimpLoader.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp" />
+    <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Particle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -58,8 +62,12 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\BillboardRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\Renderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\SpriteRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -157,12 +165,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\99_Debug\DebugText.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="sources\Others\Animation.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -404,12 +406,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="sources\Others\Animation.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="sources\Others\Collision.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -493,6 +489,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\FontAtlasPS.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\UISpriteVS.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>

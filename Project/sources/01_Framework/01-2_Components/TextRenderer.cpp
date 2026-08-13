@@ -7,6 +7,25 @@
 *	@updated : 2026/08/12
 *============================================================*/
 #include "TextRenderer.h"
+#include "Texture.h"
+#include "FontLoader.h"
+#include "FontManager.h"
+#include "DeviceManager.h"
+#include "BufferManager.h"
+#include "UIStyle.h"
+#include "GameObject.h"
+#include "Utility.h"
+#include "D3D11Config.h"
+#include <d3d11.h>
+#include <dwrite.h>
+
+TextRenderer::TextRenderer(GameObject* owner)
+	: UIRenderer(owner)
+{
+	// 2Dレイヤーに描画
+	mSortKey.layer = Layer::UI;
+	mCanvas.CreateCanvas(UIStyle::Pivot::LeftTop);
+};
 
 void TextRenderer::Draw() const
 {
@@ -53,14 +72,14 @@ void TextRenderer::Draw() const
 		// 最大文字数到達時の自動改行
 		if (mCharsPerLine > 0 && charCount >= mCharsPerLine) {
 			currentX = startX;
-			currentY += _mFont->Size;
+			currentY += _mFont->Size + _mFont->Size / 4;
 			charCount = 0;
 		}
 
 		// 改行記号による手動改行
 		if (codepoint == L'\n') {
 			currentX = startX;
-			currentY += _mFont->Size + _mFont->Size / 2;
+			currentY += _mFont->Size + _mFont->Size / 4;
 			charCount = 0;
 			continue;
 		}
@@ -103,4 +122,22 @@ void TextRenderer::Draw() const
 
 	// 深度ステート有効
 	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
+}
+
+TextRenderer* TextRenderer::SetFont(const std::string& fontName)
+{
+	_mFont = FontManager::getInstance().GetFont(fontName);
+	return this;
+}
+
+TextRenderer* TextRenderer::SetText(const std::string& text)
+{
+	mText = Utility::String::toWideString(text);
+	return this;
+}
+
+TextRenderer* TextRenderer::SetCharsPerLine(const size_t& charsPerLine)
+{
+	mCharsPerLine = charsPerLine;
+	return this;
 }

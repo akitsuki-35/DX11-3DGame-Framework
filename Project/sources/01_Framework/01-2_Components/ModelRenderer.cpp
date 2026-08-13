@@ -8,6 +8,7 @@
 *============================================================*/
 #include "ModelRenderer.h"
 #include "BufferManager.h"
+#include "Texture.h"
 
 void ModelRenderer::Draw() const
 {

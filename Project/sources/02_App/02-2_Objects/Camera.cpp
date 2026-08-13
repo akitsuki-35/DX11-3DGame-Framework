@@ -66,3 +66,21 @@ void Camera::Draw() const
 	// ビュー行列設定
 	D3D11::BufferManager::getInstance().SetViewMatrix(mViewMatrix);
 }
+
+Vector3 Camera::GetForward() const
+{
+	Vector3 forward = mTarget - mTransform.GetPosition();
+	forward.Normalize();
+
+	return forward;
+}
+
+Vector3 Camera::GetRight() const
+{
+	Vector3 forward = GetForward();
+	Vector3 up = Vector3(0.0f, 1.0f, 0.0f);
+	Vector3 right = Vector3::Cross(up, forward);
+	right.Normalize();
+
+	return right;
+}

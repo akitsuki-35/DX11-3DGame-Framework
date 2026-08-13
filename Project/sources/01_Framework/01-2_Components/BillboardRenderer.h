@@ -9,8 +9,11 @@
 #pragma once
 
 #include "SpriteRenderer.h"
-#include "Game.h"
-#include "Camera.h"
+
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+class Texture;
 
 /*============================================================
 *	@class	: BillboardRenderer
@@ -34,9 +37,5 @@ public:
 
 private:
 	// ワールド行列取得
-	DirectX::XMMATRIX GetWorldMatrix() const override {
-		Camera* camera = Game::GetGameObject<Camera>();
-		return _mOwner->GetTransform().GetBillboardMatrix(camera->GetViewMatrix());
-	}
-
+	DirectX::XMMATRIX GetWorldMatrix() const override;
 };

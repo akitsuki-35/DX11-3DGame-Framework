@@ -59,18 +59,16 @@ public:
 		const char* vsPath, const char* psPath);
 
 	// クリア
-	void Clear() {
-		mShaders.clear();
-		mVSCache.clear();
-		mPSCache.clear();
-		mLayoutCache.clear();
-	}
+	void Clear();
 };
 
 namespace ShaderSet {
 	inline void initialize() {
 		ShaderManager::getInstance().Register("UI",
 			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\UnlitPS.cso");
+
+		ShaderManager::getInstance().Register("Font",
+			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\FontAtlasPS.cso");
 
 		ShaderManager::getInstance().Register("Unlit",
 			"assets\\shaders\\UnlitVS.cso", "assets\\shaders\\UnlitPS.cso");

@@ -92,18 +92,10 @@ namespace D3D11 {
 
 	public:
 		// セッター
-		void SetDepthStencilState(ID3D11DepthStencilState* depthState) { 
-			_mContext->OMSetDepthStencilState(depthState, NULL); };
-		void SetBlendState(ID3D11BlendState* blendState) {
-			float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-			_mContext->OMSetBlendState(blendState, blendFactor, 0xffffffff);
-		};
-		void SetRasterizerState(ID3D11RasterizerState* rasterizerState) {
-			_mContext->RSSetState(rasterizerState);
-		};
-		void SetSamplerState(ID3D11SamplerState* samplerState) {
-			_mContext->PSSetSamplers(0, 1, &samplerState);
-		};
+		void SetDepthStencilState(ID3D11DepthStencilState* depthState);
+		void SetBlendState(ID3D11BlendState* blendState);
+		void SetRasterizerState(ID3D11RasterizerState* rasterizerState);
+		void SetSamplerState(ID3D11SamplerState* samplerState);
 
 		// ゲッター
 		ID3D11Device* GetDevice() const { return _mDevice.Get(); }

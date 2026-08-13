@@ -7,6 +7,7 @@
 *	@updated : 2026/08/09
 *============================================================*/
 #include "AudioManager.h"
+#include "Audio.h"
 #include "Utility.h"
 #include <cassert>
 
@@ -48,6 +49,11 @@ Audio* AudioManager::Load(const char* audioPath)
 	mAudios.emplace(key, std::move(audio));
 
     return a;
+}
+
+void AudioManager::Clear()
+{
+	mAudios.clear();
 }
 
 bool AudioManager::generateAudio(Audio& audio, const std::string& path)

@@ -9,6 +9,7 @@
 #include "ShaderManager.h"
 #include "DeviceManager.h"
 #include "Utility.h"
+#include <d3d11.h>
 
 using namespace Microsoft::WRL;
 
@@ -95,4 +96,12 @@ Shader* ShaderManager::Register(const std::string& keyName, const char* vsPath, 
 	mShaders[keyName] = std::move(shader);
 
 	return mShaders[keyName].get();
+}
+
+void ShaderManager::Clear()
+{
+	mShaders.clear();
+	mVSCache.clear();
+	mPSCache.clear();
+	mLayoutCache.clear();
 }

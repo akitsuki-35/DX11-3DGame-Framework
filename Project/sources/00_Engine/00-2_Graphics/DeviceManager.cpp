@@ -288,3 +288,24 @@ void D3D11::DeviceManager::renderStateRegister()
 	RenderState::Sampler::Linear = _mSamplerLinear.Get();
 	RenderState::Sampler::Point = _mSamplerPoint.Get();
 }
+
+void D3D11::DeviceManager::SetDepthStencilState(ID3D11DepthStencilState* depthState)
+{
+	_mContext->OMSetDepthStencilState(depthState, NULL);
+}
+
+void D3D11::DeviceManager::SetBlendState(ID3D11BlendState* blendState)
+{
+	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	_mContext->OMSetBlendState(blendState, blendFactor, 0xffffffff);
+}
+
+void D3D11::DeviceManager::SetRasterizerState(ID3D11RasterizerState* rasterizerState)
+{
+	_mContext->RSSetState(rasterizerState);
+}
+
+void D3D11::DeviceManager::SetSamplerState(ID3D11SamplerState* samplerState)
+{
+	_mContext->PSSetSamplers(0, 1, &samplerState);
+}
