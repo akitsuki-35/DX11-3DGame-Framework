@@ -19,6 +19,33 @@
 #include <d3d11.h>
 #include <dwrite.h>
 
+using namespace DirectX;
+
+namespace {
+	// テキストカラーインデックス
+	enum class ColorIndex : int
+	{
+		White = 0, // = \\c[0]
+		Black,	   // = \\c[1]
+		Red,	   // = \\c[2]
+		Green,	   // = \\c[3]
+		Blue,	   // = \\c[4]
+		Yellow,	   // = \\c[5]
+		Purple,	   // = \\c[6]
+		Cyan	   // = \\c[7]
+	};
+
+	// カラー
+	static inline constexpr XMFLOAT4 White =  { 1.0f, 1.0f, 1.0f, 1.0f };
+	static inline constexpr XMFLOAT4 Black =  { 0.0f, 0.0f, 0.0f, 1.0f };
+	static inline constexpr XMFLOAT4 Red =	  { 1.0f, 0.0f, 0.0f, 1.0f };
+	static inline constexpr XMFLOAT4 Green =  { 0.0f, 1.0f, 0.0f, 1.0f };
+	static inline constexpr XMFLOAT4 Blue  =  { 0.0f, 0.0f, 1.0f, 1.0f };
+	static inline constexpr XMFLOAT4 Yellow = { 1.0f, 1.0f, 0.0f, 1.0f };
+	static inline constexpr XMFLOAT4 Purple = { 1.0f, 0.0f, 1.0f, 1.0f };
+	static inline constexpr XMFLOAT4 Cyan =   { 0.0f, 1.0f, 1.0f, 1.0f };
+}
+
 TextRenderer::TextRenderer(GameObject* owner)
 	: UIRenderer(owner)
 {
@@ -53,7 +80,10 @@ void TextRenderer::Draw() const
 	// 文字数カウント
 	size_t charCount = 0;
 
-	// 1文字ずつレンダリング処理
+	// 文字色
+	XMFLOAT4 textColor = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+
+	// 1文字ずつレンダリング処理する
 	for (size_t i = 0; i < mText.length(); ++i) {
 		// 1文字分の文字コード
 		uint32_t codepoint = mText[i];
@@ -66,6 +96,29 @@ void TextRenderer::Draw() const
 			{
 				codepoint = 0x10000 + ((codepoint - 0xD800) << 10) + (next - 0xDC00);
 				++i;
+			}
+		}
+
+		/*------------------------------------------------------------
+			制御文字チェック
+			RPGツクール風書式で判定		例 : \\c[0]
+		------------------------------------------------------------*/
+		// テキストカラー変更
+		if (codepoint == L'\\' && (i + 1) < mText.length() && mText[i + 1] == L'c')
+		{
+			if ((i + 4) < mText.length() && mText[i + 2] == L'[')
+			{
+				if (mText[i + 4] == L']')
+				{
+					// 文字から数値への簡易変換
+					int colorId = mText[i + 3] - L'0';
+
+					// テキスト色変換
+					textColor = convertTextColor(colorId);
+
+					i += 4;
+					continue;
+				}
 			}
 		}
 
@@ -106,7 +159,7 @@ void TextRenderer::Draw() const
 
 		// マテリアル設定
 		Element::MATERIAL material{};
-		material.Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+		material.Diffuse = textColor;
 		material.TextureEnable = true;
 		D3D11::BufferManager::getInstance().SetMaterial(material);
 
@@ -130,7 +183,7 @@ void TextRenderer::shadowDraw(const Glyph* glyph, const Transform& transform) co
 {
 	// シャドウ用マテリアル設定
 	Element::MATERIAL shadowMaterial{};
-	shadowMaterial.Diffuse = DirectX::XMFLOAT4{ 0.0f, 0.0f, 0.0f, 1.0f };
+	shadowMaterial.Diffuse = XMFLOAT4{ 0.0f, 0.0f, 0.0f, 1.0f };
 	shadowMaterial.TextureEnable = true;
 	D3D11::BufferManager::getInstance().SetMaterial(shadowMaterial);
 
@@ -150,9 +203,51 @@ void TextRenderer::shadowDraw(const Glyph* glyph, const Transform& transform) co
 	D3D11::BufferManager::getInstance().SetWorldMatrix(transform.GetWorldMatrix());
 }
 
+DirectX::XMFLOAT4 TextRenderer::convertTextColor(int index) const
+{
+	// カラーインデックスに応じてテキスト色を変換
+	ColorIndex colorId = static_cast<ColorIndex>(index);
+
+	switch (colorId)
+	{
+	case ColorIndex::White:
+		return White;
+
+	case ColorIndex::Black:
+		return Black;
+
+	case ColorIndex::Red:
+		return Red;
+
+	case ColorIndex::Green:
+		return Green;
+
+	case ColorIndex::Blue:
+		return Blue;
+
+	case ColorIndex::Yellow:
+		return Yellow;
+
+	case ColorIndex::Purple:
+		return Purple;
+
+	case ColorIndex::Cyan:
+		return Cyan;
+
+	default:
+		return White;
+	}
+}
+
 TextRenderer* TextRenderer::SetFont(const std::string& fontName)
 {
 	_mFont = FontManager::getInstance().GetFont(fontName);
+	return this;
+}
+
+TextRenderer* TextRenderer::SetTextSize(const float& size)
+{
+	_mFont->Size = size;
 	return this;
 }
 

@@ -18,8 +18,9 @@ void Score::Initialize()
 
 	mTransform.SetPosition({ 0.0f, 0.0f, 0.0f });
 
-	renderer->SetFont("MPLUS_Regular")->
-		SetText("あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波")
+	renderer->SetFont("LogoTypeGothic")->
+		SetText("あの\\c[7]イーハトーヴォ\\c[0]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波")
+		->SetTextSize(48.0f)
 		->LoadShader("FontOutline");
 
 	mValue = 0;

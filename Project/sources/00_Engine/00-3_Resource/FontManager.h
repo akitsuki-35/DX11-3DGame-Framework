@@ -97,5 +97,7 @@ namespace FontSet {
 	inline void initialize() {
 		FontManager::getInstance().Register("MPLUS_Regular", "assets\\fonts\\MPLUS1-Regular.ttf");
 		FontManager::getInstance().Register("MPLUS_Bold", "assets\\fonts\\MPLUS1-Bold.ttf");
+		FontManager::getInstance().Register("LogoTypeGothic", "assets\\fonts\\07LogoTypeGothic7.ttf");
+		FontManager::getInstance().Register("GenEiLateMin", "assets\\fonts\\GenEiLateMinN_v2.ttf");
 	}
 }

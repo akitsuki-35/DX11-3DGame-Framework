@@ -40,6 +40,8 @@ private:
 	// ドロップシャドウ描画
 	void shadowDraw(const Glyph* glyph, const Transform& transform) const;
 
+	DirectX::XMFLOAT4 convertTextColor(int index) const;
+
 	DirectX::XMMATRIX getWorldMatrix() = delete;
 
 public:
@@ -47,6 +49,8 @@ public:
 
 	// フォントセット
 	TextRenderer* SetFont(const std::string& fontName);
+
+	TextRenderer* SetTextSize(const float& size);
 
 	// テキスト更新
 	TextRenderer* SetText(const std::string& text);

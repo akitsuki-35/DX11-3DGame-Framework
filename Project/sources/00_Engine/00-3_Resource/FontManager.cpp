@@ -179,7 +179,7 @@ bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)
     glyph.Texture->mSize = { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
     glyph.BearingX = static_cast<int32_t>(metrics.leftSideBearing * (fontSize / designUnitsPerEm));
     glyph.BearingY = static_cast<int32_t>(metrics.topSideBearing * (fontSize / designUnitsPerEm));
-    glyph.Advance = static_cast<uint32_t>(metrics.advanceWidth * (fontSize / designUnitsPerEm) + fontSize / 4);
+    glyph.Advance = static_cast<uint32_t>(metrics.advanceWidth * (fontSize / designUnitsPerEm) + fontSize / 10);
 
     return true;
 }
