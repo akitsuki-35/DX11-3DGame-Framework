@@ -33,14 +33,18 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Skeleton.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\UICanvas.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\UIStyle.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Animation.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\AnimationManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\AudioManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\FontManager.cpp" />
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Model.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\AssimpLoader.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp" />
+    <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Particle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -58,8 +62,12 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\BillboardRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\Renderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\SpriteRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -137,6 +145,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</TreatWarningAsError>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TurnOffAllWarnings</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
     <ClCompile Include="sources\99_Debug\DebugCollisiondraw.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -157,12 +168,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\99_Debug\DebugText.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="sources\Others\Animation.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -404,12 +409,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="sources\Others\Animation.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="sources\Others\Collision.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -494,6 +493,18 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
+    <FxCompile Include="sources\03_HLSL\FontOutlinePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\FontPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
     <FxCompile Include="sources\03_HLSL\UISpriteVS.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
@@ -572,11 +583,13 @@
     <OutDir>$(SolutionDir)\_bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>_obj\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(ProjectDir)sources\00_Engine\00-1_Core;$(ProjectDir)sources\00_Engine\00-2_Graphics;$(ProjectDir)sources\00_Engine\00-3_Resource;$(ProjectDir)sources\00_Engine\00-4_Importer;$(ProjectDir)sources\01_Framework\01-1_Common;$(ProjectDir)sources\01_Framework\01-2_Components;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Users\asuka\Documents\VSProjects\_frameworks\3DGame_Framework\GameProject3D\Project\sources\04_External\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\_bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>_obj\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(ProjectDir)sources\00_Engine\00-1_Core;$(ProjectDir)sources\00_Engine\00-2_Graphics;$(ProjectDir)sources\00_Engine\00-3_Resource;$(ProjectDir)sources\00_Engine\00-4_Importer;$(ProjectDir)sources\01_Framework\01-1_Common;$(ProjectDir)sources\01_Framework\01-2_Components;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Users\asuka\Documents\VSProjects\_frameworks\3DGame_Framework\GameProject3D\Project\sources\04_External\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)sources\00_Engine\00-1_Core;$(ProjectDir)sources\00_Engine\00-2_Graphics;$(ProjectDir)sources\01_Framework\01-1_Common;$(ProjectDir)sources\01_Framework\01-2_Components;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
@@ -633,8 +646,11 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)sources\04_External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <ExternalTemplatesDiagnostics>true</ExternalTemplatesDiagnostics>
+      <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -662,10 +678,13 @@ xcopy /Y "$(ProjectDir)assimp-vc143-mt.dll" "$(TargetDir)"</Command>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)sources\04_External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <ExternalTemplatesDiagnostics>true</ExternalTemplatesDiagnostics>
+      <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

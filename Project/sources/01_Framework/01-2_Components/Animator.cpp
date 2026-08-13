@@ -9,8 +9,18 @@
 #include "Animator.h"
 #include "Skeleton.h"
 #include "BoneTransform.h"
+#include "AnimationManager.h"
+#include "ModelRenderer.h"
+#include "GameObject.h"
 #include <cmath>
 using namespace DirectX;
+
+void Animator::Set(const std::string& keyName)
+{
+    mAnimation = AnimationManager::getInstance().Get(keyName);
+    assert(setSkeleton());
+    mCurrentTime = 0.0;
+}
 
 void Animator::Update(double dt)
 {
@@ -32,6 +42,30 @@ void Animator::Update(double dt)
     }
 
     mSkeleton->Update();
+}
+
+bool Animator::setSkeleton()
+{
+    Model* model{};
+
+    // オブジェクトのModelRendererコンポーネント取得
+    ModelRenderer* renderer = _mOwner->GetComponent<ModelRenderer>();
+
+    if (!renderer) {
+        return false;
+    }
+
+    // ModelRendererのモデル取得
+    model = renderer->GetModel();
+
+    if (!model) {
+        return false;
+    }
+
+    // モデルからスケルトンを取得
+    mSkeleton = &model->GetSkeleton();
+
+    return true;
 }
 
 void Animator::calculateBoneTransform(const Animation::Channel& channel, double time)

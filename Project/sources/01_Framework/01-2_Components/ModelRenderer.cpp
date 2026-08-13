@@ -8,6 +8,7 @@
 *============================================================*/
 #include "ModelRenderer.h"
 #include "BufferManager.h"
+#include "Texture.h"
 
 void ModelRenderer::Draw() const
 {
@@ -16,7 +17,7 @@ void ModelRenderer::Draw() const
     Bind();
 
     // ワールド行列セット
-	D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());
+	D3D11::BufferManager::getInstance().SetWorldMatrix(getWorldMatrix());
 
     // ボーン行列セット
     if (_mModel->GetSkeleton().GetBoneCount() > 0) {

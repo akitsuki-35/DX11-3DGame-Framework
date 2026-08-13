@@ -9,7 +9,7 @@
 #include "UIStyle.h"
 #include "Vector2.h"
 #include "Vector3.h"
-
+#include <d3d11.h>
 using namespace DirectX;
 
 /*--------------------------------------------------

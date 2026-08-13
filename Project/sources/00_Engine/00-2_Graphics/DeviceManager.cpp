@@ -243,9 +243,9 @@ bool D3D11::DeviceManager::generateSamplerState()
 	----------------------------------------------------*/
 	D3D11_SAMPLER_DESC samplerDesc{};
 	samplerDesc.Filter = D3D11_FILTER_ANISOTROPIC;
-	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 	samplerDesc.MaxAnisotropy = 4;
 	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
@@ -287,4 +287,25 @@ void D3D11::DeviceManager::renderStateRegister()
 	RenderState::Sampler::Anisotropic = _mSamplerAnisotropic.Get();
 	RenderState::Sampler::Linear = _mSamplerLinear.Get();
 	RenderState::Sampler::Point = _mSamplerPoint.Get();
+}
+
+void D3D11::DeviceManager::SetDepthStencilState(ID3D11DepthStencilState* depthState)
+{
+	_mContext->OMSetDepthStencilState(depthState, NULL);
+}
+
+void D3D11::DeviceManager::SetBlendState(ID3D11BlendState* blendState)
+{
+	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	_mContext->OMSetBlendState(blendState, blendFactor, 0xffffffff);
+}
+
+void D3D11::DeviceManager::SetRasterizerState(ID3D11RasterizerState* rasterizerState)
+{
+	_mContext->RSSetState(rasterizerState);
+}
+
+void D3D11::DeviceManager::SetSamplerState(ID3D11SamplerState* samplerState)
+{
+	_mContext->PSSetSamplers(0, 1, &samplerState);
 }

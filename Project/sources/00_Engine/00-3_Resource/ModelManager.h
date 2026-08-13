@@ -50,7 +50,5 @@ public:
 	Model* Load(const char* modelPath);
 
 	// クリア
-	void Clear() {
-		mModels.clear();
-	}
+	void Clear();
 };

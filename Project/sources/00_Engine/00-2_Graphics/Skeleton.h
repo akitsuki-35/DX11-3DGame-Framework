@@ -42,13 +42,7 @@ private:
     DirectX::XMFLOAT4X4 mGlobalInverse{};
 
 public:
-    int AddBone(const Bone& bone){
-        int index = static_cast<int>(mBones.size());
-        mBones.push_back(bone);
-        mBoneMap.emplace(bone.Name, index);
-        
-        return index;
-    }
+    int AddBone(const Bone& bone);
 
     // ボーン取得
     int FindBone(const std::string& name) const;
@@ -61,15 +55,8 @@ public:
     void SetGlobalInverse(const DirectX::XMFLOAT4X4& matrix){ mGlobalInverse = matrix; }
 
     // ゲッター
+    int GetBoneIndex(const std::string& name);
     Bone& GetBone(size_t index) { return mBones[index]; }
-    int GetBoneIndex(std::string name) {
-        auto it = mBoneMap.find(name);
-        if (it != mBoneMap.end()) {
-            return it->second;
-        }
-
-        return -1;
-    }
     size_t GetBoneCount() const { return mBones.size(); }
     const std::vector<DirectX::XMFLOAT4X4>& GetSkinningMatrices() const { return mSkinningMatrices; }
 

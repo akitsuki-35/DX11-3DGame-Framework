@@ -189,9 +189,6 @@
     <ClCompile Include="sources\99_Debug\DebugText.cpp">
       <Filter>99_Debug</Filter>
     </ClCompile>
-    <ClCompile Include="sources\Others\Animation.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
     <ClCompile Include="sources\Others\Collision.cpp">
       <Filter>未整理</Filter>
     </ClCompile>
@@ -284,6 +281,30 @@
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp">
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\AnimationManager.cpp">
+      <Filter>00_Engine\00-3_Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Animation.cpp">
+      <Filter>00_Engine\00-3_Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-3_Resource\Model.cpp">
+      <Filter>00_Engine\00-3_Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\SpriteRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\BillboardRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\Renderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp">
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -427,9 +448,6 @@
     </ClInclude>
     <ClInclude Include="sources\99_Debug\DebugText.h">
       <Filter>99_Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\Animation.h">
-      <Filter>未整理</Filter>
     </ClInclude>
     <ClInclude Include="sources\Others\Collision.h">
       <Filter>未整理</Filter>
@@ -584,6 +602,12 @@
       <Filter>03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\UISpriteVS.hlsl">
+      <Filter>03_HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\FontPS.hlsl">
+      <Filter>03_HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\FontOutlinePS.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
   </ItemGroup>

@@ -9,10 +9,14 @@
 #pragma once
 
 #include "Component.h"
-#include "GameObject.h"
-#include "AnimationManager.h"
-#include "ModelRenderer.h"
+#include "Animation.h"
+#include <string>
 #include <cassert>
+
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+class Skeleton;
 
 /*============================================================
 *	@class	: Animator
@@ -29,39 +33,14 @@ public:
     Animator(GameObject* owner)
         : Component(owner) {}
 
-    void Set(const std::string& keyName) {
-        mAnimation = AnimationManager::getInstance().Get(keyName);
-        assert(setSkeleton());
-        mCurrentTime = 0.0;
-    }
+    void Set(const std::string& keyName);
     void Update(double dt);
 
     // ゲッター
     double GetTime() const { return mCurrentTime; }
 
 private:
-    bool setSkeleton() {
-        Model* model{};
-
-        // オブジェクトのModelRendererコンポーネント取得
-        ModelRenderer* renderer = _mOwner->GetComponent<ModelRenderer>();
-
-        if (!renderer) {
-            return false;
-        }
-
-        // ModelRendererのモデル取得
-        model = renderer->GetModel();
-
-        if (!model) {
-            return false;
-        }
-
-        // モデルからスケルトンを取得
-        mSkeleton = &model->GetSkeleton();
-
-        return true;
-    }
+    bool setSkeleton();
 
     // ボーンアニメーション計算
     void calculateBoneTransform(const Animation::Channel& channel, double time);

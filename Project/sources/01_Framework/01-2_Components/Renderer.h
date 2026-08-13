@@ -9,10 +9,17 @@
 #pragma once
 
 #include "Component.h"
-#include "DeviceManager.h"
-#include "ShaderManager.h"
+#include <string>
 #include <DirectXMath.h>
 
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+class Shader;
+
+/*------------------------------------------------------------
+	ソート用構造体
+------------------------------------------------------------*/
 // 描画レイヤー
 enum class Layer : uint8_t
 {
@@ -51,16 +58,7 @@ protected:
 	// ソート用情報
 	SORTKEY mSortKey{};
 
-	void Bind() const {
-		auto context = D3D11::DeviceManager::getInstance().GetContext();
-
-		// 入力レイアウト設定
-		context->IASetInputLayout(_mShader->GetLayout());
-
-		// シェーダー設定
-		context->VSSetShader(_mShader->GetVertexShader(), nullptr, 0);
-		context->PSSetShader(_mShader->GetPixelShader(), nullptr, 0);
-	}
+	void Bind() const;
 
 public:
 	Renderer(GameObject* owner)
@@ -70,10 +68,7 @@ public:
 	virtual void Draw() const = 0;
 
 	// シェーダー読み込み
-	Renderer* LoadShader(const std::string& keyName) {
-		_mShader = ShaderManager::getInstance().Get(keyName);
-		return this;
-	}
+	Renderer* LoadShader(const std::string& keyName);
 
 	// ゲッター
 	Shader* GetShader() const { return _mShader; }
@@ -81,5 +76,5 @@ public:
 
 private:
 	// ワールド行列取得
-	virtual DirectX::XMMATRIX GetWorldMatrix() const = 0;
+	virtual DirectX::XMMATRIX getWorldMatrix() const = 0;
 };

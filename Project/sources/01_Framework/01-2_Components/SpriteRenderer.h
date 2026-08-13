@@ -10,9 +10,11 @@
 
 #include "Renderer.h"
 #include "Mesh.h"
-#include "GameObject.h"
-#include "BufferManager.h"
-#include "TextureManager.h"
+
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+class Texture;
 
 /*============================================================
 *	@class	: SpriteRenderer
@@ -39,38 +41,15 @@ public:
 
 	~SpriteRenderer() override = default;
 
-	void Draw() const override{
-		Bind();
-
-		D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());
-
-		// マテリアル設定
-		Element::MATERIAL material{};
-		material.Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-		material.TextureEnable = static_cast<bool>(_mTexture != nullptr);
-		D3D11::BufferManager::getInstance().SetMaterial(material);
-
-		mMesh.Bind();
-
-		if (material.TextureEnable) {
-			_mTexture->Bind();
-		}
-
-		mMesh.Draw();
-	}
+	void Draw() const override;
 
 private:
 	// ワールド行列取得
-	DirectX::XMMATRIX GetWorldMatrix() const override {
-		return _mOwner->GetTransform().GetWorldMatrix();
-	}
+	DirectX::XMMATRIX getWorldMatrix() const override;
 
 public:
 	// テクスチャ読み込み
-	SpriteRenderer* LoadTexture(const char* fileName) {
-		_mTexture = TextureManager::getInstance().Load(fileName);
-		return this;
-	}
+	SpriteRenderer* LoadTexture(const char* fileName);
 
 	// ゲッター
 	Mesh& GetMesh() { return mMesh; }

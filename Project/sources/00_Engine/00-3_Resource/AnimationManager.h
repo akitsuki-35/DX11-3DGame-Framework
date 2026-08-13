@@ -8,10 +8,14 @@
 *============================================================*/
 #pragma once
 
-#include "Animation.h"
 #include <string>
 #include <memory>
 #include <unordered_map>
+
+/*--------------------------------------------------
+	前方宣言
+----------------------------------------------------*/
+class Animation;
 
 /*============================================================
 *	@class	: AnimationManager
@@ -43,34 +47,15 @@ private:
 ----------------------------------------------------*/
 private:
 	// アニメーションコンテナ
-	std::unordered_map <std::string, std::unique_ptr<Animation>> mAnimations{};
+	std::unordered_map<std::string, std::unique_ptr<Animation>> mAnimations{};
 
 public:
 	// ロード済みアニメーションを取得
-	Animation* Get(const std::string& keyName) {
-		auto it = mAnimations.find(keyName);
-
-		if (it != mAnimations.end()) {
-			return it->second.get();
-		}
-
-		return nullptr;
-	}
+	Animation* Get(const std::string& keyName);
 
 	// 登録
-	Animation* Register(const std::string& keyName, std::unique_ptr<Animation> animation) {
-		// 登録済みならreturn
-		if (mAnimations.contains(keyName)) {
-			return mAnimations[keyName].get();
-		}
-
-		mAnimations.emplace(keyName, std::move(animation));
-
-		return mAnimations[keyName].get();
-	}
+	Animation* Register(const std::string& keyName, std::unique_ptr<Animation> animation);
 
 	// クリア
-	void Clear() {
-		mAnimations.clear();
-	}
+	void Clear();
 };

@@ -40,6 +40,6 @@ private:
 	std::vector<std::unique_ptr<Texture>> mTextures{}; // 埋め込みテクスチャ
 
 public:
-	void AddMesh(ModelMesh&& mesh){ mMeshes.emplace_back(std::move(mesh)); }
+	void AddMesh(ModelMesh&& mesh);
 	Skeleton& GetSkeleton() { return mSkeleton; }
 };

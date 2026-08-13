@@ -9,9 +9,14 @@
 #pragma once
 
 #include "UIRenderer.h"
-#include "UIStyle.h"
-#include "FontManager.h"
-#include "Utility.h"
+
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+class Texture;
+class Transform;
+struct Font;
+struct Glyph;
 
 /*============================================================
 *	@class	: UIRenderer
@@ -25,41 +30,31 @@ private:
 	size_t mCharsPerLine{ 30 }; // 1行あたりの文字数
 
 public:
-	TextRenderer(GameObject* owner)
-		: UIRenderer(owner) {
-		// 2Dレイヤーに描画
-		mSortKey.layer = Layer::UI;
-	};
+	TextRenderer(GameObject* owner);
 
 	~TextRenderer() override = default;
 
 	void Draw() const override;
 
 private:
-	// ワールド行列取得
-	//DirectX::XMMATRIX GetWorldMatrix() const override {
-	//	return _mOwner->GetTransform().GetWorldMatrix();
-	//}
+	// ドロップシャドウ描画
+	void shadowDraw(const Glyph* glyph, const Transform& transform) const;
 
+	DirectX::XMFLOAT4 convertTextColor(int index) const;
+
+	DirectX::XMMATRIX getWorldMatrix() = delete;
 
 public:
 	UIRenderer* LoadTexture(const char* fileName) = delete;
 
-	// フォントのセット
-	TextRenderer* SetFont(const std::string& fontName) {
-		_mFont = FontManager::getInstance().GetFont(fontName);
-		return this;
-	}
+	// フォントセット
+	TextRenderer* SetFont(const std::string& fontName);
+
+	TextRenderer* SetTextSize(const float& size);
 
 	// テキスト更新
-	TextRenderer* SetText(const std::string& text) {
-		mText = Utility::String::toWideString(text);
-		return this;
-	}
+	TextRenderer* SetText(const std::string& text);
 
 	// 1行あたりの文字数更新
-	TextRenderer* SetCharsPerLine(const size_t& charsPerLine) {
-		mCharsPerLine = charsPerLine;
-		return this;
-	}
+	TextRenderer* SetCharsPerLine(const size_t& charsPerLine);
 };

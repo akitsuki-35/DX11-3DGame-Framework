@@ -10,6 +10,8 @@
 #include "FontLoader.h"
 #include "DeviceManager.h"
 #include "Texture.h"
+#include <d3d11.h>
+#include <dwrite.h>
 
 using namespace Microsoft::WRL;
 
@@ -68,6 +70,12 @@ Font* FontManager::Register(const std::string& keyName, const char* fontPath)
     mFonts.emplace(keyName, std::move(font));
 
     return mFonts[keyName].get();
+}
+
+void FontManager::Clear()
+{
+    mFonts.clear();
+    mAtlas.clear();
 }
 
 bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)
@@ -138,7 +146,7 @@ bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)
 
     // DirectX11テクスチャ作成
     D3D11_TEXTURE2D_DESC desc{};
-    desc.Width = width;
+    desc.Width = width ;
     desc.Height = height;
     desc.MipLevels = 1;
     desc.ArraySize = 1;
@@ -171,7 +179,7 @@ bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)
     glyph.Texture->mSize = { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
     glyph.BearingX = static_cast<int32_t>(metrics.leftSideBearing * (fontSize / designUnitsPerEm));
     glyph.BearingY = static_cast<int32_t>(metrics.topSideBearing * (fontSize / designUnitsPerEm));
-    glyph.Advance = static_cast<uint32_t>(metrics.advanceWidth * (fontSize / designUnitsPerEm) + fontSize / 4);
+    glyph.Advance = static_cast<uint32_t>(metrics.advanceWidth * (fontSize / designUnitsPerEm) + fontSize / 10);
 
     return true;
 }

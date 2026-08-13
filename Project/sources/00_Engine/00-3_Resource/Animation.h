@@ -62,7 +62,7 @@ private:
     std::vector<Channel> mChannels{};
 
 public:
-    void AddChannel(const Channel& channel) { mChannels.push_back(channel); }
+    void AddChannel(const Channel& channel);
     
     // ゲッター
     double GetDuration() const { return mDuration; }

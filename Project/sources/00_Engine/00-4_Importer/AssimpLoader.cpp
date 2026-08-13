@@ -11,6 +11,8 @@
 #include "TextureManager.h"
 #include "AnimationManager.h"
 #include "Model.h"
+#include "Texture.h"
+#include "Animation.h"
 #include "Utility.h"
 #include <memory>
 #include <Windows.h>

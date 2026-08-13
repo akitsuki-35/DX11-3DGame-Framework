@@ -22,11 +22,5 @@ public:
     Quaternion Rotation{};
     Vector3 Scale{ 1.0f,1.0f,1.0f };
 
-    DirectX::XMMATRIX ToMatrix() const {
-        DirectX::XMMATRIX scale = DirectX::XMMatrixScaling(Scale.x, Scale.y, Scale.z);
-        DirectX::XMMATRIX rotation = Rotation.ToMatrix();
-        DirectX::XMMATRIX translation = DirectX::XMMatrixTranslation(Position.x,Position.y,Position.z);
-
-        return scale * rotation * translation;
-    }
+    DirectX::XMMATRIX ToMatrix() const;
 };

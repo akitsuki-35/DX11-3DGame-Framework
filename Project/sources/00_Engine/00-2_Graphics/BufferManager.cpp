@@ -21,7 +21,7 @@ void D3D11::BufferManager::Initialize()
 	_mProjection = generateBuffer(sizeof(DirectX::XMMATRIX));
 	_mMaterial = generateBuffer(sizeof(Element::MATERIAL));
 	_mLight = generateBuffer(sizeof(Element::LIGHT));
-	_mBones = generateBuffer(sizeof(BoneBuffer));
+	_mBones = generateBuffer(sizeof(Element::BONE));
 
 	// ライト初期化
 	Element::LIGHT light{};
@@ -134,11 +134,11 @@ void D3D11::BufferManager::SetLight(Element::LIGHT light)
 
 void D3D11::BufferManager::SetBoneMatrices(const Skeleton& skeleton)
 {
-	BoneBuffer buffer{};
+	Element::BONE buffer{};
 
 	const auto& matrices = skeleton.GetSkinningMatrices();
 
-	const size_t count = std::min(matrices.size(),static_cast<size_t>(MaxBones));
+	const size_t count = std::min(matrices.size(),static_cast<size_t>(Element::MAX_BONES));
 
 	for (size_t i = 0; i < count; i++) {
 		DirectX::XMMATRIX matrix = DirectX::XMLoadFloat4x4(&matrices[i]);

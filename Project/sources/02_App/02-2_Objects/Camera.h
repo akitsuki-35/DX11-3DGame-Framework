@@ -30,19 +30,7 @@ public:
 
 	DirectX::XMMATRIX GetViewMatrix() const { return mViewMatrix; }
 
-	Vector3 GetForward() const {
-		Vector3 forward = mTarget - mTransform.GetPosition();
-		forward.Normalize();
+	Vector3 GetForward() const;
 
-		return forward;
-	}
-
-	Vector3 GetRight() const {
-		Vector3 forward = GetForward();
-		Vector3 up = Vector3(0.0f, 1.0f, 0.0f);
-		Vector3 right = Vector3::Cross(up, forward);
-		right.Normalize();
-
-		return right;
-	}
+	Vector3 GetRight() const;
 };

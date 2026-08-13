@@ -55,3 +55,55 @@ void Transform::rebuildWorldMatrix(const DirectX::XMMATRIX& rotation) const
 
     mDirty = false;
 }
+
+DirectX::XMMATRIX Transform::GetWorldMatrix() const
+{
+    // 前のワールド行列から更新されていれば更新後のワールド行列を返す
+    if (mDirty) {
+        rebuildWorldMatrix(createRotationMatrix());
+    }
+    return mWorldMatrix;
+}
+
+DirectX::XMMATRIX Transform::GetBillboardMatrix(const DirectX::XMMATRIX& view) const
+{
+    // 前のワールド行列から更新されていれば更新後のワールド行列を返す
+    rebuildWorldMatrix(createBillboardRotation(view));
+    return mWorldMatrix;
+}
+
+Vector3 Transform::GetForward() const
+{
+    const DirectX::XMMATRIX& world = GetWorldMatrix();
+
+    Vector3 forward{};
+    XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&forward), world.r[2]);
+
+    forward.Normalize();
+
+    return forward;
+}
+
+Vector3 Transform::GetRight() const
+{
+    const DirectX::XMMATRIX& world = GetWorldMatrix();
+
+    Vector3 right{};
+    XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&right), world.r[0]);
+
+    right.Normalize();
+
+    return right;
+}
+
+Vector3 Transform::GetUp() const
+{
+    const DirectX::XMMATRIX& world = GetWorldMatrix();
+
+    Vector3 up{};
+    XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&up), world.r[1]);
+
+    up.Normalize();
+
+    return up;
+}

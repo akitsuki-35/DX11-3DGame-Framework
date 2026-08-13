@@ -8,18 +8,24 @@
 *============================================================*/
 #pragma once
 
-#include "FontLoader.h"
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include <d3d11.h>
-#include <dwrite.h>
 #include <wrl/client.h>
 
-// 文字テクスチャデータ
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+class Texture;
+struct Font;
+struct IDWriteFactory;
+
+/*------------------------------------------------------------
+	文字テクスチャデータ
+------------------------------------------------------------*/
 struct Glyph
 {
-	std::shared_ptr<class Texture> Texture{ nullptr };
+	std::shared_ptr<Texture> Texture{ nullptr };
 
     int BearingX = 0;   // 左側の余白
     int BearingY = 0;   // 上側の余白
@@ -58,7 +64,7 @@ private:
 ----------------------------------------------------*/
 private:
 	// フォントコンテナ
-	std::unordered_map <std::string, std::unique_ptr<Font>> mFonts{};
+	std::unordered_map<std::string, std::unique_ptr<Font>> mFonts{};
 
 	// Glyphキャッシュ
 	std::unordered_map<Font*, std::unordered_map<uint32_t, std::unique_ptr<Glyph>>> mAtlas{};
@@ -67,9 +73,8 @@ private:
 	Microsoft::WRL::ComPtr<IDWriteFactory> _mFactory{ nullptr };
 
 public:
-	void Initialize(IDWriteFactory* factory) {
-		_mFactory = factory;
-	}
+	// ファクトリ取得
+	void Initialize(IDWriteFactory* factory) { _mFactory = factory; }
 
 	// フォント取得
 	Font* GetFont(const std::string& keyName);
@@ -81,11 +86,7 @@ public:
 	Font* Register(const std::string& keyName, const char* fontPath);
 
 	// クリア
-	void Clear()
-	{
-		mFonts.clear();
-		mAtlas.clear();
-	}
+	void Clear();
 
 private:
 	// 文字テクスチャ生成
@@ -96,5 +97,7 @@ namespace FontSet {
 	inline void initialize() {
 		FontManager::getInstance().Register("MPLUS_Regular", "assets\\fonts\\MPLUS1-Regular.ttf");
 		FontManager::getInstance().Register("MPLUS_Bold", "assets\\fonts\\MPLUS1-Bold.ttf");
+		FontManager::getInstance().Register("LogoTypeGothic", "assets\\fonts\\07LogoTypeGothic7.ttf");
+		FontManager::getInstance().Register("GenEiLateMin", "assets\\fonts\\GenEiLateMinN_v2.ttf");
 	}
 }

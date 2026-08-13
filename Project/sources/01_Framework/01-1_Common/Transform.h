@@ -74,54 +74,17 @@ public:
 	const Vector3& GetScale() const { return mScale; }
 
 	// ワールド行列取得
-	DirectX::XMMATRIX GetWorldMatrix() const {
-		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
-		if (mDirty) { 
-			rebuildWorldMatrix(createRotationMatrix());
-		}
-		return mWorldMatrix;
-	}
+	DirectX::XMMATRIX GetWorldMatrix() const;
 
 	// ビルボード用ワールド行列取得
-	DirectX::XMMATRIX GetBillboardMatrix(const DirectX::XMMATRIX& view) const {
-		// 前のワールド行列から更新されていれば更新後のワールド行列を返す
-		rebuildWorldMatrix(createBillboardRotation(view));
-		return mWorldMatrix;
-	}
+	DirectX::XMMATRIX GetBillboardMatrix(const DirectX::XMMATRIX& view) const;
 
 	// 前方向取得
-	Vector3 GetForward() const {
-		const DirectX::XMMATRIX& world = GetWorldMatrix();
-
-		Vector3 forward{};
-		XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&forward), world.r[2]);
-
-		forward.Normalize();
-
-		return forward;
-	}
+	Vector3 GetForward() const;
 
 	// 右方向取得
-	Vector3 GetRight() const {
-		const DirectX::XMMATRIX& world = GetWorldMatrix();
-
-		Vector3 right{};
-		XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&right), world.r[0]);
-
-		right.Normalize();
-
-		return right;
-	}
+	Vector3 GetRight() const;
 
 	// 上方向取得
-	Vector3 GetUp() const {
-		const DirectX::XMMATRIX& world = GetWorldMatrix();
-
-		Vector3 up{};
-		XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&up), world.r[1]);
-
-		up.Normalize();
-
-		return up;
-	}
+	Vector3 GetUp() const;
 };

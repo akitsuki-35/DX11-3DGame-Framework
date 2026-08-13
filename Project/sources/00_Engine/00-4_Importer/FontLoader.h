@@ -12,7 +12,7 @@
 #include <vector>
 #include <wrl/client.h>
 
-// フォントデータ
+// フォントデータ構造体
 struct Font {
 	Microsoft::WRL::ComPtr<IDWriteFontFace> Face{ nullptr };
 	DWRITE_FONT_METRICS Metrics{};
