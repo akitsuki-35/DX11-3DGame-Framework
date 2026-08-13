@@ -23,7 +23,7 @@ void UIRenderer::Draw() const
 	Bind();
 
 	D3D11::BufferManager::getInstance().Set2DMatrix();
-	D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());
+	D3D11::BufferManager::getInstance().SetWorldMatrix(getWorldMatrix());
 
 	// マテリアル設定
 	Element::MATERIAL material{};
@@ -43,7 +43,7 @@ void UIRenderer::Draw() const
 	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
 }
 
-DirectX::XMMATRIX UIRenderer::GetWorldMatrix() const
+DirectX::XMMATRIX UIRenderer::getWorldMatrix() const
 {
 	return _mOwner->GetTransform().GetWorldMatrix();
 }

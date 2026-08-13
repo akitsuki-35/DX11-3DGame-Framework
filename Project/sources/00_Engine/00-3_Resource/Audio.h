@@ -24,6 +24,10 @@ private:
     WAVEFORMATEX mFormat{}; // フォーマット
     UINT mBytes{ 0 }; // PCMバイト数
     UINT mSamples{ 0 }; // サンプル数
+
+    // ループタグ
+    int mLoopStart{ -1 };
+    int mLoopEnd = { -1 };
 	
 public:
     // PCMデータ取得
@@ -37,4 +41,9 @@ public:
 
     // サンプル数取得
     UINT GetSamples() const { return mSamples; }
+
+    // ループ関連取得
+    bool IsLoopTag() const { return (mLoopStart >= 0 && mLoopEnd > mLoopStart); }
+    int GetLoopStart() const { return mLoopStart; }
+    int GetLoopEnd() const { return mLoopEnd; }
 };

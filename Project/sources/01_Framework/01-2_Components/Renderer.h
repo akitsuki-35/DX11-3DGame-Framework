@@ -76,5 +76,5 @@ public:
 
 private:
 	// ワールド行列取得
-	virtual DirectX::XMMATRIX GetWorldMatrix() const = 0;
+	virtual DirectX::XMMATRIX getWorldMatrix() const = 0;
 };

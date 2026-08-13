@@ -145,6 +145,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</TreatWarningAsError>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TurnOffAllWarnings</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
     <ClCompile Include="sources\99_Debug\DebugCollisiondraw.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -490,11 +493,17 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="sources\03_HLSL\FontAtlasPS.hlsl">
+    <FxCompile Include="sources\03_HLSL\FontOutlinePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\FontPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\UISpriteVS.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
@@ -574,11 +583,13 @@
     <OutDir>$(SolutionDir)\_bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>_obj\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(ProjectDir)sources\00_Engine\00-1_Core;$(ProjectDir)sources\00_Engine\00-2_Graphics;$(ProjectDir)sources\00_Engine\00-3_Resource;$(ProjectDir)sources\00_Engine\00-4_Importer;$(ProjectDir)sources\01_Framework\01-1_Common;$(ProjectDir)sources\01_Framework\01-2_Components;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Users\asuka\Documents\VSProjects\_frameworks\3DGame_Framework\GameProject3D\Project\sources\04_External\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\_bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>_obj\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(ProjectDir)sources\00_Engine\00-1_Core;$(ProjectDir)sources\00_Engine\00-2_Graphics;$(ProjectDir)sources\00_Engine\00-3_Resource;$(ProjectDir)sources\00_Engine\00-4_Importer;$(ProjectDir)sources\01_Framework\01-1_Common;$(ProjectDir)sources\01_Framework\01-2_Components;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
+    <ExternalIncludePath>C:\Users\asuka\Documents\VSProjects\_frameworks\3DGame_Framework\GameProject3D\Project\sources\04_External\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)sources\00_Engine\00-1_Core;$(ProjectDir)sources\00_Engine\00-2_Graphics;$(ProjectDir)sources\01_Framework\01-1_Common;$(ProjectDir)sources\01_Framework\01-2_Components;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
@@ -635,8 +646,11 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWarningAsError>false</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)sources\04_External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <ExternalTemplatesDiagnostics>true</ExternalTemplatesDiagnostics>
+      <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -664,10 +678,13 @@ xcopy /Y "$(ProjectDir)assimp-vc143-mt.dll" "$(TargetDir)"</Command>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(ProjectDir)sources\04_External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <ExternalTemplatesDiagnostics>true</ExternalTemplatesDiagnostics>
+      <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

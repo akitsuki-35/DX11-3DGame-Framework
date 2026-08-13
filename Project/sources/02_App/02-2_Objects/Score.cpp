@@ -20,7 +20,7 @@ void Score::Initialize()
 
 	renderer->SetFont("MPLUS_Regular")->
 		SetText("あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波")
-		->LoadShader("Font");
+		->LoadShader("FontOutline");
 
 	mValue = 0;
 }

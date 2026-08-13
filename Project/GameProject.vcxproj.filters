@@ -604,7 +604,10 @@
     <FxCompile Include="sources\03_HLSL\UISpriteVS.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="sources\03_HLSL\FontAtlasPS.hlsl">
+    <FxCompile Include="sources\03_HLSL\FontPS.hlsl">
+      <Filter>03_HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\FontOutlinePS.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
   </ItemGroup>

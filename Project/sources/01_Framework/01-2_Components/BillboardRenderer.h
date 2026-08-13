@@ -37,5 +37,5 @@ public:
 
 private:
 	// ワールド行列取得
-	DirectX::XMMATRIX GetWorldMatrix() const override;
+	DirectX::XMMATRIX getWorldMatrix() const override;
 };

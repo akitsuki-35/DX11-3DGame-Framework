@@ -146,7 +146,7 @@ bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)
 
     // DirectX11テクスチャ作成
     D3D11_TEXTURE2D_DESC desc{};
-    desc.Width = width;
+    desc.Width = width ;
     desc.Height = height;
     desc.MipLevels = 1;
     desc.ArraySize = 1;

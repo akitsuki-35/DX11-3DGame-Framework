@@ -68,7 +68,10 @@ namespace ShaderSet {
 			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\UnlitPS.cso");
 
 		ShaderManager::getInstance().Register("Font",
-			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\FontAtlasPS.cso");
+			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\FontPS.cso");
+
+		ShaderManager::getInstance().Register("FontOutline",
+			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\FontOutlinePS.cso");
 
 		ShaderManager::getInstance().Register("Unlit",
 			"assets\\shaders\\UnlitVS.cso", "assets\\shaders\\UnlitPS.cso");

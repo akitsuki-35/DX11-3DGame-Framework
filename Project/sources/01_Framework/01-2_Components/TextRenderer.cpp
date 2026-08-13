@@ -102,6 +102,8 @@ void TextRenderer::Draw() const
 		// ワールド行列セット
 		D3D11::BufferManager::getInstance().SetWorldMatrix(transform.GetWorldMatrix());
 
+		shadowDraw(glyph, transform);
+
 		// マテリアル設定
 		Element::MATERIAL material{};
 		material.Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
@@ -122,6 +124,30 @@ void TextRenderer::Draw() const
 
 	// 深度ステート有効
 	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
+}
+
+void TextRenderer::shadowDraw(const Glyph* glyph, const Transform& transform) const
+{
+	// シャドウ用マテリアル設定
+	Element::MATERIAL shadowMaterial{};
+	shadowMaterial.Diffuse = DirectX::XMFLOAT4{ 0.0f, 0.0f, 0.0f, 1.0f };
+	shadowMaterial.TextureEnable = true;
+	D3D11::BufferManager::getInstance().SetMaterial(shadowMaterial);
+
+	// シャドウ用ワールド行列生成
+	DirectX::XMMATRIX shadowOffset = DirectX::XMMatrixTranslation(0.0f, 3.0f, 0.0f);
+	DirectX::XMMATRIX shadowWorld = DirectX::XMMatrixMultiply(transform.GetWorldMatrix(), shadowOffset);
+
+	// ワールド行列をセット
+	D3D11::BufferManager::getInstance().SetWorldMatrix(shadowWorld);
+
+	// 描画
+	mCanvas.Bind();
+	glyph->Texture->Bind();
+	mCanvas.Draw();
+
+	// ワールド行列を元の位置に戻す
+	D3D11::BufferManager::getInstance().SetWorldMatrix(transform.GetWorldMatrix());
 }
 
 TextRenderer* TextRenderer::SetFont(const std::string& fontName)

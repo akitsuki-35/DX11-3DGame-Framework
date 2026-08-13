@@ -16,7 +16,7 @@ void SpriteRenderer::Draw() const
 {
 	Bind();
 
-	D3D11::BufferManager::getInstance().SetWorldMatrix(GetWorldMatrix());
+	D3D11::BufferManager::getInstance().SetWorldMatrix(getWorldMatrix());
 
 	// マテリアル設定
 	Element::MATERIAL material{};
@@ -33,7 +33,7 @@ void SpriteRenderer::Draw() const
 	mMesh.Draw();
 }
 
-DirectX::XMMATRIX SpriteRenderer::GetWorldMatrix() const
+DirectX::XMMATRIX SpriteRenderer::getWorldMatrix() const
 {
 	return _mOwner->GetTransform().GetWorldMatrix();
 }

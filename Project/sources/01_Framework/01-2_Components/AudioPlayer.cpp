@@ -76,7 +76,10 @@ AudioPlayer* AudioPlayer::LoadAudio(const char* fileName)
 
 	// サウンドソース作成
 	HRESULT hr = mXaudio->CreateSourceVoice(&mSourceVoice, _mAudio->GetFormat());
-	assert(SUCCEEDED(hr));
+
+	if (FAILED(hr)) {
+		return nullptr;
+	}
 
 	return this;
 }
@@ -94,12 +97,18 @@ void AudioPlayer::Play(bool isLoop)
 	// バッファ設定
 	XAUDIO2_BUFFER buf{};
 	buf.AudioBytes = _mAudio->GetAudioBytes(); // PCM総バイト数
-	buf.pAudioData = _mAudio->GetPCM(); // PCMデータ先頭
-	buf.PlayBegin = 0; // 再生開始位置
-	buf.PlayLength = _mAudio->GetSamples(); // 再生サンプル数
+	buf.pAudioData = reinterpret_cast<const BYTE*>(_mAudio->GetPCM()); // PCMデータ先頭
+	buf.PlayBegin = 0;
+	buf.PlayLength = _mAudio->GetSamples(); // 先頭サンプル数
 
-	// ループ再生設定
-	if (isLoop) {
+	// ループタグが存在する場合は優先
+	if (isLoop && _mAudio->IsLoopTag()) {
+		buf.LoopBegin = _mAudio->GetLoopStart();
+		buf.LoopLength = _mAudio->GetLoopEnd() - _mAudio->GetLoopStart();
+		buf.LoopCount = XAUDIO2_LOOP_INFINITE;
+	}
+	else if (isLoop) {
+		// 通常ループ
 		buf.LoopBegin = 0;
 		buf.LoopLength = _mAudio->GetSamples();
 		buf.LoopCount = XAUDIO2_LOOP_INFINITE;
@@ -107,7 +116,7 @@ void AudioPlayer::Play(bool isLoop)
 
 	// バッファ登録
 	mSourceVoice->SubmitSourceBuffer(&buf);
-
+	
 	// 再生
 	mSourceVoice->Start();
 }

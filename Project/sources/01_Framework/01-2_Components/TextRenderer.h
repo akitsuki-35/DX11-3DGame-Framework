@@ -14,7 +14,9 @@
 	前方宣言
 ------------------------------------------------------------*/
 class Texture;
+class Transform;
 struct Font;
+struct Glyph;
 
 /*============================================================
 *	@class	: UIRenderer
@@ -35,8 +37,10 @@ public:
 	void Draw() const override;
 
 private:
-	// ワールド行列取得
-	DirectX::XMMATRIX GetWorldMatrix() = delete;
+	// ドロップシャドウ描画
+	void shadowDraw(const Glyph* glyph, const Transform& transform) const;
+
+	DirectX::XMMATRIX getWorldMatrix() = delete;
 
 public:
 	UIRenderer* LoadTexture(const char* fileName) = delete;

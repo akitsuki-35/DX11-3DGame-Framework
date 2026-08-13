@@ -203,43 +203,78 @@ bool AudioManager::loadMp3(Audio& audio, const std::string& path)
 
 bool AudioManager::loadOgg(Audio& audio, const std::string& path)
 {
-	// wavファイル読み込み
+	// oggファイル読み込み
 
-	int channels = 0; // チャンネル数
-	int sampleRate = 0; // サンプリングレート
-	short* pcm = nullptr; // stb_vorbisがmallocで返す16bitPCM
+	int error = 0;
 
-	// デコード
-	int samples = stb_vorbis_decode_filename(path.c_str(), &channels, &sampleRate, &pcm);
-	
-	if (samples <= 0 || pcm == nullptr) {
+	// ogg読み込み
+	stb_vorbis* vorbis = stb_vorbis_open_filename(path.c_str(), &error, nullptr);
+	if (!vorbis) {
 		return false;
 	}
 
-	// PCMの総サンプル数を算出
-	int total = samples * channels;
+	// OGG情報
+	stb_vorbis_info info = stb_vorbis_get_info(vorbis);
 
-	// PCMをコピー
+
+	// メタデータ取得
+	stb_vorbis_comment vc = stb_vorbis_get_comment(vorbis);
+
+	int loopStart = -1;
+	int loopEnd = -1;
+
+	// oggループタグ取得
+	for (int i = 0; i < vc.comment_list_length; i++) {
+		std::string c = vc.comment_list[i];
+
+		// ループタグスタート位置
+		if (c.rfind("LOOPSTART=", 0) == 0) {
+			loopStart = std::stoi(c.substr(10));
+		}
+
+		// ループタグ終了位置
+		if (c.rfind("LOOPEND=", 0) == 0) {
+			loopEnd = std::stoi(c.substr(8));
+		}
+
+		// ループ長(LOOPENDが存在しない場合)
+		if (c.rfind("LOOPLENGTH=", 0) == 0) {
+			int length = std::stoi(c.substr(11));
+			if (loopStart >= 0) {
+				loopEnd = loopStart + length;
+			}
+		}
+	}
+
+	// 一括デコード
+	int total = stb_vorbis_stream_length_in_samples(vorbis) * info.channels;
+
 	audio.mPCM.resize(total * sizeof(short));
-	memcpy(audio.mPCM.data(), pcm, audio.mPCM.size());
 
-	// フォーマット情報設定
+	stb_vorbis_get_samples_short_interleaved(vorbis, info.channels, 
+		reinterpret_cast<short*>(audio.mPCM.data()), total
+	);
+
+	stb_vorbis_close(vorbis);
+
+	// フォーマット設定
 	audio.mFormat.wFormatTag = WAVE_FORMAT_PCM; // PCM固定
-	audio.mFormat.nChannels = static_cast<WORD>(channels); // チャンネル数
-	audio.mFormat.nSamplesPerSec = sampleRate; // サンプリングレート
+	audio.mFormat.nChannels = static_cast<WORD>(info.channels); // チャンネル数
+	audio.mFormat.nSamplesPerSec = info.sample_rate; // サンプリングレート
 	audio.mFormat.wBitsPerSample = 16; // 16bitPCM
-	audio.mFormat.nBlockAlign = static_cast<WORD>((channels * 16) / 8);
-	audio.mFormat.nAvgBytesPerSec = sampleRate * audio.mFormat.nBlockAlign;
+	audio.mFormat.nBlockAlign = static_cast<WORD>((info.channels * 16) / 8);
+	audio.mFormat.nAvgBytesPerSec = audio.mFormat.nSamplesPerSec * audio.mFormat.nBlockAlign;
 	audio.mFormat.cbSize = 0; // 拡張なし
 
 	// 総バイト数を取得
-	audio.mBytes = (UINT)audio.mPCM.size();
-	
+	audio.mBytes = static_cast<UINT>(audio.mPCM.size());
+
 	// サンプル数算出
 	audio.mSamples = audio.mBytes / audio.mFormat.nBlockAlign;
 
-	// stb_vorbisがmallocしたPCMを解放
-	free(pcm);
+	// ループタグ保存
+	audio.mLoopStart = loopStart;
+	audio.mLoopEnd = loopEnd;
 
 	return true;
 }
