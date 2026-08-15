@@ -19,6 +19,7 @@ class ParticleRenderer : public BillboardRenderer
 	friend class ParticleEmitter;
 
 private:
+	ParticleEmitter* _mEmitter{ nullptr };
 	DirectX::XMFLOAT4 mColor{ 1.0f, 1.0f, 1.0f, 1.0f };
 
 public:
@@ -30,7 +31,12 @@ public:
 
 	~ParticleRenderer() override = default;
 
-	//void Draw() const override;
+	ParticleRenderer* SetEmitter(ParticleEmitter* emitter) {
+		_mEmitter = emitter;
+		return this;
+	}
+
+	void Draw() const override;
 
 	void Finalize() override {
 		_mTexture = nullptr;

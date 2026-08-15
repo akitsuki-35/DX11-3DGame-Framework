@@ -17,6 +17,7 @@
 class Particle
 {
 	friend class ParticleEmitter;
+	friend class ParticleRenderer;
 
 private:
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };

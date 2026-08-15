@@ -17,6 +17,8 @@
 *============================================================*/
 class ParticleEmitter : public GameObject
 {
+	friend class ParticleRenderer;
+
 private:
 	static constexpr int PARTICLE_MAX{ 10000 };
 	std::vector<Particle> mParticles{};
