@@ -14,8 +14,6 @@ using namespace MeshType;
 
 void Tree::Initialize()
 {
-	mLayer = 2;
-
 	BillboardRenderer* renderer = AddComponent<BillboardRenderer>(this);
 
 	renderer->GetMesh().CreatePlane(Plane::Pivot::CenterBottom, Plane::Axis::XY);

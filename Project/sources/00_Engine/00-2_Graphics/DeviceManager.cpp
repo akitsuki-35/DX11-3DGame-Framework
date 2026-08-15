@@ -186,8 +186,8 @@ bool D3D11::DeviceManager::generateBlendState()
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-	// アルファブレンド
-	hr = _mDevice->CreateBlendState(&blendDesc, &_mBlendAlpha);
+	// 通常（アルファブレンド）
+	hr = _mDevice->CreateBlendState(&blendDesc, &_mBlendDefault);
 	if (FAILED(hr)) { return false; }
 
 	// 加算
@@ -196,13 +196,14 @@ bool D3D11::DeviceManager::generateBlendState()
 	if (FAILED(hr)) { return false; }
 
 	// 乗算
-	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_SRC_ALPHA;
-	blendDesc.AlphaToCoverageEnable = TRUE;
-	hr = _mDevice->CreateBlendState(&blendDesc, &_mBlendATC);
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
+	hr = _mDevice->CreateBlendState(&blendDesc, &_mBlendMultiply);
 	if (FAILED(hr)) { return false; }
 
 	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-	_mContext->OMSetBlendState(_mBlendAlpha.Get(), blendFactor, 0xffffffff);
+	_mContext->OMSetBlendState(_mBlendDefault.Get(), blendFactor, 0xffffffff);
 
 	return true;
 }
@@ -275,9 +276,9 @@ void D3D11::DeviceManager::renderStateRegister()
 	RenderState::Depth::Disable = _mDepthDisable.Get();
 
 	// ブレンドステート登録
-	RenderState::Blend::Alpha = _mBlendAlpha.Get();
+	RenderState::Blend::Default = _mBlendDefault.Get();
 	RenderState::Blend::Add = _mBlendAdd.Get();
-	RenderState::Blend::ATC = _mBlendATC.Get();
+	RenderState::Blend::Multiply = _mBlendMultiply.Get();
 
 	// ラスタライザステート登録
 	RenderState::Raster::Solid = _mRasterSolid.Get();

@@ -9,14 +9,13 @@
 #pragma once
 
 #include "Renderer.h"
-#include "ModelManager.h"
-#include "TextureManager.h"
 #include "GameObject.h"
 #include "Utility.h"
 
 /*--------------------------------------------------
 	前方宣言
 ----------------------------------------------------*/
+class Model;
 class Texture;
 
 /*============================================================
@@ -28,7 +27,7 @@ class ModelRenderer : public Renderer
 	// テクスチャ
 	struct ModelTextures
 	{
-		Texture* Diffuse{};
+		Texture* Albedo{};
 		Texture* Normal{};
 		Texture* Roughness{};
 		Texture* Metalness{};
@@ -39,7 +38,7 @@ public:
 	// テクスチャタイプ
 	enum class TextureType
 	{
-		Diffuse,
+		Albedo,
 		Normal,
 		Roughness,
 		Metalness,
@@ -62,72 +61,35 @@ public:
 
 	~ModelRenderer() override = default;
 
+	void Finalize() override {
+		_mModel = nullptr;
+		mTextures.Albedo = nullptr;
+		mTextures.Normal = nullptr;
+		mTextures.Roughness = nullptr;
+		mTextures.Metalness = nullptr;
+		mTextures.Rump = nullptr;
+	}
+
 	void Draw() const override;
 
 private:
 	// ワールド行列取得
-	DirectX::XMMATRIX getWorldMatrix() const override {
-		return _mOwner->GetTransform().GetWorldMatrix();
-	}
+	DirectX::XMMATRIX getWorldMatrix() const override;
 
 public:
 	// モデル読み込み
-	ModelRenderer* LoadModel(const char* fileName) {
-		_mModel = ModelManager::getInstance().Load(fileName);
+	ModelRenderer* LoadModel(const char* fileName);
 
-		// モデルディレクトリ取得
-		mDirectory = Utility::File::getDirectoryPath(fileName);
-
-		return this;
-	}
-
-	ModelRenderer* LoadTexture(std::string textureName, TextureType type) {
-		switch (type)
-		{
-		case TextureType::Diffuse:
-			mTextures.Diffuse = TextureManager::getInstance().Load(
-				converttoTexturePath(textureName).c_str());
-			break;
-		
-		case TextureType::Normal:
-			mTextures.Normal = TextureManager::getInstance().Load(
-				converttoTexturePath(textureName).c_str());
-			break;
-		
-		case TextureType::Roughness:
-			mTextures.Roughness = TextureManager::getInstance().Load(
-				converttoTexturePath(textureName).c_str());
-			break;
-
-		case TextureType::Metalness:
-			mTextures.Metalness = TextureManager::getInstance().Load(
-				converttoTexturePath(textureName).c_str());
-			break;
-
-		case TextureType::Ramp:
-			mTextures.Rump = TextureManager::getInstance().Load(
-				converttoTexturePath(textureName).c_str());
-			break;
-
-		default:
-			break;
-		}
-
-		return this;
-	}
+	// テクスチャ読み込み
+	ModelRenderer* LoadTexture(std::string textureName, TextureType type = TextureType::Albedo);
 
 	// ゲッター
 	Model* GetModel() const{ return _mModel; }
 
 private:
+	// マップ用テクスチャセット
+	void setMapTextures() const;
+
 	// 外部テクスチャのパスを生成
-	std::string converttoTexturePath(const std::string& textureName) {
-		// テクスチャファイル名からパスを生成
-
-		// モデルと同ディレクトリから参照
-		// モデル用テクスチャを1ディレクトリに集結するため、複数ディレクトリの参照は原則不可
-		std::string texturePath = mDirectory.string() + textureName;
-
-		return texturePath;
-	}
+	std::string converttoTexturePath(const std::string& textureName);
 };

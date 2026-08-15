@@ -25,13 +25,18 @@ class Skeleton;
 class Animator final : public Component
 {
 private:
-    class Skeleton* mSkeleton{};
-    class Animation* mAnimation{};
+    class Skeleton* _mSkeleton{};
+    class Animation* _mAnimation{};
     double mCurrentTime{};
 
 public:
     Animator(GameObject* owner)
         : Component(owner) {}
+
+    void Finalize() override {
+        _mSkeleton = nullptr;
+        _mAnimation = nullptr;
+    }
 
     void Set(const std::string& keyName);
     void Update(double dt);

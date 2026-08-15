@@ -17,6 +17,8 @@
 *============================================================*/
 class Transform
 {
+	friend class ParticleRenderer;
+
 private:
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
 	Vector3 mRotation{ 0.0f, 0.0f, 0.0f };

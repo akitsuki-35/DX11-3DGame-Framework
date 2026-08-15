@@ -49,7 +49,7 @@ Microsoft::WRL::ComPtr<ID3D11Buffer> D3D11::BufferManager::generateBuffer(UINT s
 	bufferDesc.MiscFlags = 0;
 	bufferDesc.StructureByteStride = sizeof(float);
 
-	ComPtr<ID3D11Buffer> buffer;
+	ComPtr<ID3D11Buffer> buffer{};
 	D3D11::DeviceManager::getInstance().
 		GetDevice()->CreateBuffer(&bufferDesc, nullptr, &buffer);
 

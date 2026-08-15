@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/27
-*	@updated : 2026/08/04
+*	@updated : 2026/08/15
 *============================================================*/
 #pragma once
 
@@ -15,7 +15,18 @@
 /*------------------------------------------------------------
 	前方宣言
 ------------------------------------------------------------*/
+class Vector3;
 class Shader;
+
+/*------------------------------------------------------------
+	ブレンドステート
+------------------------------------------------------------*/
+enum class Blend : uint8_t
+{
+	Default,
+	Add,
+	Multiply
+};
 
 /*------------------------------------------------------------
 	ソート用構造体
@@ -41,6 +52,10 @@ struct SORTKEY
 		if (layer != key.layer)
 			return layer < key.layer;
 
+		if (std::abs(Zdepth - key.Zdepth) < 0.0001f) {
+			return false;
+		}
+
 		return Zdepth > key.Zdepth;
 	}
 };
@@ -55,14 +70,23 @@ protected:
 	// シェーダー
 	Shader* _mShader{ nullptr };
 
+	// ブレンドステート
+	Blend mBlendState{};
+
 	// ソート用情報
 	SORTKEY mSortKey{};
 
-	void Bind() const;
+	virtual void Bind() const;
 
 public:
 	Renderer(GameObject* owner)
-		: Component(owner){}
+		: Component(owner){
+		mBlendState = Blend::Default;
+	}
+
+	void Finalize() override {
+		_mShader = nullptr;
+	}
 
 	// 描画
 	virtual void Draw() const = 0;
@@ -70,11 +94,25 @@ public:
 	// シェーダー読み込み
 	Renderer* LoadShader(const std::string& keyName);
 
+	// ブレンドステート指定
+	Renderer* SetBlendState(const Blend& state);
+
+	// レイヤー指定
+	Renderer* SetLayer(const Layer& layer);
+
 	// ゲッター
 	Shader* GetShader() const { return _mShader; }
 	SORTKEY& GetSortKey() { return mSortKey; }
 
+	// Zソート用
+	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward);
+	void SetZdepth(float z) { mSortKey.Zdepth = z; }
+
 private:
 	// ワールド行列取得
 	virtual DirectX::XMMATRIX getWorldMatrix() const = 0;
+
+protected:
+	void Begin() const;
+	void End() const;
 };

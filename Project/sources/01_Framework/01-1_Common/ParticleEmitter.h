@@ -1,29 +1,30 @@
 ﻿/*============================================================
-*	@file	 : Explosion.h
-*	@brief	 : 爆発エフェクト
+*	@file	 : ParticleEmitter.h
+*	@brief	 : パーティクルエミッタ
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/06/09
-*	@updated : 2026/08/06
+* 　@date	 : 2026/06/18
+*	@updated : 2026/08/15
 *============================================================*/
 #pragma once
 
 #include "GameObject.h"
+#include "Particle.h"
 
 /*============================================================
-*	@class	: Explosion
-*	@brief	: 爆発エフェクト描画
+*	@class	: ParticleEmitter
+*	@brief	: パーティクルエミッタ
 *============================================================*/
-class Explosion : public GameObject
+class ParticleEmitter : public GameObject
 {
-private:
-	int mFrame{};
-	class Texture* _mTexture{};
+	friend class ParticleRenderer;
 
-	ID3D11ShaderResourceView* pTexture{}; // テクスチャ
+private:
+	static constexpr int PARTICLE_MAX{ 10000 };
+	std::vector<Particle> mParticles{};
 
 public:
-	Explosion() = default;
+	ParticleEmitter() = default;
 
 	void Initialize() override;
 	void Finalize() override;

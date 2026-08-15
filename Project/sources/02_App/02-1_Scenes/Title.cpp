@@ -6,51 +6,35 @@
 * 　@date	 : 2026/03/29
 *	@updated : 2026/06/23
 *============================================================*/
-#include "title.h"
-#include "renderer.h"
-#include "manager.h"
-#include "texture.h"
-#include "fade.h"
-#include "audio.h"
-#include "direct3d.h"
-
-#include "polygon2d.h"
-#include "game.h"
-#include "input.h"
-
+#include "Title.h"
+#include "SceneManager.h"
+#include "Game.h"
+#include "Input.h"
 #include <math.h>
-
-std::list<GameObject*> Title::titleObjects;
 
 void Title::Initialize()
 {
-	Title::titleObjects.clear();
+	_mGameObjects.clear();
 
-	AddTitleObject<Polygon2D>()->Initialize({ 0.0f, 0.0f }, { 1280.0f, 720.0f }, L"Resources\\Textures\\Title.png");
+	//AddGameObject<Polygon2D>()->Initialize({ 0.0f, 0.0f }, { 1280.0f, 720.0f }, L"assets\\textures\\title.png");
 }
 
 void Title::Finalize()
 {
+	_mTexture = nullptr;
+	Scene::Finalize();
 }
 
-void Title::Update(double elapsedTime)
+void Title::Update()
 {
-	for (GameObject* obj : titleObjects) {
-		obj->Update();
-	}
+	Scene::Update();
 
 	if (Input::GetKeyTrigger(VK_RETURN)) {
-		Manager::SceneChange<Game>();
+		SceneManager::getInstance().SceneChange<Game>();
 	}
 }
 
 void Title::Draw() const
 {
-	Renderer::Begin();
-
-	for (GameObject* obj : titleObjects) {
-		obj->Draw();
-	}
-
-	Renderer::End();
+	Scene::Draw();
 }

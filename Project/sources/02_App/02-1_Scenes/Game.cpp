@@ -6,38 +6,33 @@
 * 　@date	 : 2026/03/28
 *	@updated : 2026/08/04
 *============================================================*/
-#include "main.h"
-#include "game.h"
-#include "scene.h"
+#include "Game.h"
 #include "SceneManager.h"
-#include "input.h"
-#include "camera.h"
-#include "gameobject.h"
+#include "Input.h"
+#include "Camera.h"
 
-#include "field.h"
-#include "player.h"
-#include "enemy.h"
-#include "bullet.h"
-#include "tree.h"
-#include "sky.h"
-#include "box.h"
+#include "Field.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Bullet.h"
+#include "Tree.h"
+#include "Sky.h"
+#include "Box.h"
+#include "Shadow.h"
 
-#include "particle.h"
+#include "ParticleEmitter.h"
+#include "Result.h"
 
-#include "result.h"
-
-#include "score.h"
+#include "Score.h"
 
 #include "DeviceManager.h"
 #include "D3D11Config.h"
-
-std::list<GameObject*> Game::gameObjects;
 
 void Game::Initialize()
 {
 	//Fade::GetInstance().Start(1.0, true);
 
-	gameObjects.clear();
+	_mGameObjects.clear();
 
 	AddGameObject<Camera>();
 
@@ -53,67 +48,30 @@ void Game::Initialize()
 	box->SetScale({ 1.0f, 1.0f, 1.0f });
 
 	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 5.0f });
+	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 0.0f });
 
-	//AddGameObject<Particle>()->SetPosition({ 0.0f, 0.0f, 0.0f });
+	//AddGameObject<Shadow>()->SetPosition({ 0.0f, 0.1f, 0.0f });
+
+	AddGameObject<ParticleEmitter>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
 	AddGameObject<Score>();
 }
 
 void Game::Finalize()
 {
-	for (GameObject* obj : gameObjects) {
-		obj->Finalize();
-		delete obj;
-	}
-
-	gameObjects.clear();
+	Scene::Finalize();
 }
 
-void Game::Update(double /*elapsedTime*/)
+void Game::Update()
 {
-	for (GameObject* obj : gameObjects) {
-		obj->Update();
+	Scene::Update();
+
+	if (Input::GetKeyTrigger(VK_RETURN)) {
+		SceneManager::getInstance().SceneChange<Result>();
 	}
-
-	// ゲームオブジェクト削除
-	gameObjects.remove_if([](GameObject* object) {
-		return object->Destroy();
-		});
-
-	//if (Input::GetKeyTrigger(VK_RETURN)) {
-	//	Manager::SceneChange<Result>();
-	//}
 }
 
 void Game::Draw() const
 {
-	// Zソート
-	{
-		Camera* camera = GetGameObject<Camera>();
-
-		if (camera) {
-
-			Vector3 forward = camera->GetForward();
-			Vector3 position = camera->GetTransform().GetPosition();
-
-			for (GameObject* obj : gameObjects) {
-				obj->CalcCameraZ(position, forward);
-			}
-
-			gameObjects.sort([](GameObject* a, GameObject* b) {
-				return a->GetCameraZ() > b->GetCameraZ();
-				});
-		}
-	}
-
-	D3D11::DeviceManager::getInstance().SetSamplerState(D3D11::RenderState::Sampler::Anisotropic);
-
-	for (int layer = 0; layer < 4; layer++)
-	{
-		for (GameObject* obj : gameObjects) {
-			if (obj->GetLayer() == layer) {
-				obj->Draw();
-			}
-		}
-	}
+	Scene::Draw();
 }

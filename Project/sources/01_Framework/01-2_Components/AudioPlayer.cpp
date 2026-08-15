@@ -66,6 +66,8 @@ void AudioPlayer::Finalize()
 		// nullptrで上書き
 		mSourceVoice = nullptr;
 	}
+
+	_mAudio = nullptr;
 }
 
 AudioPlayer* AudioPlayer::LoadAudio(const char* fileName)

@@ -22,7 +22,7 @@ class Texture;
 *============================================================*/
 class SpriteRenderer : public Renderer
 {
-private:
+protected:
 	// メッシュ
 	Mesh mMesh{};
 
@@ -41,6 +41,11 @@ public:
 
 	~SpriteRenderer() override = default;
 
+	void Finalize() override {
+		_mTexture = nullptr;
+		Renderer::Finalize();
+	}
+
 	void Draw() const override;
 
 private:
@@ -54,5 +59,5 @@ public:
 	// ゲッター
 	Mesh& GetMesh() { return mMesh; }
 	Element::MATERIAL GetMaterial() const { return mMaterial; }
-	Texture* GetTexture() { return _mTexture; }
+	Texture* GetTexture() const { return _mTexture; }
 };

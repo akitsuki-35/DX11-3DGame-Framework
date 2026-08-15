@@ -1,16 +1,14 @@
 ﻿/*============================================================
-*	@file	 : Rade.h
+*	@file	 : Fade.h
 *	@brief	 : フェード制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/29
-*	@updated : 2026/06/02
+*	@updated : 2026/08/15
 *============================================================*/
-#ifndef FADE_H
-#define FADE_H
+#pragma once
 
 #include <DirectXMath.h>
-using namespace::DirectX;
 
 /*============================================================
 *	@class	: Fade
@@ -58,5 +56,3 @@ public:
 		const XMFLOAT4& fadeColor = { 0.0f,0.0f,0.0f,1.0f });
 	const Fade::State GetState() { return fadeState; }
 };
-
-#endif // !FADE_H

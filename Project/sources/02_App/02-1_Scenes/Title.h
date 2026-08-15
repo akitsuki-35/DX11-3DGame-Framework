@@ -1,16 +1,15 @@
 ﻿/*============================================================
-*	@file	 : title.h
+*	@file	 : Title.h
 *	@brief	 : タイトルシーン
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/29
-*	@updated : 2026/06/23
+*	@updated : 2026/08/15
 *============================================================*/
-#ifndef TITLE_H
-#define TITLE_H
+#pragma once
 
-#include "scene.h"
-#include "gameobject.h"
+#include "Scene.h"
+#include "GameObject.h"
 
 /*------------------------------------------------------------
 	前方宣言
@@ -35,49 +34,14 @@ enum TitleState
 class Title : public Scene
 {
 private:
-	TitleState state{ TitleState::TITLE_FADE_IN };
-	double accumulatedTime{ 0.0 };
-	double keyInputTime{};
-	Texture* pTexture{ nullptr };
-	static std::list<GameObject*> titleObjects;
+	TitleState mState{ TitleState::TITLE_FADE_IN };
+	double mAccumulatedTime{ 0.0 };
+	double mKeyInputTime{};
+	Texture* _mTexture{ nullptr };
 
 public:
 	void Initialize() override;
 	void Finalize() override;
-	void Update(double elapsedTime) override;
+	void Update() override;
 	void Draw() const override;
-
-	template <typename T> // テンプレート関数
-	static T* AddTitleObject() {
-		T* TitleObject = new T();
-		TitleObject->Initialize();
-		titleObjects.push_back(TitleObject);
-
-		return TitleObject;
-	}
-
-	template <typename T> // テンプレート関数
-	static T* GetTitleObject() {
-		for (GameObject* TitleObject : titleObjects) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(TitleObject);
-			if (find) return find;
-		}
-		return nullptr;
-	}
-
-	template <typename T>
-	static std::vector<T*> GetTitleObjects() {
-		std::vector<T*> objects;
-		for (GameObject* TitleObject : titleObjects) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(TitleObject);
-			if (find != nullptr) {
-				objects.push_back(find);
-			}
-		}
-		return objects;
-	}
 };
-
-#endif // TITLE_H

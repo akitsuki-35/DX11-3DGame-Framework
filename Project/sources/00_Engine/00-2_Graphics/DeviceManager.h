@@ -63,9 +63,9 @@ namespace D3D11 {
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>  _mDepthDisable{};
 
 		// ブレンドステート
-		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendAlpha{};
+		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendDefault{};
 		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendAdd{};
-		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendATC{};
+		Microsoft::WRL::ComPtr<ID3D11BlendState>  _mBlendMultiply{};
 
 		// ラスタライザステート
 		Microsoft::WRL::ComPtr<ID3D11RasterizerState> _mRasterSolid{};

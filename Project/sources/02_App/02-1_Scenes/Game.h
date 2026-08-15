@@ -9,7 +9,6 @@
 #pragma once
 
 #include "Scene.h"
-#include "GameObject.h"
 #include <list>
 
 /*------------------------------------------------------------
@@ -29,38 +28,6 @@ private:
 public:
 	void Initialize() override;
 	void Finalize() override;
-	void Update(double elapsedTime) override;
+	void Update() override;
 	void Draw() const override;
-
-	template <typename T> // テンプレート関数
-	static T* AddGameObject() {
-		T* gameObject = new T();
-		gameObject->Initialize();
-		gameObjects.push_back(gameObject);
-
-		return gameObject;
-	}
-
-	template <typename T> // テンプレート関数
-	static T* GetGameObject() {
-		for (GameObject* gameObject : gameObjects) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(gameObject);
-			if (find) return find;
-		}
-		return nullptr;
-	}
-
-	template <typename T>
-	static std::vector<T*> GetGameObjects() {
-		std::vector<T*> objects;
-		for (GameObject* gameObject : gameObjects) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(gameObject);
-			if (find != nullptr) {
-				objects.push_back(find);
-			}
-		}
-		return objects;
-	}
 };

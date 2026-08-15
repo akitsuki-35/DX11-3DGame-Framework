@@ -23,15 +23,11 @@
 class GameObject
 {
 protected:
-
-	int mLayer{ 1 }; // レイヤー番号
-	float mCameraZ{}; // カメラからの距離（Zソート用）
-
 	// トランスフォーム
 	Transform mTransform{};
 
 	// コンポーネント
-	std::vector<Component*> mComponents{};
+	std::vector<std::unique_ptr<Component>> mComponents{};
 
 	std::string mTag{};
 
@@ -47,7 +43,6 @@ public:
 		if (mIsDestroy) {
 			// 削除フラグがオンなら削除
 			Finalize();
-			delete this;
 			return true;
 		}
 		else {
@@ -56,49 +51,49 @@ public:
 	}
 
 	virtual void Initialize() = 0;
-	virtual void Finalize() {
-		for (Component* component : mComponents) {
-			component->Finalize();
-			delete component;
-		}
 
+	virtual void Finalize() {
+		for (const auto& component : mComponents) {
+			component->Finalize();
+		}
 		mComponents.clear();
 	}
 
 	virtual void Update() {
-		for (Component* component : mComponents) {
+		for (const auto& component : mComponents) {
 			component->Update();
 		}
 	}
 
 	virtual void Draw() const {
-		for (Component* component : mComponents) {
+		for (const auto& component : mComponents) {
 			component->Draw();
 		}
 	}
 
-	template <typename T> // テンプレート関数
+	// コンポーネント追加
+	template <typename T>
 	T* AddComponent(GameObject* object) {
-		T* component = new T(object);
-		mComponents.push_back(component);
-		component->Initialize();
+		auto component = std::make_unique<T>(object);
+		T* ptr = component.get();
 
-		return component;
+		mComponents.push_back(std::move(component));
+		ptr->Initialize();
+
+		return ptr;
 	}
 
-	template <typename T> // テンプレート関数
-	T* GetComponent() {
-		for (Component* component : mComponents) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(component);
+	// コンポーネント取得
+	template <typename T>
+	T* GetComponent() const {
+		for (const auto& component : mComponents) {
+			T* find = dynamic_cast<T*>(component.get());
 			if (find) return find;
 		}
 		return nullptr;
 	}
 
 	// ゲッター
-	const int& GetLayer() const { return mLayer; }
-	const float& GetCameraZ() const { return mCameraZ; }
 	const Transform& GetTransform() const { return mTransform; }
 	const Vector3& GetPosition() const { return mTransform.GetPosition(); }
 	const Vector3& GetRotation() const { return mTransform.GetRotation(); }
@@ -118,12 +113,6 @@ public:
 	GameObject& SetScale(const Vector3& scale) {
 		mTransform.SetScale(scale);
 		return *this;
-	}
-
-	// Z値計算
-	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) {
-		Vector3 dir = mTransform.GetPosition() - cameraPosition;
-		mCameraZ = Vector3::Dot(dir, cameraForward);
 	}
 
 	const std::string& GetTag() const { return mTag; }
