@@ -22,7 +22,7 @@ class Texture;
 *============================================================*/
 class SpriteRenderer : public Renderer
 {
-private:
+protected:
 	// メッシュ
 	Mesh mMesh{};
 
@@ -59,5 +59,5 @@ public:
 	// ゲッター
 	Mesh& GetMesh() { return mMesh; }
 	Element::MATERIAL GetMaterial() const { return mMaterial; }
-	Texture* GetTexture() { return _mTexture; }
+	Texture* GetTexture() const { return _mTexture; }
 };

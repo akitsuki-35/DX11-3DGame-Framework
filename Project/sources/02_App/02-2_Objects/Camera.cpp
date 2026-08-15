@@ -19,7 +19,6 @@ void Camera::Initialize()
 {
 	mTransform.SetPosition({ 0.0f, 5.0f, -10.0f });
 
-	//mPosition = Vector3(0.0f, 5.0f, -10.0f);
 	mTarget = Vector3(0.0f, 0.0f, 0.0f);
 }
 

@@ -7,7 +7,7 @@
 *	@updated : 2026/08/07
 *============================================================*/
 #include "Animator.h"
-#include "Skeleton.h"
+#include "Model.h"
 #include "BoneTransform.h"
 #include "AnimationManager.h"
 #include "ModelRenderer.h"

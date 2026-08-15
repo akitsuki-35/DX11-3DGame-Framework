@@ -21,16 +21,17 @@ void Title::Initialize()
 
 void Title::Finalize()
 {
+	_mTexture = nullptr;
 	Scene::Finalize();
 }
 
 void Title::Update()
 {
+	Scene::Update();
+
 	if (Input::GetKeyTrigger(VK_RETURN)) {
 		SceneManager::getInstance().SceneChange<Game>();
 	}
-
-	Scene::Update();
 }
 
 void Title::Draw() const

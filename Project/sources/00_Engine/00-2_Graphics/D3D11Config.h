@@ -41,9 +41,9 @@ namespace D3D11 {
 
 		// ブレンドステート
 		namespace Blend {
-			inline ID3D11BlendState* Alpha;
+			inline ID3D11BlendState* Default;
 			inline ID3D11BlendState* Add;
-			inline ID3D11BlendState* ATC;
+			inline ID3D11BlendState* Multiply;
 		}
 
 		// ラスタライザステート

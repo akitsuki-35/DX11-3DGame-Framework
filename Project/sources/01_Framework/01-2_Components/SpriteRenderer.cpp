@@ -14,6 +14,8 @@
 
 void SpriteRenderer::Draw() const
 {
+	Renderer::Begin();
+
 	Bind();
 
 	D3D11::BufferManager::getInstance().SetWorldMatrix(getWorldMatrix());
@@ -31,6 +33,8 @@ void SpriteRenderer::Draw() const
 	}
 
 	mMesh.Draw();
+
+	Renderer::End();
 }
 
 DirectX::XMMATRIX SpriteRenderer::getWorldMatrix() const

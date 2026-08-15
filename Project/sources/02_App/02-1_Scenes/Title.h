@@ -8,8 +8,8 @@
 *============================================================*/
 #pragma once
 
-#include "scene.h"
-#include "gameobject.h"
+#include "Scene.h"
+#include "GameObject.h"
 
 /*------------------------------------------------------------
 	前方宣言

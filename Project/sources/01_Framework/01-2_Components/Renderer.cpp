@@ -11,6 +11,7 @@
 #include "GameObject.h"
 #include "DeviceManager.h"
 #include "ShaderManager.h"
+#include "D3D11Config.h"
 
 void Renderer::Bind() const
 {
@@ -30,8 +31,46 @@ Renderer* Renderer::LoadShader(const std::string& keyName)
 	return this;
 }
 
+Renderer* Renderer::SetBlendState(const Blend& state)
+{
+	mBlendState = state;
+	return this;
+}
+
+Renderer* Renderer::SetLayer(const Layer& layer)
+{
+	mSortKey.layer = layer;
+	return this;
+}
+
 void Renderer::CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward)
 {
 	Vector3 dir = _mOwner->GetTransform().GetPosition() - cameraPosition;
 	mSortKey.Zdepth = Vector3::Dot(dir, cameraForward);
+}
+
+void Renderer::Begin() const
+{
+	switch (mBlendState)
+	{
+	case Blend::Default:
+		D3D11::DeviceManager::getInstance().SetBlendState(D3D11::RenderState::Blend::Default);
+		break;
+
+	case Blend::Add:
+		D3D11::DeviceManager::getInstance().SetBlendState(D3D11::RenderState::Blend::Add);
+		break;
+
+	case Blend::Multiply:
+		D3D11::DeviceManager::getInstance().SetBlendState(D3D11::RenderState::Blend::Multiply);
+		break;
+
+	default:
+		break;
+	}
+}
+
+void Renderer::End() const
+{
+	D3D11::DeviceManager::getInstance().SetBlendState(D3D11::RenderState::Blend::Default);
 }

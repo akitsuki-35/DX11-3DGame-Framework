@@ -17,6 +17,8 @@
 
 void UIRenderer::Draw() const
 {
+	Renderer::Begin();
+
 	// 深度ステート無効
 	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Disable);
 
@@ -41,6 +43,8 @@ void UIRenderer::Draw() const
 
 	// 深度ステート有効
 	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
+
+	Renderer::End();
 }
 
 DirectX::XMMATRIX UIRenderer::getWorldMatrix() const

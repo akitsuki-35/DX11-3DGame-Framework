@@ -16,8 +16,6 @@
 *============================================================*/
 class Shadow: public GameObject
 {
-private:
-
 public:
 	Shadow() = default;
 

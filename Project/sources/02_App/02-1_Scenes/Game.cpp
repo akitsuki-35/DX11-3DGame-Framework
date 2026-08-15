@@ -18,8 +18,9 @@
 #include "Tree.h"
 #include "Sky.h"
 #include "Box.h"
+#include "Shadow.h"
 
-#include "particle.h"
+#include "ParticleEmitter.h"
 #include "Result.h"
 
 #include "Score.h"
@@ -49,7 +50,9 @@ void Game::Initialize()
 	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 5.0f });
 	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 0.0f });
 
-	//AddGameObject<Particle>()->SetPosition({ 0.0f, 0.0f, 0.0f });
+	//AddGameObject<Shadow>()->SetPosition({ 0.0f, 0.1f, 0.0f });
+
+	AddGameObject<ParticleEmitter>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
 	AddGameObject<Score>();
 }
@@ -63,9 +66,9 @@ void Game::Update()
 {
 	Scene::Update();
 
-	//if (Input::GetKeyTrigger(VK_RETURN)) {
-	//	SceneManager::getInstance().SceneChange<Result>();
-	//}
+	if (Input::GetKeyTrigger(VK_RETURN)) {
+		SceneManager::getInstance().SceneChange<Result>();
+	}
 }
 
 void Game::Draw() const

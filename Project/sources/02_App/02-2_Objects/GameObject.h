@@ -85,7 +85,7 @@ public:
 
 	// コンポーネント取得
 	template <typename T>
-	T* GetComponent() {
+	T* GetComponent() const {
 		for (const auto& component : mComponents) {
 			T* find = dynamic_cast<T*>(component.get());
 			if (find) return find;

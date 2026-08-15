@@ -19,12 +19,13 @@ class Texture;
 *	@class	: BillboardRenderer
 *	@brief	: 板ポリゴン描画
 *============================================================*/
-class BillboardRenderer final : public SpriteRenderer
+class BillboardRenderer : public SpriteRenderer
 {
-private:
+	friend class ParticleEmitter;
+
+protected:
 	Mesh mMesh{}; // メッシュ
 	Element::MATERIAL mMaterial{}; // マテリアル
-	Texture* _mTexture{ nullptr }; // テクスチャ
 
 public:
 	BillboardRenderer(GameObject* owner)
@@ -36,10 +37,11 @@ public:
 	~BillboardRenderer() override = default;
 
 	void Finalize() override {
+		_mTexture = nullptr;
 		SpriteRenderer::Finalize();
 	}
 
-private:
+protected:
 	// ワールド行列取得
 	DirectX::XMMATRIX getWorldMatrix() const override;
 };

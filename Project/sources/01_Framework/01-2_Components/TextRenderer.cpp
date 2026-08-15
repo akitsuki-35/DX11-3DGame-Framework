@@ -60,6 +60,8 @@ void TextRenderer::Draw() const
 		return;
 	}
 
+	Renderer::Begin();
+
 	// 深度ステート無効
 	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Disable);
 
@@ -177,6 +179,8 @@ void TextRenderer::Draw() const
 
 	// 深度ステート有効
 	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
+
+	Renderer::End();
 }
 
 void TextRenderer::shadowDraw(const Glyph* glyph, const Transform& transform) const

@@ -8,11 +8,11 @@
 *============================================================*/
 #include "Fade.h"
 #include "Main.h"
-#include "Sprite.h"
 #include "Texture.h"
-#include "Direct3D.h"
 
 #include "DebugMemoryleak.h"
+
+using namespace::DirectX;
 
 /*------------------------------------------------------------
 	メンバ変数定義

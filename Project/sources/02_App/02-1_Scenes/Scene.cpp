@@ -81,6 +81,7 @@ void Scene::Draw() const
 	}
 
 	// オブジェクト描画
+	// 描画コンポーネントを持つオブジェクトのみを描画する
 	for (int layer = 0; layer < static_cast<int>(Layer::Count); layer++)
 	{
 		for (const auto& obj : renderQueue) {

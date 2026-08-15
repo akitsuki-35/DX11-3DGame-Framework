@@ -10,7 +10,6 @@
 #include "SpriteRenderer.h"
 #include "MeshTypes.h"
 #include "AudioPlayer.h"
-#include "Utility.h"
 #include "input.h"
 
 using namespace MeshType;

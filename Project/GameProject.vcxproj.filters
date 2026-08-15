@@ -82,6 +82,21 @@
     <Filter Include="00_Engine\00-2_Graphics\UI">
       <UniqueIdentifier>{30ec2ba0-824a-4adb-8f03-8211996e7d09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Framework\01-2_Components\Animator">
+      <UniqueIdentifier>{e21d15bc-902a-403d-8029-e3649ed7ea19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Framework\01-2_Components\AudioPlayer">
+      <UniqueIdentifier>{6c19db79-72c0-470a-baa7-27501eb658b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_App\02-2_Objects\Game">
+      <UniqueIdentifier>{efe4ddf4-de7c-4fe1-93b9-b940a76d159a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_App\02-2_Objects\Common">
+      <UniqueIdentifier>{65fad8cf-3ed9-4ee9-a5cd-6d3c41ea6113}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00_Engine\00-2_Graphics\Effects">
+      <UniqueIdentifier>{acdab742-2005-44cb-bb82-f8cea4659a79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp">
@@ -99,17 +114,8 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Particle.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp">
-      <Filter>01_Framework\01-2_Components</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp">
       <Filter>02_App\02-1_Scenes</Filter>
@@ -119,39 +125,6 @@
     </ClCompile>
     <ClCompile Include="sources\02_App\02-1_Scenes\Title.cpp">
       <Filter>02_App\02-1_Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Tree.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Box.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Bullet.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Camera.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Enemy.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Explosion.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Grass.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Player.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Score.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Sky.cpp">
-      <Filter>02_App\02-2_Objects</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui.cpp">
       <Filter>04_External\ImGui</Filter>
@@ -228,9 +201,6 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\Transform.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Skeleton.cpp">
       <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
     </ClCompile>
@@ -291,6 +261,54 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\Fade.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp">
+      <Filter>01_Framework\01-2_Components\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp">
+      <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Box.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Bullet.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Camera.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Enemy.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Grass.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Player.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Score.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Sky.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Tree.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-1_Common\ParticleEmitter..cpp">
+      <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
+      <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\Particle.cpp">
+      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\ParticleRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -317,12 +335,6 @@
     <ClInclude Include="sources\01_Framework\01-1_Common\Input.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Particle.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Vector2.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
@@ -341,9 +353,6 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\BillboardRenderer.h">
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\AudioPlayer.h">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\Component.h">
       <Filter>01_Framework\01-2_Components</Filter>
     </ClInclude>
@@ -358,42 +367,6 @@
     </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\Title.h">
       <Filter>02_App\02-1_Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Sky.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Tree.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Box.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Bullet.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Camera.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Enemy.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Explosion.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Field.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Grass.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Player.h">
-      <Filter>02_App\02-2_Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Score.h">
-      <Filter>02_App\02-2_Objects</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imconfig.h">
       <Filter>04_External\ImGui</Filter>
@@ -500,9 +473,6 @@
     <ClInclude Include="sources\01_Framework\01-1_Common\BoneTransform.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\Animator.h">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Skeleton.h">
       <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
     </ClInclude>
@@ -544,6 +514,57 @@
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Fade.h">
       <Filter>01_Framework\01-1_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\Animator.h">
+      <Filter>01_Framework\01-2_Components\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\AudioPlayer.h">
+      <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Box.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Bullet.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Camera.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Enemy.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Field.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Grass.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Player.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Score.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Sky.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Tree.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
+      <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-1_Common\ParticleEmitter.h">
+      <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
+      <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\Particle.h">
+      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\ParticleRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
