@@ -62,6 +62,15 @@ public:
 
 	~ModelRenderer() override = default;
 
+	void Finalize() override {
+		_mModel = nullptr;
+		mTextures.Diffuse = nullptr;
+		mTextures.Normal = nullptr;
+		mTextures.Roughness = nullptr;
+		mTextures.Metalness = nullptr;
+		mTextures.Rump = nullptr;
+	}
+
 	void Draw() const override;
 
 private:

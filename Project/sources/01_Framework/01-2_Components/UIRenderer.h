@@ -41,6 +41,11 @@ public:
 
 	~UIRenderer() override = default;
 
+	void Finalize() override {
+		_mTexture = nullptr;
+		Renderer::Finalize();
+	}
+
 	void Draw() const override;
 
 private:

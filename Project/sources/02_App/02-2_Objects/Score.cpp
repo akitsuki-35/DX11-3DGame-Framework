@@ -12,8 +12,6 @@
 
 void Score::Initialize()
 {
-	mLayer = 3;
-
 	TextRenderer* renderer = AddComponent<TextRenderer>(this);
 
 	mTransform.SetPosition({ 0.0f, 0.0f, 0.0f });

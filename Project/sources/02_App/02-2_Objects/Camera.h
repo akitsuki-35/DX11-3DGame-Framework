@@ -26,11 +26,13 @@ public:
 	void Initialize() override;
 	void Finalize() override;
 	void Update() override;
-	void Draw() const override;
 
 	DirectX::XMMATRIX GetViewMatrix() const { return mViewMatrix; }
 
 	Vector3 GetForward() const;
 
 	Vector3 GetRight() const;
+
+	// カメラ行列のセット
+	void SetMatrix() const;
 };

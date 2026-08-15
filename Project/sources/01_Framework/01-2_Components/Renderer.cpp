@@ -7,6 +7,8 @@
 *	@updated : 2026/08/13
 *============================================================*/
 #include "Renderer.h"
+#include "Vector3.h"
+#include "GameObject.h"
 #include "DeviceManager.h"
 #include "ShaderManager.h"
 
@@ -26,4 +28,10 @@ Renderer* Renderer::LoadShader(const std::string& keyName)
 {
 	_mShader = ShaderManager::getInstance().Get(keyName);
 	return this;
+}
+
+void Renderer::CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward)
+{
+	Vector3 dir = _mOwner->GetTransform().GetPosition() - cameraPosition;
+	mSortKey.Zdepth = Vector3::Dot(dir, cameraForward);
 }

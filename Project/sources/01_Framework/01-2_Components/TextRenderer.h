@@ -30,6 +30,11 @@ private:
 	size_t mCharsPerLine{ 30 }; // 1行あたりの文字数
 
 public:
+	void Finalize() override {
+		_mFont = nullptr;
+		UIRenderer::Finalize();
+	}
+
 	TextRenderer(GameObject* owner);
 
 	~TextRenderer() override = default;

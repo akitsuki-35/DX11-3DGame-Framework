@@ -11,8 +11,6 @@
 
 void Box::Initialize()
 {
-	mLayer = 1;
-
 	mTransform = Transform(
 		{ 0.0f, 0.0f, 0.0f },
 		{ 0.0f, 0.0f, 0.0f },

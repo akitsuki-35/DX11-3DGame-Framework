@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="未整理">
-      <UniqueIdentifier>{f168aaa5-13cf-40d5-b6ed-9eec2ebf1f05}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00_Engine">
       <UniqueIdentifier>{5f9a23a6-f09f-47c5-88c7-f09540b6dbe8}</UniqueIdentifier>
     </Filter>
@@ -189,27 +186,6 @@
     <ClCompile Include="sources\99_Debug\DebugText.cpp">
       <Filter>99_Debug</Filter>
     </ClCompile>
-    <ClCompile Include="sources\Others\Collision.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Others\Cursor.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Others\Easing.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Others\Fade.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Others\Keyboard.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Others\KeyLogger.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\Others\Mouse.cpp">
-      <Filter>未整理</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
@@ -304,6 +280,15 @@
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp">
+      <Filter>01_Framework\01-1_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-1_Scenes\Scene.cpp">
+      <Filter>02_App\02-1_Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-1_Common\Easing.cpp">
+      <Filter>01_Framework\01-1_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-1_Common\Fade.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -449,36 +434,6 @@
     <ClInclude Include="sources\99_Debug\DebugText.h">
       <Filter>99_Debug</Filter>
     </ClInclude>
-    <ClInclude Include="sources\Others\Collision.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\Cursor.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\Easing.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\Fade.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\Keyboard.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\KeyLogger.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\Mouse.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\Observer.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\SpriteRenderer.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\Others\Subject.h">
-      <Filter>未整理</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
@@ -583,6 +538,12 @@
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h">
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-1_Common\Easing.h">
+      <Filter>01_Framework\01-1_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-1_Common\Fade.h">
+      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

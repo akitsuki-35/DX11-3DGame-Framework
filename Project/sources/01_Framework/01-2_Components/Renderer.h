@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/27
-*	@updated : 2026/08/04
+*	@updated : 2026/08/15
 *============================================================*/
 #pragma once
 
@@ -15,6 +15,7 @@
 /*------------------------------------------------------------
 	前方宣言
 ------------------------------------------------------------*/
+class Vector3;
 class Shader;
 
 /*------------------------------------------------------------
@@ -41,6 +42,10 @@ struct SORTKEY
 		if (layer != key.layer)
 			return layer < key.layer;
 
+		if (std::abs(Zdepth - key.Zdepth) < 0.0001f) {
+			return false;
+		}
+
 		return Zdepth > key.Zdepth;
 	}
 };
@@ -64,6 +69,10 @@ public:
 	Renderer(GameObject* owner)
 		: Component(owner){}
 
+	void Finalize() override {
+		_mShader = nullptr;
+	}
+
 	// 描画
 	virtual void Draw() const = 0;
 
@@ -73,6 +82,10 @@ public:
 	// ゲッター
 	Shader* GetShader() const { return _mShader; }
 	SORTKEY& GetSortKey() { return mSortKey; }
+
+	// セッター
+	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward);
+	void SetZdepth(float z) { mSortKey.Zdepth = z; }
 
 private:
 	// ワールド行列取得

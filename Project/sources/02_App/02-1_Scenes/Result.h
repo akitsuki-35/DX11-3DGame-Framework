@@ -32,40 +32,40 @@ private:
 public:
 	void Initialize() override;
 	void Finalize() override;
-	void Update(double elapsedTime) override;
+	void Update() override;
 	void Draw() const override;
 
-	template <typename T> // テンプレート関数
-	static T* AddResultObject() {
-		T* ResultObject = new T();
-		ResultObject->Initialize();
-		resultObjects.push_back(ResultObject);
+	//template <typename T> // テンプレート関数
+	//static T* AddResultObject() {
+	//	T* ResultObject = new T();
+	//	ResultObject->Initialize();
+	//	resultObjects.push_back(ResultObject);
 
-		return ResultObject;
-	}
+	//	return ResultObject;
+	//}
 
-	template <typename T> // テンプレート関数
-	static T* GetResultObject() {
-		for (GameObject* ResultObject : resultObjects) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(ResultObject);
-			if (find) return find;
-		}
-		return nullptr;
-	}
+	//template <typename T> // テンプレート関数
+	//static T* GetResultObject() {
+	//	for (GameObject* ResultObject : resultObjects) {
+	//		// RTTI（実行時型情報）
+	//		T* find = dynamic_cast<T*>(ResultObject);
+	//		if (find) return find;
+	//	}
+	//	return nullptr;
+	//}
 
-	template <typename T>
-	static std::vector<T*> GetResultObjects() {
-		std::vector<T*> objects;
-		for (GameObject* ResultObject : resultObjects) {
-			// RTTI（実行時型情報）
-			T* find = dynamic_cast<T*>(ResultObject);
-			if (find != nullptr) {
-				objects.push_back(find);
-			}
-		}
-		return objects;
-	}
+	//template <typename T>
+	//static std::vector<T*> GetResultObjects() {
+	//	std::vector<T*> objects;
+	//	for (GameObject* ResultObject : resultObjects) {
+	//		// RTTI（実行時型情報）
+	//		T* find = dynamic_cast<T*>(ResultObject);
+	//		if (find != nullptr) {
+	//			objects.push_back(find);
+	//		}
+	//	}
+	//	return objects;
+	//}
 };
 
 #endif //  RESULT_H

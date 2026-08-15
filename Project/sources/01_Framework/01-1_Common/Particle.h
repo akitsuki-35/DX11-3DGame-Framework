@@ -10,6 +10,7 @@
 #define PARTICLE_H
 
 #include "gameobject.h"
+#include <d3d11.h>
 
 /*============================================================
 *	@class	: Particle
@@ -30,7 +31,7 @@ private:
 
 	static constexpr int PARTICLE_MAX{ 10000 };
 	PARTICLE mParticle[PARTICLE_MAX]{};
-	XMFLOAT4 mColor{ 1.0f, 0.2f, 0.2f, 1.0f };
+	DirectX::XMFLOAT4 mColor{ 1.0f, 0.2f, 0.2f, 1.0f };
 
 	ID3D11Buffer* _mVertexBuffer{}; // 頂点バッファ
 	ID3D11InputLayout* _mVertexLayout{}; // 頂点レイアウト

@@ -17,8 +17,6 @@ using namespace DirectX;
 
 void Camera::Initialize()
 {
-	mLayer = 0;
-
 	mTransform.SetPosition({ 0.0f, 5.0f, -10.0f });
 
 	//mPosition = Vector3(0.0f, 5.0f, -10.0f);
@@ -56,17 +54,6 @@ void Camera::Update()
 		XMLoadFloat3((XMFLOAT3*)&mTarget), XMLoadFloat3(&up));
 }
 
-void Camera::Draw() const
-{
-	// プロジェクション行列設定
-	XMMATRIX projection = XMMatrixPerspectiveFovLH(1.0f,
-		static_cast<float>(Screen::WIDTH) / static_cast<float>(Screen::HEIGHT), 1.0f, 1000.0f);
-	D3D11::BufferManager::getInstance().SetProjectionMatrix(projection);
-
-	// ビュー行列設定
-	D3D11::BufferManager::getInstance().SetViewMatrix(mViewMatrix);
-}
-
 Vector3 Camera::GetForward() const
 {
 	Vector3 forward = mTarget - mTransform.GetPosition();
@@ -83,4 +70,15 @@ Vector3 Camera::GetRight() const
 	right.Normalize();
 
 	return right;
+}
+
+void Camera::SetMatrix() const
+{
+	// プロジェクション行列設定
+	XMMATRIX projection = XMMatrixPerspectiveFovLH(1.0f,
+		static_cast<float>(Screen::WIDTH) / static_cast<float>(Screen::HEIGHT), 1.0f, 1000.0f);
+	D3D11::BufferManager::getInstance().SetProjectionMatrix(projection);
+
+	// ビュー行列設定
+	D3D11::BufferManager::getInstance().SetViewMatrix(mViewMatrix);
 }

@@ -35,6 +35,10 @@ public:
 
 	~BillboardRenderer() override = default;
 
+	void Finalize() override {
+		SpriteRenderer::Finalize();
+	}
+
 private:
 	// ワールド行列取得
 	DirectX::XMMATRIX getWorldMatrix() const override;

@@ -57,7 +57,7 @@ void SceneManager::Update()
 {
 	Input::Update();
 
-	if(mCurrentScene) mCurrentScene->Update(1.0/60.0);
+	if(mCurrentScene) mCurrentScene->Update();
 
 	if (mNextScene)
 	{
