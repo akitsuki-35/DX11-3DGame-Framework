@@ -49,6 +49,12 @@ void Renderer::CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) const
 	mSortKey.Zdepth = Vector3::Dot(dir, cameraForward);
 }
 
+Renderer* Renderer::SetColor(const DirectX::XMFLOAT4 color)
+{
+	mColor = color;
+	return this;
+}
+
 void Renderer::Begin() const
 {
 	switch (mBlendState)

@@ -28,12 +28,6 @@ private:
 	// エミッタ
 	ParticleEmitter* _mEmitter{ nullptr };
 
-	// カラー
-	DirectX::XMFLOAT4 mColor{ 1.0f, 1.0f, 1.0f, 1.0f };
-
-	// マテリアル
-	Element::MATERIAL mMaterial{};
-
 	// テクスチャ
 	Texture* _mTexture{ nullptr };
 
@@ -69,6 +63,5 @@ public:
 	ParticleRenderer* LoadTexture(const char* fileName);
 
 	// ゲッター
-	Element::MATERIAL GetMaterial() const { return mMaterial; }
 	Texture* GetTexture() const { return _mTexture; }
 };

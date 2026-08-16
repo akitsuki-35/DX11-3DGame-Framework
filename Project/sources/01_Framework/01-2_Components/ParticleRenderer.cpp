@@ -46,7 +46,7 @@ void ParticleRenderer::Draw() const
 
 	// マテリアル設定
 	Element::MATERIAL material{};
-	material.Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	material.Diffuse = mColor;
 	material.TextureEnable = static_cast<bool>(_mTexture != nullptr);
 	D3D11::BufferManager::getInstance().SetMaterial(material);
 

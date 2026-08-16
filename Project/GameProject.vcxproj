@@ -47,7 +47,7 @@
     <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Easing.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\Fade.cpp">
+    <ClCompile Include="sources\01_Framework\01-1_Common\Transition.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -222,7 +222,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Easing.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\Fade.h">
+    <ClInclude Include="sources\01_Framework\01-1_Common\Transition.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>

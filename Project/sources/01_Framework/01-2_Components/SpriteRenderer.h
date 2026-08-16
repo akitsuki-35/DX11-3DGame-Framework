@@ -26,9 +26,6 @@ protected:
 	// メッシュ
 	Mesh mMesh{};
 
-	// マテリアル
-	Element::MATERIAL mMaterial{};
-
 	// テクスチャ
 	Texture* _mTexture{ nullptr };
 
@@ -58,6 +55,5 @@ public:
 
 	// ゲッター
 	Mesh& GetMesh() { return mMesh; }
-	Element::MATERIAL GetMaterial() const { return mMaterial; }
 	Texture* GetTexture() const { return _mTexture; }
 };

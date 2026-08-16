@@ -19,9 +19,6 @@ void UIRenderer::Draw() const
 {
 	Renderer::Begin();
 
-	// 深度ステート無効
-	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Disable);
-
 	Bind();
 
 	D3D11::BufferManager::getInstance().Set2DMatrix();
@@ -29,7 +26,7 @@ void UIRenderer::Draw() const
 
 	// マテリアル設定
 	Element::MATERIAL material{};
-	material.Diffuse = DirectX::XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	material.Diffuse = mColor;
 	material.TextureEnable = static_cast<bool>(_mTexture != nullptr);
 	D3D11::BufferManager::getInstance().SetMaterial(material);
 
@@ -40,9 +37,6 @@ void UIRenderer::Draw() const
 	}
 
 	mCanvas.Draw();
-
-	// 深度ステート有効
-	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
 
 	Renderer::End();
 }

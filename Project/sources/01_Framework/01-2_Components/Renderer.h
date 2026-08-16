@@ -67,6 +67,9 @@ protected:
 	// シェーダー
 	Shader* _mShader{ nullptr };
 
+	// カラー
+	DirectX::XMFLOAT4 mColor{ 1.0f, 1.0f, 1.0f, 1.0f };
+
 	// ブレンドステート
 	Blend mBlendState{};
 
@@ -97,13 +100,17 @@ public:
 	// レイヤー指定
 	Renderer* SetLayer(const Layer& layer);
 
-	// ゲッター
-	Shader* GetShader() const { return _mShader; }
-	SORTKEY& GetSortKey() { return mSortKey; }
-
 	// Zソート用
 	virtual void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) const;
 	void SetZdepth(float z) { mSortKey.Zdepth = z; }
+
+	// ゲッター
+	Shader* GetShader() const { return _mShader; }
+	DirectX::XMFLOAT4 GetColor() const { return mColor; }
+	SORTKEY& GetSortKey() const { return mSortKey; }
+
+	// セッター
+	Renderer* SetColor(const DirectX::XMFLOAT4 color);
 
 private:
 	// ワールド行列取得
