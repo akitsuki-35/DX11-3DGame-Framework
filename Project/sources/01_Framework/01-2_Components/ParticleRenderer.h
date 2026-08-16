@@ -8,29 +8,46 @@
 *============================================================*/
 #pragma once
 
-#include "BillboardRenderer.h"
+#include "Renderer.h"
+#include "Elements.h"
+
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+class Texture;
 
 /*============================================================
 *	@class	: ParticleRenderer
 *	@brief	: パーティクル描画コンポーネント
 *============================================================*/
-class ParticleRenderer : public BillboardRenderer
+class ParticleRenderer : public Renderer
 {
 	friend class ParticleEmitter;
 
 private:
+	// エミッタ
 	ParticleEmitter* _mEmitter{ nullptr };
+
+	// カラー
 	DirectX::XMFLOAT4 mColor{ 1.0f, 1.0f, 1.0f, 1.0f };
+
+	// マテリアル
+	Element::MATERIAL mMaterial{};
+
+	// テクスチャ
+	Texture* _mTexture{ nullptr };
 
 public:
 	ParticleRenderer(GameObject* owner)
-		: BillboardRenderer(owner) {
+		: Renderer(owner) {
 		// 不透明レイヤーに描画
 		mSortKey.layer = Layer::Alpha;
 	};
 
 	~ParticleRenderer() override = default;
 
+	// エミッタのセット
+	// コンポーネントのアタッチと同時に呼び出す
 	ParticleRenderer* SetEmitter(ParticleEmitter* emitter) {
 		_mEmitter = emitter;
 		return this;
@@ -40,6 +57,18 @@ public:
 
 	void Finalize() override {
 		_mTexture = nullptr;
-		SpriteRenderer::Finalize();
+		Renderer::Finalize();
 	}
+
+private:
+	// ワールド行列取得
+	DirectX::XMMATRIX getWorldMatrix() const override;
+
+public:
+	// テクスチャ読み込み
+	ParticleRenderer* LoadTexture(const char* fileName);
+
+	// ゲッター
+	Element::MATERIAL GetMaterial() const { return mMaterial; }
+	Texture* GetTexture() const { return _mTexture; }
 };

@@ -18,8 +18,6 @@ void ParticleEmitter::Initialize()
 {
 	ParticleRenderer* renderer = AddComponent<ParticleRenderer>(this)->SetEmitter(this);
 
-	renderer->GetMesh().CreatePlane(Plane::Pivot::Center, Plane::Axis::XY);
-
 	renderer->LoadTexture("assets\\textures\\particle.png")->LoadShader("Unlit")
 		->SetBlendState(Blend::Add)->SetLayer(Layer::Alpha);
 

@@ -7,11 +7,11 @@
 *	@updated : 2026/08/13
 *============================================================*/
 #include "BillboardRenderer.h"
-#include "Game.h"
+#include "Scene.h"
 #include "Camera.h"
 
 DirectX::XMMATRIX BillboardRenderer::getWorldMatrix() const
 {
-	Camera* camera = Game::GetGameObject<Camera>();
+	Camera* camera = Scene::GetGameObject<Camera>();
 	return _mOwner->GetTransform().GetBillboardMatrix(camera->GetViewMatrix());
 }

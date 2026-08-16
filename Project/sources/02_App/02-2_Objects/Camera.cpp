@@ -24,6 +24,7 @@ void Camera::Initialize()
 
 void Camera::Finalize()
 {
+	GameObject::Finalize();
 }
 
 void Camera::Update()

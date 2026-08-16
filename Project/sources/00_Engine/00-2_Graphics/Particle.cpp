@@ -7,6 +7,14 @@
 *	@updated : 2026/08/15
 *============================================================*/
 #include "Particle.h"
+#include "MeshTypes.h"
+
+using namespace MeshType;
+
+Particle::Particle()
+{
+	mMesh.CreatePlane(Plane::Pivot::Center, Plane::Axis::XY);
+}
 
 void Particle::update(double dt)
 {

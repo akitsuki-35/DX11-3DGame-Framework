@@ -49,11 +49,8 @@ struct SORTKEY
 
 	bool operator<(const SORTKEY& key) const
 	{
-		if (layer != key.layer)
+		if (layer != key.layer) {
 			return layer < key.layer;
-
-		if (std::abs(Zdepth - key.Zdepth) < 0.0001f) {
-			return false;
 		}
 
 		return Zdepth > key.Zdepth;
@@ -74,7 +71,7 @@ protected:
 	Blend mBlendState{};
 
 	// ソート用情報
-	SORTKEY mSortKey{};
+	mutable SORTKEY mSortKey{};
 
 	virtual void Bind() const;
 
@@ -105,7 +102,7 @@ public:
 	SORTKEY& GetSortKey() { return mSortKey; }
 
 	// Zソート用
-	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward);
+	virtual void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) const;
 	void SetZdepth(float z) { mSortKey.Zdepth = z; }
 
 private:
