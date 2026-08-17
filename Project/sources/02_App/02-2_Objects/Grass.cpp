@@ -31,9 +31,9 @@ void Grass::Finalize()
 	GameObject::Finalize();
 }
 
-void Grass::Update()
+void Grass::Update(double deltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Grass::Draw() const

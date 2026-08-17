@@ -9,8 +9,6 @@
 #include "Shadow.h"
 #include "SpriteRenderer.h"
 #include "MeshTypes.h"
-#include "DeviceManager.h"
-#include "D3D11Config.h"
 
 using namespace MeshType;
 
@@ -29,16 +27,12 @@ void Shadow::Finalize()
 	GameObject::Finalize();
 }
 
-void Shadow::Update()
+void Shadow::Update(double deltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Shadow::Draw() const
 {
-	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Disable);
-
 	GameObject::Draw();
-
-	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
 }

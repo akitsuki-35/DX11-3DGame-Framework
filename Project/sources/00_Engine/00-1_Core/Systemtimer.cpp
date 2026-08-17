@@ -11,19 +11,26 @@
 void System::Timer::Initialize()
 {
     // タイマー初期化
-    timeBeginPeriod(1);
-    mExecLastTime = timeGetTime();
-    mCurrentTime = 0;
+    QueryPerformanceFrequency(&mFreq);
+    QueryPerformanceCounter(&mExecLastTime);
 }
 
-bool System::Timer::Tick(double frameRate)
+bool System::Timer::Tick()
 {
     // タイマー進行
-    mCurrentTime = timeGetTime();
+    QueryPerformanceCounter(&mCurrentTime);
 
-    if ((mCurrentTime - mExecLastTime) >= (frameRate)) {
-        mExecLastTime = mCurrentTime;
+    // dt更新
+    double dt = static_cast<double>(mCurrentTime.QuadPart - mExecLastTime.QuadPart)
+        / static_cast<double>(mFreq.QuadPart);
 
+    mExecLastTime = mCurrentTime;
+
+    // 累積時間購入
+    mAccumulator += dt;
+
+    if (mAccumulator >= mFps) {
+        mAccumulator -= mFps;
         return true;
     }
 

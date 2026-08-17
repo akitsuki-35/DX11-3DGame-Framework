@@ -42,9 +42,10 @@ void Player::Finalize()
 	GameObject::Finalize();
 }
 
-void Player::Update()
+void Player::Update(double deltaTime)
 {
-	float dt = 1.0f / 60.0f; // 経過時間
+	float dt = static_cast<float>(deltaTime);
+
 	float j = 15.0f; // ジャンプ力
 	float g = 30.0f; // 重力加速度
 	float r = 5.0f; // 抵抗力
@@ -202,8 +203,8 @@ void Player::Update()
 	mTransform.SetRotation(rotation);
 	mTransform.SetScale(scale);
 
-	GameObject::Update();
-	GetComponent<Animator>()->Update(dt);
+	GameObject::Update(deltaTime);
+	GetComponent<Animator>()->Update(deltaTime);
 }
 
 void Player::Draw() const

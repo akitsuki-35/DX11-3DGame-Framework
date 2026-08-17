@@ -36,6 +36,7 @@ namespace D3D11 {
 		// 深度ステート
 		namespace Depth {
 			inline ID3D11DepthStencilState* Enable;
+			inline ID3D11DepthStencilState* TestOnly;
 			inline ID3D11DepthStencilState* Disable;
 		}
 

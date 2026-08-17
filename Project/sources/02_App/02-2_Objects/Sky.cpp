@@ -31,13 +31,13 @@ void Sky::Finalize()
 	GameObject::Finalize();
 }
 
-void Sky::Update()
+void Sky::Update(double deltaTime)
 {
 	Camera* camera = Game::GetGameObject<Camera>();
 
 	mTransform.SetPosition(camera->GetPosition());
 
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Sky::Draw() const

@@ -157,8 +157,13 @@ bool D3D11::DeviceManager::generateDepthStencilState()
 	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, &_mDepthEnable);
 	if (FAILED(hr)) { return false; }
 
-	// 深度無効ステート
+	// テストのみ
 	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
+	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, &_mDepthTestOnly);
+	if (FAILED(hr)) { return false; }
+
+	// 深度無効
+	depthStencilDesc.DepthEnable = FALSE;
 	hr = _mDevice->CreateDepthStencilState(&depthStencilDesc, &_mDepthDisable);
 	if (FAILED(hr)) { return false; }
 
@@ -273,6 +278,7 @@ void D3D11::DeviceManager::renderStateRegister()
 {
 	// 深度ステート登録
 	RenderState::Depth::Enable = _mDepthEnable.Get();
+	RenderState::Depth::TestOnly = _mDepthTestOnly.Get();
 	RenderState::Depth::Disable = _mDepthDisable.Get();
 
 	// ブレンドステート登録

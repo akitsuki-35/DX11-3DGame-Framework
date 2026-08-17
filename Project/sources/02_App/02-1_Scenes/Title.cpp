@@ -25,9 +25,9 @@ void Title::Finalize()
 	Scene::Finalize();
 }
 
-void Title::Update()
+void Title::Update(double deltaTime)
 {
-	Scene::Update();
+	Scene::Update(deltaTime);
 
 	if (Input::GetKeyTrigger(VK_RETURN)) {
 		SceneManager::getInstance().SceneChange<Game>();

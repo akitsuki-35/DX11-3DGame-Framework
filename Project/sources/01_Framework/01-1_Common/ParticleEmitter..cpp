@@ -18,8 +18,6 @@ void ParticleEmitter::Initialize()
 {
 	ParticleRenderer* renderer = AddComponent<ParticleRenderer>(this)->SetEmitter(this);
 
-	renderer->GetMesh().CreatePlane(Plane::Pivot::Center, Plane::Axis::XY);
-
 	renderer->LoadTexture("assets\\textures\\particle.png")->LoadShader("Unlit")
 		->SetBlendState(Blend::Add)->SetLayer(Layer::Alpha);
 
@@ -35,9 +33,8 @@ void ParticleEmitter::Finalize()
 	GameObject::Finalize();
 }
 
-void ParticleEmitter::Update()
+void ParticleEmitter::Update(double deltaTime)
 {
-	float dt = 1.0f / 60.0f;
 	Vector3 gravity{ 0.0f, -9.8f, 0.0f };
 
 	int count = 100;
@@ -67,7 +64,7 @@ void ParticleEmitter::Update()
 
 	// パーティクル更新
 	for (int i = 0; i < PARTICLE_MAX; i++) {
-		mParticles[i].update(dt);
+		mParticles[i].update(deltaTime);
 	}
 }
 

@@ -8,6 +8,7 @@
 *============================================================*/
 #include "SceneManager.h"
 #include "Graphics.h"
+#include "Transition.h"
 #include "Input.h"
 #include "Game.h"
 #include "Title.h"
@@ -20,6 +21,7 @@
 void SceneManager::Initialize()
 {
 	D3D11::Graphics::getInstance().Initialize();
+	Transition::getInstance().Initialize();
 	Input::Initialize();
 	AudioPlayer::InitializeMaster();
 
@@ -53,11 +55,12 @@ void SceneManager::Finalize()
 /*------------------------------------------------------------
 	更新
 ------------------------------------------------------------*/
-void SceneManager::Update()
+void SceneManager::Update(double deltaTime)
 {
+	Transition::getInstance().Update(deltaTime);
 	Input::Update();
 
-	if(mCurrentScene) mCurrentScene->Update();
+	if(mCurrentScene) mCurrentScene->Update(deltaTime);
 
 	if (mNextScene)
 	{
@@ -72,6 +75,7 @@ void SceneManager::Update()
 
 		mCurrentScene->Initialize();
 	}
+
 }
 
 /*------------------------------------------------------------
@@ -82,6 +86,8 @@ void SceneManager::Draw()
 	D3D11::Graphics::getInstance().Begin();
 
 	if(mCurrentScene) mCurrentScene->Draw();
+
+	Transition::getInstance().Draw();
 
 	D3D11::Graphics::getInstance().End();
 }

@@ -15,6 +15,7 @@
 	前方宣言
 ------------------------------------------------------------*/
 class Texture;
+class Transform;
 
 /*============================================================
 *	@class	: UIRenderer
@@ -26,13 +27,15 @@ protected:
 	// キャンバス
 	UICanvas mCanvas{};
 
-	// マテリアル
-	Element::MATERIAL mMaterial{};
-
 	// テクスチャ
 	Texture* _mTexture{ nullptr };
 
 public:
+	UIRenderer() {
+		// 2Dレイヤーに描画
+		mSortKey.layer = Layer::UI;
+	}
+
 	UIRenderer(GameObject* owner)
 		: Renderer(owner) {
 		// 2Dレイヤーに描画
@@ -47,6 +50,7 @@ public:
 	}
 
 	void Draw() const override;
+	void Draw(const Transform& transform);
 
 private:
 	// ワールド行列取得
@@ -58,6 +62,5 @@ public:
 
 	// ゲッター
 	UICanvas& GetCanvas() { return mCanvas; }
-	Element::MATERIAL GetMaterial() const { return mMaterial; }
 	Texture* GetTexture() { return _mTexture; }
 };

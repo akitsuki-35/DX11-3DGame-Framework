@@ -60,6 +60,7 @@ namespace D3D11 {
 
 		// 深度ステート
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>  _mDepthEnable{};
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>  _mDepthTestOnly{};
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilState>  _mDepthDisable{};
 
 		// ブレンドステート

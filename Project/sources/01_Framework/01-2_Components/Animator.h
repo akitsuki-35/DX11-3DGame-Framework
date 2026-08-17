@@ -39,7 +39,7 @@ public:
     }
 
     void Set(const std::string& keyName);
-    void Update(double dt);
+    void Update(double deltaTime) override;
 
     // ゲッター
     double GetTime() const { return mCurrentTime; }

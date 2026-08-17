@@ -47,9 +47,9 @@
     <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Easing.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\Fade.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    <ClCompile Include="sources\01_Framework\01-1_Common\Transition.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\ParticleEmitter..cpp">
@@ -179,7 +179,6 @@
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Config.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\Main.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Systemtimer.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
@@ -218,13 +217,13 @@
     <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Easing.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\Fade.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    <ClInclude Include="sources\01_Framework\01-1_Common\Transition.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Input.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\ParticleEmitter.h">

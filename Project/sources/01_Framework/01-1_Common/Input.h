@@ -15,5 +15,4 @@ public:
 
 	static bool GetKeyPress( BYTE KeyCode );
 	static bool GetKeyTrigger( BYTE KeyCode );
-
 };

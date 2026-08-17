@@ -43,10 +43,16 @@ Renderer* Renderer::SetLayer(const Layer& layer)
 	return this;
 }
 
-void Renderer::CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward)
+void Renderer::CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) const
 {
 	Vector3 dir = _mOwner->GetTransform().GetPosition() - cameraPosition;
 	mSortKey.Zdepth = Vector3::Dot(dir, cameraForward);
+}
+
+Renderer* Renderer::SetColor(const DirectX::XMFLOAT4 color)
+{
+	mColor = color;
+	return this;
 }
 
 void Renderer::Begin() const

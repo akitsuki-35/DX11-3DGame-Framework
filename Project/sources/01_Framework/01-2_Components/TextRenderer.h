@@ -35,6 +35,8 @@ public:
 		UIRenderer::Finalize();
 	}
 
+	TextRenderer();
+
 	TextRenderer(GameObject* owner);
 
 	~TextRenderer() override = default;
@@ -48,6 +50,7 @@ private:
 	DirectX::XMFLOAT4 convertTextColor(int index) const;
 
 	DirectX::XMMATRIX getWorldMatrix() = delete;
+	Renderer* SetColor(const DirectX::XMFLOAT4 color) = delete;
 
 public:
 	UIRenderer* LoadTexture(const char* fileName) = delete;

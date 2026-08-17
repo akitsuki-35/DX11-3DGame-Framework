@@ -16,34 +16,17 @@
 #include "GameObject.h"
 #include "Utility.h"
 #include "D3D11Config.h"
+#include "Config.h"
 #include <d3d11.h>
 #include <dwrite.h>
 
 using namespace DirectX;
 
-namespace {
-	// テキストカラーインデックス
-	enum class ColorIndex : int
-	{
-		White = 0, // = \\c[0]
-		Black,	   // = \\c[1]
-		Red,	   // = \\c[2]
-		Green,	   // = \\c[3]
-		Blue,	   // = \\c[4]
-		Yellow,	   // = \\c[5]
-		Purple,	   // = \\c[6]
-		Cyan	   // = \\c[7]
-	};
-
-	// カラー
-	static inline constexpr XMFLOAT4 White =  { 1.0f, 1.0f, 1.0f, 1.0f };
-	static inline constexpr XMFLOAT4 Black =  { 0.0f, 0.0f, 0.0f, 1.0f };
-	static inline constexpr XMFLOAT4 Red =	  { 1.0f, 0.0f, 0.0f, 1.0f };
-	static inline constexpr XMFLOAT4 Green =  { 0.0f, 1.0f, 0.0f, 1.0f };
-	static inline constexpr XMFLOAT4 Blue  =  { 0.0f, 0.0f, 1.0f, 1.0f };
-	static inline constexpr XMFLOAT4 Yellow = { 1.0f, 1.0f, 0.0f, 1.0f };
-	static inline constexpr XMFLOAT4 Purple = { 1.0f, 0.0f, 1.0f, 1.0f };
-	static inline constexpr XMFLOAT4 Cyan =   { 0.0f, 1.0f, 1.0f, 1.0f };
+TextRenderer::TextRenderer()
+{
+	// 2Dレイヤーに描画
+	mSortKey.layer = Layer::UI;
+	mCanvas.CreateCanvas(UIStyle::Pivot::LeftTop);
 }
 
 TextRenderer::TextRenderer(GameObject* owner)
@@ -116,7 +99,7 @@ void TextRenderer::Draw() const
 					int colorId = mText[i + 3] - L'0';
 
 					// テキスト色変換
-					textColor = convertTextColor(colorId);
+					textColor = Color::ConvertColor(colorId);
 
 					i += 4;
 					continue;
@@ -205,42 +188,6 @@ void TextRenderer::shadowDraw(const Glyph* glyph, const Transform& transform) co
 
 	// ワールド行列を元の位置に戻す
 	D3D11::BufferManager::getInstance().SetWorldMatrix(transform.GetWorldMatrix());
-}
-
-DirectX::XMFLOAT4 TextRenderer::convertTextColor(int index) const
-{
-	// カラーインデックスに応じてテキスト色を変換
-	ColorIndex colorId = static_cast<ColorIndex>(index);
-
-	switch (colorId)
-	{
-	case ColorIndex::White:
-		return White;
-
-	case ColorIndex::Black:
-		return Black;
-
-	case ColorIndex::Red:
-		return Red;
-
-	case ColorIndex::Green:
-		return Green;
-
-	case ColorIndex::Blue:
-		return Blue;
-
-	case ColorIndex::Yellow:
-		return Yellow;
-
-	case ColorIndex::Purple:
-		return Purple;
-
-	case ColorIndex::Cyan:
-		return Cyan;
-
-	default:
-		return White;
-	}
 }
 
 TextRenderer* TextRenderer::SetFont(const std::string& fontName)

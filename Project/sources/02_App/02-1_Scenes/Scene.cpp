@@ -12,6 +12,7 @@
 #include "Renderer.h"
 #include "GameObject.h"
 #include "Camera.h"
+#include <array>
 #include <algorithm>
 
 void Scene::Finalize()
@@ -23,10 +24,10 @@ void Scene::Finalize()
 	_mGameObjects.clear();
 }
 
-void Scene::Update()
+void Scene::Update(double deltaTime)
 {
 	for (const auto& obj : _mGameObjects) {
-		obj->Update();
+		obj->Update(deltaTime);
 	}
 
 	// ゲームオブジェクト削除
@@ -41,57 +42,61 @@ void Scene::Draw() const
 
 	// カメラ取得
 	Camera* camera = GetGameObject<Camera>();
-	
-	// 描画用キュー
-	std::vector<GameObject*> renderQueue{};
 
-	// 描画コンポーネントを持つオブジェクトをキューに登録
+	// レイヤー別の描画キューを作成
+	constexpr size_t LAYER = static_cast<size_t>(Layer::Count);
+	std::array<std::vector<GameObject*>, LAYER> layerQueue{};
+
+	// レイヤー別にオブジェクトを詰める
 	for (const auto& obj : _mGameObjects) {
 		if (auto* renderer = obj->GetComponent<Renderer>()) {
-			renderQueue.push_back(obj.get());
+			size_t layer = static_cast<size_t>(renderer->GetSortKey().layer);
+			layerQueue[layer].push_back(obj.get());
 		}
 	}
-
+	
 	if (camera) {
 		Vector3 forward = camera->GetForward();
 		Vector3 position = camera->GetTransform().GetPosition();
 
-		// カメラからの距離計算
-		// 3Dオブジェクトのみ計算
-		for (const auto& obj : renderQueue) {
-			auto* renderer = obj->GetComponent<Renderer>();
-			if (renderer->GetSortKey().layer != Layer::UI) {
+		// Zソート
+		for (size_t layer = 0; layer < LAYER; layer++) {
+			// UIには適用しない
+			if (layer == static_cast<size_t>(Layer::UI)) {
+				continue;
+			}
+
+			for (auto* obj : layerQueue[layer]) {
+				auto* renderer = obj->GetComponent<Renderer>();
 				renderer->CalcCameraZ(position, forward);
 			}
+
+			std::stable_sort(layerQueue[layer].begin(), layerQueue[layer].end(),
+				[](GameObject* a, GameObject* b) {
+					return a->GetComponent<Renderer>()->GetSortKey().Zdepth >
+						b->GetComponent<Renderer>()->GetSortKey().Zdepth;});
 		}
 
-		// Zソート
-		std::sort(renderQueue.begin(), renderQueue.end(), [](GameObject* a, GameObject* b) {
-			return a->GetComponent<Renderer>()->GetSortKey() < b->GetComponent<Renderer>()->GetSortKey();
-			});
-
-		// カメラ行列をセット
+		// カメラ行列セット
 		camera->SetMatrix();
 	}
-	else {
-		// レイヤー番号のみで描画
-		std::sort(renderQueue.begin(), renderQueue.end(), [](GameObject* a, GameObject* b) {
-			return a->GetComponent<Renderer>()->GetSortKey().layer < b->GetComponent<Renderer>()->GetSortKey().layer;
-			});
-	}
 
-	// オブジェクト描画
-	// 描画コンポーネントを持つオブジェクトのみを描画する
-	for (int layer = 0; layer < static_cast<int>(Layer::Count); layer++)
-	{
-		for (const auto& obj : renderQueue) {
-			auto renderer = obj->GetComponent<Renderer>();
+	// レイヤー順に描画
+	for (size_t layer = 0; layer < LAYER; layer++) {
 
-			if (renderer) {
-				if (static_cast<int>(renderer->GetSortKey().layer) == layer) {
-					obj->Draw();
-				}
-			}
+		// 深度ステート切替
+		if (layer == static_cast<size_t>(Layer::World)) {
+			D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
+		}
+		else if(layer == static_cast<size_t>(Layer::Alpha)) {
+			D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::TestOnly);
+		}
+		else if (layer == static_cast<size_t>(Layer::UI)) {
+			D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Disable);
+		}
+
+		for (auto* obj : layerQueue[layer]) {
+			obj->Draw();
 		}
 	}
 }

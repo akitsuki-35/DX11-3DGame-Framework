@@ -20,9 +20,8 @@ int Application::Run() const
 			break;
 		}
 		else{
-			if (System::Timer::getInstance().Tick(1000 / 60))
-			{
-				SceneManager::getInstance().Update();
+			while (System::Timer::getInstance().Tick()) {
+				SceneManager::getInstance().Update(System::Timer::getInstance().GetDeltaTime());
 				SceneManager::getInstance().Draw();
 			}
 		}

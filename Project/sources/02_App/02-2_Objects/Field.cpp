@@ -33,7 +33,7 @@ void Field::Finalize()
 	GameObject::Finalize();
 }
 
-void Field::Update()
+void Field::Update(double deltaTime)
 {
 	if (Input::GetKeyTrigger('Z')) {
 		GameObject::GetComponent<AudioPlayer>()->Pause();
@@ -46,7 +46,7 @@ void Field::Update()
 	}
 
 
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Field::Draw() const

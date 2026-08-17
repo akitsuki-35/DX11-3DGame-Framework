@@ -27,7 +27,7 @@ public:
 
 	virtual void Initialize() = 0;
 	virtual void Finalize();
-	virtual void Update();
+	virtual void Update(double deltaTime);
 	virtual void Draw() const;
 
 	template <typename T>

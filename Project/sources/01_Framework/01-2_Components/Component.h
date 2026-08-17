@@ -25,6 +25,6 @@ public:
 
 	virtual void Initialize() {};
 	virtual void Finalize() {};
-	virtual void Update() {};
+	virtual void Update(double /*deltaTime*/) {};
 	virtual void Draw() const {};
 };

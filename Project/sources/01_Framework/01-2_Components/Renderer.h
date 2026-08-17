@@ -49,11 +49,8 @@ struct SORTKEY
 
 	bool operator<(const SORTKEY& key) const
 	{
-		if (layer != key.layer)
+		if (layer != key.layer) {
 			return layer < key.layer;
-
-		if (std::abs(Zdepth - key.Zdepth) < 0.0001f) {
-			return false;
 		}
 
 		return Zdepth > key.Zdepth;
@@ -70,15 +67,22 @@ protected:
 	// シェーダー
 	Shader* _mShader{ nullptr };
 
+	// カラー
+	DirectX::XMFLOAT4 mColor{ 1.0f, 1.0f, 1.0f, 1.0f };
+
 	// ブレンドステート
 	Blend mBlendState{};
 
 	// ソート用情報
-	SORTKEY mSortKey{};
+	mutable SORTKEY mSortKey{};
 
 	virtual void Bind() const;
 
 public:
+	Renderer() {
+		mBlendState = Blend::Default;
+	}
+
 	Renderer(GameObject* owner)
 		: Component(owner){
 		mBlendState = Blend::Default;
@@ -100,13 +104,17 @@ public:
 	// レイヤー指定
 	Renderer* SetLayer(const Layer& layer);
 
+	// Zソート用
+	virtual void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) const;
+	void SetZdepth(float z) { mSortKey.Zdepth = z; }
+
 	// ゲッター
 	Shader* GetShader() const { return _mShader; }
-	SORTKEY& GetSortKey() { return mSortKey; }
+	DirectX::XMFLOAT4 GetColor() const { return mColor; }
+	SORTKEY& GetSortKey() const { return mSortKey; }
 
-	// Zソート用
-	void CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward);
-	void SetZdepth(float z) { mSortKey.Zdepth = z; }
+	// セッター
+	Renderer* SetColor(const DirectX::XMFLOAT4 color);
 
 private:
 	// ワールド行列取得
