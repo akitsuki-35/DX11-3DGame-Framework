@@ -317,9 +317,6 @@
     <ClInclude Include="sources\00_Engine\00-1_Core\Config.h">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Main.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Systemtimer.h">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>

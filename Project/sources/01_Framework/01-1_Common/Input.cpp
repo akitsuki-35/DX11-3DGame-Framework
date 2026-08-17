@@ -1,15 +1,12 @@
 ﻿
-#include "main.h"
-#include "input.h"
-
+#include "Input.h"
+#pragma comment (lib, "winmm.lib")
 
 BYTE Input::m_OldKeyState[256];
 BYTE Input::m_KeyState[256];
 
-
 void Input::Initialize()
 {
-
 	memset( m_OldKeyState, 0, 256 );
 	memset( m_KeyState, 0, 256 );
 
@@ -18,21 +15,18 @@ void Input::Initialize()
 void Input::Finalize()
 {
 
-
 }
 
 void Input::Update()
 {
+	memcpy(m_OldKeyState, m_KeyState, 256);
 
-	memcpy( m_OldKeyState, m_KeyState, 256 );
-
-	GetKeyboardState( m_KeyState );
-
+	(void)GetKeyboardState(m_KeyState);
 }
 
 bool Input::GetKeyPress(BYTE KeyCode)
 {
-	return (m_KeyState[KeyCode] & 0x80);
+	return (m_KeyState[KeyCode] & 0x80) != 0;
 }
 
 bool Input::GetKeyTrigger(BYTE KeyCode)

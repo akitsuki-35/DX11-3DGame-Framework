@@ -20,7 +20,7 @@ namespace Collision3D {
 *	@class	: Collision3DBase
 *	@brief	: 3Dコリジョン基底クラス
 *============================================================*/
-class Cllision3DBase : public Component
+class Collision3DBase : public Component
 {
 private:
 	Vector3 mSize{};
