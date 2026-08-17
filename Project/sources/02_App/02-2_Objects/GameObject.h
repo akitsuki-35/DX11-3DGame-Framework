@@ -59,9 +59,9 @@ public:
 		mComponents.clear();
 	}
 
-	virtual void Update() {
+	virtual void Update(double deltaTime) {
 		for (const auto& component : mComponents) {
-			component->Update();
+			component->Update(deltaTime);
 		}
 	}
 

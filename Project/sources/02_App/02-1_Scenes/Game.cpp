@@ -10,6 +10,7 @@
 #include "SceneManager.h"
 #include "Input.h"
 #include "Camera.h"
+#include "Transition.h"
 
 #include "Field.h"
 #include "Player.h"
@@ -30,7 +31,7 @@
 
 void Game::Initialize()
 {
-	//Fade::GetInstance().Start(1.0, true);
+	Transition::getInstance().Start(1.0, true);
 
 	_mGameObjects.clear();
 
@@ -62,9 +63,9 @@ void Game::Finalize()
 	Scene::Finalize();
 }
 
-void Game::Update()
+void Game::Update(double deltaTime)
 {
-	Scene::Update();
+	Scene::Update(deltaTime);
 
 	if (Input::GetKeyTrigger(VK_RETURN)) {
 		SceneManager::getInstance().SceneChange<Result>();

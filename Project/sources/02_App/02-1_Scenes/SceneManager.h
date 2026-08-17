@@ -46,7 +46,7 @@ private:
 public:
 	void Initialize();
 	void Finalize();
-	void Update();
+	void Update(double deltaTime);
 	void Draw();
 
 	template <class T>

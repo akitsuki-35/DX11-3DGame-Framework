@@ -27,9 +27,9 @@ void Shadow::Finalize()
 	GameObject::Finalize();
 }
 
-void Shadow::Update()
+void Shadow::Update(double deltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Shadow::Draw() const

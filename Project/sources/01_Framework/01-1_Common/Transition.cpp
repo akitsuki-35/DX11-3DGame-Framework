@@ -7,13 +7,22 @@
 *	@updated : 2026/08/16
 *============================================================*/
 #include "Transition.h"
-#include "UIRenderer.h"
 
 using namespace::DirectX;
 
 void Transition::Initialize()
 {
+	_mRenderer = std::make_unique<UIRenderer>();
+	_mRenderer->GetCanvas().CreateCanvas(UIStyle::Pivot::LeftTop);
 
+	mTransform.SetPosition({ 0.0f, 0.0f, 0.0f });
+	mTransform.SetScale({ Screen::WIDTH, Screen::HEIGHT, 0.0f });
+
+	_mRenderer->LoadShader("UI");
+
+	mState = State::None;
+	mAccumulatedtime = 0.0;
+	mTime = 0.0;
 }
 
 void Transition::Finalize()
@@ -22,9 +31,9 @@ void Transition::Finalize()
 	_mRenderer = nullptr;
 }
 
-void Transition::Update()
+void Transition::Update(double deltaTime)
 {
-	double dt = 1.0f / 60.0f;
+	float dt = static_cast<float>(deltaTime);
 
 	// 時間計測とステートの管理
 	if (mState == State::None || mState == State::FadeOutEnd || mState == State::FadeInEnd) {
@@ -33,16 +42,20 @@ void Transition::Update()
 
 	mAccumulatedtime += dt;
 
-	double lifeTime = mAccumulatedtime - mStartTime;
+	double lifeTime = mAccumulatedtime;
 
-	float alpha = (float)(lifeTime / mTime);
+	double progress = lifeTime / mTime;
+	if (progress > 1.0) progress = 1.0;
+	if (progress < 0.0) progress = 0.0;
+
+	float alpha = static_cast<float>(progress);
 
 	XMFLOAT4 color = _mRenderer->GetColor();
 	color.w = mState == State::FadeIn ? 1.0f - alpha : alpha;
 	_mRenderer->SetColor({ color });
 
 	if (mTime <= lifeTime) {
-		mState == State::FadeIn ? State::FadeInEnd : State::FadeOutEnd;
+		mState = (mState == State::FadeIn) ? State::FadeInEnd : State::FadeOutEnd;
 	}
 }
 
@@ -52,7 +65,11 @@ void Transition::Draw() const
 		return;
 	}
 
-	_mRenderer->Draw();
+	if (!_mRenderer->GetTexture()) {
+		_mRenderer->LoadTexture("assets\\textures\\white.png");
+	}
+
+	_mRenderer->Draw(mTransform);
 }
 
 void Transition::Start(const double& fadeTime, const bool& isFadeIn, const Color::Index& color)
@@ -60,7 +77,10 @@ void Transition::Start(const double& fadeTime, const bool& isFadeIn, const Color
 	mTime = fadeTime;
 	mState = isFadeIn ? State::FadeIn : State::FadeOut;
 
-	mStartTime = mAccumulatedtime;
+	mAccumulatedtime = 0.0;
 
-	_mRenderer->SetColor(Color::ConvertColor(static_cast<int>(color)));
+	//mStartTime = mAccumulatedtime;
+	XMFLOAT4 initColor = Color::ConvertColor(static_cast<int>(color));
+	initColor.w = isFadeIn ? 1.0f : 0.0f;
+	_mRenderer->SetColor(initColor);
 }

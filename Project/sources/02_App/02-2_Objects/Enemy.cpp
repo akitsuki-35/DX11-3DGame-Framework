@@ -29,9 +29,9 @@ void Enemy::Finalize()
 	GameObject::Finalize();
 }
 
-void Enemy::Update()
+void Enemy::Update(double deltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Enemy::Draw() const

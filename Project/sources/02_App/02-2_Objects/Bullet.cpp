@@ -32,9 +32,9 @@ void Bullet::Finalize()
 	GameObject::Finalize();
 }
 
-void Bullet::Update()
+void Bullet::Update(double deltaTime)
 {
-	float dt = 1.0f / 60.0f;
+	float dt = static_cast<float>(deltaTime);
 
 	Vector3 position = mTransform.GetPosition();
 
@@ -68,7 +68,7 @@ void Bullet::Update()
 
 	mTransform.SetPosition(position);
 
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Bullet::Draw() const

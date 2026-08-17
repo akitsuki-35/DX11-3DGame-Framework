@@ -42,6 +42,6 @@ private:
 public:
 	void Initialize() override;
 	void Finalize() override;
-	void Update() override;
+	void Update(double deltaTime) override;
 	void Draw() const override;
 };

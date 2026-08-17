@@ -79,6 +79,10 @@ protected:
 	virtual void Bind() const;
 
 public:
+	Renderer() {
+		mBlendState = Blend::Default;
+	}
+
 	Renderer(GameObject* owner)
 		: Component(owner){
 		mBlendState = Blend::Default;

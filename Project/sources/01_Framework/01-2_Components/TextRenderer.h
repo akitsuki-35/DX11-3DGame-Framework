@@ -35,6 +35,8 @@ public:
 		UIRenderer::Finalize();
 	}
 
+	TextRenderer();
+
 	TextRenderer(GameObject* owner);
 
 	~TextRenderer() override = default;

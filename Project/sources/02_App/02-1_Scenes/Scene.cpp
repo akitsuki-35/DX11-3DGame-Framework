@@ -24,10 +24,10 @@ void Scene::Finalize()
 	_mGameObjects.clear();
 }
 
-void Scene::Update()
+void Scene::Update(double deltaTime)
 {
 	for (const auto& obj : _mGameObjects) {
-		obj->Update();
+		obj->Update(deltaTime);
 	}
 
 	// ゲームオブジェクト削除

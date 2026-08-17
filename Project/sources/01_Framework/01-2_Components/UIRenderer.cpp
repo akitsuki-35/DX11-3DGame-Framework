@@ -41,6 +41,32 @@ void UIRenderer::Draw() const
 	Renderer::End();
 }
 
+void UIRenderer::Draw(const Transform& transform)
+{
+	Renderer::Begin();
+
+	Bind();
+
+	D3D11::BufferManager::getInstance().Set2DMatrix();
+	D3D11::BufferManager::getInstance().SetWorldMatrix(transform.GetWorldMatrix());
+
+	// マテリアル設定
+	Element::MATERIAL material{};
+	material.Diffuse = mColor;
+	material.TextureEnable = static_cast<bool>(_mTexture != nullptr);
+	D3D11::BufferManager::getInstance().SetMaterial(material);
+
+	mCanvas.Bind();
+
+	if (material.TextureEnable) {
+		_mTexture->Bind();
+	}
+
+	mCanvas.Draw();
+
+	Renderer::End();
+}
+
 DirectX::XMMATRIX UIRenderer::getWorldMatrix() const
 {
 	return _mOwner->GetTransform().GetWorldMatrix();

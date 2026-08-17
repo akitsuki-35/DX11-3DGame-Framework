@@ -16,18 +16,18 @@ Particle::Particle()
 	mMesh.CreatePlane(Plane::Pivot::Center, Plane::Axis::XY);
 }
 
-void Particle::update(double dt)
+void Particle::update(double deltaTime)
 {
-	float t = static_cast<float>(dt);
+	float dt = static_cast<float>(deltaTime);
 
 	if (!mEnable) {
 		return;
 	}
 
 	Vector3 gravity{ 0.0f, -9.8f, 0.0f };
-	mVelocity += gravity * t; // 重力
-	mVelocity += mVelocity * -1.0f * t; // 抵抗
-	mPosition += mVelocity * t;
+	mVelocity += gravity * dt; // 重力
+	mVelocity += mVelocity * -1.0f * dt; // 抵抗
+	mPosition += mVelocity * dt;
 
 	mLife--;
 

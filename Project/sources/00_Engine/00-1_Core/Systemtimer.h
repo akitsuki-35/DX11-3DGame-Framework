@@ -40,11 +40,16 @@ namespace System {
 		メンバ変数・メンバ関数
 	----------------------------------------------------*/
 	private:
-		DWORD mExecLastTime{};
-		DWORD mCurrentTime{};
+		LARGE_INTEGER mFreq{};
+		LARGE_INTEGER mExecLastTime{};
+		LARGE_INTEGER mCurrentTime{};
+		double mAccumulator{};
+		double mFps{ 1.0 / 60.0 };
 
 	public:
 		void Initialize();
-		bool Tick(double frameRate);
+		bool Tick();
+		double GetDeltaTime() const { return mFps; }
+		void SetFps(double fps) { mFps = 1.0 / fps; }
 	};
 }

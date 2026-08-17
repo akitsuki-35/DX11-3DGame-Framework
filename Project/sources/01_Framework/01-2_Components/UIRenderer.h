@@ -15,6 +15,7 @@
 	前方宣言
 ------------------------------------------------------------*/
 class Texture;
+class Transform;
 
 /*============================================================
 *	@class	: UIRenderer
@@ -30,6 +31,11 @@ protected:
 	Texture* _mTexture{ nullptr };
 
 public:
+	UIRenderer() {
+		// 2Dレイヤーに描画
+		mSortKey.layer = Layer::UI;
+	}
+
 	UIRenderer(GameObject* owner)
 		: Renderer(owner) {
 		// 2Dレイヤーに描画
@@ -44,6 +50,7 @@ public:
 	}
 
 	void Draw() const override;
+	void Draw(const Transform& transform);
 
 private:
 	// ワールド行列取得

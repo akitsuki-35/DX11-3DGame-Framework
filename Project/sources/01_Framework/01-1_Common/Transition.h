@@ -8,9 +8,11 @@
 *============================================================*/
 #pragma once
 
+#include "UIRenderer.h"
+#include "Transform.h"
+#include "Config.h"
 #include <DirectXMath.h>
 #include <memory>
-#include "Config.h"
 
 /*------------------------------------------------------------
 	前方宣言
@@ -62,17 +64,13 @@ private:
 	double mAccumulatedtime{}; // 総経過時間
 	double mStartTime{}; // トランジション開始時間
 
-	UIRenderer* _mRenderer{}; // レンダラー
+	std::unique_ptr<UIRenderer> _mRenderer{}; // レンダラー
+	Transform mTransform{}; // トランスフォーム
 
 public:
-	static Transition& GetInstance() {
-		static Transition instance;
-		return instance;
-	}
-
 	void Initialize();
 	void Finalize();
-	void Update();
+	void Update(double deltaTime);
 	void Draw() const;
 
 	// フェード開始

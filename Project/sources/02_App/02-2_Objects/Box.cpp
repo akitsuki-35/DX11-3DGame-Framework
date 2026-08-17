@@ -28,9 +28,9 @@ void Box::Finalize()
 	GameObject::Finalize();
 }
 
-void Box::Update()
+void Box::Update(double deltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Box::Draw() const

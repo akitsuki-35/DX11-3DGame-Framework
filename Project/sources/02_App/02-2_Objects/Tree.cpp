@@ -29,9 +29,9 @@ void Tree::Finalize()
 	GameObject::Finalize();
 }
 
-void Tree::Update()
+void Tree::Update(double deltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(deltaTime);
 }
 
 void Tree::Draw() const

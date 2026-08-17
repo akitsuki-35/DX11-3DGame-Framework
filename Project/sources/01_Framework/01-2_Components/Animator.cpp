@@ -22,14 +22,14 @@ void Animator::Set(const std::string& keyName)
     mCurrentTime = 0.0;
 }
 
-void Animator::Update(double dt)
+void Animator::Update(double deltaTime)
 {
     if (!_mAnimation || !_mSkeleton) {
         return;
     }
 
     // Tickへ変換
-    mCurrentTime += dt * _mAnimation->GetTicksPerSecond();
+    mCurrentTime += deltaTime * _mAnimation->GetTicksPerSecond();
 
     // アニメーションループ
     if (mCurrentTime >= _mAnimation->GetDuration()) {

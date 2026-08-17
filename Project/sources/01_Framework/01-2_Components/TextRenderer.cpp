@@ -22,6 +22,13 @@
 
 using namespace DirectX;
 
+TextRenderer::TextRenderer()
+{
+	// 2Dレイヤーに描画
+	mSortKey.layer = Layer::UI;
+	mCanvas.CreateCanvas(UIStyle::Pivot::LeftTop);
+}
+
 TextRenderer::TextRenderer(GameObject* owner)
 	: UIRenderer(owner)
 {

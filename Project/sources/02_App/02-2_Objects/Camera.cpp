@@ -27,12 +27,12 @@ void Camera::Finalize()
 	GameObject::Finalize();
 }
 
-void Camera::Update()
+void Camera::Update(double deltaTime)
 {
+	float dt = static_cast<float>(deltaTime);
+
 	Player* player = Game::GetGameObject<Player>();
 	Vector3 playerPos = player->GetTransform().GetPosition();
-
-	float dt = 1.0f / 60.0f;
 
 	Vector3 rotation = mTransform.GetRotation();
 

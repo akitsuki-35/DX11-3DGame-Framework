@@ -35,5 +35,5 @@ private:
 public:
 	Particle();
 
-	void update(double dt);
+	void update(double deltaTime);
 };
