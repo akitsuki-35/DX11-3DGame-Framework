@@ -297,9 +297,6 @@
     <ClCompile Include="sources\02_App\02-2_Objects\Tree.cpp">
       <Filter>02_App\02-2_Objects\Game</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\ParticleEmitter..cpp">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
       <Filter>02_App\02-2_Objects\Common</Filter>
     </ClCompile>
@@ -308,6 +305,15 @@
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-2_Components\ParticleRenderer.cpp">
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp">
+      <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-1_Common\BezierCurve.cpp">
+      <Filter>01_Framework\01-1_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleTypes.cpp">
+      <Filter>02_App\02-2_Objects\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -551,9 +557,6 @@
     <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
       <Filter>02_App\02-2_Objects\Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\ParticleEmitter.h">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
       <Filter>02_App\02-2_Objects\Common</Filter>
     </ClInclude>
@@ -562,6 +565,15 @@
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\ParticleRenderer.h">
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h">
+      <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-1_Common\BezierCurve.h">
+      <Filter>01_Framework\01-1_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleTypes.h">
+      <Filter>02_App\02-2_Objects\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -26,6 +26,10 @@ void ParticleEmitter::Initialize()
 	for (int i = 0; i < PARTICLE_MAX; i++) {
 		mParticles[i].mEnable = false;
 	}
+
+	_mType = std::make_unique<ParticleType::Bezier>(this);
+
+	mCount = 100;
 }
 
 void ParticleEmitter::Finalize()
@@ -35,37 +39,12 @@ void ParticleEmitter::Finalize()
 
 void ParticleEmitter::Update(double deltaTime)
 {
-	Vector3 gravity{ 0.0f, -9.8f, 0.0f };
-
-	int count = 100;
-
+	// パーティクル発射
 	if (Input::GetKeyTrigger(VK_SPACE)) {
-		// パーティクル発射
-		for (int i = 0; i < PARTICLE_MAX; i++) {
-			if (!mParticles[i].mEnable) {
-				mParticles[i].mEnable = true;
-				mParticles[i].mLife = 60;
-				mParticles[i].mPosition = mTransform.GetPosition();
-				mParticles[i].mVelocity = { ((float)rand() / RAND_MAX - 0.5f) * 20.0f,
-					((float)rand() / RAND_MAX) * 20.0f,
-					((float)rand() / RAND_MAX - 0.5f) * 20.0f };
-
-				float scale = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
-
-				mParticles[i].mScale = { scale, scale, scale };
-
-				count--;
-				if (count <= 0) {
-					break;
-				}
-			}
-		}
+		_mType->Emission();
 	}
 
-	// パーティクル更新
-	for (int i = 0; i < PARTICLE_MAX; i++) {
-		mParticles[i].update(deltaTime);
-	}
+	_mType->Update(deltaTime);
 }
 
 void ParticleEmitter::Draw() const

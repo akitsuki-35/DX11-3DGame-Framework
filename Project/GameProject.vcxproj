@@ -45,6 +45,7 @@
     <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\AssimpLoader.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp" />
+    <ClCompile Include="sources\01_Framework\01-1_Common\BezierCurve.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Easing.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\Transition.cpp">
@@ -52,12 +53,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\ParticleEmitter..cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -121,6 +116,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp" />
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleTypes.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Player.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Score.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -213,6 +210,7 @@
     <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h" />
     <ClInclude Include="sources\00_Engine\00-4_Importer\AssimpLoader.h" />
     <ClInclude Include="sources\00_Engine\00-4_Importer\FontLoader.h" />
+    <ClInclude Include="sources\01_Framework\01-1_Common\BezierCurve.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\BoneTransform.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -226,12 +224,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Input.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\ParticleEmitter.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Quaternion.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -305,6 +297,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h" />
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleTypes.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\Player.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\Score.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
