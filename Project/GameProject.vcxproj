@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp" />
+    <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\BufferManager.cpp" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Config.h" />
+    <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
