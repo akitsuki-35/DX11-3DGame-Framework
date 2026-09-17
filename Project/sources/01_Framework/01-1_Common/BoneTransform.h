@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : BoneTransform.h
-*	@brief	 : ボーン用トランスフォーム
+*	@brief	 : ボーントランスフォーム
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/07
-*	@updated : 2026/08/07
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -13,7 +13,7 @@
 
 /*============================================================
 *	@class	: BoneTransform
-*	@brief	: ボーン用トランスフォーム
+*	@brief	: ボーントランスフォーム
 *============================================================*/
 class BoneTransform
 {
@@ -22,5 +22,6 @@ public:
     Quaternion Rotation{};
     Vector3 Scale{ 1.0f,1.0f,1.0f };
 
+    // XMMATRIXに変換
     DirectX::XMMATRIX ToMatrix() const;
 };

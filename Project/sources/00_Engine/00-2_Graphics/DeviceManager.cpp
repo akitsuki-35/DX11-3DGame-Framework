@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/13
-*	@updated : 2026/07/14
+*	@updated : 2026/09/16
 *============================================================*/
 #include "DeviceManager.h"
 #include "SystemWindow.h"
@@ -298,21 +298,25 @@ void D3D11::DeviceManager::renderStateRegister()
 
 void D3D11::DeviceManager::SetDepthStencilState(ID3D11DepthStencilState* depthState)
 {
+	// デプスステンシルステート設定
 	_mContext->OMSetDepthStencilState(depthState, NULL);
 }
 
 void D3D11::DeviceManager::SetBlendState(ID3D11BlendState* blendState)
 {
+	// ブレンドステート設定
 	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 	_mContext->OMSetBlendState(blendState, blendFactor, 0xffffffff);
 }
 
 void D3D11::DeviceManager::SetRasterizerState(ID3D11RasterizerState* rasterizerState)
 {
+	// ラスタライザステート設定
 	_mContext->RSSetState(rasterizerState);
 }
 
 void D3D11::DeviceManager::SetSamplerState(ID3D11SamplerState* samplerState)
 {
+	// サンプラーステート設定
 	_mContext->PSSetSamplers(0, 1, &samplerState);
 }

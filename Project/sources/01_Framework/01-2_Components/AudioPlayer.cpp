@@ -1,16 +1,15 @@
 ﻿/*============================================================
 *	@file	 : AudioPlayer.cpp
-*	@brief	 : オーディオ再生
+*	@brief	 : オーディオ再生コンポーネント
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/09
-*	@updated : 2026/08/09
+*	@updated : 2026/09/16
 *============================================================*/
 #include "AudioPlayer.h"
 #include "AudioManager.h"
 #include "Audio.h"
 #include <cassert>
-#include <iostream>
 #include <algorithm>
 #include <xaudio2.h>
 
@@ -125,6 +124,7 @@ void AudioPlayer::Play(bool isLoop)
 
 void AudioPlayer::Pause()
 {
+	// 一時停止
 	if (mSourceVoice) {
 		mSourceVoice->Stop();
 	}
@@ -132,6 +132,7 @@ void AudioPlayer::Pause()
 
 void AudioPlayer::Resume()
 {
+	// 再開
 	if (mSourceVoice) {
 		mSourceVoice->Start();
 	}
@@ -139,18 +140,22 @@ void AudioPlayer::Resume()
 
 void AudioPlayer::Stop()
 {
+	// 再生停止
 	if (mSourceVoice) {
 		mSourceVoice->Stop();
 		mSourceVoice->FlushSourceBuffers();
 	}
 }
 
-void AudioPlayer::SetVolume(float Volume)
+AudioPlayer* AudioPlayer::SetVolume(float Volume)
 {
 	// 0.0f～1.0f間で補間
 	mVolume = std::clamp(Volume, 0.0f, 1.0f);
-
+	
+	// ボリューム変更
 	if (mSourceVoice) {
 		mSourceVoice->SetVolume(mVolume);
 	}
+
+	return this;
 }

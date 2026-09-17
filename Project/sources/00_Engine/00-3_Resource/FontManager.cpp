@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/11
-*	@updated : 2026/08/11
+*	@updated : 2026/09/16
 *============================================================*/
 #include "FontManager.h"
 #include "FontLoader.h"
@@ -27,19 +27,19 @@ Font* FontManager::GetFont(const std::string& keyName)
     return nullptr;
 }
 
-Glyph* FontManager::GetGlyph(Font* font, uint32_t codePoint)
+Glyph* FontManager::GetGlyph(const GlyphKey& key)
 {
 	// キャッシュが存在すれば返す
-	auto it = mAtlas[font].find(codePoint);
+	auto it = mAtlas.find(key);
 
-	if (it != mAtlas[font].end()) {
+	if (it != mAtlas.end()) {
 		return it->second.get();
 	}
 
 	// 文字テクスチャ生成
 	std::unique_ptr<Glyph> glyph = std::make_unique<Glyph>();
 
-	if (!generateGlyph(*glyph, font, codePoint)) {
+	if (!generateGlyph(*glyph, key)) {
 		return nullptr;
 	}
 
@@ -47,7 +47,7 @@ Glyph* FontManager::GetGlyph(Font* font, uint32_t codePoint)
     Glyph* g = glyph.get();
 
     // コンテナへ登録
-    mAtlas[font].emplace(codePoint, std::move(glyph));
+    mAtlas.emplace(key, std::move(glyph));
 
 	return g;
 }
@@ -74,28 +74,28 @@ Font* FontManager::Register(const std::string& keyName, const char* fontPath)
 
 void FontManager::Clear()
 {
-    mFonts.clear();
     mAtlas.clear();
+    mFonts.clear();
 }
 
-bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)
+bool FontManager::generateGlyph(Glyph& glyph, const GlyphKey& key)
 {
     // 文字コードをGlyphインデックスに変換
     UINT16 glyphIndex = 0;
-    font->Face->GetGlyphIndices(&codepoint, 1, &glyphIndex);
+    key.Font->Face->GetGlyphIndices(&key.Codepoint, 1, &glyphIndex);
 
     // メトリクス取得
     DWRITE_GLYPH_METRICS metrics{};
-    font->Face->GetDesignGlyphMetrics(&glyphIndex, 1, &metrics);
+    key.Font->Face->GetDesignGlyphMetrics(&glyphIndex, 1, &metrics);
     
     // サイズをピクセル単位に変換
-    float designUnitsPerEm = font->Metrics.designUnitsPerEm;
-    float fontSize = font->Size;
+    float designUnitsPerEm = key.Font->Metrics.designUnitsPerEm;
+    float fontSize = static_cast<float>(key.Size);
 
     // GlyphRun作成
     DWRITE_GLYPH_RUN glyphRun{};
-    glyphRun.fontFace = font->Face.Get();
-    glyphRun.fontEmSize = font->Size;
+    glyphRun.fontFace = key.Font->Face.Get();
+    glyphRun.fontEmSize = static_cast<float>(key.Size);
     glyphRun.glyphCount = 1;
     glyphRun.glyphIndices = &glyphIndex;
 
@@ -174,7 +174,8 @@ bool FontManager::generateGlyph(Glyph& glyph, Font* font, uint32_t codepoint)
     if (!glyph.Texture) {
         glyph.Texture = std::make_shared<Texture>();
     }
-
+    
+    // パラメータ設定
     glyph.Texture->_mSRV = srv.Get();
     glyph.Texture->mSize = { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
     glyph.BearingX = static_cast<int32_t>(metrics.leftSideBearing * (fontSize / designUnitsPerEm));

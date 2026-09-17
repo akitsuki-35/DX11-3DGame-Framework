@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/15
-*	@updated : 2026/08/15
+*	@updated : 2026/09/16
 *============================================================*/
 #include "Scene.h"
 #include "DeviceManager.h"
@@ -26,14 +26,20 @@ void Scene::Finalize()
 
 void Scene::Update(double deltaTime)
 {
+	// ポーズ中は処理しない
+	if (mPause) return;
+
 	for (const auto& obj : _mGameObjects) {
 		obj->Update(deltaTime);
 	}
 
-	// ゲームオブジェクト削除
-	_mGameObjects.remove_if([](const auto& object) {
-		return object->Destroy();
-		});	
+	// ヒットストップ中はオブジェクトを削除しない
+	if (!mHitStop) {
+		// ゲームオブジェクト削除
+		_mGameObjects.remove_if([](const auto& object) {
+			return object->Destroy();
+			});
+	}
 }
 
 void Scene::Draw() const
@@ -98,7 +104,7 @@ void Scene::Draw() const
 		for (auto* obj : layerQueue[layer]) {
 			obj->Draw();
 		}
-	}
 
-	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
+		D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
+	}
 }

@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : Mesh.h
-*	@brief	 : ポリゴンメッシュ生成
+*	@brief	 : ポリゴンメッシュ
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -14,7 +14,7 @@
 
 /*============================================================
 *	@class	: Mesh
-*	@brief	: ポリゴンメッシュ生成
+*	@brief	: ポリゴンメッシュ
 *============================================================*/
 class Mesh
 {
@@ -28,15 +28,11 @@ private:
 	// インデックスバッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mIndexBuffer{};
 
-	UINT mStride{};
-	UINT mVertexNum{};
-	UINT mIndexNum{};
-	bool mIsIndex{ false };
-
 public:
 	Mesh() = default;
 	~Mesh() = default;
 
+	// 板ポリゴン作成
 	bool CreatePlane(MeshType::Plane::Pivot pivot, MeshType::Plane::Axis axis);
 
 	void Bind() const;

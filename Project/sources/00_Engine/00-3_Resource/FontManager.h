@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/11
-*	@updated : 2026/08/11
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -25,16 +25,57 @@ struct IDWriteFactory;
 ------------------------------------------------------------*/
 struct Glyph
 {
+	// テクスチャ本体
 	std::shared_ptr<Texture> Texture{ nullptr };
 
-    int BearingX = 0;   // 左側の余白
-    int BearingY = 0;   // 上側の余白
-    int Advance = 0;   // 次の文字までの移動量
+	// 左右余白
+	int BearingX{ 0 };
+
+	// 上下余白
+	int BearingY{ 0 };
+
+	// 字間
+	int Advance{ 0 };
+};
+
+/*------------------------------------------------------------
+	文字探索用キー
+------------------------------------------------------------*/
+struct GlyphKey
+{
+	// フォント
+	Font* Font{};
+
+	// 文字
+	uint32_t Codepoint{};
+	
+	// フォントサイズ
+	int Size{};
+
+	bool operator==(const GlyphKey& o) const {
+		return Font == o.Font && Codepoint == o.Codepoint && Size == o.Size;
+	}
+};
+
+// ハッシュ化
+template <>
+struct std::hash<GlyphKey> {
+	size_t operator()(const GlyphKey& k) const {
+
+		size_t h1 = std::hash<const Font*>()(k.Font);
+		size_t h2 = std::hash<uint32_t>()(k.Codepoint);
+		size_t h3 = std::hash<int>()(k.Size);
+
+		size_t seed = h1;
+		seed ^= h2 + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+		seed ^= h3 + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+		return seed;
+	}
 };
 
 /*============================================================
 *	@class	: FontManager
-*	@brief	: テクスチャのロード・管理
+*	@brief	: フォントのロード・管理
 *============================================================*/
 class FontManager final
 {
@@ -66,8 +107,8 @@ private:
 	// フォントコンテナ
 	std::unordered_map<std::string, std::unique_ptr<Font>> mFonts{};
 
-	// Glyphキャッシュ
-	std::unordered_map<Font*, std::unordered_map<uint32_t, std::unique_ptr<Glyph>>> mAtlas{};
+	// 文字テクスチャキャッシュ
+	std::unordered_map<GlyphKey, std::unique_ptr<Glyph>> mAtlas{};
 
 	// DirectWriteファクトリ
 	Microsoft::WRL::ComPtr<IDWriteFactory> _mFactory{ nullptr };
@@ -80,7 +121,7 @@ public:
 	Font* GetFont(const std::string& keyName);
 	
 	// 文字テクスチャ取得
-	Glyph* GetGlyph(Font* font, uint32_t codePoint);
+	Glyph* GetGlyph(const GlyphKey& key);
 
 	// フォント登録
 	Font* Register(const std::string& keyName, const char* fontPath);
@@ -90,14 +131,13 @@ public:
 
 private:
 	// 文字テクスチャ生成
-	bool generateGlyph(Glyph& glyph, Font* font, uint32_t codepPoint);
+	bool generateGlyph(Glyph& glyph, const GlyphKey& key);
 };
 
+// フォントロード
+// ゲーム起動時に一度だけ呼ぶ
 namespace FontSet {
 	inline void initialize() {
-		FontManager::getInstance().Register("MPLUS_Regular", "assets\\fonts\\MPLUS1-Regular.ttf");
-		FontManager::getInstance().Register("MPLUS_Bold", "assets\\fonts\\MPLUS1-Bold.ttf");
-		FontManager::getInstance().Register("LogoTypeGothic", "assets\\fonts\\07LogoTypeGothic7.ttf");
-		FontManager::getInstance().Register("GenEiLateMin", "assets\\fonts\\GenEiLateMinN_v2.ttf");
+		FontManager::getInstance().Register("Kaisotai", "assets\\fonts\\Kaisotai-Next-UP-B.ttf");
 	}
 }

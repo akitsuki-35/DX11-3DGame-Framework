@@ -45,7 +45,6 @@ void Field::Update(double deltaTime)
 		GameObject::GetComponent<AudioPlayer>()->Stop();
 	}
 
-
 	GameObject::Update(deltaTime);
 }
 

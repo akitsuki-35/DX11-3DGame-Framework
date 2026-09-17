@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/29
-*	@updated : 2026/08/16
+*	@updated : 2026/09/16
 *============================================================*/
 #include "Transition.h"
 
@@ -12,59 +12,54 @@ using namespace::DirectX;
 
 void Transition::Initialize()
 {
+	// タイマー初期化
+	_mTimer = std::make_unique<Timer>();
+
+	// レンダラー初期化
 	_mRenderer = std::make_unique<UIRenderer>();
 	_mRenderer->GetCanvas().CreateCanvas(UIStyle::Pivot::LeftTop);
 
+	// トランスフォーム初期化
 	mTransform.SetPosition({ 0.0f, 0.0f, 0.0f });
 	mTransform.SetScale({ Screen::WIDTH, Screen::HEIGHT, 0.0f });
 
+	// シェーダー読み込み
 	_mRenderer->LoadShader("UI");
-
-	mState = State::None;
-	mAccumulatedtime = 0.0;
-	mTime = 0.0;
 }
 
 void Transition::Finalize()
 {
 	_mRenderer->Finalize();
 	_mRenderer = nullptr;
+
+	_mTimer->Finalize();
+	_mTimer = nullptr;
 }
 
 void Transition::Update(double deltaTime)
 {
-	float dt = static_cast<float>(deltaTime);
+	if (!_mTimer->GetEnable()) return;
 
-	// 時間計測とステートの管理
-	if (mState == State::None || mState == State::FadeOutEnd || mState == State::FadeInEnd) {
-		return;
-	}
+	// トランジション進行度を取得
+	float alpha = _mTimer->GetProgress();
 
-	mAccumulatedtime += dt;
+	// 値をクランプ
+	if (alpha > 1.0f) alpha = 1.0f;
+	if (alpha < 0.0f) alpha = 0.0f;
 
-	double lifeTime = mAccumulatedtime;
-
-	double progress = lifeTime / mTime;
-	if (progress > 1.0) progress = 1.0;
-	if (progress < 0.0) progress = 0.0;
-
-	float alpha = static_cast<float>(progress);
-
+	// 透明度更新
 	XMFLOAT4 color = _mRenderer->GetColor();
-	color.w = mState == State::FadeIn ? 1.0f - alpha : alpha;
+	color.w = mFadeIn ? alpha : 1.0f - alpha;
 	_mRenderer->SetColor({ color });
 
-	if (mTime <= lifeTime) {
-		mState = (mState == State::FadeIn) ? State::FadeInEnd : State::FadeOutEnd;
-	}
+	_mTimer->Update(deltaTime);
 }
 
 void Transition::Draw() const
 {
-	if (mState == State::None || mState == State::FadeInEnd) {
-		return;
-	}
+	if (!_mTimer->GetEnable()) return;
 
+	// テクスチャが存在しない場合は白テクスチャを使用
 	if (!_mRenderer->GetTexture()) {
 		_mRenderer->LoadTexture("assets\\textures\\white.png");
 	}
@@ -74,13 +69,25 @@ void Transition::Draw() const
 
 void Transition::Start(const double& fadeTime, const bool& isFadeIn, const Color::Index& color)
 {
-	mTime = fadeTime;
-	mState = isFadeIn ? State::FadeIn : State::FadeOut;
+	// タイマーをセット
+	_mTimer->Start(fadeTime);
 
-	mAccumulatedtime = 0.0;
-
-	//mStartTime = mAccumulatedtime;
+	// フェードタイプに応じて初期の透明度を決定
 	XMFLOAT4 initColor = Color::ConvertColor(static_cast<int>(color));
 	initColor.w = isFadeIn ? 1.0f : 0.0f;
 	_mRenderer->SetColor(initColor);
+
+	mFadeIn = isFadeIn;
+}
+
+bool Transition::GetTransitionActive()
+{
+	// トランジション中かを判定
+	return _mTimer->GetEnable();
+}
+
+float Transition::GetTransitionProgress()
+{
+	// トランジション進行度を取得
+	return _mTimer->GetProgress();
 }

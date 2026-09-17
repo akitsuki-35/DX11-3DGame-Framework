@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/02
-*	@updated : 2026/08/02
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -27,7 +27,7 @@ struct aiNode;
 
 /*============================================================
 *	@class	: AssimpLoader
-*	@brief	: assimpによるモデルロード・生成
+*	@brief	: assimpによるモデルロード
 *============================================================*/
 class AssimpLoader final
 {

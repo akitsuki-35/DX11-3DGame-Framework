@@ -41,8 +41,9 @@ struct MATERIAL
 // ライト
 struct LIGHT
 {
+    float4 Position;
     int Enable;
-    float Dummy;
+    float3 Dummy;
     float4 Direction;
     float4 Diffuse;
     float4 Ambient;
@@ -92,3 +93,9 @@ cbuffer BoneBuffer : register(b6)
 {
     column_major float4x4 BoneMatrices[128];
 };
+
+// 汎用パラメータ
+cbuffer ParameterBuffer : register(b7)
+{
+    float4 Parameter;
+}

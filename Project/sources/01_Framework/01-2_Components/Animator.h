@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : Animator.h
-*	@brief	 : アニメーターコンポーネント
+*	@brief	 : アニメーションコンポーネント
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/07
-*	@updated : 2026/08/07
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -17,16 +17,22 @@
 	前方宣言
 ------------------------------------------------------------*/
 class Skeleton;
+class Animation;
 
 /*============================================================
 *	@class	: Animator
-*	@brief	: アニメーターコンポーネント
+*	@brief	: アニメーションコンポーネント
 *============================================================*/
 class Animator final : public Component
 {
 private:
-    class Skeleton* _mSkeleton{};
-    class Animation* _mAnimation{};
+    // スケルトン
+    Skeleton* _mSkeleton{};
+
+    // アニメーション
+    Animation* _mAnimation{};
+    
+    // アニメーション経過時間
     double mCurrentTime{};
 
 public:
@@ -38,13 +44,17 @@ public:
         _mAnimation = nullptr;
     }
 
+    // アニメーションをセット
     void Set(const std::string& keyName);
+
+    // 更新
     void Update(double deltaTime) override;
 
-    // ゲッター
+    // 経過時間取得
     double GetTime() const { return mCurrentTime; }
 
 private:
+    // モデルのスケルトンをセット
     bool setSkeleton();
 
     // ボーンアニメーション計算

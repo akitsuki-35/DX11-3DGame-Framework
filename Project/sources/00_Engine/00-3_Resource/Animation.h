@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/07
-*	@updated : 2026/08/07
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -55,13 +55,17 @@ public:
     };
 
 private:
-    double mDuration{}; // 総再生時間
-    double mTicksPerSecond{}; // 1秒あたりのTick数
+    // 総再生時間
+    double mDuration{};
+
+    // 1秒あたりのTick数
+    double mTicksPerSecond{};
 
     // チャンネル
     std::vector<Channel> mChannels{};
 
 public:
+    // 新規チャンネル追加
     void AddChannel(const Channel& channel);
     
     // ゲッター

@@ -4,12 +4,13 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/12
-*	@updated : 2026/08/12
+*	@updated : 2026/09/16
 *============================================================*/
 #include "UIStyle.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include <d3d11.h>
+
 using namespace DirectX;
 
 /*--------------------------------------------------
@@ -64,6 +65,7 @@ namespace {
         pos += offset;
         position = { pos.x, pos.y, position.z };
 
+        // 頂点パラメータ設定
         vertex.Position = position.ConvertToXMFLOAT3();
         vertex.Normal = { 0.0f, 0.0f, -1.0f };
         vertex.Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };

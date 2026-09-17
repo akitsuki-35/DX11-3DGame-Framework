@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/13
-*	@updated : 2026/07/14
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -13,7 +13,7 @@
 
 namespace D3D11 {
 /*============================================================
-*	@class	: DeviceManager
+*	@class	: D3D11::DeviceManager
 *	@brief	: DirectX11デバイス管理
 *============================================================*/
 	class DeviceManager final

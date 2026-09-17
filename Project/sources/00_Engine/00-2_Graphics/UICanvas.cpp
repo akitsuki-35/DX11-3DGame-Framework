@@ -1,15 +1,16 @@
 ﻿/*============================================================
 *	@file	 : UICanvas.cpp
-*	@brief	 : UIキャンバス設定
+*	@brief	 : UI領域キャンバス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/12
-*	@updated : 2026/08/12
+*	@updated : 2026/09/16
 *============================================================*/
 #include "UICanvas.h"
 #include "DeviceManager.h"
 #include "Elements.h"
 #include <cassert>
+
 using namespace DirectX;
 
 bool UICanvas::CreateCanvas(UIStyle::Pivot pivot)
@@ -30,6 +31,7 @@ bool UICanvas::CreateCanvas(UIStyle::Pivot pivot)
 
 	assert(_mVertexBuffer);
 
+	// ピボット設定格納
 	mPivot = pivot;
 
 	return true;

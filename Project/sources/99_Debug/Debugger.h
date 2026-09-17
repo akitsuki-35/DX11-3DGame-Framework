@@ -38,8 +38,6 @@ public:
 	const void Update() const;
 	const void Draw() const;
 
-	// ===== デバッグウィンドウ関数をここに追加 =====
-	const void BezierControl();
-	const void ParticleControl();
+	// ===== デバッグウィンドウ関数をここに追加 =====7
 };
 #endif

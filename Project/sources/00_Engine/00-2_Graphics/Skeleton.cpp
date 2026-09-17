@@ -4,13 +4,14 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/07
-*	@updated : 2026/08/07
+*	@updated : 2026/09/16
 *============================================================*/
 #include "Skeleton.h"
 using namespace DirectX;
 
 int Skeleton::AddBone(const Bone& bone)
 {
+    // 新規ボーン登録
     int index = static_cast<int>(mBones.size());
     mBones.push_back(bone);
     mBoneMap.emplace(bone.Name, index);
@@ -77,6 +78,7 @@ void Skeleton::updateGlobal(int index)
 
 void Skeleton::CalculateBindPose()
 {
+    // バインドポーズ計算
     for (size_t i = 0; i < mBones.size(); i++) {
         if (mBones[i].ParentIndex == -1) {
             // BindGlobalを計算
@@ -87,6 +89,7 @@ void Skeleton::CalculateBindPose()
 
 int Skeleton::GetBoneIndex(const std::string& name)
 {
+    // ボーンインデックス取得
     auto it = mBoneMap.find(name);
     if (it != mBoneMap.end()) {
         return it->second;

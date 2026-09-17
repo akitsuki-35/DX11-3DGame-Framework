@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : AudioPlayer.h
-*	@brief	 : オーディオ再生
+*	@brief	 : オーディオ再生コンポーネント
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/09
-*	@updated : 2026/08/09
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -35,6 +35,7 @@ private:
 	float mVolume = { 1.0f };
 
 public:
+	// マスタリングボイス初期化・解放
 	static void InitializeMaster();
 	static void FinalizeMaster();
 
@@ -42,6 +43,7 @@ public:
 
 	void Finalize() override;
 
+	// オーディオ読み込み
 	AudioPlayer* LoadAudio(const char* fileName);
 
 	// 再生
@@ -57,6 +59,6 @@ public:
 	void Stop();
 
 	// ボリューム変更
-	void SetVolume(float Volume);
+	AudioPlayer* SetVolume(float Volume);
 };
 

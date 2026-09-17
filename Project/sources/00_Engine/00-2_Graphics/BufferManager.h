@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/14
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -13,6 +13,9 @@
 #include <d3d11.h>
 #include <wrl/client.h>
 
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
 class Skeleton;
 
 namespace D3D11 {
@@ -55,6 +58,7 @@ namespace D3D11 {
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mMaterial{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mLight{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mBones{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mParameter{};
 
 	public:
 		void Initialize();
@@ -67,12 +71,13 @@ namespace D3D11 {
 	public:
 		// セッター
 		void Set2DMatrix();
-		void SetWorldMatrix(DirectX::XMMATRIX worldMatrix);
-		void SetViewMatrix(DirectX::XMMATRIX viewMatrix);
-		void SetProjectionMatrix(DirectX::XMMATRIX projectionMatrix);
-		void SetMaterial(Element::MATERIAL material);
-		void SetLight(Element::LIGHT light);
+		void SetWorldMatrix(const DirectX::XMMATRIX& worldMatrix);
+		void SetViewMatrix(const DirectX::XMMATRIX& viewMatrix);
+		void SetProjectionMatrix(const DirectX::XMMATRIX& projectionMatrix);
+		void SetMaterial(const Element::MATERIAL& material);
+		void SetLight(const Element::LIGHT& light);
 		void SetBoneMatrices(const Skeleton& skeleton);
+		void SetParameter(const DirectX::XMFLOAT4& parameter);
 
 		// ゲッター
 		ID3D11Buffer* GetWorldBuffer() const { return _mWorld.Get(); }
@@ -81,5 +86,6 @@ namespace D3D11 {
 		ID3D11Buffer* GetMaterialBuffer() const { return _mMaterial.Get(); }
 		ID3D11Buffer* GetLightBuffer() const { return _mLight.Get(); }
 		ID3D11Buffer* GetBoneBuffer() const { return _mBones.Get(); }
+		ID3D11Buffer* GetParameterBuffer() const { return _mParameter.Get(); }
 	};
 }

@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : MeshTypes.cpp
-*	@brief	 : メッシュタイプ管理
+*	@brief	 : メッシュタイプ定義
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/26
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #include "MeshTypes.h"
 #include "Vector2.h"
@@ -64,7 +64,7 @@ namespace {
     {
         //    X  Y  Z                   法線
         AXIS{ 0, 1, 2 , Vector3{  0.0f, 0.0f ,1.0f }}, // 0.XY
-        AXIS{ 0, 2, 1 , Vector3{  0.0f, 1.0f ,0.0f }}, // 1/XZ
+        AXIS{ 0, 2, 1 , Vector3{  0.0f, 1.0f ,0.0f }}, // 1.XZ
         AXIS{ 1, 2, 0 , Vector3{  1.0f, 0.0f ,0.0f }}  // 2.YZ
     };
 
@@ -106,6 +106,7 @@ namespace {
         // 向きを変換
         position = ConvertAxis(position, AXIS_TABLE[static_cast<size_t>(desc.axis)]);
 
+        // 頂点パラメータ設定
         vertex.Position = position.ConvertToXMFLOAT3();
         vertex.Normal = AXIS_TABLE[static_cast<size_t>(desc.axis)].normal.ConvertToXMFLOAT3();
         vertex.Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };

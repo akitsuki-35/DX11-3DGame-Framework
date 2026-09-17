@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/02
-*	@updated : 2026/08/02
+*	@updated : 2026/09/16
 *============================================================*/
 #include "AssimpLoader.h"
 #include "DeviceManager.h"
@@ -14,10 +14,6 @@
 #include "Texture.h"
 #include "Animation.h"
 #include "Utility.h"
-#include <memory>
-#include <Windows.h>
-#include <wrl/client.h>
-#include <DirectXMath.h>
 #include <DirectXTex/DirectXTex.h>
 
 // assimp関連
@@ -73,6 +69,7 @@ bool AssimpLoader::GenerateModel(Model& model, const std::string& path)
 		aiProcess_GenSmoothNormals
 	);
 
+	// 読み込み失敗時はreturn
 	if (!scene) {
 		OutputDebugStringA(importer.GetErrorString());
 		return false;
@@ -476,7 +473,7 @@ void AssimpLoader::loadMaterials(const aiScene* scene, Model& model, const std::
 }
 
 /*--------------------------------------------------
-	アニメーション関連ロード
+	アニメーションロード
 ----------------------------------------------------*/
 bool AssimpLoader::AiAnimationLoader::loadAnimations(const aiScene* scene, const Skeleton& skeleton)
 {
