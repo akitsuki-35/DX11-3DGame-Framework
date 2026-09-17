@@ -9,7 +9,11 @@
 #pragma once
 
 #include "Vector3.h"
-#include "Mesh.h"
+
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+struct ParticleDesc;
 
 /*============================================================
 *	@class	: Particle
@@ -21,19 +25,44 @@ class Particle
 	friend class ParticleRenderer;
 
 private:
-	Mesh mMesh{};
+	// 座標
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
+
+	// スケール
 	Vector3 mScale{ 1.0f, 1.0f, 1.0f };
-	float mAlpha{ 1.0f };
 
+	// 速度
 	Vector3 mVelocity{};
+	
+	// 加速度
+	Vector3 mAccel{};
 
-	bool mEnable{ false };
+	// 重力加速度
+	float mGravity{};
+
+	// 抵抗
+	float mDrag{};
+
+	// 寿命
 	int mLife{ 0 };
-	int mMaxLife{ 0 };
+
+	// 有効状態
+	bool mEnable{ false };
 
 public:
-	Particle();
+	Particle() = default;
 
-	void update(double deltaTime);
+	// 更新
+	void Update(double deltaTime);
+
+	// パラメータのセット
+	// positionには基本的にエミッタ本体の座標を指定する
+	void SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& accel, const Vector3& scale,
+		const float& gravity,  const float& drag, const int& life);
+
+	// 有効・無効切り替え
+	void SetEnable(bool enable) { mEnable = enable; }
+
+	// 有効・無効状態取得
+	bool IsEnable() const { return mEnable; }
 };

@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/13
-*	@updated : 2026/08/13
+*	@updated : 2026/09/16
 *============================================================*/
 #include "BillboardRenderer.h"
 #include "Scene.h"
@@ -12,6 +12,7 @@
 
 DirectX::XMMATRIX BillboardRenderer::getWorldMatrix() const
 {
+	// ビルボード行列取得
 	Camera* camera = Scene::GetGameObject<Camera>();
 	return _mOwner->GetTransform().GetBillboardMatrix(camera->GetViewMatrix());
 }

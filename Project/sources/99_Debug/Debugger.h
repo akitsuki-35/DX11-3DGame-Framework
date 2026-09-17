@@ -1,15 +1,14 @@
 ﻿/*============================================================
-*	@file	 : debugger.h
+*	@file	 : Debugger.h
 *	@brief	 : ImGuiデバッガー
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/21
-*	@updated : 2026/06/02
+*	@updated : 2026/08/19
 *============================================================*/
-#ifndef DEBUGGER_H
-#define DEBUGGER_H
+#pragma once
 
-#if defined(DEBUG) || defined(_DEBUG)
+#ifndef NDEBUG
 
 #include <Windows.h>
 
@@ -28,7 +27,7 @@ private:
 	~Debugger() {};
 
 public:
-	static Debugger& GetInstance() {
+	static Debugger& getInstance() {
 		static Debugger instance;
 		return instance;
 	}
@@ -39,10 +38,6 @@ public:
 	const void Update() const;
 	const void Draw() const;
 
-	// ===== デバッグウィンドウ関数をここに追加 =====
-	const void CursorDebug();
-	const void CursorColorDebug();
+	// ===== デバッグウィンドウ関数をここに追加 =====7
 };
-#endif // defined(DEBUG) || defined(_DEBUG)
-
-#endif // DEBUGGER_H
+#endif

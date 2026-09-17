@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -18,7 +18,7 @@ class Texture;
 
 /*============================================================
 *	@class	: SpriteRenderer
-*	@brief	: 板ポリゴン描画
+*	@brief	: 板ポリゴン描画コンポーネント
 *============================================================*/
 class SpriteRenderer : public Renderer
 {
@@ -43,6 +43,7 @@ public:
 		Renderer::Finalize();
 	}
 
+	// 描画
 	void Draw() const override;
 
 private:

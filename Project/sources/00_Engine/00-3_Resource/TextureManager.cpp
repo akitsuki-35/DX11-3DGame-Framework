@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/30
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #include "TextureManager.h"
 #include "Texture.h"
@@ -65,5 +65,4 @@ bool TextureManager::generateTexture(Texture& texture, const std::string& path)
 	texture.mSize = { static_cast<UINT>(metaData.width), static_cast<UINT>(metaData.height) };
 
 	return true;
-
 }

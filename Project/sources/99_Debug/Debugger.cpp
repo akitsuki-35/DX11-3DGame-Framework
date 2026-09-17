@@ -6,17 +6,20 @@
 * 　@date	 : 2026/05/21
 *	@updated : 2026/06/02
 *============================================================*/
-#if defined(DEBUG) || defined(_DEBUG)
+#ifndef NDEBUG
 #include "Debugger.h"
-#include "direct3d.h"
+#include "DeviceManager.h"
 
 // ImGui
-#include <imgui.h>
-#include <imgui_impl_win32.h>
-#include <imgui_impl_dx11.h>
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_win32.h"
+#include "ImGui/imgui_impl_dx11.h"
 
 // デバッグ対象のインクルード
-#include "cursor.h"
+#include "Scene.h"
+#include "ParticleEmitter.h"
+#include "ParticleBezier.h"
+#include "BezierCurve.h"
 
 /*============================================================
 	使い方
@@ -51,7 +54,8 @@ const void Debugger::Initialize(HWND hwnd) const
 	ImGui_ImplWin32_Initialize(hwnd);
 
 	// DirectX11用の初期化
-	ImGui_ImplDX11_Initialize(Direct3DGetDevice(), Direct3DGetDeviceContext());
+	ImGui_ImplDX11_Initialize(D3D11::DeviceManager::getInstance().GetDevice(),
+		D3D11::DeviceManager::getInstance().GetContext());
 }
 
 const void Debugger::Finalize() const
@@ -68,9 +72,6 @@ const void Debugger::Update() const
 	ImGui::NewFrame();
 
 	// ===== デバッグウィンドウの追加処理 =====
-
-	GetInstance().CursorDebug();
-	GetInstance().CursorColorDebug();
 }
 
 const void Debugger::Draw() const
@@ -79,27 +80,4 @@ const void Debugger::Draw() const
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
-const void Debugger::CursorDebug()
-{
-	ImGui::Begin("Cursor");
-	ImGui::Text("posX: %f", Cursor::GetInstance().GetPosition().x);
-	ImGui::Text("posY: %f", Cursor::GetInstance().GetPosition().y);
-	ImGui::Text("LeftPresed: %s", Cursor::GetInstance().IsLeftButtonPressed() ? "true" : "false");
-	ImGui::Text("RightPresed: %s", Cursor::GetInstance().IsRightButtonPressed() ? "true" : "false");
-	ImGui::End();
-}
-
-const void Debugger::CursorColorDebug()
-{
-	ImGui::Begin("CursorColor");
-	ImGui::Text(
-		"Color : %.2f %.2f %.2f %.2f",
-		Cursor::GetInstance().GetColor().x,
-		Cursor::GetInstance().GetColor().y,
-		Cursor::GetInstance().GetColor().z,
-		Cursor::GetInstance().GetColor().w
-	);
-	ImGui::End();
-}
-
-#endif // defined(DEBUG) || defined(_DEBUG)
+#endif

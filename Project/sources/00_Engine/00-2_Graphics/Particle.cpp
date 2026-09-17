@@ -4,29 +4,25 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/15
-*	@updated : 2026/08/15
+*	@updated : 2026/09/16
 *============================================================*/
 #include "Particle.h"
-#include "MeshTypes.h"
+#include "ParticleEmitter.h"
 
-using namespace MeshType;
-
-Particle::Particle()
+void Particle::Update(double deltaTime)
 {
-	mMesh.CreatePlane(Plane::Pivot::Center, Plane::Axis::XY);
-}
+	// 発射後パーティクル更新
 
-void Particle::update(double deltaTime)
-{
 	float dt = static_cast<float>(deltaTime);
 
 	if (!mEnable) {
 		return;
 	}
 
-	Vector3 gravity{ 0.0f, -9.8f, 0.0f };
-	mVelocity += gravity * dt; // 重力
-	mVelocity += mVelocity * -1.0f * dt; // 抵抗
+	Vector3 gravity{ 0.0f, -mGravity, 0.0f };
+	mVelocity += mAccel * dt;
+	mVelocity += gravity * dt;
+	mVelocity += mVelocity * mDrag * dt;
 	mPosition += mVelocity * dt;
 
 	mLife--;
@@ -34,4 +30,16 @@ void Particle::update(double deltaTime)
 	if (mLife <= 0) {
 		mEnable = false;
 	}
+}
+
+void Particle::SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& accel, const Vector3& scale, const float& gravity, const float& drag, const int& life)
+{
+	// 外部からメンバ変数を初期化
+	mPosition = position;
+	mVelocity = velocity;
+	mAccel = accel;
+	mScale = scale;
+	mGravity = gravity;
+	mDrag = drag;
+	mLife = life;
 }

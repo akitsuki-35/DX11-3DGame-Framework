@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/14
-*	@updated : 2026/07/14
+*	@updated : 2026/09/16
 *============================================================*/
 #include "BufferManager.h"
 #include "DeviceManager.h"
@@ -22,20 +22,26 @@ void D3D11::BufferManager::Initialize()
 	_mMaterial = generateBuffer(sizeof(Element::MATERIAL));
 	_mLight = generateBuffer(sizeof(Element::LIGHT));
 	_mBones = generateBuffer(sizeof(Element::BONE));
+	_mParameter = generateBuffer(sizeof(XMFLOAT4));
 
 	// ライト初期化
 	Element::LIGHT light{};
+	light.Position = { 1.0f, -1.0f, 1.0f, 0.0f };
 	light.Enable = true;
-	light.Direction = XMFLOAT4(1.0f, -1.0f, 0.0f, 0.0f);
-	light.Ambient = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);
-	light.Diffuse = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);
-	D3D11::BufferManager::getInstance().SetLight(light);
+	light.Direction = XMFLOAT4(1.0f, -1.0f, 1.0f, 0.0f);
+	light.Ambient = XMFLOAT4(0.9f, 0.8f, 1.0f, 1.0f);
+	light.Diffuse = XMFLOAT4(0.7f, 0.7f, 1.0f, 1.0f);
+	SetLight(light);
 
 	// マテリアル初期化
 	Element::MATERIAL material{};
 	material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	material.Ambient = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	D3D11::BufferManager::getInstance().SetMaterial(material);
+	SetMaterial(material);
+
+	// 汎用パラメータ初期化
+	DirectX::XMFLOAT4 parameter{ 0.0f, 0.0f, 0.0f, 0.0f };
+	SetParameter(parameter);
 }
 
 Microsoft::WRL::ComPtr<ID3D11Buffer> D3D11::BufferManager::generateBuffer(UINT size)
@@ -67,7 +73,7 @@ void D3D11::BufferManager::Set2DMatrix()
 	SetProjectionMatrix(projection);
 }
 
-void D3D11::BufferManager::SetWorldMatrix(DirectX::XMMATRIX worldMatrix)
+void D3D11::BufferManager::SetWorldMatrix(const DirectX::XMMATRIX& worldMatrix)
 {
 	// ワールド行列設定
 	XMFLOAT4X4 worldf;
@@ -80,7 +86,7 @@ void D3D11::BufferManager::SetWorldMatrix(DirectX::XMMATRIX worldMatrix)
 		GetContext()->VSSetConstantBuffers(0, 1, &buf);
 }
 
-void D3D11::BufferManager::SetViewMatrix(DirectX::XMMATRIX viewMatrix)
+void D3D11::BufferManager::SetViewMatrix(const DirectX::XMMATRIX& viewMatrix)
 {
 	// ビュー行列設定
 	XMFLOAT4X4 viewf;
@@ -93,7 +99,7 @@ void D3D11::BufferManager::SetViewMatrix(DirectX::XMMATRIX viewMatrix)
 		GetContext()->VSSetConstantBuffers(1, 1, &buf);
 }
 
-void D3D11::BufferManager::SetProjectionMatrix(DirectX::XMMATRIX projectionMatrix)
+void D3D11::BufferManager::SetProjectionMatrix(const DirectX::XMMATRIX& projectionMatrix)
 {
 	// プロジェクション行列設定
 	XMFLOAT4X4 projectionf;
@@ -106,7 +112,7 @@ void D3D11::BufferManager::SetProjectionMatrix(DirectX::XMMATRIX projectionMatri
 		GetContext()->VSSetConstantBuffers(2, 1, &buf);
 }
 
-void D3D11::BufferManager::SetMaterial(Element::MATERIAL material)
+void D3D11::BufferManager::SetMaterial(const Element::MATERIAL& material)
 {
 	// マテリアル設定
 	DeviceManager::getInstance().
@@ -119,7 +125,7 @@ void D3D11::BufferManager::SetMaterial(Element::MATERIAL material)
 		GetContext()->PSSetConstantBuffers(3, 1, &buf);
 }
 
-void D3D11::BufferManager::SetLight(Element::LIGHT light)
+void D3D11::BufferManager::SetLight(const Element::LIGHT& light)
 {
 	// ライト設定
 	DeviceManager::getInstance().
@@ -134,6 +140,7 @@ void D3D11::BufferManager::SetLight(Element::LIGHT light)
 
 void D3D11::BufferManager::SetBoneMatrices(const Skeleton& skeleton)
 {
+	// ボーン行列設定
 	Element::BONE buffer{};
 
 	const auto& matrices = skeleton.GetSkinningMatrices();
@@ -154,4 +161,17 @@ void D3D11::BufferManager::SetBoneMatrices(const Skeleton& skeleton)
 	ID3D11Buffer* buf = _mBones.Get();
 
 	DeviceManager::getInstance().GetContext()->VSSetConstantBuffers(6, 1, &buf);
+}
+
+void D3D11::BufferManager::SetParameter(const DirectX::XMFLOAT4& parameter)
+{
+	// 汎用パラメータ設定
+	DeviceManager::getInstance().
+		GetContext()->UpdateSubresource(_mParameter.Get(), 0, nullptr, &parameter, 0, 0);
+
+	ID3D11Buffer* buf = _mParameter.Get();
+	DeviceManager::getInstance().
+		GetContext()->VSSetConstantBuffers(7, 1, &buf);
+	DeviceManager::getInstance().
+		GetContext()->PSSetConstantBuffers(7, 1, &buf);
 }

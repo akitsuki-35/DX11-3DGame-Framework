@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/12
-*	@updated : 2026/08/12
+*	@updated : 2026/09/16
 *============================================================*/
 #include "TextRenderer.h"
 #include "Texture.h"
@@ -39,6 +39,7 @@ TextRenderer::TextRenderer(GameObject* owner)
 
 void TextRenderer::Draw() const
 {
+	// テキストが空白またはフォントが存在しない場合は描画しない
 	if (mText.empty() || !_mFont) {
 		return;
 	}
@@ -56,8 +57,8 @@ void TextRenderer::Draw() const
 	Transform transform = _mOwner->GetTransform();
 
 	// スタート位置と現在位置を初期化
-	const float startX = transform.GetPosition().x;
-	const float startY = transform.GetPosition().y;
+	const float startX = transform.GetPosition().x + mOffset.x;
+	const float startY = transform.GetPosition().y + mOffset.y;
 
 	float currentX = startX;
 	float currentY = startY;
@@ -66,7 +67,7 @@ void TextRenderer::Draw() const
 	size_t charCount = 0;
 
 	// 文字色
-	XMFLOAT4 textColor = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+	XMFLOAT4 textColor = mColor;
 
 	// 1文字ずつレンダリング処理する
 	for (size_t i = 0; i < mText.length(); ++i) {
@@ -110,20 +111,21 @@ void TextRenderer::Draw() const
 		// 最大文字数到達時の自動改行
 		if (mCharsPerLine > 0 && charCount >= mCharsPerLine) {
 			currentX = startX;
-			currentY += _mFont->Size + _mFont->Size / 4;
+			currentY += mSize + mSize / 4;
 			charCount = 0;
 		}
 
 		// 改行記号による手動改行
 		if (codepoint == L'\n') {
 			currentX = startX;
-			currentY += _mFont->Size + _mFont->Size / 4;
+			currentY += mSize + mSize / 4;
 			charCount = 0;
 			continue;
 		}
 
 		// フォントリソース取得
-		Glyph* glyph = FontManager::getInstance().GetGlyph(_mFont, codepoint);
+		GlyphKey key = { _mFont, codepoint, mSize };
+		Glyph* glyph = FontManager::getInstance().GetGlyph(key);
 		if (!glyph) {
 			continue;
 		}
@@ -140,13 +142,19 @@ void TextRenderer::Draw() const
 		// ワールド行列セット
 		D3D11::BufferManager::getInstance().SetWorldMatrix(transform.GetWorldMatrix());
 
-		shadowDraw(glyph, transform);
+		// ドロップシャドウ描画
+		if (mShadowEnable) {
+			shadowDraw(glyph, transform);
+		}
 
 		// マテリアル設定
 		Element::MATERIAL material{};
 		material.Diffuse = textColor;
 		material.TextureEnable = true;
 		D3D11::BufferManager::getInstance().SetMaterial(material);
+
+		// パラメータ設定
+		D3D11::BufferManager::getInstance().SetParameter(mParameter);
 
 		mCanvas.Bind();
 
@@ -170,7 +178,7 @@ void TextRenderer::shadowDraw(const Glyph* glyph, const Transform& transform) co
 {
 	// シャドウ用マテリアル設定
 	Element::MATERIAL shadowMaterial{};
-	shadowMaterial.Diffuse = XMFLOAT4{ 0.0f, 0.0f, 0.0f, 1.0f };
+	shadowMaterial.Diffuse = mShadowColor;
 	shadowMaterial.TextureEnable = true;
 	D3D11::BufferManager::getInstance().SetMaterial(shadowMaterial);
 
@@ -192,24 +200,49 @@ void TextRenderer::shadowDraw(const Glyph* glyph, const Transform& transform) co
 
 TextRenderer* TextRenderer::SetFont(const std::string& fontName)
 {
+	// フォント読み込み
 	_mFont = FontManager::getInstance().GetFont(fontName);
 	return this;
 }
 
-TextRenderer* TextRenderer::SetTextSize(const float& size)
+TextRenderer* TextRenderer::SetTextSize(const int& size)
 {
-	_mFont->Size = size;
+	// 文字サイズ設定
+	mSize = size;
 	return this;
 }
 
 TextRenderer* TextRenderer::SetText(const std::string& text)
 {
+	// 文字列設定
 	mText = Utility::String::toWideString(text);
 	return this;
 }
 
 TextRenderer* TextRenderer::SetCharsPerLine(const size_t& charsPerLine)
 {
+	// 1行あたりの文字数設定
 	mCharsPerLine = charsPerLine;
+	return this;
+}
+
+TextRenderer* TextRenderer::SetOffset(const Vector2& offset)
+{
+	// オフセット設定
+	mOffset = offset;
+	return this;
+}
+
+TextRenderer* TextRenderer::SetShadowColor(const DirectX::XMFLOAT4 color)
+{
+	// ドロップシャドウ色設定
+	mShadowColor = color;
+	return this;
+}
+
+TextRenderer* TextRenderer::SetShadowEnable(const bool& isEnable)
+{
+	// ドロップシャドウ有効無効切り替え
+	mShadowEnable = isEnable;
 	return this;
 }

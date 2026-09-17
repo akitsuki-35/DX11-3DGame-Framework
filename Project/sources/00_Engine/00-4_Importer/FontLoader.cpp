@@ -1,10 +1,10 @@
 ﻿/*============================================================
-*	@file	 : FontLoader.h
+*	@file	 : FontLoader.cpp
 *	@brief	 : フォントファイル読み込み
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/06/04
-*	@updated : 2026/08/11
+*	@updated : 2026/09/16
 *============================================================*/
 #include "FontLoader.h"
 #include "Utility.h"

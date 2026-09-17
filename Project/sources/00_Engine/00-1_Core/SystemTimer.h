@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
-*	@updated : 2026/07/07
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -12,7 +12,7 @@
 
 namespace System {
 /*============================================================
-*	@class	: Timer
+*	@class	: System::Timer
 *	@brief	: システムタイマー
 *============================================================*/
 	class Timer final
@@ -48,8 +48,23 @@ namespace System {
 
 	public:
 		void Initialize();
+
+		// タイマー進行
 		bool Tick();
+
+		// タイマーリセット
+		void Refresh();
+
+		// 現在時間取得
+		double GetCurrent() const { return static_cast<double>(mCurrentTime.QuadPart); }
+
+		// 累積時間取得
+		double GetAccumulator() const { return mAccumulator; }
+
+		// dt取得
 		double GetDeltaTime() const { return mFps; }
+
+		// FPS値変更
 		void SetFps(double fps) { mFps = 1.0 / fps; }
 	};
 }

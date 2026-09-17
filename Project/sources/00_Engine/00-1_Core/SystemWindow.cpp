@@ -95,6 +95,11 @@ int System::Window::ProcessMessage() const
 	return 0;
 }
 
+void System::Window::GameQuit() const
+{
+	DestroyWindow(mHwnd);
+}
+
 LRESULT System::Window::wndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	// ウィンドウプロシージャ

@@ -1,30 +1,23 @@
 ﻿/*============================================================
-*	@file	 : ParticleEmitter.h
-*	@brief	 : パーティクルエミッタ
+*	@file	 : Wave.h
+*	@brief	 : 波
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/06/18
-*	@updated : 2026/08/15
+* 　@date	 : 2026/09/17
+*	@updated : 2026/09/17
 *============================================================*/
 #pragma once
 
 #include "GameObject.h"
-#include "Particle.h"
 
 /*============================================================
-*	@class	: ParticleEmitter
-*	@brief	: パーティクルエミッタ
+*	@class	: Wave
+*	@brief	: 波
 *============================================================*/
-class ParticleEmitter : public GameObject
+class Wave : public GameObject
 {
-	friend class ParticleRenderer;
-
-private:
-	static constexpr int PARTICLE_MAX{ 10000 };
-	std::vector<Particle> mParticles{};
-
 public:
-	ParticleEmitter() = default;
+	Wave() = default;
 
 	void Initialize() override;
 	void Finalize() override;

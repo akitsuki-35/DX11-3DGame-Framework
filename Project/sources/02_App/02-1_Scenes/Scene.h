@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2025/09/17
-*	@updated : 2026/08/15
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -20,7 +20,13 @@
 class Scene
 {
 protected:
-	inline static std::list<std::unique_ptr<GameObject>> _mGameObjects;
+	// ゲームオブジェクト配列
+	static inline std::list<std::unique_ptr<GameObject>> _mGameObjects{};
+
+	// ポーズ・ヒットストップフラグ
+	// シーンによってマネージャーオブジェクトのクラスが異なるので、マネージャー側からフラグを切り替える
+	static inline bool mPause{ false };
+	static inline bool mHitStop{ false };
 
 public:
 	virtual ~Scene() = default;
@@ -30,6 +36,14 @@ public:
 	virtual void Update(double deltaTime);
 	virtual void Draw() const;
 
+	// ポーズ・ヒットストップフラグ設定
+	static void SetPause(const bool& isPause) { mPause = isPause; }
+	static void SetHitStop(const bool& isHitStop) { mHitStop = isHitStop; };
+
+	/*------------------------------------------------------------
+		テンプレート関数
+	------------------------------------------------------------*/
+	// オブジェクト追加
 	template <typename T>
 	static T* AddGameObject() {
 		auto gameObject = std::make_unique<T>();
@@ -40,6 +54,7 @@ public:
 		return ptr;
 	}
 
+	// オブジェクト取得（単体）
 	template <typename T>
 	static T* GetGameObject() {
 		for (const auto& gameObject : _mGameObjects) {
@@ -49,6 +64,7 @@ public:
 		return nullptr;
 	}
 
+	// オブジェクト取得（複数）
 	template <typename T>
 	static std::vector<T*> GetGameObjects() {
 		std::vector<T*> objects;

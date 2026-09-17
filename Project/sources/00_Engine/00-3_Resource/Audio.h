@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/09
-*	@updated : 2026/08/09
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -20,12 +20,19 @@ class Audio
 	friend class AudioManager;
 
 private:
-    std::vector<BYTE> mPCM{}; // PCMデータ
-    WAVEFORMATEX mFormat{}; // フォーマット
-    UINT mBytes{ 0 }; // PCMバイト数
-    UINT mSamples{ 0 }; // サンプル数
+    // PCMデータ
+    std::vector<BYTE> mPCM{};
 
-    // ループタグ
+    // フォーマット
+    WAVEFORMATEX mFormat{};
+
+    // PCMバイト数
+    UINT mBytes{ 0 };
+
+    // サンプル数
+    UINT mSamples{ 0 };
+
+    // oggループタグ
     int mLoopStart{ -1 };
     int mLoopEnd = { -1 };
 	

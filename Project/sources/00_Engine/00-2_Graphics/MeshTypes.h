@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/26
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -45,6 +45,7 @@ namespace MeshType {
 			Count
 		};
 
+		// 初期化用構造体
 		struct DESC
 		{
 			Pivot pivot = Pivot::Center;

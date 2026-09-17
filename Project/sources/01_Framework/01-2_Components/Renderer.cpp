@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/13
-*	@updated : 2026/08/13
+*	@updated : 2026/09/16
 *============================================================*/
 #include "Renderer.h"
 #include "Vector3.h"
@@ -27,36 +27,51 @@ void Renderer::Bind() const
 
 Renderer* Renderer::LoadShader(const std::string& keyName)
 {
+	// シェーダー読み込み
 	_mShader = ShaderManager::getInstance().Get(keyName);
 	return this;
 }
 
 Renderer* Renderer::SetBlendState(const Blend& state)
 {
+	// ブレンドステート設定
 	mBlendState = state;
 	return this;
 }
 
 Renderer* Renderer::SetLayer(const Layer& layer)
 {
+	// レイヤー設定
 	mSortKey.layer = layer;
 	return this;
 }
 
 void Renderer::CalcCameraZ(Vector3 cameraPosition, Vector3 cameraForward) const
 {
+	// カメラからの距離を計算
 	Vector3 dir = _mOwner->GetTransform().GetPosition() - cameraPosition;
 	mSortKey.Zdepth = Vector3::Dot(dir, cameraForward);
 }
 
 Renderer* Renderer::SetColor(const DirectX::XMFLOAT4 color)
 {
+	// カラー設定
 	mColor = color;
+	return this;
+}
+
+Renderer* Renderer::SetParameter(const DirectX::XMFLOAT4 parameter)
+{
+	// 汎用パラメータ設定
+	mParameter = parameter;
 	return this;
 }
 
 void Renderer::Begin() const
 {
+	// ブレンドステートのセット
+	// 描画関数の先頭で呼び出し
+
 	switch (mBlendState)
 	{
 	case Blend::Default:
@@ -78,5 +93,8 @@ void Renderer::Begin() const
 
 void Renderer::End() const
 {
+	// ブレンドステートをデフォルトに戻す
+	// 描画関数の末尾で呼び出し
+
 	D3D11::DeviceManager::getInstance().SetBlendState(D3D11::RenderState::Blend::Default);
 }

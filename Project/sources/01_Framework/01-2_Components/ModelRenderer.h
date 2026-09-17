@@ -4,13 +4,12 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/31
-*	@updated : 2026/07/31
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
 #include "Renderer.h"
-#include "GameObject.h"
-#include "Utility.h"
+#include <filesystem>
 
 /*--------------------------------------------------
 	前方宣言
@@ -27,10 +26,19 @@ class ModelRenderer : public Renderer
 	// テクスチャ
 	struct ModelTextures
 	{
+		// アルベドカラー
 		Texture* Albedo{};
+
+		// 法線マップ
 		Texture* Normal{};
+
+		// ざらつき
 		Texture* Roughness{};
+
+		// 金属感
 		Texture* Metalness{};
+
+		// セルシェーディング明るさ値
 		Texture* Rump{};
 	};
 

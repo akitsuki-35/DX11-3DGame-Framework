@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
-*	@updated : 2026/07/07
+*	@updated : 2026/09/16
 *============================================================*/
 #include "SystemTimer.h"
 
@@ -26,7 +26,7 @@ bool System::Timer::Tick()
 
     mExecLastTime = mCurrentTime;
 
-    // 累積時間購入
+    // 累積時間更新
     mAccumulator += dt;
 
     if (mAccumulator >= mFps) {
@@ -35,4 +35,14 @@ bool System::Timer::Tick()
     }
 
     return false;
+}
+
+void System::Timer::Refresh()
+{
+    // 累積時間を現在時間でリセット
+    QueryPerformanceCounter(&mCurrentTime);
+
+    mExecLastTime = mCurrentTime;
+
+    mAccumulator = 0.0;
 }
