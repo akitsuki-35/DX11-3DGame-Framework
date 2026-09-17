@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -17,15 +17,18 @@ class Texture;
 
 /*============================================================
 *	@class	: BillboardRenderer
-*	@brief	: 板ポリゴン描画
+*	@brief	: ビルボード描画コンポーネント
 *============================================================*/
 class BillboardRenderer : public SpriteRenderer
 {
 	friend class ParticleEmitter;
 
 protected:
-	Mesh mMesh{}; // メッシュ
-	Element::MATERIAL mMaterial{}; // マテリアル
+	// メッシュ
+	Mesh mMesh{};
+
+	// マテリアル
+	Element::MATERIAL mMaterial{};
 
 public:
 	BillboardRenderer(GameObject* owner)

@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : AudioManager.h
-*	@brief	 : オーディオ管理
+*	@brief	 : オーディオリソース管理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/09
-*	@updated : 2026/08/09
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -67,8 +67,11 @@ public:
 private:
 	// オーディオ生成
 	bool generateAudio(Audio& audio, const std::string& path);
+	
+	// オーディオ拡張子取得
 	AudioType getType(const std::string& ext);
 
+	// 拡張子ごとのロード処理
 	bool loadWav(Audio& audio, const std::string& path);
 	bool loadMp3(Audio& audio, const std::string& path);
 	bool loadOgg(Audio& audio, const std::string& path);

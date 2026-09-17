@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/01
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -60,6 +60,9 @@ public:
 	void Draw(const SUBSET& subset) const;
 
 private:
+	// 頂点バッファ生成
 	bool generateVertexBuffer();
+
+	// インデックスバッファ生成
 	bool generateIndexBuffer();
 };

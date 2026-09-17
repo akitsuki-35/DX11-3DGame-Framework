@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/14
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -62,6 +62,8 @@ public:
 	void Clear();
 };
 
+// シェーダー登録
+// ゲーム起動時に1度だけ呼ぶ
 namespace ShaderSet {
 	inline void initialize() {
 		ShaderManager::getInstance().Register("UI",
@@ -70,13 +72,7 @@ namespace ShaderSet {
 		ShaderManager::getInstance().Register("Font",
 			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\FontPS.cso");
 
-		ShaderManager::getInstance().Register("FontOutline",
-			"assets\\shaders\\UISpriteVS.cso", "assets\\shaders\\FontOutlinePS.cso");
-
 		ShaderManager::getInstance().Register("Unlit",
 			"assets\\shaders\\UnlitVS.cso", "assets\\shaders\\UnlitPS.cso");
-
-		ShaderManager::getInstance().Register("Directional",
-			"assets\\shaders\\DirectionalVS.cso", "assets\\shaders\\DirectionalPS.cso");
 	}
 }

@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -40,7 +40,10 @@ private:
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 private:
+	// 現在シーン
 	std::unique_ptr<Scene> mCurrentScene{};
+
+	// 遷移先シーン
 	std::unique_ptr<Scene> mNextScene{};
 
 public:
@@ -49,6 +52,7 @@ public:
 	void Update(double deltaTime);
 	void Draw();
 
+	// シーン遷移
 	template <class T>
 	void SceneChange() {
 		mNextScene = std::make_unique<T>();

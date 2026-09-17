@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : UICanvas.h
-*	@brief	 : UIキャンバス設定
+*	@brief	 : UI領域キャンバス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/12
-*	@updated : 2026/08/12
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -14,7 +14,7 @@
 
 /*============================================================
 *	@class	: UICanvas
-*	@brief	: UI用キャンバス
+*	@brief	: UI領域キャンバス
 *============================================================*/
 class UICanvas
 {
@@ -31,15 +31,11 @@ private:
 	// インデックスバッファ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> _mIndexBuffer{};
 
-	UINT mStride{};
-	UINT mVertexNum{};
-	UINT mIndexNum{};
-	bool mIsIndex{ false };
-
 public:
 	UICanvas() = default;
 	~UICanvas() = default;
 
+	// キャンバス作成
 	bool CreateCanvas(UIStyle::Pivot pivot);
 
 	void Bind() const;

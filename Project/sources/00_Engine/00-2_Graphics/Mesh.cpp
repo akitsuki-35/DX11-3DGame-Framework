@@ -1,10 +1,10 @@
 ﻿/*============================================================
-*	@file	 : Mesh.h
-*	@brief	 : ポリゴンメッシュ生成
+*	@file	 : Mesh.cpp
+*	@brief	 : ポリゴンメッシュ
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/24
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #include "Mesh.h"
 #include "DeviceManager.h"

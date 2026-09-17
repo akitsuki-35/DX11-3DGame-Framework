@@ -4,58 +4,33 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/28
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #include "Game.h"
-#include "SceneManager.h"
-#include "Input.h"
-#include "Camera.h"
-#include "Transition.h"
 
+// オブジェクト群
+#include "Camera.h"
 #include "Wave.h"
 #include "Player.h"
-#include "Enemy.h"
 #include "Bullet.h"
-#include "Tree.h"
 #include "Sky.h"
-#include "Box.h"
-#include "Shadow.h"
-
-#include "ParticleEmitter.h"
-#include "Result.h"
-
-#include "Score.h"
-
-#include "DeviceManager.h"
-#include "D3D11Config.h"
 
 void Game::Initialize()
 {
-	Transition::getInstance().Start(1.0, true);
-
+	// 配列を初期化
 	_mGameObjects.clear();
 
+	// カメラ
 	AddGameObject<Camera>();
 
+	// スカイドーム
 	AddGameObject<Sky>();
 
-	AddGameObject<Wave>();
+	// フィールド
+	AddGameObject<Wave>()->SetPosition({ 0.0f, 0.0f, 0.0f });
+
+	// オブジェクト
 	AddGameObject<Player>();
-	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
-	AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
-	AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
-	Box* box = AddGameObject<Box>();
-	box->SetPosition({ 0.0f, 0.0f, -5.0f });
-	box->SetScale({ 1.0f, 1.0f, 1.0f });
-
-	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 5.0f });
-	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 0.0f });
-
-	AddGameObject<Shadow>()->SetPosition({ 0.0f, 0.1f, 0.0f });
-
-	AddGameObject<ParticleEmitter>()->SetPosition({ 0.0f, 0.0f, 0.0f });
-
-	AddGameObject<Score>();
 }
 
 void Game::Finalize()
@@ -65,11 +40,12 @@ void Game::Finalize()
 
 void Game::Update(double deltaTime)
 {
-	Scene::Update(deltaTime);
-
-	if (Input::GetKeyTrigger(VK_RETURN)) {
-		SceneManager::getInstance().SceneChange<Result>();
+	// スロー中は通常の半分の時間で更新
+	if (mSlow) {
+		deltaTime *= 0.5;
 	}
+
+	Scene::Update(deltaTime);
 }
 
 void Game::Draw() const

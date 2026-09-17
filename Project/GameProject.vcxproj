@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp" />
-    <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\BufferManager.cpp" />
@@ -31,6 +30,9 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\ModelMesh.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Graphics.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Particle.cpp" />
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBase.cpp" />
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBezier.cpp" />
+    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBox.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Skeleton.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\UICanvas.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\UIStyle.cpp" />
@@ -44,6 +46,7 @@
     <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\AssimpLoader.cpp" />
+    <ClCompile Include="sources\00_Engine\00-4_Importer\CSVHandler.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\BezierCurve.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp" />
@@ -64,11 +67,13 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\BillboardRenderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\GridRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\ParticleRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Renderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\SpriteRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp" />
+    <ClCompile Include="sources\01_Framework\01-2_Components\Timer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
@@ -110,6 +115,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp" />
+    <ClCompile Include="sources\02_App\02-2_Objects\GameObject.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Grass.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -118,7 +124,6 @@
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\MeshField.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp" />
-    <ClCompile Include="sources\02_App\02-2_Objects\ParticleTypes.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Player.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Score.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -178,7 +183,6 @@
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Config.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -196,6 +200,9 @@
     <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Graphics.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Particle.h" />
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBase.h" />
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBezier.h" />
+    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBox.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Skeleton.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\UICanvas.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\UIStyle.h" />
@@ -211,6 +218,7 @@
     <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h" />
     <ClInclude Include="sources\00_Engine\00-4_Importer\AssimpLoader.h" />
+    <ClInclude Include="sources\00_Engine\00-4_Importer\CSVHandler.h" />
     <ClInclude Include="sources\00_Engine\00-4_Importer\FontLoader.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\BezierCurve.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\BoneTransform.h" />
@@ -241,11 +249,13 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\AudioPlayer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\BillboardRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Component.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\GridRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\ParticleRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Renderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\SpriteRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h" />
+    <ClInclude Include="sources\01_Framework\01-2_Components\Timer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\UIRenderer.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Result.h">
@@ -301,7 +311,6 @@
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\MeshField.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h" />
-    <ClInclude Include="sources\02_App\02-2_Objects\ParticleTypes.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\Player.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\Score.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -369,28 +378,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="sources\03_HLSL\Common.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="sources\03_HLSL\DirectionalPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="sources\03_HLSL\DirectionalVS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
     <FxCompile Include="sources\03_HLSL\FontOutlinePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)assets\shaders\%(Filename).cso</ObjectFileOutput>

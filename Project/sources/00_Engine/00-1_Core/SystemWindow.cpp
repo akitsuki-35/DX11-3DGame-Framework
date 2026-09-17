@@ -8,13 +8,6 @@
 *============================================================*/
 #include "SystemWindow.h"
 
-// ImGui
-#include <ImGui/imgui_impl_win32.h>
-/*------------------------------------------------------------
-	ローカル関数 プロトタイプ宣言
-------------------------------------------------------------*/
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
 {
 	mHInstance = hInstance;
@@ -102,11 +95,13 @@ int System::Window::ProcessMessage() const
 	return 0;
 }
 
+void System::Window::GameQuit() const
+{
+	DestroyWindow(mHwnd);
+}
+
 LRESULT System::Window::wndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
-		return true;
-
 	// ウィンドウプロシージャ
 	switch (uMsg)
 	{

@@ -1,41 +1,26 @@
 ﻿/*============================================================
 *	@file	 : Transition.h
-*	@brief	 : フェード制御
+*	@brief	 : トランジション
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/03/29
-*	@updated : 2026/08/15
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
+#include "Timer.h"
 #include "UIRenderer.h"
 #include "Transform.h"
 #include "Config.h"
 #include <DirectXMath.h>
 #include <memory>
 
-/*------------------------------------------------------------
-	前方宣言
-------------------------------------------------------------*/
-class UIRenderer;
-
 /*============================================================
 *	@class	: Transition
-*	@brief	: フェード制御
+*	@brief	: トランジション
 *============================================================*/
 class Transition
 {
-public:
-	// フェードの推移状態
-	enum class State : int
-	{
-		None,
-		FadeOut,
-		FadeOutEnd,
-		FadeIn,
-		FadeInEnd
-	};
-
 /*--------------------------------------------------
 	Singleton用
 ----------------------------------------------------*/
@@ -59,13 +44,17 @@ private:
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 private:
-	State mState{};
-	double mTime{ 60.0f }; // トランジション総時間
-	double mAccumulatedtime{}; // 総経過時間
-	double mStartTime{}; // トランジション開始時間
+	// タイマー
+	std::unique_ptr<Timer> _mTimer{};
 
-	std::unique_ptr<UIRenderer> _mRenderer{}; // レンダラー
-	Transform mTransform{}; // トランスフォーム
+	// レンダラー
+	std::unique_ptr<UIRenderer> _mRenderer{};
+
+	// トランスフォーム
+	Transform mTransform{};
+
+	// フェードインorフェードアウト？
+	bool mFadeIn{};
 
 public:
 	void Initialize();
@@ -73,8 +62,13 @@ public:
 	void Update(double deltaTime);
 	void Draw() const;
 
-	// フェード開始
+	// トランジション開始
 	void Start(const double& fadeTime, const bool& isFadeIn,
 		const Color::Index& color = Color::Index::Black);
-	Transition::State GetState() const { return mState; }
+
+	// トランジション中か判定
+	bool GetTransitionActive();
+
+	// トランジション進行度取得
+	float GetTransitionProgress();
 };

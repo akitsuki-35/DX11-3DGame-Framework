@@ -4,13 +4,15 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/02
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #include "ModelMesh.h"
 #include "DeviceManager.h"
 
 bool ModelMesh::Create(const std::vector<Element::VERTEX3D>& vertices, const std::vector<uint32_t>& indices)
 {
+	// メッシュ生成
+
 	mVertices = vertices;
 	mIndices = indices;
 

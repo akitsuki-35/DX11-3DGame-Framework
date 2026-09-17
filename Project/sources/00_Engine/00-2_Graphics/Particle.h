@@ -9,12 +9,11 @@
 #pragma once
 
 #include "Vector3.h"
-#include "Mesh.h"
 
-namespace ParticleType {
-	class Base;
-	class Box;
-}
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+struct ParticleDesc;
 
 /*============================================================
 *	@class	: Particle
@@ -26,33 +25,43 @@ class Particle
 	friend class ParticleRenderer;
 
 private:
-	Mesh mMesh{};
+	// 座標
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
+
+	// スケール
 	Vector3 mScale{ 1.0f, 1.0f, 1.0f };
-	float mAlpha{ 1.0f };
 
+	// 速度
 	Vector3 mVelocity{};
+	
+	// 加速度
+	Vector3 mAccel{};
 
-	bool mEnable{ false };
+	// 重力加速度
+	float mGravity{};
+
+	// 抵抗
+	float mDrag{};
+
+	// 寿命
 	int mLife{ 0 };
 
+	// 有効状態
+	bool mEnable{ false };
+
 public:
-	Particle();
+	Particle() = default;
 
 	// 更新
 	void Update(double deltaTime);
 
 	// パラメータのセット
-	void SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& scale, int life = 60) {
-		mPosition = position;
-		mVelocity = velocity;
-		mScale = scale;
-		mLife = life;
-	}
+	// positionには基本的にエミッタ本体の座標を指定する
+	void SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& accel, const Vector3& scale,
+		const float& gravity,  const float& drag, const int& life);
 
 	// 有効・無効切り替え
-	void Enable() { mEnable = true; }
-	void Disable() { mEnable = false; }
+	void SetEnable(bool enable) { mEnable = enable; }
 
 	// 有効・無効状態取得
 	bool IsEnable() const { return mEnable; }

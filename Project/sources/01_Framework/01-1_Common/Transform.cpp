@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/05/19
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #include "Transform.h"
 
@@ -74,11 +74,14 @@ DirectX::XMMATRIX Transform::GetBillboardMatrix(const DirectX::XMMATRIX& view) c
 
 Vector3 Transform::GetForward() const
 {
+    // オブジェクト正面取得
+
     const DirectX::XMMATRIX& world = GetWorldMatrix();
 
     Vector3 forward{};
     XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&forward), world.r[2]);
 
+    // 正規化
     forward.Normalize();
 
     return forward;
@@ -86,11 +89,14 @@ Vector3 Transform::GetForward() const
 
 Vector3 Transform::GetRight() const
 {
+    // オブジェクト右方向取得
+
     const DirectX::XMMATRIX& world = GetWorldMatrix();
 
     Vector3 right{};
     XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&right), world.r[0]);
 
+    // 正規化
     right.Normalize();
 
     return right;
@@ -98,11 +104,14 @@ Vector3 Transform::GetRight() const
 
 Vector3 Transform::GetUp() const
 {
+    // オブジェクト上方向取得
+
     const DirectX::XMMATRIX& world = GetWorldMatrix();
 
     Vector3 up{};
     XMStoreFloat3(reinterpret_cast<DirectX::XMFLOAT3*>(&up), world.r[1]);
 
+    // 正規化
     up.Normalize();
 
     return up;

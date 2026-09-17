@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/13
-*	@updated : 2026/08/04
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
@@ -37,8 +37,10 @@ protected:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> _mSRV{ nullptr };
 
 public:
+	// テクスチャのセット
 	void Bind(UINT slot = 0) const;
 
+	// ゲッター
 	const DirectX::XMUINT2& GetSize() const { return mSize; }
 	const UINT& GetWidth() const { return mSize.x; }
 	const UINT& GetHeight() const { return mSize.y; }

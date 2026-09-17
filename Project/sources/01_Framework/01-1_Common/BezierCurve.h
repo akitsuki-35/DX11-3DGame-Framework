@@ -4,12 +4,12 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/09
-*	@updated : 2026/08/19
+*	@updated : 2026/09/16
 *============================================================*/
 #pragma once
 
 #include "Vector3.h"
-#include "Debugger.h"
+#include <array>
 #include <vector>
 
 /*============================================================
@@ -18,10 +18,8 @@
 *============================================================*/
 class BezierCurve
 {
-	// Debuggerから操作可能にする
-	friend Debugger;
-
 private:
+	// 曲線上の座標
 	struct POINT {
 		Vector3 position{};
 	};
@@ -32,12 +30,16 @@ private:
 	int mFrameMax{}; // 全体フレーム
 	int mFrame{}; // 現在フレーム
 
-	POINT mControlPoint[4]{}; // 制御点(三次ベジエ曲線)
-	std::vector<POINT> mBezierPoint; // フレームごとのベジエ曲線上座標
+	// 制御点(三次ベジエ曲線)
+	std::array<POINT, 4> mControlPoints{};
+
+	// フレームごとのベジエ曲線上座標
+	std::vector<POINT> mBezierPoint{};
 
 public:
 	BezierCurve();
 
+	// 更新
 	void Update();
 	
 	// ベジエ曲線上座標計算
@@ -47,10 +49,16 @@ public:
 	int GetFrame() const { return mFrame; }
 
 	// 制御点座標取得
-	Vector3& GetControlPoint(int index) { return mControlPoint[index].position; }
+	Vector3& GetControlPoint(int index) { return mControlPoints[index].position; }
 
 	// フレーム指定でベジエ曲線上座標取得
 	Vector3& GetBezierPoint(int index) { return mBezierPoint[index].position; }
+
+	// 制御点座標更新
+	void SetControlPoint(int index, Vector3 position) {
+		if (index > 4) return;
+		mControlPoints[index].position = position;
+	}
 
 	// 最大フレーム変更
 	void SetFrameMax(const int& frameMax) {
