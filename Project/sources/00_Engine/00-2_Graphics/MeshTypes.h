@@ -53,5 +53,42 @@ namespace MeshType {
 
 		// 板ポリゴン生成
 		std::array<Element::VERTEX3D, 4> Create(const DESC& desc);
+		Element::VERTEX3D CreateVertex(size_t index, const MeshType::Plane::DESC& desc);
+	}
+
+	namespace Bumpy {
+		// メッシュピボット列挙体
+		enum class Pivot : uint8_t
+		{
+			Center,
+			CenterTop,
+			CenterBottom,
+			LeftTop,
+			LeftBottom,
+			RightTop,
+			RightBottom,
+
+			Count
+		};
+
+		// メッシュ方向列挙体
+		enum class Axis : uint8_t
+		{
+			XY,
+			XZ,
+			YZ,
+
+			Count
+		};
+
+		struct DESC
+		{
+			Pivot pivot = Pivot::Center;
+			Axis axis = Axis::XZ;
+		};
+
+		// 板ポリゴン生成
+		std::array<std::array<Element::VERTEX3D, 21>, 21> Create(const DESC& desc);
+		Element::VERTEX3D CreateVertex(size_t indexA, size_t indexB, const MeshType::Bumpy::DESC& desc);
 	}
 }

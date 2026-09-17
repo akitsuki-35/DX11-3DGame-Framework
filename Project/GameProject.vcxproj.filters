@@ -315,6 +315,12 @@
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\MeshField.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Wave.cpp">
+      <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -574,6 +580,12 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h">
       <Filter>00_Engine\00-1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\MeshField.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Wave.h">
+      <Filter>02_App\02-2_Objects\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

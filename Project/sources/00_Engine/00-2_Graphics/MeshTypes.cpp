@@ -86,33 +86,6 @@ namespace {
 
         return newPosition;
     }
-
-    /*--------------------------------------------------
-        頂点生成
-    ----------------------------------------------------*/
-    Element::VERTEX3D CreateVertex(size_t index, const MeshType::Plane::DESC& desc)
-    {
-        Element::VERTEX3D vertex{};
-
-        // 基準座標で初期化
-        Vector3 position = BASE_VERTEX[index];
-
-        // ピボット補正
-        const Vector2 offset = OFFSET_TABLE[static_cast<size_t>(desc.pivot)];
-        Vector2 pos = { position.x, position.y };
-        pos += offset;
-        position = { pos.x, pos.y, position.z };
-
-        // 向きを変換
-        position = ConvertAxis(position, AXIS_TABLE[static_cast<size_t>(desc.axis)]);
-
-        vertex.Position = position.ConvertToXMFLOAT3();
-        vertex.Normal = AXIS_TABLE[static_cast<size_t>(desc.axis)].normal.ConvertToXMFLOAT3();
-        vertex.Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
-        vertex.TexCoord = UV[index].ConvertToXMFLOAT2();
-
-        return vertex;
-    }
 }
 
 std::array<Element::VERTEX3D, 4> MeshType::Plane::Create(const DESC& desc)
@@ -124,4 +97,65 @@ std::array<Element::VERTEX3D, 4> MeshType::Plane::Create(const DESC& desc)
     }
 
     return vertices;
+}
+
+Element::VERTEX3D MeshType::Plane::CreateVertex(size_t index, const MeshType::Plane::DESC& desc)
+{
+    Element::VERTEX3D vertex{};
+
+    // 基準座標で初期化
+    Vector3 position = BASE_VERTEX[index];
+
+    // ピボット補正
+    const Vector2 offset = OFFSET_TABLE[static_cast<size_t>(desc.pivot)];
+    Vector2 pos = { position.x, position.y };
+    pos += offset;
+    position = { pos.x, pos.y, position.z };
+
+    // 向きを変換
+    position = ConvertAxis(position, AXIS_TABLE[static_cast<size_t>(desc.axis)]);
+
+    vertex.Position = position.ConvertToXMFLOAT3();
+    vertex.Normal = AXIS_TABLE[static_cast<size_t>(desc.axis)].normal.ConvertToXMFLOAT3();
+    vertex.Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+    vertex.TexCoord = UV[index].ConvertToXMFLOAT2();
+
+    return vertex;
+}
+
+std::array<std::array<Element::VERTEX3D, 21>, 21> MeshType::Bumpy::Create(const DESC& desc)
+{
+    std::array<std::array<Element::VERTEX3D, 21>, 21> vertices{};
+
+    for (size_t x = 0; x < vertices.size(); ++x) {
+        for (size_t z = 0; z < vertices.size(); ++z) {
+            vertices[x][z] = CreateVertex(x, z, desc);
+        }
+    }
+
+    return vertices;
+}
+
+Element::VERTEX3D MeshType::Bumpy::CreateVertex(size_t indexA, size_t indexB, const MeshType::Bumpy::DESC& desc)
+{
+    Element::VERTEX3D vertex{};
+
+    // 基準座標で初期化
+    Vector3 position = BASE_VERTEX[indexA];
+
+    // ピボット補正
+    const Vector2 offset = OFFSET_TABLE[static_cast<size_t>(desc.pivot)];
+    Vector2 pos = { position.x, position.y };
+    pos += offset;
+    position = { pos.x, pos.y, position.z };
+
+    // 向きを変換
+    position = ConvertAxis(position, AXIS_TABLE[static_cast<size_t>(desc.axis)]);
+
+    vertex.Position = position.ConvertToXMFLOAT3();
+    vertex.Normal = AXIS_TABLE[static_cast<size_t>(desc.axis)].normal.ConvertToXMFLOAT3();
+    vertex.Diffuse = XMFLOAT4{ 1.0f, 1.0f, 1.0f, 1.0f };
+    vertex.TexCoord = UV[indexA].ConvertToXMFLOAT2();
+
+    return vertex;
 }

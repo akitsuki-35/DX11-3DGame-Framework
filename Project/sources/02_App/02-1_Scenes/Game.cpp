@@ -12,7 +12,7 @@
 #include "Camera.h"
 #include "Transition.h"
 
-#include "Field.h"
+#include "Wave.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
@@ -39,7 +39,7 @@ void Game::Initialize()
 
 	AddGameObject<Sky>();
 
-	AddGameObject<Field>();
+	AddGameObject<Wave>();
 	AddGameObject<Player>();
 	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
 	AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });

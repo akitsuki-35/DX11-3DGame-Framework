@@ -1,12 +1,12 @@
 ﻿/*============================================================
-*	@file	 : Field.cpp
-*	@brief	 : 3Dポリゴン表示
+*	@file	 : MeshField.cpp
+*	@brief	 : メッシュフィールド
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/04/28
-*	@updated : 2026/08/12
+* 　@date	 : 2026/09/08
+*	@updated : 2026/09/08
 *============================================================*/
-#include "Field.h"
+#include "MeshField.h"
 #include "SpriteRenderer.h"
 #include "MeshTypes.h"
 #include "AudioPlayer.h"
@@ -14,7 +14,7 @@
 
 using namespace MeshType;
 
-void Field::Initialize()
+void MeshField::Initialize()
 {
 	SpriteRenderer* renderer = AddComponent<SpriteRenderer>(this);
 
@@ -28,12 +28,12 @@ void Field::Initialize()
 	bgm->Play(true);
 }
 
-void Field::Finalize()
+void MeshField::Finalize()
 {
 	GameObject::Finalize();
 }
 
-void Field::Update(double deltaTime)
+void MeshField::Update(double deltaTime)
 {
 	if (Input::GetKeyTrigger('Z')) {
 		GameObject::GetComponent<AudioPlayer>()->Pause();
@@ -48,7 +48,7 @@ void Field::Update(double deltaTime)
 	GameObject::Update(deltaTime);
 }
 
-void Field::Draw() const
+void MeshField::Draw() const
 {
 	GameObject::Draw();
 }
