@@ -336,6 +336,9 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\Timer.cpp">
       <Filter>01_Framework\01-2_Components</Filter>
     </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -614,6 +617,9 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\Timer.h">
       <Filter>01_Framework\01-2_Components</Filter>
     </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="sources\03_HLSL\UnlitPS.hlsl">
@@ -629,6 +635,9 @@
       <Filter>03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\FontOutlinePS.hlsl">
+      <Filter>03_HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="sources\03_HLSL\Common.hlsl">
       <Filter>03_HLSL</Filter>
     </FxCompile>
   </ItemGroup>
