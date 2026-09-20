@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/11
-*	@updated : 2026/09/16
+*	@updated : 2026/09/20
 *============================================================*/
 #pragma once
 
@@ -133,11 +133,3 @@ private:
 	// 文字テクスチャ生成
 	bool generateGlyph(Glyph& glyph, const GlyphKey& key);
 };
-
-// フォントロード
-// ゲーム起動時に一度だけ呼ぶ
-namespace FontSet {
-	inline void initialize() {
-		FontManager::getInstance().Register("Kaisotai", "assets\\fonts\\Kaisotai-Next-UP-B.ttf");
-	}
-}

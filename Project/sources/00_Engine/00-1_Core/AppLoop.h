@@ -1,44 +1,41 @@
 ﻿/*============================================================
-*	@file	 : Application.h
+*	@file	 : AppLoop.h
 *	@brief	 : アプリケーションループ制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/07
-*	@updated : 2026/08/02
+*	@updated : 2026/09/20
 *============================================================*/
 #pragma once
 
 /*============================================================
-*	@class	: Application
-*	@brief	: アプリケーション
+*	@class	: AppLoop
+*	@brief	: アプリケーションループ制御
 *============================================================*/
-class Application final
+class AppLoop final
 {
 /*--------------------------------------------------
 	Singleton用
 ----------------------------------------------------*/
 public:
-	static Application& getInstance() {
-		static Application instance;
+	static AppLoop& getInstance() {
+		static AppLoop instance;
 		return instance;
 	}
 
 private:
-	Application() = default;
-	Application(const Application&) = delete;
+	AppLoop() = default;
+	AppLoop(const AppLoop&) = delete;
 
-	Application& operator=(const Application&) = delete;
-	Application(Application&&) = delete;
+	AppLoop& operator=(const AppLoop&) = delete;
+	AppLoop(AppLoop&&) = delete;
 
-	Application& operator=(Application&&) = delete;
-	~Application() {};
+	AppLoop& operator=(AppLoop&&) = delete;
+	~AppLoop() {};
 
 /*--------------------------------------------------
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
-private:
-	bool mPaused{ false }; // ポーズフラグ
-
 public:
 	int Run() const;
 };

@@ -1,10 +1,10 @@
 ﻿/*============================================================
-*	@file	 : SceneManager.h
-*	@brief	 : シーン管理
+*	@file	 : Application.h
+*	@brief	 : アプリケーション内部処理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/09/16
+*	@updated : 2026/09/20
 *============================================================*/
 #pragma once
 
@@ -12,42 +12,42 @@
 #include <memory>
 
 /*============================================================
-*	@class	: SceneManager
-*	@brief	: シーン管理
+*	@class	: Application
+*	@brief	: アプリケーション内部処理
 *============================================================*/
-class SceneManager final
+class Application final
 {
 /*--------------------------------------------------
 	Singleton用
 ----------------------------------------------------*/
 public:
-	static SceneManager& getInstance() {
-		static SceneManager instance;
+	static Application& getInstance() {
+		static Application instance;
 		return instance;
 	}
 
 private:
-	SceneManager() = default;
-	SceneManager(const SceneManager&) = delete;
+	Application() = default;
+	Application(const Application&) = delete;
 
-	SceneManager& operator=(const SceneManager&) = delete;
-	SceneManager(SceneManager&&) = delete;
+	Application& operator=(const Application&) = delete;
+	Application(Application&&) = delete;
 
-	SceneManager& operator=(SceneManager&&) = delete;
-	~SceneManager() {};
+	Application& operator=(Application&&) = delete;
+	~Application() {};
 
 /*--------------------------------------------------
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 private:
 	// 現在シーン
-	std::unique_ptr<Scene> mCurrentScene{};
+	std::unique_ptr<Scene> _mCurrentScene{};
 
 	// 遷移先シーン
-	std::unique_ptr<Scene> mNextScene{};
+	std::unique_ptr<Scene> _mNextScene{};
 
 public:
-	void Initialize();
+	void Initialize(std::unique_ptr<Scene> scene);
 	void Finalize();
 	void Update(double deltaTime);
 	void Draw();
@@ -55,6 +55,6 @@ public:
 	// シーン遷移
 	template <class T>
 	void SceneChange() {
-		mNextScene = std::make_unique<T>();
+		_mNextScene = std::make_unique<T>();
 	}
 };

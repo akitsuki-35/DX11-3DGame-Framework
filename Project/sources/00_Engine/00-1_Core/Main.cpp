@@ -4,14 +4,15 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/09/15
+*	@updated : 2026/09/20
 *============================================================*/
 // System
 #include "SystemWindow.h"
 #include "SystemTimer.h"
-#include "Application.h"
+#include "AppLoop.h"
 
-#include "SceneManager.h"
+#include "AppSetup.h"
+#include <d3d11.h>
 
 /*------------------------------------------------------------
 	メイン
@@ -28,7 +29,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	// ウィンドウ初期化
 	System::Window::getInstance().Initialize(hInstance);
 
-	SceneManager::getInstance().Initialize();
+	AppSetup::Initialize();
 
 	// ウィンドウ表示
 	System::Window::getInstance().Show(nCmdShow);
@@ -37,11 +38,11 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	System::Timer::getInstance().Initialize();
 
 	// ゲームループ
-	int isQuit = Application::getInstance().Run();
+	int isQuit = AppLoop::getInstance().Run();
 
 	timeEndPeriod(1);
 
-	SceneManager::getInstance().Finalize();	
+	AppSetup::Finalize();
 
 	return isQuit;
 }
