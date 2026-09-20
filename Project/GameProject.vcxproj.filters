@@ -1,649 +1,631 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="00_Engine">
-      <UniqueIdentifier>{5f9a23a6-f09f-47c5-88c7-f09540b6dbe8}</UniqueIdentifier>
+    <Filter Include="旧">
+      <UniqueIdentifier>{e431dd55-f196-45cc-a037-7850dc600a48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00_Engine\00-1_Core">
-      <UniqueIdentifier>{0237132d-6efd-4190-be7a-1556ff42d036}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-2_Graphics">
-      <UniqueIdentifier>{a23fa5f7-7fd6-4cfe-8d53-c8b9f0d17b53}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Framework">
-      <UniqueIdentifier>{1b269d7f-0295-4617-9c0e-1cf8ed5e52b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Framework\01-1_Common">
-      <UniqueIdentifier>{6d238e21-a4ea-4c2c-b06a-40168897765a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_App">
+    <Filter Include="旧\02_App">
       <UniqueIdentifier>{0018b8ab-874c-4b7d-b792-3655a293171f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03_HLSL">
-      <UniqueIdentifier>{316d835e-c6be-41e5-86e7-17c45cd1cd62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04_External">
-      <UniqueIdentifier>{c0578a09-2ea1-405d-8aff-139551c8d192}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04_External\ImGui">
-      <UniqueIdentifier>{bca3d428-e11d-4e58-8c0e-d0d8ce746547}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="99_Debug">
-      <UniqueIdentifier>{b40c971e-101e-4ea4-bc5b-984f15af651b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-3_Resource">
-      <UniqueIdentifier>{ed83b9b4-d220-4bb8-aaf9-044fc6065dd5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Framework\01-2_Components">
-      <UniqueIdentifier>{afed10f6-0809-43ff-ab2d-9666210c8cf3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_App\02-1_Scenes">
+    <Filter Include="旧\02_App\02-1_Scenes">
       <UniqueIdentifier>{6b73aeb5-90dd-443b-b717-d051455775fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_App\02-2_Objects">
+    <Filter Include="旧\02_App\02-2_Objects">
       <UniqueIdentifier>{240e13a5-0f74-4882-9214-24a8cf71cc75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00_Engine\00-3_Resource\Model">
-      <UniqueIdentifier>{2f8f377a-0370-4944-ba5b-87464f62e2f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-3_Resource\Shader">
-      <UniqueIdentifier>{35ba1298-4479-43f1-b54a-7292bfe3ba89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-3_Resource\Texture">
-      <UniqueIdentifier>{592118a8-79cc-4d3c-98ce-452887d795c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Framework\01-2_Components\Renderer">
-      <UniqueIdentifier>{3334af44-d530-46be-bd67-f689e7a64f56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-3_Resource\Animation">
-      <UniqueIdentifier>{b584a70b-e592-406f-9797-bc1a55ad8012}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-2_Graphics\Geometry">
-      <UniqueIdentifier>{1318ff4e-78d6-4d90-9766-5111a055245b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-2_Graphics\DirectX11">
-      <UniqueIdentifier>{f8e30804-6f19-4e1a-baf0-f66f0faec06d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-4_Importer">
-      <UniqueIdentifier>{694724bd-6eda-4874-b98e-84df09fec82a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-3_Resource\Audio">
-      <UniqueIdentifier>{74be788d-1bd7-4312-826a-c002cf1dd358}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04_External\stb_vorbis">
-      <UniqueIdentifier>{2e2fc489-5292-4054-82d3-e81d9774e35b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04_External\minimp3">
-      <UniqueIdentifier>{cdf2c124-6f16-4b29-a8ad-f381264abd07}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-3_Resource\Font">
-      <UniqueIdentifier>{337f3baa-a7ba-439d-ade6-592b9e1674f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_Engine\00-2_Graphics\UI">
-      <UniqueIdentifier>{30ec2ba0-824a-4adb-8f03-8211996e7d09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Framework\01-2_Components\Animator">
-      <UniqueIdentifier>{e21d15bc-902a-403d-8029-e3649ed7ea19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Framework\01-2_Components\AudioPlayer">
-      <UniqueIdentifier>{6c19db79-72c0-470a-baa7-27501eb658b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_App\02-2_Objects\Game">
+    <Filter Include="旧\02_App\02-2_Objects\Game">
       <UniqueIdentifier>{efe4ddf4-de7c-4fe1-93b9-b940a76d159a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_App\02-2_Objects\Common">
+    <Filter Include="旧\02_App\02-2_Objects\Common">
       <UniqueIdentifier>{65fad8cf-3ed9-4ee9-a5cd-6d3c41ea6113}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00_Engine\00-2_Graphics\Effects">
-      <UniqueIdentifier>{acdab742-2005-44cb-bb82-f8cea4659a79}</UniqueIdentifier>
+    <Filter Include="旧\03_HLSL">
+      <UniqueIdentifier>{316d835e-c6be-41e5-86e7-17c45cd1cd62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="旧\04_External">
+      <UniqueIdentifier>{c0578a09-2ea1-405d-8aff-139551c8d192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="旧\04_External\ImGui">
+      <UniqueIdentifier>{bca3d428-e11d-4e58-8c0e-d0d8ce746547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="旧\04_External\stb_vorbis">
+      <UniqueIdentifier>{2e2fc489-5292-4054-82d3-e81d9774e35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="旧\04_External\minimp3">
+      <UniqueIdentifier>{cdf2c124-6f16-4b29-a8ad-f381264abd07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="旧\99_Debug">
+      <UniqueIdentifier>{b40c971e-101e-4ea4-bc5b-984f15af651b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{c0466dbd-3fb8-475b-b23e-b5b55a7c915d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{29ca6017-7cd0-4740-8b3d-e5601b0781bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app">
+      <UniqueIdentifier>{e986f2a7-573f-449b-ae86-121876e48609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components">
+      <UniqueIdentifier>{c81873e3-80d2-48ba-bdcf-299c048f9f5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry">
+      <UniqueIdentifier>{843345fb-fee1-48f5-a7e3-ed90a3cf7224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="importer">
+      <UniqueIdentifier>{73f2e3b3-053e-4fb2-b876-86d187bc3a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{96dc9509-d045-4611-980e-78dc36e4cc56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{cf46bc58-a380-43a1-933a-4a16a2191100}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{c4e58cd5-908a-4801-a9a1-93b176d1c7f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\animation">
+      <UniqueIdentifier>{4d508cf9-5540-4740-9884-b59979506b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\audio">
+      <UniqueIdentifier>{c8691e7e-96a2-4615-8fd1-6c2e05a2eaae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\font">
+      <UniqueIdentifier>{d7756e05-fb6f-4e40-9c5f-12392121a59a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\model">
+      <UniqueIdentifier>{145a5868-f360-47ab-8213-d8e636058ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\shader">
+      <UniqueIdentifier>{b85ed590-83ea-4f3d-8100-fd036cb4db39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\texture">
+      <UniqueIdentifier>{8e1dea04-187b-4f90-88ab-e390d36088e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics">
+      <UniqueIdentifier>{328dde46-4677-4fee-9aba-95896b091251}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\common">
+      <UniqueIdentifier>{4eeb8ed7-a280-4ed9-80a5-e6a5dbe1a2bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\d3d11">
+      <UniqueIdentifier>{ee1d97cb-76c1-4719-ae28-ce4feed1f006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\particle">
+      <UniqueIdentifier>{62ceec15-d54a-4e3e-945b-878e042f4885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\UI">
+      <UniqueIdentifier>{9e697303-ef0d-4925-83df-1d800f24b05e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp">
-      <Filter>02_App\02-1_Scenes</Filter>
+      <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
-      <Filter>02_App\02-1_Scenes</Filter>
+      <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-1_Scenes\Title.cpp">
-      <Filter>02_App\02-1_Scenes</Filter>
+      <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui.cpp">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui_demo.cpp">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui_draw.cpp">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui_impl_dx11.cpp">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui_impl_win32.cpp">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui_tables.cpp">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui_widgets.cpp">
-      <Filter>04_External\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\99_Debug\DebugCollisiondraw.cpp">
-      <Filter>99_Debug</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="sources\99_Debug\Debugger.cpp">
-      <Filter>99_Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\99_Debug\DebugOstream.cpp">
-      <Filter>99_Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\99_Debug\DebugText.cpp">
-      <Filter>99_Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp">
-      <Filter>00_Engine\00-3_Resource\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp">
-      <Filter>00_Engine\00-3_Resource\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp">
-      <Filter>00_Engine\00-3_Resource\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp">
-      <Filter>00_Engine\00-3_Resource\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Mesh.cpp">
-      <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\MeshTypes.cpp">
-      <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\ModelMesh.cpp">
-      <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\BufferManager.cpp">
-      <Filter>00_Engine\00-2_Graphics\DirectX11</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\DeviceManager.cpp">
-      <Filter>00_Engine\00-2_Graphics\DirectX11</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Graphics.cpp">
-      <Filter>00_Engine\00-2_Graphics\DirectX11</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-1_Scenes\SceneManager.cpp">
-      <Filter>02_App\02-1_Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Transform.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Skeleton.cpp">
-      <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-4_Importer\AssimpLoader.cpp">
-      <Filter>00_Engine\00-4_Importer</Filter>
+      <Filter>旧\99_Debug</Filter>
     </ClCompile>
     <ClCompile Include="sources\04_External\include\stb_vorbis\stb_vorbis.c">
-      <Filter>04_External\stb_vorbis</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\AudioManager.cpp">
-      <Filter>00_Engine\00-3_Resource\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp">
-      <Filter>00_Engine\00-4_Importer</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\FontManager.cpp">
-      <Filter>00_Engine\00-3_Resource\Font</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\UIStyle.cpp">
-      <Filter>00_Engine\00-2_Graphics\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\UICanvas.cpp">
-      <Filter>00_Engine\00-2_Graphics\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\AnimationManager.cpp">
-      <Filter>00_Engine\00-3_Resource\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\Animation.cpp">
-      <Filter>00_Engine\00-3_Resource\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-3_Resource\Model.cpp">
-      <Filter>00_Engine\00-3_Resource\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\SpriteRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\BillboardRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\Renderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-1_Scenes\Scene.cpp">
-      <Filter>02_App\02-1_Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Easing.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Transition.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp">
-      <Filter>01_Framework\01-2_Components\Animator</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp">
-      <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
+      <Filter>旧\04_External\stb_vorbis</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Box.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Bullet.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Camera.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Enemy.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Grass.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Player.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Score.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Sky.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Tree.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Particle.cpp">
-      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\ParticleRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\BezierCurve.cpp">
-      <Filter>01_Framework\01-1_Common</Filter>
+      <Filter>旧\02_App\02-2_Objects\Common</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\MeshField.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Wave.cpp">
-      <Filter>02_App\02-2_Objects\Common</Filter>
+      <Filter>旧\02_App\02-2_Objects\Common</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\GameObject.cpp">
-      <Filter>02_App\02-2_Objects\Common</Filter>
+      <Filter>旧\02_App\02-2_Objects\Common</Filter>
     </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBase.cpp">
-      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    <ClCompile Include="src\core\AppLoop.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBezier.cpp">
-      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    <ClCompile Include="src\core\Main.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBox.cpp">
-      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    <ClCompile Include="src\core\SystemTimer.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-4_Importer\CSVHandler.cpp">
-      <Filter>00_Engine\00-4_Importer</Filter>
+    <ClCompile Include="src\core\SystemWindow.cpp">
+      <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\GridRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    <ClCompile Include="src\utility\Utility.cpp">
+      <Filter>utility</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\Timer.cpp">
-      <Filter>01_Framework\01-2_Components</Filter>
+    <ClCompile Include="src\app\Application.cpp">
+      <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp">
-      <Filter>00_Engine\00-1_Core</Filter>
+    <ClCompile Include="src\app\AppSetup.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Animator.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\AudioPlayer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\BillboardRenderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\GridRenderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\ModelRenderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\ParticleRenderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Renderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\SpriteRenderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\TextRenderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Timer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\UIRenderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\MeshTypes.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\geometry\Mesh.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\importer\AssimpLoader.cpp">
+      <Filter>importer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\importer\CSVHandler.cpp">
+      <Filter>importer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\importer\FontLoader.cpp">
+      <Filter>importer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\input\Input.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\BezierCurve.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\BoneTransform.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\Easing.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\Transform.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\animation\Animation.cpp">
+      <Filter>resource\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\animation\AnimationManager.cpp">
+      <Filter>resource\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\animation\Skeleton.cpp">
+      <Filter>resource\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\audio\AudioManager.cpp">
+      <Filter>resource\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\font\FontManager.cpp">
+      <Filter>resource\font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\model\Model.cpp">
+      <Filter>resource\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\model\ModelManager.cpp">
+      <Filter>resource\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\model\ModelMesh.cpp">
+      <Filter>resource\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\shader\ShaderManager.cpp">
+      <Filter>resource\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\texture\Texture.cpp">
+      <Filter>resource\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\texture\TextureManager.cpp">
+      <Filter>resource\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\resource\texture\WICTextureLoader11.cpp">
+      <Filter>resource\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\common\Shadow.cpp">
+      <Filter>graphics\common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\common\Transition.cpp">
+      <Filter>graphics\common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\d3d11\BufferManager.cpp">
+      <Filter>graphics\d3d11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\d3d11\DeviceManager.cpp">
+      <Filter>graphics\d3d11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\d3d11\Graphics.cpp">
+      <Filter>graphics\d3d11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\particle\Particle.cpp">
+      <Filter>graphics\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\particle\ParticleBase.cpp">
+      <Filter>graphics\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\particle\ParticleBezier.cpp">
+      <Filter>graphics\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\particle\ParticleBox.cpp">
+      <Filter>graphics\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\UI\UICanvas.cpp">
+      <Filter>graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\UI\UIStyle.cpp">
+      <Filter>graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Scene.cpp">
+      <Filter>app</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Config.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Input.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Vector2.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Vector3.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\WICTextureLoader11.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\Renderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\SpriteRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\BillboardRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\Component.h">
-      <Filter>01_Framework\01-2_Components</Filter>
-    </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h">
-      <Filter>02_App\02-1_Scenes</Filter>
+      <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\Result.h">
-      <Filter>02_App\02-1_Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-1_Scenes\Scene.h">
-      <Filter>02_App\02-1_Scenes</Filter>
+      <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\Title.h">
-      <Filter>02_App\02-1_Scenes</Filter>
+      <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imconfig.h">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imgui.h">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imgui_impl_dx11.h">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imgui_impl_win32.h">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imgui_internal.h">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imstb_rectpack.h">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imstb_textedit.h">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imstb_truetype.h">
-      <Filter>04_External\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\99_Debug\DebugCollisiondraw.h">
-      <Filter>99_Debug</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="sources\99_Debug\Debugger.h">
-      <Filter>99_Debug</Filter>
+      <Filter>旧\99_Debug</Filter>
     </ClInclude>
     <ClInclude Include="sources\99_Debug\DebugMemoryleak.h">
-      <Filter>99_Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\99_Debug\DebugOstream.h">
-      <Filter>99_Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\99_Debug\DebugText.h">
-      <Filter>99_Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h">
-      <Filter>00_Engine\00-3_Resource\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h">
-      <Filter>00_Engine\00-3_Resource\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h">
-      <Filter>00_Engine\00-3_Resource\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\ShaderManager.h">
-      <Filter>00_Engine\00-3_Resource\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h">
-      <Filter>00_Engine\00-3_Resource\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h">
-      <Filter>00_Engine\00-3_Resource\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Mesh.h">
-      <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\MeshTypes.h">
-      <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h">
-      <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\BufferManager.h">
-      <Filter>00_Engine\00-2_Graphics\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\DeviceManager.h">
-      <Filter>00_Engine\00-2_Graphics\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\D3D11Config.h">
-      <Filter>00_Engine\00-2_Graphics\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Elements.h">
-      <Filter>00_Engine\00-2_Graphics\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Graphics.h">
-      <Filter>00_Engine\00-2_Graphics\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-1_Scenes\SceneManager.h">
-      <Filter>02_App\02-1_Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Transform.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Animation.h">
-      <Filter>00_Engine\00-3_Resource\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Quaternion.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\AnimationManager.h">
-      <Filter>00_Engine\00-3_Resource\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\BoneTransform.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Skeleton.h">
-      <Filter>00_Engine\00-2_Graphics\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-4_Importer\AssimpLoader.h">
-      <Filter>00_Engine\00-4_Importer</Filter>
+      <Filter>旧\99_Debug</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\minimp3\minimp3.h">
-      <Filter>04_External\minimp3</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Audio.h">
-      <Filter>00_Engine\00-3_Resource\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\AudioManager.h">
-      <Filter>00_Engine\00-3_Resource\Audio</Filter>
+      <Filter>旧\04_External\minimp3</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\minimp3\minimp3_ex.h">
-      <Filter>04_External\minimp3</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-4_Importer\FontLoader.h">
-      <Filter>00_Engine\00-4_Importer</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-3_Resource\FontManager.h">
-      <Filter>00_Engine\00-3_Resource\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\UIRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\UICanvas.h">
-      <Filter>00_Engine\00-2_Graphics\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\UIStyle.h">
-      <Filter>00_Engine\00-2_Graphics\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Easing.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Transition.h">
-      <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\Animator.h">
-      <Filter>01_Framework\01-2_Components\Animator</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\AudioPlayer.h">
-      <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
+      <Filter>旧\04_External\minimp3</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Box.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Bullet.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Camera.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Enemy.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Field.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Grass.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Player.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Score.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Sky.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Tree.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Particle.h">
-      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\ParticleRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+      <Filter>旧\02_App\02-2_Objects\Common</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\BezierCurve.h">
-      <Filter>01_Framework\01-1_Common</Filter>
+      <Filter>旧\02_App\02-2_Objects\Common</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\MeshField.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
+      <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Wave.h">
-      <Filter>02_App\02-2_Objects\Common</Filter>
+      <Filter>旧\02_App\02-2_Objects\Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBase.h">
-      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    <ClInclude Include="src\core\AppLoop.h">
+      <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBezier.h">
-      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    <ClInclude Include="src\core\Config.h">
+      <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBox.h">
-      <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    <ClInclude Include="src\core\SystemTimer.h">
+      <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-4_Importer\CSVHandler.h">
-      <Filter>00_Engine\00-4_Importer</Filter>
+    <ClInclude Include="src\core\SystemWindow.h">
+      <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\GridRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    <ClInclude Include="src\utility\Utility.h">
+      <Filter>utility</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\Timer.h">
-      <Filter>01_Framework\01-2_Components</Filter>
+    <ClInclude Include="src\app\Application.h">
+      <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h">
-      <Filter>00_Engine\00-1_Core</Filter>
+    <ClInclude Include="src\app\AppSetup.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Animator.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\AudioPlayer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\BillboardRenderer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Component.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\GridRenderer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\ModelRenderer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\ParticleRenderer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Renderer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\SpriteRenderer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\TextRenderer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Timer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\UIRenderer.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\MeshTypes.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\Mesh.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\importer\AssimpLoader.h">
+      <Filter>importer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\importer\CSVHandler.h">
+      <Filter>importer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\importer\FontLoader.h">
+      <Filter>importer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\input\Input.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\Vector2.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\Vector3.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\BezierCurve.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\BoneTransform.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\Easing.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\Quaternion.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\Transform.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\animation\Animation.h">
+      <Filter>resource\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\animation\AnimationManager.h">
+      <Filter>resource\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\animation\Skeleton.h">
+      <Filter>resource\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\audio\Audio.h">
+      <Filter>resource\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\audio\AudioManager.h">
+      <Filter>resource\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\font\FontManager.h">
+      <Filter>resource\font</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\model\Model.h">
+      <Filter>resource\model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\model\ModelManager.h">
+      <Filter>resource\model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\model\ModelMesh.h">
+      <Filter>resource\model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\shader\Shader.h">
+      <Filter>resource\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\shader\ShaderManager.h">
+      <Filter>resource\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\texture\Texture.h">
+      <Filter>resource\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\texture\TextureManager.h">
+      <Filter>resource\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource\texture\WICTextureLoader11.h">
+      <Filter>resource\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\common\Shadow.h">
+      <Filter>graphics\common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\common\Transition.h">
+      <Filter>graphics\common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\d3d11\BufferManager.h">
+      <Filter>graphics\d3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\d3d11\D3D11Config.h">
+      <Filter>graphics\d3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\d3d11\DeviceManager.h">
+      <Filter>graphics\d3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\d3d11\Elements.h">
+      <Filter>graphics\d3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\d3d11\Graphics.h">
+      <Filter>graphics\d3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\particle\Particle.h">
+      <Filter>graphics\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\particle\ParticleBase.h">
+      <Filter>graphics\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\particle\ParticleBezier.h">
+      <Filter>graphics\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\particle\ParticleBox.h">
+      <Filter>graphics\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\UI\UICanvas.h">
+      <Filter>graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\UI\UIStyle.h">
+      <Filter>graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Scene.h">
+      <Filter>app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="sources\03_HLSL\UnlitPS.hlsl">
-      <Filter>03_HLSL</Filter>
+      <Filter>旧\03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\UnlitVS.hlsl">
-      <Filter>03_HLSL</Filter>
+      <Filter>旧\03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\UISpriteVS.hlsl">
-      <Filter>03_HLSL</Filter>
+      <Filter>旧\03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\FontPS.hlsl">
-      <Filter>03_HLSL</Filter>
+      <Filter>旧\03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\FontOutlinePS.hlsl">
-      <Filter>03_HLSL</Filter>
+      <Filter>旧\03_HLSL</Filter>
     </FxCompile>
     <FxCompile Include="sources\03_HLSL\Common.hlsl">
-      <Filter>03_HLSL</Filter>
+      <Filter>旧\03_HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="sources\04_External\include\ImGui\imgui.ini">
-      <Filter>04_External\ImGui</Filter>
+      <Filter>旧\04_External\ImGui</Filter>
     </None>
   </ItemGroup>
 </Project>

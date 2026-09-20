@@ -19,65 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sources\00_Engine\00-1_Core\AppLoop.cpp" />
-    <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp" />
-    <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp" />
-    <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp" />
-    <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\BufferManager.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\DeviceManager.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Mesh.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\MeshTypes.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\ModelMesh.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Graphics.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Particle.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBase.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBezier.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBox.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\Skeleton.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\UICanvas.cpp" />
-    <ClCompile Include="sources\00_Engine\00-2_Graphics\UIStyle.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\Animation.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\AnimationManager.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\AudioManager.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\FontManager.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\Model.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\ModelManager.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\ShaderManager.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
-    <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp" />
-    <ClCompile Include="sources\00_Engine\00-4_Importer\AssimpLoader.cpp" />
-    <ClCompile Include="sources\00_Engine\00-4_Importer\CSVHandler.cpp" />
-    <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\BezierCurve.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\BoneTransform.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\Easing.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\Transition.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Input.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Transform.cpp" />
-    <ClCompile Include="sources\01_Framework\01-1_Common\WICTextureLoader11.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\BillboardRenderer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\GridRenderer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\ModelRenderer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\ParticleRenderer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\Renderer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\SpriteRenderer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\Timer.cpp" />
-    <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp" />
-    <ClCompile Include="sources\02_App\02-1_Scenes\Application.cpp" />
-    <ClCompile Include="sources\02_App\02-1_Scenes\AppSetup.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -85,7 +26,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="sources\02_App\02-1_Scenes\Scene.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Title.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -163,81 +103,60 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\app\Application.cpp" />
+    <ClCompile Include="src\app\AppSetup.cpp" />
+    <ClCompile Include="src\app\Scene.cpp" />
+    <ClCompile Include="src\components\Animator.cpp" />
+    <ClCompile Include="src\components\AudioPlayer.cpp" />
+    <ClCompile Include="src\components\BillboardRenderer.cpp" />
+    <ClCompile Include="src\components\GridRenderer.cpp" />
+    <ClCompile Include="src\components\ModelRenderer.cpp" />
+    <ClCompile Include="src\components\ParticleRenderer.cpp" />
+    <ClCompile Include="src\components\Renderer.cpp" />
+    <ClCompile Include="src\components\SpriteRenderer.cpp" />
+    <ClCompile Include="src\components\TextRenderer.cpp" />
+    <ClCompile Include="src\components\Timer.cpp" />
+    <ClCompile Include="src\components\UIRenderer.cpp" />
+    <ClCompile Include="src\core\AppLoop.cpp" />
+    <ClCompile Include="src\core\Main.cpp" />
+    <ClCompile Include="src\core\SystemTimer.cpp" />
+    <ClCompile Include="src\core\SystemWindow.cpp" />
+    <ClCompile Include="src\geometry\Mesh.cpp" />
+    <ClCompile Include="src\geometry\MeshTypes.cpp" />
+    <ClCompile Include="src\graphics\common\Shadow.cpp" />
+    <ClCompile Include="src\graphics\common\Transition.cpp" />
+    <ClCompile Include="src\graphics\d3d11\BufferManager.cpp" />
+    <ClCompile Include="src\graphics\d3d11\DeviceManager.cpp" />
+    <ClCompile Include="src\graphics\d3d11\Graphics.cpp" />
+    <ClCompile Include="src\graphics\particle\Particle.cpp" />
+    <ClCompile Include="src\graphics\particle\ParticleBase.cpp" />
+    <ClCompile Include="src\graphics\particle\ParticleBezier.cpp" />
+    <ClCompile Include="src\graphics\particle\ParticleBox.cpp" />
+    <ClCompile Include="src\graphics\UI\UICanvas.cpp" />
+    <ClCompile Include="src\graphics\UI\UIStyle.cpp" />
+    <ClCompile Include="src\importer\AssimpLoader.cpp" />
+    <ClCompile Include="src\importer\CSVHandler.cpp" />
+    <ClCompile Include="src\importer\FontLoader.cpp" />
+    <ClCompile Include="src\input\Input.cpp" />
+    <ClCompile Include="src\math\BezierCurve.cpp" />
+    <ClCompile Include="src\math\BoneTransform.cpp" />
+    <ClCompile Include="src\math\Easing.cpp" />
+    <ClCompile Include="src\math\Transform.cpp" />
+    <ClCompile Include="src\resource\animation\Animation.cpp" />
+    <ClCompile Include="src\resource\animation\AnimationManager.cpp" />
+    <ClCompile Include="src\resource\animation\Skeleton.cpp" />
+    <ClCompile Include="src\resource\audio\AudioManager.cpp" />
+    <ClCompile Include="src\resource\font\FontManager.cpp" />
+    <ClCompile Include="src\resource\model\Model.cpp" />
+    <ClCompile Include="src\resource\model\ModelManager.cpp" />
+    <ClCompile Include="src\resource\model\ModelMesh.cpp" />
+    <ClCompile Include="src\resource\shader\ShaderManager.cpp" />
+    <ClCompile Include="src\resource\texture\Texture.cpp" />
+    <ClCompile Include="src\resource\texture\TextureManager.cpp" />
+    <ClCompile Include="src\resource\texture\WICTextureLoader11.cpp" />
+    <ClCompile Include="src\utility\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sources\00_Engine\00-1_Core\AppLoop.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\Config.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\BufferManager.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\DeviceManager.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\D3D11Config.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Elements.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Mesh.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\MeshTypes.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\ModelMesh.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Graphics.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Particle.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBase.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBezier.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBox.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\Skeleton.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\UICanvas.h" />
-    <ClInclude Include="sources\00_Engine\00-2_Graphics\UIStyle.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Animation.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\AnimationManager.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Audio.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\AudioManager.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\FontManager.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Model.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\ModelManager.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Shader.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\ShaderManager.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h" />
-    <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h" />
-    <ClInclude Include="sources\00_Engine\00-4_Importer\AssimpLoader.h" />
-    <ClInclude Include="sources\00_Engine\00-4_Importer\CSVHandler.h" />
-    <ClInclude Include="sources\00_Engine\00-4_Importer\FontLoader.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\BezierCurve.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\BoneTransform.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Easing.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\Transition.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Input.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\Quaternion.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Transform.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\Vector2.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\Vector3.h" />
-    <ClInclude Include="sources\01_Framework\01-1_Common\WICTextureLoader11.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\Animator.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\AudioPlayer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\BillboardRenderer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\Component.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\GridRenderer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\ParticleRenderer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\Renderer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\ModelRenderer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\SpriteRenderer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\Timer.h" />
-    <ClInclude Include="sources\01_Framework\01-2_Components\UIRenderer.h" />
-    <ClInclude Include="sources\02_App\02-1_Scenes\Application.h" />
-    <ClInclude Include="sources\02_App\02-1_Scenes\AppSetup.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Result.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -245,7 +164,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="sources\02_App\02-1_Scenes\Scene.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Title.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -338,6 +256,66 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="src\app\Application.h" />
+    <ClInclude Include="src\app\AppSetup.h" />
+    <ClInclude Include="src\app\Scene.h" />
+    <ClInclude Include="src\components\Animator.h" />
+    <ClInclude Include="src\components\AudioPlayer.h" />
+    <ClInclude Include="src\components\BillboardRenderer.h" />
+    <ClInclude Include="src\components\Component.h" />
+    <ClInclude Include="src\components\GridRenderer.h" />
+    <ClInclude Include="src\components\ModelRenderer.h" />
+    <ClInclude Include="src\components\ParticleRenderer.h" />
+    <ClInclude Include="src\components\Renderer.h" />
+    <ClInclude Include="src\components\SpriteRenderer.h" />
+    <ClInclude Include="src\components\TextRenderer.h" />
+    <ClInclude Include="src\components\Timer.h" />
+    <ClInclude Include="src\components\UIRenderer.h" />
+    <ClInclude Include="src\core\AppLoop.h" />
+    <ClInclude Include="src\core\Config.h" />
+    <ClInclude Include="src\core\SystemTimer.h" />
+    <ClInclude Include="src\core\SystemWindow.h" />
+    <ClInclude Include="src\geometry\Mesh.h" />
+    <ClInclude Include="src\geometry\MeshTypes.h" />
+    <ClInclude Include="src\graphics\common\Shadow.h" />
+    <ClInclude Include="src\graphics\common\Transition.h" />
+    <ClInclude Include="src\graphics\d3d11\BufferManager.h" />
+    <ClInclude Include="src\graphics\d3d11\D3D11Config.h" />
+    <ClInclude Include="src\graphics\d3d11\DeviceManager.h" />
+    <ClInclude Include="src\graphics\d3d11\Elements.h" />
+    <ClInclude Include="src\graphics\d3d11\Graphics.h" />
+    <ClInclude Include="src\graphics\particle\Particle.h" />
+    <ClInclude Include="src\graphics\particle\ParticleBase.h" />
+    <ClInclude Include="src\graphics\particle\ParticleBezier.h" />
+    <ClInclude Include="src\graphics\particle\ParticleBox.h" />
+    <ClInclude Include="src\graphics\UI\UICanvas.h" />
+    <ClInclude Include="src\graphics\UI\UIStyle.h" />
+    <ClInclude Include="src\importer\AssimpLoader.h" />
+    <ClInclude Include="src\importer\CSVHandler.h" />
+    <ClInclude Include="src\importer\FontLoader.h" />
+    <ClInclude Include="src\input\Input.h" />
+    <ClInclude Include="src\math\BezierCurve.h" />
+    <ClInclude Include="src\math\BoneTransform.h" />
+    <ClInclude Include="src\math\Easing.h" />
+    <ClInclude Include="src\math\Quaternion.h" />
+    <ClInclude Include="src\math\Transform.h" />
+    <ClInclude Include="src\math\Vector2.h" />
+    <ClInclude Include="src\math\Vector3.h" />
+    <ClInclude Include="src\resource\animation\Animation.h" />
+    <ClInclude Include="src\resource\animation\AnimationManager.h" />
+    <ClInclude Include="src\resource\animation\Skeleton.h" />
+    <ClInclude Include="src\resource\audio\Audio.h" />
+    <ClInclude Include="src\resource\audio\AudioManager.h" />
+    <ClInclude Include="src\resource\font\FontManager.h" />
+    <ClInclude Include="src\resource\model\Model.h" />
+    <ClInclude Include="src\resource\model\ModelManager.h" />
+    <ClInclude Include="src\resource\model\ModelMesh.h" />
+    <ClInclude Include="src\resource\shader\Shader.h" />
+    <ClInclude Include="src\resource\shader\ShaderManager.h" />
+    <ClInclude Include="src\resource\texture\Texture.h" />
+    <ClInclude Include="src\resource\texture\TextureManager.h" />
+    <ClInclude Include="src\resource\texture\WICTextureLoader11.h" />
+    <ClInclude Include="src\utility\Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="sources\03_HLSL\Common.hlsl">
@@ -435,13 +413,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)\_bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>_obj\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(ProjectDir)sources\00_Engine\00-1_Core;$(ProjectDir)sources\00_Engine\00-2_Graphics;$(ProjectDir)sources\00_Engine\00-3_Resource;$(ProjectDir)sources\00_Engine\00-4_Importer;$(ProjectDir)sources\01_Framework\01-1_Common;$(ProjectDir)sources\01_Framework\01-2_Components;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)src\app;$(ProjectDir)src\components;$(ProjectDir)src\core;$(ProjectDir)src\geometry;$(ProjectDir)src\graphics\common;$(ProjectDir)src\graphics\d3d11;$(ProjectDir)src\graphics\particle;$(ProjectDir)src\graphics\UI;$(ProjectDir)src\importer;$(ProjectDir)src\input;$(ProjectDir)src\math;$(ProjectDir)src\resource;$(ProjectDir)src\resource\animation;$(ProjectDir)src\resource\audio;$(ProjectDir)src\resource\font;$(ProjectDir)src\resource\model;$(ProjectDir)src\resource\shader;$(ProjectDir)src\resource\texture;$(ProjectDir)src\utility;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
     <ExternalIncludePath>C:\Users\asuka\Documents\VSProjects\_frameworks\3DGame_Framework\GameProject3D\Project\sources\04_External\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\_bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>_obj\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(ProjectDir)sources\00_Engine\00-1_Core;$(ProjectDir)sources\00_Engine\00-2_Graphics;$(ProjectDir)sources\00_Engine\00-3_Resource;$(ProjectDir)sources\00_Engine\00-4_Importer;$(ProjectDir)sources\01_Framework\01-1_Common;$(ProjectDir)sources\01_Framework\01-2_Components;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)src\app;$(ProjectDir)src\components;$(ProjectDir)src\core;$(ProjectDir)src\geometry;$(ProjectDir)src\graphics\common;$(ProjectDir)src\graphics\d3d11;$(ProjectDir)src\graphics\particle;$(ProjectDir)src\graphics\UI;$(ProjectDir)src\importer;$(ProjectDir)src\input;$(ProjectDir)src\math;$(ProjectDir)src\resource;$(ProjectDir)src\resource\animation;$(ProjectDir)src\resource\audio;$(ProjectDir)src\resource\font;$(ProjectDir)src\resource\model;$(ProjectDir)src\resource\shader;$(ProjectDir)src\resource\texture;$(ProjectDir)src\utility;$(ProjectDir)sources\02_App\02-1_Scenes;$(ProjectDir)sources\02_App\02-2_Objects;$(ProjectDir)sources\03_HLSL;$(ProjectDir)sources\99_Debug;$(IncludePath)</IncludePath>
     <ExternalIncludePath>C:\Users\asuka\Documents\VSProjects\_frameworks\3DGame_Framework\GameProject3D\Project\sources\04_External\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
