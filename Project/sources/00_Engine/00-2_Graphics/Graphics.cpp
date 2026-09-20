@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/09/16
+*	@updated : 2026/09/20
 *============================================================*/
 #include "Graphics.h"
 #include "DeviceManager.h"
@@ -31,12 +31,8 @@ void D3D11::Graphics::Initialize()
 	// 定数バッファ初期化
 	D3D11::BufferManager::getInstance().Initialize();
 
-	// シェーダー読み込み
-	ShaderSet::initialize();
-
 	// DirectWriteファクトリ生成
 	FontManager::getInstance().Initialize(FontLoader::Initialize());
-	FontSet::initialize();
 }
 
 void D3D11::Graphics::Finalize()

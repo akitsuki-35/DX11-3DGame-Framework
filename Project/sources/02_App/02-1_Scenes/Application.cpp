@@ -1,88 +1,72 @@
 ﻿/*============================================================
-*	@file	 : SceneManager.cpp
-*	@brief	 : シーン管理
+*	@file	 : Application.cpp
+*	@brief	 : アプリケーション内部処理
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/21
-*	@updated : 2026/09/16
+*	@updated : 2026/09/20
 *============================================================*/
-#include "SceneManager.h"
+#include "Application.h"
+#include "Scene.h"
 #include "SystemTimer.h"
 #include "Graphics.h"
 #include "Transition.h"
 #include "Input.h"
-#include "Title.h"
-#include "Game.h"
-#include "Scene.h"
 #include "AudioPlayer.h"
+#include <cassert>
 
 /*------------------------------------------------------------
 	初期化
 ------------------------------------------------------------*/
-void SceneManager::Initialize()
+void Application::Initialize(std::unique_ptr<Scene> scene)
 {
-	// 各種初期化
-	D3D11::Graphics::getInstance().Initialize();
+	assert(scene);
 
-	Transition::getInstance().Initialize();
-	Input::Initialize();
-	AudioPlayer::InitializeMaster();
+	_mNextScene = std::move(scene);
 
-	// 初期シーン設定
-#if defined(DEBUG) || defined(_DEBUG)
-	SceneChange<Game>();
-#else
-	SceneChange<Title>();
-#endif
-
-	mCurrentScene = std::move(mNextScene);
-	mCurrentScene->Initialize();
+	_mCurrentScene = std::move(_mNextScene);
+	_mCurrentScene->Initialize();
 }
 
 /*------------------------------------------------------------
 	終了
 ------------------------------------------------------------*/
-void SceneManager::Finalize()
+void Application::Finalize()
 {
-	if (mNextScene) {
-		if (mCurrentScene) {
-			mCurrentScene->Finalize();
+	if (_mNextScene) {
+		if (_mCurrentScene) {
+			_mCurrentScene->Finalize();
 		}
 
-		mCurrentScene = std::move(mNextScene);
-		mCurrentScene->Initialize();
+		_mCurrentScene = std::move(_mNextScene);
+		_mCurrentScene->Initialize();
 	}
-
-	AudioPlayer::FinalizeMaster();
-	Input::Finalize();
-
-	D3D11::Graphics::getInstance().Finalize();
 }
 
 /*------------------------------------------------------------
 	更新
 ------------------------------------------------------------*/
-void SceneManager::Update(double deltaTime)
+void Application::Update(double deltaTime)
 {
 	Transition::getInstance().Update(deltaTime);
 	Input::Update();
 
 	// 現在シーン更新
-	if (mCurrentScene) {
-		mCurrentScene->Update(deltaTime);
+	if (_mCurrentScene) {
+		_mCurrentScene->Update(deltaTime);
 	}
 
 	// シーン遷移
-	if (mNextScene) {
-		if (mCurrentScene) {
-			mCurrentScene->Finalize();
+	if (_mNextScene) {
+		if (_mCurrentScene) {
+			_mCurrentScene->Finalize();
 		}
 
-		mCurrentScene.reset();
+		_mCurrentScene.reset();
 
-		mCurrentScene = std::move(mNextScene);
+		_mCurrentScene = std::move(_mNextScene);
 
-		mCurrentScene->Initialize();
+		_mCurrentScene->Initialize();
 
 		// ロード中の累積時間をリセット
 		System::Timer::getInstance().Refresh();
@@ -92,13 +76,13 @@ void SceneManager::Update(double deltaTime)
 /*------------------------------------------------------------
 	描画
 ------------------------------------------------------------*/
-void SceneManager::Draw()
+void Application::Draw()
 {
 	D3D11::Graphics::getInstance().Begin();
 
 	// 現在シーン描画
-	if (mCurrentScene) {
-		mCurrentScene->Draw();
+	if (_mCurrentScene) {
+		_mCurrentScene->Draw();
 	}
 
 	// トランジションテクスチャを最後に描画

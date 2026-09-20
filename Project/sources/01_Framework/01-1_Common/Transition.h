@@ -57,7 +57,7 @@ private:
 	bool mFadeIn{};
 
 public:
-	void Initialize();
+	void Initialize(const char* texturePath, std::string shaderName);
 	void Finalize();
 	void Update(double deltaTime);
 	void Draw() const;

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp" />
+    <ClCompile Include="sources\00_Engine\00-1_Core\AppLoop.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp" />
@@ -76,6 +76,8 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\Timer.cpp" />
     <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp" />
+    <ClCompile Include="sources\02_App\02-1_Scenes\Application.cpp" />
+    <ClCompile Include="sources\02_App\02-1_Scenes\AppSetup.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -84,7 +86,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-1_Scenes\Scene.cpp" />
-    <ClCompile Include="sources\02_App\02-1_Scenes\SceneManager.cpp" />
     <ClCompile Include="sources\02_App\02-1_Scenes\Title.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -164,16 +165,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Application.h" />
+    <ClInclude Include="sources\00_Engine\00-1_Core\AppLoop.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Config.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\BufferManager.h" />
     <ClInclude Include="sources\00_Engine\00-2_Graphics\DeviceManager.h" />
@@ -241,6 +236,8 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\Timer.h" />
     <ClInclude Include="sources\01_Framework\01-2_Components\UIRenderer.h" />
+    <ClInclude Include="sources\02_App\02-1_Scenes\Application.h" />
+    <ClInclude Include="sources\02_App\02-1_Scenes\AppSetup.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Result.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -249,7 +246,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\Scene.h" />
-    <ClInclude Include="sources\02_App\02-1_Scenes\SceneManager.h" />
     <ClInclude Include="sources\02_App\02-1_Scenes\Title.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

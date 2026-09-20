@@ -1,17 +1,17 @@
 ﻿/*============================================================
-*	@file	 : Application.cpp
+*	@file	 : AppLoop.cpp
 *	@brief	 : アプリケーションループ制御
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/07
-*	@updated : 2026/09/16
+*	@updated : 2026/09/20
 *============================================================*/
-#include "Application.h"
+#include "AppLoop.h"
 #include "SystemWindow.h"
 #include "SystemTimer.h"
-#include "SceneManager.h"
+#include "Application.h"
 
-int Application::Run() const
+int AppLoop::Run() const
 {
 	// アプリケーションループ
 	while (1)
@@ -23,11 +23,11 @@ int Application::Run() const
 			// システムタイマー更新
 			while (System::Timer::getInstance().Tick()) {
 				// 更新
-				SceneManager::getInstance().Update(System::Timer::getInstance().GetDeltaTime());
+				Application::getInstance().Update(System::Timer::getInstance().GetDeltaTime());
 			}
 
 			// 描画
-			SceneManager::getInstance().Draw();
+			Application::getInstance().Draw();
 		}
 	}
 

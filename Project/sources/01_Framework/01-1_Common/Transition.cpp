@@ -7,10 +7,11 @@
 *	@updated : 2026/09/16
 *============================================================*/
 #include "Transition.h"
+#include <cassert>
 
 using namespace::DirectX;
 
-void Transition::Initialize()
+void Transition::Initialize(const char* texturePath, std::string shaderName)
 {
 	// タイマー初期化
 	_mTimer = std::make_unique<Timer>();
@@ -23,8 +24,11 @@ void Transition::Initialize()
 	mTransform.SetPosition({ 0.0f, 0.0f, 0.0f });
 	mTransform.SetScale({ Screen::WIDTH, Screen::HEIGHT, 0.0f });
 
+	// テクスチャ読み込み
+	_mRenderer->LoadTexture(texturePath);
+
 	// シェーダー読み込み
-	_mRenderer->LoadShader("UI");
+	_mRenderer->LoadShader(shaderName);
 }
 
 void Transition::Finalize()
@@ -59,10 +63,7 @@ void Transition::Draw() const
 {
 	if (!_mTimer->GetEnable()) return;
 
-	// テクスチャが存在しない場合は白テクスチャを使用
-	if (!_mRenderer->GetTexture()) {
-		_mRenderer->LoadTexture("assets\\textures\\white.png");
-	}
+	assert(_mRenderer->GetTexture());
 
 	_mRenderer->Draw(mTransform);
 }
