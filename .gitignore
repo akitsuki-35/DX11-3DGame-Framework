@@ -6,4 +6,4 @@
 _bin/
 _obj/
 # テスト用コードを管理から除外
-Project/Project/
+Project/
