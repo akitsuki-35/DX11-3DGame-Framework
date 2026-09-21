@@ -165,16 +165,10 @@
     <ClCompile Include="sources\02_App\02-2_Objects\Tree.cpp">
       <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp">
-      <Filter>旧\02_App\02-2_Objects\Common</Filter>
-    </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\MeshField.cpp">
       <Filter>旧\02_App\02-2_Objects\Game</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Wave.cpp">
-      <Filter>旧\02_App\02-2_Objects\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\GameObject.cpp">
       <Filter>旧\02_App\02-2_Objects\Common</Filter>
     </ClCompile>
     <ClCompile Include="src\core\AppLoop.cpp">
@@ -333,6 +327,12 @@
     <ClCompile Include="sources\02_App\02-1_Scenes\Main.cpp">
       <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\app\GameObject.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\ParticleEmitter..cpp">
+      <Filter>app</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h">
@@ -409,12 +409,6 @@
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Tree.h">
       <Filter>旧\02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
-      <Filter>旧\02_App\02-2_Objects\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h">
-      <Filter>旧\02_App\02-2_Objects\Common</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\MeshField.h">
       <Filter>旧\02_App\02-2_Objects\Game</Filter>
@@ -601,6 +595,12 @@
     </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\AppSetup.h">
       <Filter>旧\02_App\02-1_Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\GameObject.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\ParticleEmitter.h">
+      <Filter>app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

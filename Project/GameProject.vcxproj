@@ -59,7 +59,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp" />
-    <ClCompile Include="sources\02_App\02-2_Objects\GameObject.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Grass.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -67,7 +66,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\MeshField.cpp" />
-    <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Player.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Score.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -106,6 +104,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\app\Application.cpp" />
+    <ClCompile Include="src\app\GameObject.cpp" />
+    <ClCompile Include="src\app\ParticleEmitter..cpp" />
     <ClCompile Include="src\app\Scene.cpp" />
     <ClCompile Include="src\components\Animator.cpp" />
     <ClCompile Include="src\components\AudioPlayer.cpp" />
@@ -196,12 +196,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Field.h" />
-    <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Grass.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -209,7 +203,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\MeshField.h" />
-    <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\Player.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\Score.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -258,6 +251,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="src\app\Application.h" />
+    <ClInclude Include="src\app\GameObject.h" />
+    <ClInclude Include="src\app\ParticleEmitter.h" />
     <ClInclude Include="src\app\Scene.h" />
     <ClInclude Include="src\components\Animator.h" />
     <ClInclude Include="src\components\AudioPlayer.h" />
