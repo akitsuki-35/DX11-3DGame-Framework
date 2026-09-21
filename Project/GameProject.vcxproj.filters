@@ -180,9 +180,6 @@
     <ClCompile Include="src\core\AppLoop.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Main.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\SystemTimer.cpp">
       <Filter>core</Filter>
     </ClCompile>
@@ -331,6 +328,9 @@
       <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="sources\02_App\02-1_Scenes\AppSetup.cpp">
+      <Filter>旧\02_App\02-1_Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-1_Scenes\Main.cpp">
       <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClCompile>
   </ItemGroup>
