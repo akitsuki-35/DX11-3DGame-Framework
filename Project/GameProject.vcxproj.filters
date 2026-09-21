@@ -195,9 +195,6 @@
     <ClCompile Include="src\app\Application.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\AppSetup.cpp">
-      <Filter>app</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\Animator.cpp">
       <Filter>components</Filter>
     </ClCompile>
@@ -333,6 +330,9 @@
     <ClCompile Include="src\app\Scene.cpp">
       <Filter>app</Filter>
     </ClCompile>
+    <ClCompile Include="sources\02_App\02-1_Scenes\AppSetup.cpp">
+      <Filter>旧\02_App\02-1_Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h">
@@ -438,9 +438,6 @@
       <Filter>utility</Filter>
     </ClInclude>
     <ClInclude Include="src\app\Application.h">
-      <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\AppSetup.h">
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Animator.h">
@@ -601,6 +598,9 @@
     </ClInclude>
     <ClInclude Include="src\app\Scene.h">
       <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-1_Scenes\AppSetup.h">
+      <Filter>旧\02_App\02-1_Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
