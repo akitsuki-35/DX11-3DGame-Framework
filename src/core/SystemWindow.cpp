@@ -8,7 +8,7 @@
 *============================================================*/
 #include "SystemWindow.h"
 
-void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
+void System::Window::Initialize(HINSTANCE hInstance, const char* windowName, int width, int height)
 {
 	mHInstance = hInstance;
 	mWidth = width;
@@ -39,7 +39,7 @@ void System::Window::Initialize(HINSTANCE hInstance, int width, int height)
 	mHwnd = CreateWindowEx(
 		0, 
 		CLASS_NAME, 
-		WINDOW_NAME,
+		windowName,
 		WS_OVERLAPPEDWINDOW, 
 		CW_USEDEFAULT, 
 		CW_USEDEFAULT,

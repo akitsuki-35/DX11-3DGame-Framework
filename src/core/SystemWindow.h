@@ -43,7 +43,6 @@ namespace System {
 	private:
 		HWND mHwnd{ nullptr };
 		static constexpr char CLASS_NAME[] = "AppClass"; // ウィンドウクラス名
-		static constexpr char WINDOW_NAME[] = "A.X.I.A"; // アプリケーション名
 		HINSTANCE mHInstance{ nullptr };
 		int mWidth{ Screen::WIDTH };
 		int mHeigth{ Screen::HEIGHT };
@@ -52,7 +51,7 @@ namespace System {
 		static LRESULT CALLBACK wndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 	public:
-		void Initialize(HINSTANCE hInstance, int width = Screen::WIDTH, int height = Screen::HEIGHT);
+		void Initialize(HINSTANCE hInstance, const char* windowName, int width = Screen::WIDTH, int height = Screen::HEIGHT);
 		void Finalize() const;
 
 		// ウィンドウ表示
