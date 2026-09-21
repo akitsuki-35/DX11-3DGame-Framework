@@ -9,7 +9,7 @@
 #include "Game.h"
 
 // オブジェクト群
-#include "Camera.h"
+#include "GameCamera.h"
 #include "Wave.h"
 #include "Player.h"
 #include "Bullet.h"
@@ -21,7 +21,7 @@ void Game::Initialize()
 	_mGameObjects.clear();
 
 	// カメラ
-	AddGameObject<Camera>();
+	AddGameObject<GameCamera>();
 
 	// スカイドーム
 	AddGameObject<Sky>();

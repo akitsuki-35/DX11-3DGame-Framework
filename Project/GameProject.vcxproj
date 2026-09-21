@@ -24,7 +24,7 @@
     <ClCompile Include="src\objects\Bullet.cpp" />
     <ClCompile Include="src\objects\Enemy.cpp" />
     <ClCompile Include="src\objects\Field.cpp" />
-    <ClCompile Include="src\objects\Camera.cpp" />
+    <ClCompile Include="src\objects\GameCamera.cpp" />
     <ClCompile Include="src\objects\Grass.cpp" />
     <ClCompile Include="src\objects\MeshField.cpp" />
     <ClCompile Include="src\objects\Player.cpp" />
@@ -44,7 +44,7 @@
     <ClInclude Include="src\objects\Bullet.h" />
     <ClInclude Include="src\objects\Enemy.h" />
     <ClInclude Include="src\objects\Field.h" />
-    <ClInclude Include="src\objects\Camera.h" />
+    <ClInclude Include="src\objects\GameCamera.h" />
     <ClInclude Include="src\objects\Grass.h" />
     <ClInclude Include="src\objects\MeshField.h" />
     <ClInclude Include="src\objects\Player.h" />

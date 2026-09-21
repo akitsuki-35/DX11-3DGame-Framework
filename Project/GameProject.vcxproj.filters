@@ -72,7 +72,7 @@
     <ClCompile Include="src\objects\Wave.cpp">
       <Filter>旧\objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\Camera.cpp">
+    <ClCompile Include="src\objects\GameCamera.cpp">
       <Filter>旧\objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,7 +125,7 @@
     <ClInclude Include="src\objects\Wave.h">
       <Filter>旧\objects</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\Camera.h">
+    <ClInclude Include="src\objects\GameCamera.h">
       <Filter>旧\objects</Filter>
     </ClInclude>
   </ItemGroup>

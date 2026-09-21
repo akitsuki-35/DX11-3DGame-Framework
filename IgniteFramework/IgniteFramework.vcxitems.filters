@@ -294,6 +294,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)src\debug\DebugMemoryleak.h">
       <Filter>debug</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\app\Camera.h">
+      <Filter>app</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\utility\Utility.cpp">
@@ -475,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\stb_vorbis\stb_vorbis.c">
       <Filter>external\stb_vorbis</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\app\Camera.cpp">
+      <Filter>app</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

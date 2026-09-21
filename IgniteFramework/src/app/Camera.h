@@ -23,9 +23,9 @@ protected:
 
 public:
 	virtual ~Camera() = default;
-	void Initialize() override;
-	void Finalize() override;
-	void Update(double deltaTime) override;
+	virtual void Initialize() override;
+	virtual void Finalize() override;
+	virtual void Update(double deltaTime) override;
 
 	DirectX::XMMATRIX GetViewMatrix() const { return mViewMatrix; }
 
