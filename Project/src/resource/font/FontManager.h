@@ -4,10 +4,11 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/11
-*	@updated : 2026/09/20
+*	@updated : 2026/09/21
 *============================================================*/
 #pragma once
 
+#include "FontLoader.h"
 #include <string>
 #include <memory>
 #include <unordered_map>
@@ -17,8 +18,6 @@
 	前方宣言
 ------------------------------------------------------------*/
 class Texture;
-struct Font;
-struct IDWriteFactory;
 
 /*------------------------------------------------------------
 	文字テクスチャデータ

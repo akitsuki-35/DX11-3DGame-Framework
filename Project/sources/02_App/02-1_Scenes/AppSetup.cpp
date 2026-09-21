@@ -12,6 +12,13 @@
 #include "Input.h"
 #include "AudioPlayer.h"
 
+#include "AnimationManager.h"
+#include "AudioManager.h"
+#include "FontManager.h"
+#include "ModelManager.h"
+#include "ShaderManager.h"
+#include "TextureManager.h"
+
 #include "Application.h"
 #include "Game.h"
 #include <memory>
@@ -36,6 +43,13 @@ void AppSetup::Initialize()
 void AppSetup::Finalize()
 {
 	Application::getInstance().Finalize();
+
+	AnimationManager::getInstance().Clear();
+	AudioManager::getInstance().Clear();
+	ModelManager::getInstance().Clear();
+	TextureManager::getInstance().Clear();
+	FontManager::getInstance().Clear();
+	ShaderManager::getInstance().Clear();
 
 	AudioPlayer::FinalizeMaster();
 	Input::Finalize();

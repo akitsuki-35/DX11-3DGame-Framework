@@ -4,18 +4,14 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/07
-*	@updated : 2026/08/07
+*	@updated : 2026/09/21
 *============================================================*/
 #pragma once
 
+#include "Animation.h"
 #include <string>
 #include <memory>
 #include <unordered_map>
-
-/*--------------------------------------------------
-	前方宣言
-----------------------------------------------------*/
-class Animation;
 
 /*============================================================
 *	@class	: AnimationManager
