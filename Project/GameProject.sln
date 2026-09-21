@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36603.0 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12210.168 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameProject", "GameProject.vcxproj", "{D88DFE1C-A1F1-44FB-9C6B-D68E680E9C8E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IgniteFramework", "..\IgniteFramework\IgniteFramework.vcxitems", "{C4FC7926-0C55-4A9B-A979-902282AF9A83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,5 +29,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {53C4A9D0-531D-4BD3-A7F0-FE1A4427A427}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\IgniteFramework\IgniteFramework.vcxitems*{c4fc7926-0c55-4a9b-a979-902282af9a83}*SharedItemsImports = 9
+		..\IgniteFramework\IgniteFramework.vcxitems*{d88dfe1c-a1f1-44fb-9c6b-d68e680e9c8e}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

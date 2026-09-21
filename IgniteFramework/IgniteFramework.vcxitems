@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{c4fc7926-0c55-4a9b-a979-902282af9a83}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\app\Application.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\app\GameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\app\ParticleEmitter..cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\app\Scene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\app\Shadow.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\Animator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\AudioPlayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\BillboardRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\GridRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\ModelRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\ParticleRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\Renderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\SpriteRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\TextRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\Timer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\components\UIRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\core\AppLoop.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\core\SystemTimer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\core\SystemWindow.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_tables.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\external\include\stb_vorbis\stb_vorbis.c">
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TurnOffAllWarnings</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\geometry\Mesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\geometry\MeshTypes.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\common\Transition.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\d3d11\BufferManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\d3d11\DeviceManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\d3d11\Graphics.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\particle\Particle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\particle\ParticleBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\particle\ParticleBezier.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\particle\ParticleBox.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\UI\UICanvas.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\graphics\UI\UIStyle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\importer\AssimpLoader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\importer\CSVHandler.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\importer\FontLoader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\input\Input.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\math\BezierCurve.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\math\BoneTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\math\Easing.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\math\Transform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\animation\Animation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\animation\AnimationManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\animation\Skeleton.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\audio\AudioManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\font\FontManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\model\Model.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\model\ModelManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\model\ModelMesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\shader\ShaderManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\texture\Texture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\texture\TextureManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\resource\texture\WICTextureLoader11.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\utility\Utility.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\app\Application.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\app\GameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\app\ParticleEmitter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\app\Scene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\app\Shadow.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\Animator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\AudioPlayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\BillboardRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\Component.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\GridRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\ModelRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\ParticleRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\Renderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\SpriteRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\TextRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\Timer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\components\UIRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\core\AppLoop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\core\Config.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\core\SystemTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\core\SystemWindow.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\debug\DebugMemoryleak.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imconfig.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui_internal.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imstb_textedit.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imstb_truetype.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\minimp3\minimp3.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\external\include\minimp3\minimp3_ex.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\geometry\Mesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\geometry\MeshTypes.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\common\Transition.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\d3d11\BufferManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\d3d11\D3D11Config.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\d3d11\DeviceManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\d3d11\Elements.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\d3d11\Graphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\particle\Particle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\particle\ParticleBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\particle\ParticleBezier.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\particle\ParticleBox.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\UI\UICanvas.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\graphics\UI\UIStyle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\importer\AssimpLoader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\importer\CSVHandler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\importer\FontLoader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\input\Input.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\math\BezierCurve.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\math\BoneTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\math\Easing.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\math\Quaternion.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\math\Transform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\math\Vector2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\math\Vector3.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\animation\Animation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\animation\AnimationManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\animation\Skeleton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\audio\Audio.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\audio\AudioManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\font\FontManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\model\Model.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\model\ModelManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\model\ModelMesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\shader\Shader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\shader\ShaderManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\texture\Texture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\texture\TextureManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\resource\texture\WICTextureLoader11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\utility\Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)src\external\include\ImGui\imgui.ini" />
+  </ItemGroup>
+</Project>
