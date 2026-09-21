@@ -1,10 +1,10 @@
 ﻿/*============================================================
 *	@file	 : Camera.cpp
-*	@brief	 : カメラオブジェクト
+*	@brief	 : カメラ基底クラス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/04/26
-*	@updated : 2026/08/06
+*	@updated : 2026/09/21
 *============================================================*/
 #include "Camera.h"
 #include "BufferManager.h"
