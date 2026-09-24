@@ -21,6 +21,7 @@ void D3D11::BufferManager::Initialize()
 	_mProjection = generateBuffer(sizeof(DirectX::XMMATRIX));
 	_mMaterial = generateBuffer(sizeof(Element::MATERIAL));
 	_mLight = generateBuffer(sizeof(Element::LIGHT));
+	_mCamera = generateBuffer(sizeof(XMFLOAT4));
 	_mBones = generateBuffer(sizeof(Element::BONE));
 	_mParameter = generateBuffer(sizeof(XMFLOAT4));
 
@@ -136,6 +137,19 @@ void D3D11::BufferManager::SetLight(const Element::LIGHT& light)
 		GetContext()->VSSetConstantBuffers(4, 1, &buf);
 	DeviceManager::getInstance().
 		GetContext()->PSSetConstantBuffers(4, 1, &buf);
+}
+
+void D3D11::BufferManager::SetCamera(const DirectX::XMFLOAT4& camera)
+{
+	// カメラ座標設定
+	DeviceManager::getInstance().
+		GetContext()->UpdateSubresource(_mCamera.Get(), 0, nullptr, &camera, 0, 0);
+
+	ID3D11Buffer* buf = _mCamera.Get();
+	DeviceManager::getInstance().
+		GetContext()->VSSetConstantBuffers(5, 1, &buf);
+	DeviceManager::getInstance().
+		GetContext()->PSSetConstantBuffers(5, 1, &buf);
 }
 
 void D3D11::BufferManager::SetBoneMatrices(const Skeleton& skeleton)
