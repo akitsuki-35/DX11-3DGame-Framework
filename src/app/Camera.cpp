@@ -30,6 +30,10 @@ void Camera::Update(double deltaTime)
 	mViewMatrix = XMMatrixLookAtLH(XMLoadFloat3((XMFLOAT3*)&mTransform.GetPosition()),
 		XMLoadFloat3((XMFLOAT3*)&mTarget), XMLoadFloat3(&up));
 
+	// カメラ座標をGPUへ送信
+	XMFLOAT3 position = mTransform.GetPosition().ConvertToXMFLOAT3();
+	D3D11::BufferManager::getInstance().SetCamera({ position.x, position.y, position.z, 1.0 });
+
 	GameObject::Update(deltaTime);
 }
 

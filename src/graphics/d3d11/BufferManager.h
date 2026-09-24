@@ -57,6 +57,7 @@ namespace D3D11 {
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mProjection{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mMaterial{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mLight{};
+		Microsoft::WRL::ComPtr<ID3D11Buffer> _mCamera{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mBones{};
 		Microsoft::WRL::ComPtr<ID3D11Buffer> _mParameter{};
 
@@ -76,6 +77,7 @@ namespace D3D11 {
 		void SetProjectionMatrix(const DirectX::XMMATRIX& projectionMatrix);
 		void SetMaterial(const Element::MATERIAL& material);
 		void SetLight(const Element::LIGHT& light);
+		void SetCamera(const DirectX::XMFLOAT4& camera);
 		void SetBoneMatrices(const Skeleton& skeleton);
 		void SetParameter(const DirectX::XMFLOAT4& parameter);
 
@@ -85,6 +87,7 @@ namespace D3D11 {
 		ID3D11Buffer* GetProjectionBuffer() const { return _mProjection.Get(); }
 		ID3D11Buffer* GetMaterialBuffer() const { return _mMaterial.Get(); }
 		ID3D11Buffer* GetLightBuffer() const { return _mLight.Get(); }
+		ID3D11Buffer* GetCameraBuffer() const { return _mCamera.Get(); }
 		ID3D11Buffer* GetBoneBuffer() const { return _mBones.Get(); }
 		ID3D11Buffer* GetParameterBuffer() const { return _mParameter.Get(); }
 	};
