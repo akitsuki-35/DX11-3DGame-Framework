@@ -1,15 +1,30 @@
-# DirectX11による3Dゲーム開発フレームワーク
+# DirectX11によるゲーム開発フレームワーク
 
-DirectX11 3Dゲームのフレームワーク作成<br>
-開発環境：Visual Studio 2022 / 2026
+DirectX11用 自作ゲームフレームワーク "IGNITE"<br>
+開発環境：Visual Studio 2026<br>
+言語：C++20
 
----
+## 概要
+自作フレームワーク「IGNITE」<br>
+DirectX11 / C++20によるゲーム開発用フレームワーク。サブモジュールとしてゲーム開発プロジェクトに導入し使用します。
+
+## 機能
+* システムタイマー・システムウィンドウ・ゲームループの基盤を提供します。
+* Flyweightを用いた高速・安全なリソース管理を提供します。
+* ファイル読み込み・ファイルパス変換等のユーティリティを提供します。
+* ゲームオブジェクトに紐づき、汎用的なサブシステム・描画を導入するコンポーネント機能を提供します。
+* 自作パーティクルシミュレーター[https://github.com/akitsuki-35/DX11-Particle-Simulator]と連携し、csvファイルからパーティクルパラメータを読み込む機能を提供します。
+
+## 開発実績
+* 「A.X.I.A」[https://github.com/akitsuki-35/DX11-GameProject-AXIA]
+   * ジャンル：3Dシューティングゲーム
+   * 開発期間：3ヶ月
+   * 制作人数：1人
+
 ## ブランチ
 * master　…　安定版のdevelopをマージ
 * develop　…　futureの内容をマージ
 * future/　…　作業用ブランチ
-
----
 
 ## 命名規則
 
@@ -31,25 +46,22 @@ DirectX11 3Dゲームのフレームワーク作成<br>
 | メンバ変数 | m + PascalCase | mClassValue |
 | publicメンバ関数 | PascalCase | FunctionName |
 | privateメンバ関数 | camelCase | functionName |
-| privateメンバ関数 | camelCase | functionName |
 
 ### 構造体
 | Type | Style | Sample |
 | ---- | ---- | ---- |
 | 構造体 | PascalCase | StructName |
-| 構造体変数 | camelCase | structValue |
-
----
+| 構造体変数 | PascalCase | StructValue |
 
 ## ディレクトリ
 ### フォルダ
-* hlsl
-   * hlslファイル
-* include
-   * 外部インクルード
+* src
+   * ソースファイル
+* external
+   * 外部インクルードファイル・ライブラリ
 * lib
    * 外部ライブラリ
-* Resources
+* assets
    * オーディオ・テクスチャ・シェーダーファイル
 * _bin
    * 実行ファイル

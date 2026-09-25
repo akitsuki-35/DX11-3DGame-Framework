@@ -14,6 +14,8 @@ using namespace DirectX;
 
 bool Mesh::CreatePlane(MeshType::Plane::Pivot pivot, MeshType::Plane::Axis axis)
 {
+	mType = Type::Plane;
+
 	// 頂点情報定義
 	MeshType::Plane::DESC desc{};
 	desc.pivot = pivot;
@@ -35,6 +37,8 @@ bool Mesh::CreatePlane(MeshType::Plane::Pivot pivot, MeshType::Plane::Axis axis)
 
 	assert(_mVertexBuffer);
 
+	mVertexCount = static_cast<uint8_t>(vertex.size());
+
 	return true;
 }
 
@@ -47,6 +51,10 @@ void Mesh::Bind() const
 	UINT offset = 0;
 	D3D11::DeviceManager::getInstance().GetContext()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 
+	if (mIndexed) {
+		D3D11::DeviceManager::getInstance().GetContext()->IASetIndexBuffer(_mIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	}
+
 	// プリミティブトポロジ設定
 	D3D11::DeviceManager::getInstance().GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 }
@@ -54,5 +62,10 @@ void Mesh::Bind() const
 void Mesh::Draw() const
 {
 	// 描画命令発行
-	D3D11::DeviceManager::getInstance().GetContext()->Draw(4, 0);
+	if (mIndexed) {
+		D3D11::DeviceManager::getInstance().GetContext()->DrawIndexed(mIndexCount, 0, 0);
+	}
+	else {
+		D3D11::DeviceManager::getInstance().GetContext()->Draw(mVertexCount, 0);
+	}
 }
